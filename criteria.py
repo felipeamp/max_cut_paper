@@ -39,7 +39,6 @@ class Criterion(object):
 #################################################################################################
 #################################################################################################
 
-
 class Twoing(Criterion):
     name = 'Twoing'
 
@@ -108,13 +107,11 @@ class Twoing(Criterion):
                 best_splits_per_attrib.append((attrib_index,
                                                best_twoing,
                                                [{last_left_value}, {first_right_value}]))
-        max_criterion_value = float('-inf')
+
         best_attribute_and_split = (None, [], float('-inf'))
-        for best_attrib_split in best_splits_per_attrib:
-            criterion_value = best_attrib_split[2]
-            if criterion_value > max_criterion_value:
-                max_criterion_value = criterion_value
-                best_attribute_and_split = best_attrib_split
+        for curr_attrib_split in best_splits_per_attrib:
+            if curr_attrib_split[2] > best_attribute_and_split[2]:
+                best_attribute_and_split = curr_attrib_split
         return best_attribute_and_split
 
     @staticmethod
@@ -385,72 +382,8 @@ class Twoing(Criterion):
 #################################################################################################
 #################################################################################################
 
-
 class GWSquaredGini(Criterion):
     name = 'GW Squared Gini'
-
-    @classmethod
-    def evaluate_all_attributes(cls, tree_node):
-        #TESTED!
-
-        ret = [] # contains (attrib_index, gain_ratio, split_values, p_value, time_taken)
-        diff_keys, diff_values = cls._calculate_diff(tree_node.valid_samples_indices,
-                                                     tree_node.dataset.sample_costs)
-        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                start_time = timeit.default_timer()
-                (attrib_num_valid_values,
-                 orig_to_new_value_int,
-                 new_to_orig_value_int) = cls._get_attrib_valid_values(
-                     attrib_index,
-                     tree_node.dataset.samples,
-                     tree_node.valid_samples_indices)
-                if attrib_num_valid_values <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        attrib_num_valid_values))
-                    continue
-                (curr_gain,
-                 _,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     attrib_index,
-                     tree_node.dataset.num_classes,
-                     attrib_num_valid_values,
-                     orig_to_new_value_int,
-                     new_to_orig_value_int,
-                     tree_node.valid_samples_indices,
-                     tree_node.class_index_num_samples,
-                     tree_node.dataset.samples,
-                     tree_node.dataset.sample_class,
-                     diff_keys,
-                     diff_values)
-                ret.append((attrib_index,
-                            curr_gain,
-                            [left_int_values, right_int_values],
-                            None,
-                            timeit.default_timer() - start_time,
-                            None,
-                            None))
-
-        preference_rank_full = sorted(ret, key=lambda x: -x[1])
-        seen_attrib = [False] * len(tree_node.dataset.attrib_names)
-        preference_rank = []
-        for pref_elem in preference_rank_full:
-            if seen_attrib[pref_elem[0]]:
-                continue
-            seen_attrib[pref_elem[0]] = True
-            preference_rank.append(pref_elem)
-        ret_with_preference_full = [0] * len(tree_node.dataset.attrib_names)
-        for preference, elem in enumerate(preference_rank):
-            attrib_index = elem[0]
-            new_elem = list(elem)
-            new_elem.append(preference)
-            ret_with_preference_full[attrib_index] = tuple(new_elem)
-        ret_with_preference = [elem for elem in ret_with_preference_full if elem != 0]
-
-        return ret_with_preference
 
     @classmethod
     def select_best_attribute_and_split(cls, tree_node):
