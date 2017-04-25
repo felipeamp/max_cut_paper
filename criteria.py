@@ -314,51 +314,6 @@ class Twoing(Criterion):
                 samples_done += value_num_samples
         return random_contingency_table
 
-    @classmethod
-    def _accept_attribute(cls, real_gini_gain, num_tests, num_fails_allowed, num_valid_samples,
-                          class_index_num_samples, values_num_samples, values_seen):
-        num_classes = len(class_index_num_samples)
-        classes_dist = class_index_num_samples[:]
-        for class_index in range(num_classes):
-            classes_dist[class_index] /= float(num_valid_samples)
-
-        num_fails_seen = 0
-        for test_number in range(1, num_tests + 1):
-            random_contingency_table = cls._generate_random_contingency_table(
-                classes_dist,
-                num_valid_samples,
-                values_num_samples)
-
-            best_gini_gain = float('-inf')
-            for (set_left_classes,
-                 set_right_classes) in cls._generate_twoing(class_index_num_samples):
-
-                (twoing_contingency_table,
-                 superclass_index_num_samples) = cls._get_twoing_contingency_table(
-                     random_contingency_table,
-                     values_num_samples,
-                     set_left_classes,
-                     set_right_classes)
-                original_gini = cls._calculate_gini_index(num_valid_samples,
-                                                          superclass_index_num_samples)
-                (curr_gini_gain, _, _) = cls._two_class_trick(original_gini,
-                                                              superclass_index_num_samples,
-                                                              values_seen,
-                                                              values_num_samples,
-                                                              twoing_contingency_table,
-                                                              num_valid_samples)
-                if curr_gini_gain > best_gini_gain:
-                    best_gini_gain = curr_gini_gain
-
-            if best_gini_gain > real_gini_gain:
-                num_fails_seen += 1
-                if num_fails_seen > num_fails_allowed:
-                    return False, test_number
-            if num_tests - test_number <= num_fails_allowed - num_fails_seen:
-                return True, test_number
-        return True, num_tests
-
-
 
 
 #################################################################################################
