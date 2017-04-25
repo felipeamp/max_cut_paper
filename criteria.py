@@ -57,30 +57,17 @@ class Twoing(Criterion):
                 -  Split value according to the criterion. If no attribute has a valid split, this
                 value should be `float('-inf')`.
         """
-        def _remove_duplicate_attributes(best_splits_per_attrib, num_attributes):
-            seen_attrib = [False] * num_attributes
-            ret = []
-            for best_attrib_split in best_splits_per_attrib:
-                curr_attrib_index, _, curr_criterion_value = best_attrib_split
-                if seen_attrib[curr_attrib_index] or math.isinf(curr_criterion_value):
-                    continue
-                seen_attrib[curr_attrib_index] = True
-                ret.append(best_attrib_split)
-            return ret
-
         best_splits_per_attrib = []
-        cache_values_seen = []
-        for attrib_index, is_valid_nominal_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if not is_valid_nominal_attrib:
-                cache_values_seen.append(None)
-                continue
-            else:
+        for (attrib_index,
+             (is_valid_nominal_attrib,
+              is_valid_numeric_attrib)) in enumerate(zip(tree_node.valid_nominal_attribute,
+                                                         tree_node.valid_numeric_attribute)):
+            if is_valid_nominal_attrib:
                 best_total_gini_gain = float('-inf')
                 best_left_values = set()
                 best_right_values = set()
                 values_seen = cls._get_values_seen(
                     tree_node.contingency_tables[attrib_index][1])
-                cache_values_seen.append(values_seen)
                 for (set_left_classes,
                      set_right_classes) in cls._generate_twoing(tree_node.class_index_num_samples):
                     (twoing_contingency_table,
@@ -107,9 +94,20 @@ class Twoing(Criterion):
                 best_splits_per_attrib.append((attrib_index,
                                                [best_left_values, best_right_values],
                                                best_total_gini_gain))
-        best_splits_per_attrib = _remove_duplicate_attributes(
-            best_splits_per_attrib,
-            len(tree_node.valid_nominal_attribute))
+            elif is_valid_numeric_attrib:
+                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
+                                                                  tree_node.dataset.samples,
+                                                                  tree_node.dataset.sample_class,
+                                                                  attrib_index)
+                values_and_classes.sort()
+                (best_twoing,
+                 last_left_value,
+                 first_right_value) = cls._twoing_for_numeric(
+                     values_and_classes,
+                     tree_node.dataset.num_classes)
+                best_splits_per_attrib.append((attrib_index,
+                                               best_twoing,
+                                               [{last_left_value}, {first_right_value}]))
         max_criterion_value = float('-inf')
         best_attribute_and_split = (None, [], float('-inf'))
         for best_attrib_split in best_splits_per_attrib:
@@ -126,6 +124,14 @@ class Twoing(Criterion):
             if num_samples > 0:
                 values_seen.add(value)
         return values_seen
+
+    @staticmethod
+    def _get_numeric_values_seen(valid_samples_indices, sample, sample_class, attrib_index):
+        values_and_classes = []
+        for sample_index in valid_samples_indices:
+            sample_value = sample[sample_index][attrib_index]
+            values_and_classes.append((sample_value, sample_class[sample_index]))
+        return values_and_classes
 
     @staticmethod
     def _generate_twoing(class_index_num_samples):
@@ -163,6 +169,61 @@ class Twoing(Criterion):
                 superclass_index_num_samples[1] += contingency_table[value][class_index]
                 twoing_contingency_table[value][1] += contingency_table[value][class_index]
         return twoing_contingency_table, superclass_index_num_samples
+
+    @classmethod
+    def _twoing_for_numeric(cls, sorted_values_and_classes, num_classes):
+        last_left_value = sorted_values_and_classes[0][0]
+        num_left_samples = 1
+        num_right_samples = len(sorted_values_and_classes) - 1
+
+        class_num_left = [0] * num_classes
+        class_num_left[sorted_values_and_classes[0][1]] = 1
+
+        class_num_right = [0] * num_classes
+        for _, sample_class in sorted_values_and_classes[1:]:
+            class_num_right[sample_class] += 1
+
+        best_twoing = float('-inf')
+        best_last_left_value = None
+        best_first_right_value = None
+
+        for first_right_index in range(1, len(sorted_values_and_classes)):
+            first_right_value = sorted_values_and_classes[first_right_index][0]
+            if first_right_value != last_left_value:
+                twoing_value = cls._get_twoing_value(class_num_left,
+                                                     class_num_right,
+                                                     num_left_samples,
+                                                     num_right_samples)
+                if twoing_value > best_twoing:
+                    best_twoing = twoing_value
+                    best_last_left_value = last_left_value
+                    best_first_right_value = first_right_value
+
+                last_left_value = first_right_value
+
+            num_left_samples += 1
+            num_right_samples -= 1
+            first_right_class = sorted_values_and_classes[first_right_index][1]
+            class_num_left[first_right_class] += 1
+            class_num_right[first_right_class] -= 1
+        return (best_twoing, best_last_left_value, best_first_right_value)
+
+    @staticmethod
+    def _get_twoing_value(class_num_left, class_num_right, num_left_samples,
+                          num_right_samples):
+        sum_dif = 0.0
+        for left_num, right_num in zip(class_num_left, class_num_right):
+            class_num_tot = class_num_left + class_num_right
+            if class_num_tot == 0:
+                continue
+            sum_dif += abs(left_num / num_left_samples - right_num / num_right_samples)
+
+        num_total_samples = num_left_samples + num_right_samples
+        frequency_left = num_left_samples / num_total_samples
+        frequency_right = num_right_samples / num_total_samples
+
+        twoing_value = (frequency_left * frequency_right / 4.0) * sum_dif ** 2
+        return twoing_value
 
     @staticmethod
     def _two_class_trick(original_gini, class_index_num_samples, values_seen, values_num_samples,
@@ -717,23 +778,15 @@ class LSSquaredGini(Criterion):
 
             elif is_valid_numeric_attrib:
                 start_time = timeit.default_timer()
-                (values_seen,
-                 values_and_classes) = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
-                                                                    tree_node.dataset.samples,
-                                                                    tree_node.dataset.sample_class,
-                                                                    attrib_index)
-                if len(values_seen) <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        len(values_seen)))
-                    continue
-
-                sorted_values_and_classes = sorted(values_and_classes)
+                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
+                                                                  tree_node.dataset.samples,
+                                                                  tree_node.dataset.sample_class,
+                                                                  attrib_index)
+                values_and_classes.sort()
                 (best_cut_value,
                  last_left_value,
                  first_right_value) = cls._best_cut_for_numeric(
-                     sorted_values_and_classes,
+                     values_and_classes,
                      tree_node.dataset.num_classes)
                 ret.append((attrib_index,
                             best_cut_value,
@@ -805,23 +858,15 @@ class LSSquaredGini(Criterion):
                     best_split_right_values = right_int_values
 
             elif is_valid_numeric_attrib:
-                (values_seen,
-                 values_and_classes) = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
-                                                                    tree_node.dataset.samples,
-                                                                    tree_node.dataset.sample_class,
-                                                                    attrib_index)
-                if len(values_seen) <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        len(values_seen)))
-                    continue
-
-                sorted_values_and_classes = sorted(values_and_classes)
+                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
+                                                                  tree_node.dataset.samples,
+                                                                  tree_node.dataset.sample_class,
+                                                                  attrib_index)
+                values_and_classes.sort()
                 (curr_gain,
                  last_left_value,
                  first_right_value) = cls._best_cut_for_numeric(
-                     sorted_values_and_classes,
+                     values_and_classes,
                      tree_node.dataset.num_classes)
                 if curr_gain > best_gain:
                     best_attrib_index = attrib_index
@@ -872,14 +917,11 @@ class LSSquaredGini(Criterion):
 
     @staticmethod
     def _get_numeric_values_seen(valid_samples_indices, sample, sample_class, attrib_index):
-        values_seen = set()
         values_and_classes = []
         for sample_index in valid_samples_indices:
             sample_value = sample[sample_index][attrib_index]
             values_and_classes.append((sample_value, sample_class[sample_index]))
-            if sample_value not in values_seen:
-                values_seen.add(sample_value)
-        return values_seen, values_and_classes
+        return values_and_classes
 
     @classmethod
     def _generate_best_split(cls, attrib_index, num_classes, attrib_num_valid_values,
@@ -1674,23 +1716,15 @@ class LSChiSquare(Criterion):
 
             elif is_valid_numeric_attrib:
                 start_time = timeit.default_timer()
-                (values_seen,
-                 values_and_classes) = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
-                                                                    tree_node.dataset.samples,
-                                                                    tree_node.dataset.sample_class,
-                                                                    attrib_index)
-                if len(values_seen) <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        len(values_seen)))
-                    continue
-
-                sorted_values_and_classes = sorted(values_and_classes)
+                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
+                                                                  tree_node.dataset.samples,
+                                                                  tree_node.dataset.sample_class,
+                                                                  attrib_index)
+                values_and_classes.sort()
                 (best_cut_value,
                  last_left_value,
                  first_right_value) = cls._best_cut_for_numeric_chi_square(
-                     sorted_values_and_classes,
+                     values_and_classes,
                      tree_node.dataset.num_classes,
                      tree_node.class_index_num_samples)
                 ret.append((attrib_index,
@@ -1758,23 +1792,15 @@ class LSChiSquare(Criterion):
                     best_split_right_values = right_int_values
 
             elif is_valid_numeric_attrib:
-                (values_seen,
-                 values_and_classes) = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
-                                                                    tree_node.dataset.samples,
-                                                                    tree_node.dataset.sample_class,
-                                                                    attrib_index)
-                if len(values_seen) <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        len(values_seen)))
-                    continue
-
-                sorted_values_and_classes = sorted(values_and_classes)
+                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
+                                                                  tree_node.dataset.samples,
+                                                                  tree_node.dataset.sample_class,
+                                                                  attrib_index)
+                values_and_classes.sort()
                 (curr_gain,
                  last_left_value,
                  first_right_value) = cls._best_cut_for_numeric_chi_square(
-                     sorted_values_and_classes,
+                     values_and_classes,
                      tree_node.dataset.num_classes,
                      tree_node.class_index_num_samples)
 
@@ -1790,14 +1816,11 @@ class LSChiSquare(Criterion):
 
     @staticmethod
     def _get_numeric_values_seen(valid_samples_indices, sample, sample_class, attrib_index):
-        values_seen = set()
         values_and_classes = []
         for sample_index in valid_samples_indices:
             sample_value = sample[sample_index][attrib_index]
             values_and_classes.append((sample_value, sample_class[sample_index]))
-            if sample_value not in values_seen:
-                values_seen.add(sample_value)
-        return values_seen, values_and_classes
+        return values_and_classes
 
     @classmethod
     def _best_cut_for_numeric_chi_square(cls, sorted_values_and_classes, num_classes,

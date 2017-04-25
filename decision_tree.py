@@ -824,8 +824,18 @@ class TreeNode(object):
                     splits_samples_indices[1].append(sample_index)
             return splits_samples_indices
 
-        def _has_multiple_values(values_num_samples):
+        def _has_multiple_nominal_values(values_num_samples):
             return sum(num_samples > 0 for num_samples in values_num_samples) > 1
+
+        def _has_multiple_numeric_values(valid_samples_indices, sample, attrib_index):
+            values_seen = set()
+            for sample_index in valid_samples_indices:
+                sample_value = sample[sample_index][attrib_index]
+                if sample_value not in values_seen:
+                    if values_seen:
+                        return True
+                    values_seen.add(sample_value)
+            return False
 
         def _has_enough_samples_in_second_largest_class(class_index_num_samples,
                                                         most_common_int_class):
@@ -850,13 +860,24 @@ class TreeNode(object):
         for attrib_index in range(len(self.valid_nominal_attribute)):
             if not self.valid_nominal_attribute[attrib_index]:
                 continue
-            if not _has_multiple_values(self.contingency_tables[attrib_index][1]):
+            if not _has_multiple_nominal_values(self.contingency_tables[attrib_index][1]):
                 self.valid_nominal_attribute[attrib_index] = False
             else:
                 num_valid_nominal_attributes += 1
 
+        num_valid_numeric_attributes = 0
+        for attrib_index in range(len(self.valid_numeric_attribute)):
+            if not self.valid_numeric_attribute[attrib_index]:
+                continue
+            if not _has_multiple_numeric_values(self.valid_samples_indices,
+                                                self.dataset.samples
+                                                attrib_index):
+                self.valid_numeric_attribute[attrib_index] = False
+            else:
+                num_valid_nominal_attributes += 1
+
         # If there are no valid nominal attributes, this node should be a leaf.
-        if not num_valid_nominal_attributes:
+        if not num_valid_nominal_attributes and not num_valid_numeric_attributes:
             return None
 
         if self._use_stop_conditions:
