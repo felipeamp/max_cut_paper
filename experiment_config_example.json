@@ -1,0 +1,46 @@
+{
+    "datasets basepath": "./datasets",
+    "use all datasets": true, // when true, do not supply "datasets folders"
+    // "datasets folders": [ // only used when "use all datasets" is false
+    //     "adult census income",
+    //     "cars with aggreg",
+    //     "contraceptive with aggreg",
+    //     "cover type with aggreg",
+    //     "kdd98 multiclass 2",
+    //     "kdd98 multiclass 3",
+    //     "kdd98 multiclass 5",
+    //     "kdd98 multiclass 9",
+    //     "mushroom",
+    //     "nursery with aggreg",
+    // ],
+    "load one dataset at a time": false,
+
+    "criteria": [
+        "Twoing",
+        "GW Squared Gini",
+        "GW Chi Square",
+        "LS Squared Gini",
+        "LS Chi Square",
+    ],
+
+    "output folder": "./outputs/multiple levels experiment", // this folder files may be overwritten!
+
+    "num trials": 20,
+    "calculate t-test on accuracy": true, // when false, do not supply "t-test single-sided p-value"
+    "t-test single-sided p-value": 0.1, // only used when "calculate t-test on accuracy" is true
+
+    "max depth": 5,
+    "use cross-validation": true, // when false, do not supply "num folds"
+    "num folds": 10, // only used when "use cross-validation" is true
+    "is stratified": true, // only used when "use cross-validation" is true
+
+    "prunning parameters": {
+        "use chi-sq test": false, // when false, do not supply "max chi-sq p-value"
+        // "max chi-sq p-value": 0.1, // only used if "use chi-sq test" is true.
+        // "second most freq value min samples": 40, // only used if "use chi-sq test" is true.
+
+        "min num samples allowed": [1],
+        "use second most freq class min samples": false, // when false, do not supply "second most freq class min samples"
+        // "second most freq class min samples": 40, // only used when "use second most freq class min samples" is true
+    },
+}

@@ -1,0 +1,29 @@
+{
+    "datasets basepath": "./datasets",
+    "use all datasets": true,
+    "load one dataset at a time": false,
+
+    "criteria": [
+        "Twoing",
+        "GW Squared Gini",
+        "GW Chi Square",
+        "LS Squared Gini",
+        "LS Chi Square",
+    ],
+
+    "output folder": "./outputs/single level experiment",
+
+    "num trials": 20,
+    "calculate t-test on accuracy": false,
+
+    "max depth": 1,
+    "use cross-validation": false,
+    "num training samples": 10,
+
+    "prunning parameters": {
+        "use chi-sq test": false,
+
+        "min num samples allowed": [1],
+        "use second most freq class min samples": false
+    }
+}
