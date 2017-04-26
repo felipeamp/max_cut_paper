@@ -370,232 +370,117 @@ class GWSquaredGini(Criterion):
 
     @classmethod
     def select_best_attribute_and_split(cls, tree_node):
-        best_attrib_index = 0
-        best_gain = float('-inf')
-        best_split_left_values = set([])
-        best_split_right_values = set([])
-        diff_keys, diff_values = cls._calculate_diff(tree_node.valid_samples_indices,
-                                                     tree_node.dataset.sample_costs)
-        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                (attrib_num_valid_values,
-                 orig_to_new_value_int,
-                 new_to_orig_value_int) = cls._get_attrib_valid_values(
-                     attrib_index,
-                     tree_node.dataset.samples,
-                     tree_node.valid_samples_indices)
-                if attrib_num_valid_values <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        attrib_num_valid_values))
-                    continue
-                (curr_gain,
-                 _,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     attrib_index,
-                     tree_node.dataset.num_classes,
-                     attrib_num_valid_values,
-                     orig_to_new_value_int,
-                     new_to_orig_value_int,
-                     tree_node.valid_samples_indices,
-                     tree_node.class_index_num_samples,
-                     tree_node.dataset.samples,
-                     tree_node.dataset.sample_class,
-                     diff_keys,
-                     diff_values)
+        """Returns the best attribute and its best split, according to the GWSG criterion.
 
-                if curr_gain > best_gain:
-                    best_attrib_index = attrib_index
-                    best_gain = curr_gain
-                    best_split_left_values = left_int_values
-                    best_split_right_values = right_int_values
-        splits_values = [best_split_left_values, best_split_right_values]
-        return (best_attrib_index, splits_values, best_gain, None)
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns:
+            A tuple cointaining, in order:
+                - the index of the accepted attribute;
+                - a list of sets, each containing the values that should go to that split/subtree.
+                -  Split value according to the criterion. If no attribute has a valid split, this
+                value should be `float('-inf')`.
+        """
+        best_splits_per_attrib = []
+        for attrib_index, is_valid_nominal_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_nominal_attrib:
+                (new_to_orig_value_int,
+                 new_contingency_table,
+                 new_values_num_seen) = cls._remove_empty_values(
+                     tree_node.contingency_tables[attrib_index][0],
+                     tree_node.contingency_tables[attrib_index][1])
+
+                (curr_cut_value,
+                 left_int_values,
+                 right_int_values) = cls._generate_best_split(new_to_orig_value_int,
+                                                              new_contingency_table,
+                                                              new_values_num_seen)
+                best_splits_per_attrib.append((attrib_index,
+                                               [left_int_values, right_int_values],
+                                               curr_cut_value))
+
+        best_attribute_and_split = (None, [], float('-inf'))
+        for curr_attrib_split in best_splits_per_attrib:
+            if curr_attrib_split[2] > best_attribute_and_split[2]:
+                best_attribute_and_split = curr_attrib_split
+        return best_attribute_and_split
+
 
     @staticmethod
-    def _get_attrib_valid_values(attrib_index, samples, valid_samples_indices):
-        #TESTED!
-        seen_values = set([])
+    def _remove_empty_values(contingency_table, values_num_samples):
+        # Define conversion from original values to new values
         orig_to_new_value_int = {}
         new_to_orig_value_int = []
-        for sample_index in valid_samples_indices:
-            value_int = samples[sample_index][attrib_index]
-            if value_int not in seen_values:
-                orig_to_new_value_int[value_int] = len(seen_values)
-                new_to_orig_value_int.append(value_int)
-                seen_values.add(value_int)
-        return len(seen_values), orig_to_new_value_int, new_to_orig_value_int
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                orig_to_new_value_int[orig_value] = len(new_to_orig_value_int)
+                new_to_orig_value_int.append(orig_value)
 
-    @staticmethod
-    def _calculate_diff(valid_samples_indices, sample_costs):
-        #TESTED!
-        def _max_min_diff(list_of_values):
-            max_val = list_of_values[0]
-            min_val = max_val
-            for value in list_of_values[1:]:
-                if value > max_val:
-                    max_val = value
-                elif value < min_val:
-                    min_val = value
-            return abs(max_val - min_val)
+        # Generate the new contingency tables
+        new_contingency_table = np.zeros((len(new_to_orig_value_int), contingency_table.shape[1]),
+                                         dtype=int)
+        new_value_num_seen = np.zeros((len(new_to_orig_value_int)), dtype=int)
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                curr_new_value = orig_to_new_value_int[orig_value]
+                new_value_num_seen[curr_new_value] = curr_num_samples
+                np.copyto(dst=new_contingency_table[curr_new_value, :],
+                          src=contingency_table[orig_value, :])
 
-        diff_keys = []
-        diff_values = []
-        for sample_index in valid_samples_indices:
-            curr_costs = sample_costs[sample_index]
-            diff_values.append(_max_min_diff(curr_costs))
-            diff_keys.append(sample_index)
-        diff_keys_values = sorted(list(zip(diff_keys, diff_values)),
-                                  key=lambda key_value: key_value[1])
-        diff_keys, diff_values = zip(*diff_keys_values)
-        return diff_keys, diff_values
+        return (new_to_orig_value_int,
+                new_contingency_table,
+                new_value_num_seen)
 
     @classmethod
-    def _generate_best_split(cls, attrib_index, num_classes, attrib_num_valid_values,
-                             orig_to_new_value_int, new_to_orig_value_int, valid_samples_indices,
-                             class_index_num_samples, samples, sample_class, diff_keys,
-                             diff_values):
-        #TESTED!
-        def _init_values_histograms(attrib_index, num_classes, attrib_num_valid_values,
-                                    valid_samples_indices):
-            #TESTED!
-            values_histogram = np.zeros((attrib_num_valid_values), dtype=np.int64)
-            values_histogram_with_classes = np.zeros((attrib_num_valid_values, num_classes),
-                                                     dtype=np.int64)
-            for sample_index in valid_samples_indices:
-                orig_value = samples[sample_index][attrib_index]
-                new_value = orig_to_new_value_int[orig_value]
-                values_histogram[new_value] += 1
-                values_histogram_with_classes[new_value][sample_class[sample_index]] += 1
-            return values_histogram, values_histogram_with_classes
-
-        def _init_values_weights(num_classes, values_histogram, values_histogram_with_classes):
-            # TESTED!
-            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
-            weights = np.zeros((values_histogram.shape[0], values_histogram.shape[0]),
+    def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
+                             new_values_num_seen):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
+            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut).
+            weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
                                dtype=np.float64)
-            for value_index_i in range(values_histogram.shape[0]):
-                for value_index_j in range(values_histogram.shape[0]):
+            for value_index_i in range(new_values_num_seen.shape[0]):
+                for value_index_j in range(new_values_num_seen.shape[0]):
                     if value_index_i == value_index_j:
                         continue
-                    for class_index in range(num_classes):
+                    for class_index in range(new_contingency_table.shape[1]):
                         num_elems_value_j_diff_class = (
-                            values_histogram[value_index_j]
-                            - values_histogram_with_classes[value_index_j, class_index])
+                            new_values_num_seen[value_index_j]
+                            - new_contingency_table[value_index_j, class_index])
                         weights[value_index_i, value_index_j] += (
-                            values_histogram_with_classes[value_index_i, class_index]
+                            new_contingency_table[value_index_i, class_index]
                             * num_elems_value_j_diff_class)
             return weights
 
-        (values_histogram,
-         values_histogram_with_classes) = _init_values_histograms(attrib_index,
-                                                                  num_classes,
-                                                                  attrib_num_valid_values,
-                                                                  valid_samples_indices)
-        weights = _init_values_weights(num_classes,
-                                       values_histogram,
-                                       values_histogram_with_classes)
+        weights = _init_values_weights(new_contingency_table, new_values_num_seen)
+        frac_split_cholesky = cls._solve_max_cut(weights)
+        left_new_values, right_new_values = cls._generate_random_partition(frac_split_cholesky)
 
-        frac_split_cholesky = cls._solve_max_cut(attrib_num_valid_values, weights)
-        left_values, right_values = cls._generate_random_partition(frac_split_cholesky,
-                                                                   new_to_orig_value_int)
-        gain = cls._calculate_split_gain(num_classes,
-                                         len(valid_samples_indices),
-                                         class_index_num_samples,
-                                         sample_class,
-                                         samples,
-                                         attrib_index,
-                                         right_values,
-                                         diff_keys,
-                                         diff_values)
-        return gain, values_histogram, left_values, right_values
+        left_orig_values, right_orig_values = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                            left_new_values,
+                                                                            right_new_values)
+        cut_val = cls._calculate_split_value(left_new_values, right_new_values, weights)
+        return cut_val, left_orig_values, right_orig_values
+
 
     @staticmethod
-    def _calculate_split_gain(num_classes, num_samples, class_index_num_samples, sample_class,
-                              samples, attrib_index, right_values, diff_keys, diff_values):
-        #TESTED!
-        def _init_num_samples_right_split_and_tcv(num_classes, sample_class, samples, attrib_index,
-                                                  right_values, diff_keys):
-            #TESTED!
-            tcv = np.zeros((num_classes, 2), dtype=np.int64)
-            # first column = left/false in values_split
-            num_samples_right_split = 0
-            # tcv[class_index][0] is for samples on the left side of split and tcv[class_index][1]
-            # is for samples on the right side.
-            for int_key in diff_keys:
-                curr_sample_class = sample_class[int_key]
-                sample_int_value = samples[int_key][attrib_index]
-                if sample_int_value in right_values:
-                    num_samples_right_split += 1
-                    tcv[curr_sample_class][1] += 1
-                else:
-                    tcv[curr_sample_class][0] += 1
-            return num_samples_right_split, tcv
-
-
-        # Initialize auxiliary variables
-        gain = 0.0
-        tc = class_index_num_samples[:] # this slice makes a copy of class_index_num_samples
-        num_samples_right_split, tcv = _init_num_samples_right_split_and_tcv(num_classes,
-                                                                             sample_class,
-                                                                             samples,
-                                                                             attrib_index,
-                                                                             right_values,
-                                                                             diff_keys)
-        # Calculate gain and update auxiliary variables
-
-        # Samples we haven't dealt with yet, including the current one. Will subtract 1 at every
-        # loop, including first.
-        num_remaining_samples = num_samples + 1
-        for int_key, sample_diff in zip(diff_keys, diff_values):
-            curr_sample_class = sample_class[int_key]
-            sample_atrib_int_value = samples[int_key][attrib_index]
-
-            num_remaining_samples -= 1
-            num_elems_in_compl_tc = num_remaining_samples - tc[curr_sample_class]
-
-            # Let's calculate the number of samples in same split side (not yet seen in loop) with
-            # different class.
-            if sample_atrib_int_value in right_values:
-                num_elems_compl_tc_same_split = num_samples_right_split - tcv[curr_sample_class][1]
-            else:
-                num_samples_left_split = num_remaining_samples - num_samples_right_split
-                num_elems_compl_tc_same_split = num_samples_left_split - tcv[curr_sample_class][0]
-
-            gain += sample_diff * (num_elems_in_compl_tc - num_elems_compl_tc_same_split)
-
-            # Time to update the auxiliary variables. We decrement tc and tcv so they only have
-            # information concerning samples not yet seen in this for loop.
-            tc[curr_sample_class] -= 1
-            if sample_atrib_int_value in right_values:
-                tcv[curr_sample_class][1] -= 1
-                num_samples_right_split -= 1
-            else:
-                tcv[curr_sample_class][0] -= 1
-        return gain
-
-    @staticmethod
-    def _solve_max_cut(attrib_num_valid_values, weights):
-        #TESTED!
-        def _solve_sdp(size, weights):
-            #TESTED!
-            # See Max Cut approximate given by Goemans and Williamson, 1995.
-            var = cvx.Semidef(size)
+    def _solve_max_cut(weights):
+        def _solve_sdp(weights):
+            # See Max Cut approximation given by Goemans and Williamson, 1995.
+            var = cvx.Semidef(weights.shape[0])
             obj = cvx.Minimize(0.25 * cvx.trace(weights.T * var))
 
             constraints = [var == var.T, var >> 0]
-            for i in range(size):
+            for i in range(weights.shape[0]):
                 constraints.append(var[i, i] == 1)
 
             prob = cvx.Problem(obj, constraints)
             prob.solve(solver=cvx.SCS, verbose=False)
             return var.value
 
-        fractional_split_squared = _solve_sdp(attrib_num_valid_values, weights)
-        # The solution should be symmetric, but let's just make sure the approximations didn't
-        # change that.
+        fractional_split_squared = _solve_sdp(weights)
+        # The solution should already be symmetric, but let's just make sure the approximations
+        # didn't change that.
         sym_fractional_split_squared = 0.5 * (fractional_split_squared
                                               + fractional_split_squared.T)
         # We are interested in the Cholesky decomposition of the above matrix to finally choose a
@@ -611,28 +496,38 @@ class GWSquaredGini(Criterion):
         return np.dot(temp_L.T, temp_P)
 
     @staticmethod
-    def _generate_random_partition(frac_split_cholesky,
-                                   new_to_orig_value_int):
-        #TESTED!
+    def _generate_random_partition(frac_split_cholesky):
         random_vector = np.random.randn(frac_split_cholesky.shape[1])
         values_split = np.zeros((frac_split_cholesky.shape[1]), dtype=np.float64)
         for column_index in range(frac_split_cholesky.shape[1]):
             column = frac_split_cholesky[:, column_index]
             values_split[column_index] = np.dot(random_vector, column)
         values_split_bool = np.apply_along_axis(lambda x: x > 0.0, axis=0, arr=values_split)
-        # Let's get the values on each side of this partition
-        left_values = set([])
-        right_values = set([])
+
+        left_new_values = set()
+        right_new_values = set()
         for new_value in range(frac_split_cholesky.shape[1]):
             if values_split_bool[new_value]:
-                left_values.add(new_to_orig_value_int[new_value])
+                left_new_values.add(new_value)
             else:
-                right_values.add(new_to_orig_value_int[new_value])
+                right_new_values.add(new_value)
+        return left_new_values, right_new_values
 
-        return left_values, right_values
+    @staticmethod
+    def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
+        # Let's get the original values on each side of this partition
+        left_orig_values = set(new_to_orig_value_int[left_new_value]
+                               for left_new_value in left_new_values)
+        right_orig_values = set(new_to_orig_value_int[right_new_value]
+                                for right_new_value in right_new_values)
+        return left_orig_values, right_orig_values
 
-
-
+    @staticmethod
+    def _calculate_split_value(left_new_values, right_new_values, weights):
+        cut_val = 0.0
+        for value_left, value_right in itertools.product(left_new_values, right_new_values):
+            cut_val += weights[value_left, value_right]
+        return cut_val
 
 
 
