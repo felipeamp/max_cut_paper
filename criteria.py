@@ -620,7 +620,7 @@ class GWChiSquare(Criterion):
     @classmethod
     def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
                              new_values_num_seen):
-        def _init_values_weights(new_values_num_seen, new_contingency_table):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
             # TESTED!
             # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
             weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
@@ -1174,7 +1174,7 @@ class LSChiSquare(Criterion):
     @classmethod
     def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
                              new_values_num_seen):
-        def _init_values_weights(new_values_num_seen, new_contingency_table):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
             # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
             weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
                                dtype=np.float64)
