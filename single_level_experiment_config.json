@@ -8,7 +8,7 @@
         "GW Squared Gini",
         "GW Chi Square",
         "LS Squared Gini",
-        "LS Chi Square",
+        "LS Chi Square"
     ],
 
     "output folder": "./outputs/single level experiment",
