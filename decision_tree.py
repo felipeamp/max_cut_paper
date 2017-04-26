@@ -177,6 +177,7 @@ class DecisionTree(object):
         self._root_node = TreeNode(dataset,
                                    training_samples_indices,
                                    dataset.valid_nominal_attribute[:],
+                                   dataset.valid_numeric_attribute[:],
                                    max_depth,
                                    min_samples_per_node,
                                    use_stop_conditions,
@@ -643,6 +644,8 @@ class TreeNode(object):
             samples.
         valid_nominal_attribute (:obj:'list' of 'bool'): list where the i-th entry indicates wether
             the i-th attribute from the dataset is valid and nominal or not.
+        valid_numeric_attribute (:obj:'list' of 'bool'): list where the i-th entry indicates wether
+            the i-th attribute from the dataset is valid and numeric or not.
         num_valid_samples (int): number of training samples in this TreeNode.
         class_index_num_samples (:obj:'list' of 'int'): list where the i-th entry indicates the
             number of samples having class i.
@@ -650,8 +653,8 @@ class TreeNode(object):
         number_non_empty_classes (int): number of classes having no sample in this TreeNode.
     """
     def __init__(self, dataset, valid_samples_indices, valid_nominal_attribute,
-                 max_depth_remaining, min_samples_per_node, use_stop_conditions=False,
-                 max_p_value_chi_sq=0.1):
+                 valid_numeric_attribute, max_depth_remaining, min_samples_per_node,
+                 use_stop_conditions=False, max_p_value_chi_sq=0.1):
         """Initializes a TreeNode instance with the given arguments.
 
         Args:
@@ -660,6 +663,8 @@ class TreeNode(object):
                 training at this node.
             valid_nominal_attribute (:obj:'list' of 'bool'): the i-th entry informs wether the i-th
                 attribute is a valid nominal one.
+            valid_numeric_attribute (:obj:'list' of 'bool'): the i-th entry informs wether the i-th
+                attribute is a valid numeric one.
             max_depth_remaining (int): maximum depth that the subtree rooted at this node can have.
                 If zero, this node will be a leaf.
             min_samples_per_node (int): minimum number of samples that must be present in order to
@@ -696,6 +701,7 @@ class TreeNode(object):
         # Note that self.valid_nominal_attribute might be different from
         # self.dataset.valid_nominal_attribute when use_stop_conditions == True.
         self.valid_nominal_attribute = valid_nominal_attribute
+        self.valid_numeric_attribute = valid_numeric_attribute
 
         self.num_valid_samples = len(valid_samples_indices)
         self.class_index_num_samples = [0] * dataset.num_classes
@@ -870,7 +876,7 @@ class TreeNode(object):
             if not self.valid_numeric_attribute[attrib_index]:
                 continue
             if not _has_multiple_numeric_values(self.valid_samples_indices,
-                                                self.dataset.samples
+                                                self.dataset.samples,
                                                 attrib_index):
                 self.valid_numeric_attribute[attrib_index] = False
             else:
@@ -961,6 +967,7 @@ class TreeNode(object):
             self.nodes.append(TreeNode(self.dataset,
                                        curr_split_samples_indices,
                                        self.valid_nominal_attribute,
+                                       self.valid_numeric_attribute,
                                        self.max_depth_remaining - 1,
                                        self._min_samples_per_node,
                                        self._use_stop_conditions,
