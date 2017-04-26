@@ -882,7 +882,7 @@ class TreeNode(object):
             else:
                 num_valid_numeric_attributes += 1
 
-        # If there are no valid nominal attributes, this node should be a leaf.
+        # If there are no valid attributes, this node should be a leaf.
         if not num_valid_nominal_attributes and not num_valid_numeric_attributes:
             return None
 
