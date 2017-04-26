@@ -355,23 +355,6 @@ class Twoing(Criterion):
                                / (left_num + right_num))
         return children_gini_index
 
-    @staticmethod
-    def _generate_random_contingency_table(classes_dist, num_valid_samples, values_num_samples):
-        # TESTED!
-        random_classes = np.random.choice(len(classes_dist),
-                                          num_valid_samples,
-                                          replace=True,
-                                          p=classes_dist)
-        random_contingency_table = np.zeros((values_num_samples.shape[0], len(classes_dist)),
-                                            dtype=float)
-        samples_done = 0
-        for value, value_num_samples in enumerate(values_num_samples):
-            if value_num_samples > 0:
-                for class_index in random_classes[samples_done: samples_done + value_num_samples]:
-                    random_contingency_table[value, class_index] += 1
-                samples_done += value_num_samples
-        return random_contingency_table
-
 
 
 #################################################################################################
