@@ -8,9 +8,6 @@
 
 import abc
 import itertools
-import math
-import random
-import timeit
 
 import chol
 import cvxpy as cvx
@@ -18,6 +15,8 @@ import numpy as np
 
 
 class Criterion(object):
+    """Abstract base class for every criterion.
+    """
     __metaclass__ = abc.ABCMeta
 
     name = ''
@@ -40,6 +39,9 @@ class Criterion(object):
 #################################################################################################
 
 class Twoing(Criterion):
+    """Twoing criterion. For reference see "Breiman, L., Friedman, J. J., Olshen, R. A., and
+    Stone, C. J. Classification and Regression Trees. Wadsworth, 1984".
+    """
     name = 'Twoing'
 
     @classmethod
@@ -366,11 +368,15 @@ class Twoing(Criterion):
 #################################################################################################
 
 class GWSquaredGini(Criterion):
+    """Square Gini criterion using Goemans and Williamson method for solving the Max Cut problem
+    using a randomized approximation and a SDP formulation.
+    """
     name = 'GW Squared Gini'
 
     @classmethod
     def select_best_attribute_and_split(cls, tree_node):
-        """Returns the best attribute and its best split, according to the GWSG criterion.
+        """Returns the best attribute and its best split, according to the GW Squared Gini
+        criterion.
 
         Args:
           tree_node (TreeNode): tree node where we want to find the best attribute/split.
@@ -405,7 +411,6 @@ class GWSquaredGini(Criterion):
             if curr_attrib_split[2] > best_attribute_and_split[2]:
                 best_attribute_and_split = curr_attrib_split
         return best_attribute_and_split
-
 
     @staticmethod
     def _remove_empty_values(contingency_table, values_num_samples):
@@ -486,14 +491,214 @@ class GWSquaredGini(Criterion):
         # We are interested in the Cholesky decomposition of the above matrix to finally choose a
         # random partition based on it. Detail: the above matrix may be singular, so not every
         # method works.
-        temp_P, temp_L, _ = chol.chol_higham(sym_fractional_split_squared)
+        permutation_matrix, lower_triang_matrix, _ = chol.chol_higham(sym_fractional_split_squared)
 
-        # Note that temp_L.T is upper triangular, but
-        # frac_split_cholesky = np.dot(temp.L.T, temp_P)
+        # Note that lower_triang_matrix.T is upper triangular, but
+        # frac_split_cholesky = np.dot(lower_triang_matrix.T, permutation_matrix)
         # is not necessarily upper triangular. Since we are only interested in decomposing
         # sym_fractional_split_squared = np.dot(frac_split_cholesky.T, frac_split_cholesky)
         # that is not a problem.
-        return np.dot(temp_L.T, temp_P)
+        return np.dot(lower_triang_matrix.T, permutation_matrix)
+
+    @staticmethod
+    def _generate_random_partition(frac_split_cholesky):
+        random_vector = np.random.randn(frac_split_cholesky.shape[1])
+        values_split = np.zeros((frac_split_cholesky.shape[1]), dtype=np.float64)
+        for column_index in range(frac_split_cholesky.shape[1]):
+            column = frac_split_cholesky[:, column_index]
+            values_split[column_index] = np.dot(random_vector, column)
+        values_split_bool = np.apply_along_axis(lambda x: x > 0.0, axis=0, arr=values_split)
+
+        left_new_values = set()
+        right_new_values = set()
+        for new_value in range(frac_split_cholesky.shape[1]):
+            if values_split_bool[new_value]:
+                left_new_values.add(new_value)
+            else:
+                right_new_values.add(new_value)
+        return left_new_values, right_new_values
+
+    @staticmethod
+    def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
+        # Let's get the original values on each side of this partition
+        left_orig_values = set(new_to_orig_value_int[left_new_value]
+                               for left_new_value in left_new_values)
+        right_orig_values = set(new_to_orig_value_int[right_new_value]
+                                for right_new_value in right_new_values)
+        return left_orig_values, right_orig_values
+
+    @staticmethod
+    def _calculate_split_value(left_new_values, right_new_values, weights):
+        cut_val = 0.0
+        for value_left, value_right in itertools.product(left_new_values, right_new_values):
+            cut_val += weights[value_left, value_right]
+        return cut_val
+
+
+
+#################################################################################################
+#################################################################################################
+###                                                                                           ###
+###                                       GW CHI SQUARE                                       ###
+###                                                                                           ###
+#################################################################################################
+#################################################################################################
+
+
+class GWChiSquare(Criterion):
+    """Chi Square criterion using Goemans and Williamson method for solving the Max Cut problem
+    using a randomized approximation and a SDP formulation.
+    """
+    name = 'GW Chi Square'
+
+    @classmethod
+    def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, according to the GW Chi Square criterion.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns:
+            A tuple cointaining, in order:
+                - the index of the accepted attribute;
+                - a list of sets, each containing the values that should go to that split/subtree.
+                -  Split value according to the criterion. If no attribute has a valid split, this
+                value should be `float('-inf')`.
+        """
+        best_splits_per_attrib = []
+        for attrib_index, is_valid_nominal_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_nominal_attrib:
+                (new_to_orig_value_int,
+                 new_contingency_table,
+                 new_values_num_seen) = cls._remove_empty_values(
+                     tree_node.contingency_tables[attrib_index][0],
+                     tree_node.contingency_tables[attrib_index][1])
+
+                (curr_cut_value,
+                 left_int_values,
+                 right_int_values) = cls._generate_best_split(new_to_orig_value_int,
+                                                              new_contingency_table,
+                                                              new_values_num_seen)
+                best_splits_per_attrib.append((attrib_index,
+                                               [left_int_values, right_int_values],
+                                               curr_cut_value))
+
+        best_attribute_and_split = (None, [], float('-inf'))
+        for curr_attrib_split in best_splits_per_attrib:
+            if curr_attrib_split[2] > best_attribute_and_split[2]:
+                best_attribute_and_split = curr_attrib_split
+        return best_attribute_and_split
+
+    @staticmethod
+    def _remove_empty_values(contingency_table, values_num_samples):
+        # Define conversion from original values to new values
+        orig_to_new_value_int = {}
+        new_to_orig_value_int = []
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                orig_to_new_value_int[orig_value] = len(new_to_orig_value_int)
+                new_to_orig_value_int.append(orig_value)
+
+        # Generate the new contingency tables
+        new_contingency_table = np.zeros((len(new_to_orig_value_int), contingency_table.shape[1]),
+                                         dtype=int)
+        new_value_num_seen = np.zeros((len(new_to_orig_value_int)), dtype=int)
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                curr_new_value = orig_to_new_value_int[orig_value]
+                new_value_num_seen[curr_new_value] = curr_num_samples
+                np.copyto(dst=new_contingency_table[curr_new_value, :],
+                          src=contingency_table[orig_value, :])
+
+        return (new_to_orig_value_int,
+                new_contingency_table,
+                new_value_num_seen)
+
+    @classmethod
+    def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
+                             new_values_num_seen):
+        def _init_values_weights(new_values_num_seen, new_contingency_table):
+            # TESTED!
+            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
+            weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
+                               dtype=np.float64)
+            for value_index_i, num_samples_value_index_i in enumerate(new_values_num_seen):
+                for value_index_j, num_samples_value_index_j in enumerate(new_values_num_seen):
+                    if value_index_i == value_index_j:
+                        continue
+                    num_samples_both_values = (num_samples_value_index_i
+                                               + num_samples_value_index_j) # is always > 0.
+                    for curr_class_index in range(new_contingency_table.shape[1]):
+                        num_samples_both_values_curr_class = (
+                            new_contingency_table[value_index_i, curr_class_index]
+                            + new_contingency_table[value_index_j, curr_class_index])
+                        if num_samples_both_values_curr_class == 0:
+                            continue
+
+                        expected_value_index_i_class = (
+                            num_samples_value_index_i * num_samples_both_values_curr_class
+                            / num_samples_both_values)
+                        diff_index_i = (
+                            new_contingency_table[value_index_i, curr_class_index]
+                            - expected_value_index_i_class)
+
+                        expected_value_index_j_class = (
+                            num_samples_value_index_j * num_samples_both_values_curr_class
+                            / num_samples_both_values)
+                        diff_index_j = (
+                            new_contingency_table[value_index_j, curr_class_index]
+                            - expected_value_index_j_class)
+
+                        edge_weight_curr_class = (
+                            diff_index_i * (diff_index_i / expected_value_index_i_class)
+                            + diff_index_j * (diff_index_j / expected_value_index_j_class))
+                        weights[value_index_i, value_index_j] += edge_weight_curr_class
+
+                    if new_values_num_seen.shape[0] > 2:
+                        weights[value_index_i, value_index_j] /= (new_values_num_seen.shape[0] - 1.)
+            return weights
+
+        weights = _init_values_weights(new_contingency_table, new_values_num_seen)
+        frac_split_cholesky = cls._solve_max_cut(weights)
+        left_new_values, right_new_values = cls._generate_random_partition(frac_split_cholesky)
+
+        left_orig_values, right_orig_values = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                            left_new_values,
+                                                                            right_new_values)
+        cut_val = cls._calculate_split_value(left_new_values, right_new_values, weights)
+        return cut_val, left_orig_values, right_orig_values
+
+    @staticmethod
+    def _solve_max_cut(weights):
+        def _solve_sdp(weights):
+            # See Max Cut approximation given by Goemans and Williamson, 1995.
+            var = cvx.Semidef(weights.shape[0])
+            obj = cvx.Minimize(0.25 * cvx.trace(weights.T * var))
+
+            constraints = [var == var.T, var >> 0]
+            for i in range(weights.shape[0]):
+                constraints.append(var[i, i] == 1)
+
+            prob = cvx.Problem(obj, constraints)
+            prob.solve(solver=cvx.SCS, verbose=False)
+            return var.value
+
+        fractional_split_squared = _solve_sdp(weights)
+        # The solution should already be symmetric, but let's just make sure the approximations
+        # didn't change that.
+        sym_fractional_split_squared = 0.5 * (fractional_split_squared
+                                              + fractional_split_squared.T)
+        # We are interested in the Cholesky decomposition of the above matrix to finally choose a
+        # random partition based on it. Detail: the above matrix may be singular, so not every
+        # method works.
+        permutation_matrix, lower_triang_matrix, _ = chol.chol_higham(sym_fractional_split_squared)
+
+        # Note that lower_triang_matrix.T is upper triangular, but
+        # frac_split_cholesky = np.dot(lower_triang_matrix.T, permutation_matrix)
+        # is not necessarily upper triangular. Since we are only interested in decomposing
+        # sym_fractional_split_squared = np.dot(frac_split_cholesky.T, frac_split_cholesky)
+        # that is not a problem.
+        return np.dot(lower_triang_matrix.T, permutation_matrix)
 
     @staticmethod
     def _generate_random_partition(frac_split_cholesky):
@@ -541,92 +746,25 @@ class GWSquaredGini(Criterion):
 
 
 class LSSquaredGini(Criterion):
+    """Squared Gini criterion using a greedy local search for solving the Max Cut problem.
+    """
     name = 'LS Squared Gini'
 
     @classmethod
-    def evaluate_all_attributes(cls, tree_node):
-        #TESTED!
-        ret = [] # contains (attrib_index, gain_ratio, split_values, p_value, time_taken)
-
-        for (attrib_index,
-             (is_valid_nominal_attrib,
-              is_valid_numeric_attrib)) in enumerate(
-                  zip(tree_node.valid_nominal_attribute,
-                      tree_node.dataset.valid_numeric_attribute)):
-            if is_valid_nominal_attrib:
-                start_time = timeit.default_timer()
-                (attrib_num_valid_values,
-                 orig_to_new_value_int,
-                 new_to_orig_value_int) = cls._get_attrib_valid_values(
-                     attrib_index,
-                     tree_node.dataset.samples,
-                     tree_node.valid_samples_indices)
-                if attrib_num_valid_values <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        attrib_num_valid_values))
-                    continue
-                (curr_gain,
-                 _,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     attrib_index,
-                     tree_node.dataset.num_classes,
-                     attrib_num_valid_values,
-                     orig_to_new_value_int,
-                     new_to_orig_value_int,
-                     tree_node.valid_samples_indices,
-                     tree_node.dataset.samples,
-                     tree_node.dataset.sample_class)
-                ret.append((attrib_index,
-                            curr_gain,
-                            [left_int_values, right_int_values],
-                            None,
-                            timeit.default_timer() - start_time,
-                            None,
-                            None))
-
-            elif is_valid_numeric_attrib:
-                start_time = timeit.default_timer()
-                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
-                                                                  tree_node.dataset.samples,
-                                                                  tree_node.dataset.sample_class,
-                                                                  attrib_index)
-                values_and_classes.sort()
-                (best_cut_value,
-                 last_left_value,
-                 first_right_value) = cls._best_cut_for_numeric(
-                     values_and_classes,
-                     tree_node.dataset.num_classes)
-                ret.append((attrib_index,
-                            best_cut_value,
-                            [{last_left_value}, {first_right_value}],
-                            None,
-                            timeit.default_timer() - start_time,
-                            None,
-                            None))
-
-        preference_rank_full = sorted(ret, key=lambda x: -x[1])
-        seen_attrib = [False] * len(tree_node.dataset.attrib_names)
-        preference_rank = []
-        for pref_elem in preference_rank_full:
-            if seen_attrib[pref_elem[0]]:
-                continue
-            seen_attrib[pref_elem[0]] = True
-            preference_rank.append(pref_elem)
-        ret_with_preference_full = [0] * len(tree_node.dataset.attrib_names)
-        for preference, elem in enumerate(preference_rank):
-            attrib_index = elem[0]
-            new_elem = list(elem)
-            new_elem.append(preference)
-            ret_with_preference_full[attrib_index] = tuple(new_elem)
-        ret_with_preference = [elem for elem in ret_with_preference_full if elem != 0]
-
-        return ret_with_preference
-
-    @classmethod
     def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, according to the LS Squared Gini
+        criterion.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns:
+            A tuple cointaining, in order:
+                - the index of the accepted attribute;
+                - a list of sets, each containing the values that should go to that split/subtree.
+                -  Split value according to the criterion. If no attribute has a valid split, this
+                value should be `float('-inf')`.
+        """
         best_attrib_index = 0
         best_gain = float('-inf')
         best_split_left_values = set([])
@@ -832,11 +970,11 @@ class LSSquaredGini(Criterion):
         while improvement:
             improvement = False
             for value in values_seen:
-                new_cut_val = cls._calculate_split_gain_for_single_switch(curr_cut_val,
-                                                                          set_left_values,
-                                                                          set_right_values,
-                                                                          value,
-                                                                          weights)
+                new_cut_val = cls._split_gain_for_single_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                value,
+                                                                weights)
                 if new_cut_val - curr_cut_val > 0.000001:
                     curr_cut_val = new_cut_val
                     if value in set_left_values:
@@ -853,11 +991,11 @@ class LSSquaredGini(Criterion):
                 if ((value1 in set_left_values and value2 in set_left_values) or
                         (value1 in set_right_values and value2 in set_right_values)):
                     continue
-                new_cut_val = cls._calculate_split_gain_for_double_switch(curr_cut_val,
-                                                                          set_left_values,
-                                                                          set_right_values,
-                                                                          (value1, value2),
-                                                                          weights)
+                new_cut_val = cls._split_gain_for_double_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                (value1, value2),
+                                                                weights)
                 if new_cut_val - curr_cut_val > 0.000001:
                     curr_cut_val = new_cut_val
                     if value1 in set_left_values:
@@ -876,8 +1014,8 @@ class LSSquaredGini(Criterion):
         return curr_cut_val, set_left_values, set_right_values
 
     @staticmethod
-    def _calculate_split_gain_for_single_switch(curr_gain, new_left_values, new_right_values,
-                                                new_value_to_change_sides, weights):
+    def _split_gain_for_single_switch(curr_gain, new_left_values, new_right_values,
+                                      new_value_to_change_sides, weights):
         new_gain = curr_gain
         if new_value_to_change_sides in new_left_values:
             for value in new_left_values:
@@ -896,8 +1034,8 @@ class LSSquaredGini(Criterion):
         return new_gain
 
     @staticmethod
-    def _calculate_split_gain_for_double_switch(curr_gain, new_left_values, new_right_values,
-                                                new_values_to_change_sides, weights):
+    def _split_gain_for_double_switch(curr_gain, new_left_values, new_right_values,
+                                      new_values_to_change_sides, weights):
         assert len(new_values_to_change_sides) == 2
         new_gain = curr_gain
         first_value_to_change_sides = new_values_to_change_sides[0]
@@ -969,318 +1107,6 @@ class LSSquaredGini(Criterion):
 
 
 
-
-
-#################################################################################################
-#################################################################################################
-###                                                                                           ###
-###                                       GW CHI SQUARE                                       ###
-###                                                                                           ###
-#################################################################################################
-#################################################################################################
-
-
-class GWChiSquare(Criterion):
-    name = 'GW Chi Square'
-
-    @classmethod
-    def evaluate_all_attributes(cls, tree_node):
-        #TESTED!
-        ret = [] # contains (attrib_index, gain_ratio, split_values, p_value, time_taken)
-        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                start_time = timeit.default_timer()
-                (attrib_num_valid_values,
-                 orig_to_new_value_int,
-                 new_to_orig_value_int) = cls._get_attrib_valid_values(
-                     attrib_index,
-                     tree_node.dataset.samples,
-                     tree_node.valid_samples_indices)
-                if attrib_num_valid_values <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        attrib_num_valid_values))
-                    continue
-                (curr_gain,
-                 _,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     attrib_index,
-                     tree_node.dataset.num_classes,
-                     attrib_num_valid_values,
-                     orig_to_new_value_int,
-                     new_to_orig_value_int,
-                     tree_node.valid_samples_indices,
-                     tree_node.dataset.samples,
-                     tree_node.dataset.sample_class)
-                ret.append((attrib_index,
-                            curr_gain,
-                            [left_int_values, right_int_values],
-                            None,
-                            timeit.default_timer() - start_time,
-                            None,
-                            None))
-
-        preference_rank_full = sorted(ret, key=lambda x: -x[1])
-        seen_attrib = [False] * len(tree_node.dataset.attrib_names)
-        preference_rank = []
-        for pref_elem in preference_rank_full:
-            if seen_attrib[pref_elem[0]]:
-                continue
-            seen_attrib[pref_elem[0]] = True
-            preference_rank.append(pref_elem)
-        ret_with_preference_full = [0] * len(tree_node.dataset.attrib_names)
-        for preference, elem in enumerate(preference_rank):
-            attrib_index = elem[0]
-            new_elem = list(elem)
-            new_elem.append(preference)
-            ret_with_preference_full[attrib_index] = tuple(new_elem)
-        ret_with_preference = [elem for elem in ret_with_preference_full if elem != 0]
-
-        return ret_with_preference
-
-    @classmethod
-    def select_best_attribute_and_split(cls, tree_node):
-        best_attrib_index = 0
-        best_gain = float('-inf')
-        best_split_left_values = set([])
-        best_split_right_values = set([])
-        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                (attrib_num_valid_values,
-                 orig_to_new_value_int,
-                 new_to_orig_value_int) = cls._get_attrib_valid_values(
-                     attrib_index,
-                     tree_node.dataset.samples,
-                     tree_node.valid_samples_indices)
-                if attrib_num_valid_values <= 1:
-                    print("Attribute {} ({}) is valid but has only {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        attrib_num_valid_values))
-                    continue
-                (curr_gain,
-                 _,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     attrib_index,
-                     tree_node.dataset.num_classes,
-                     attrib_num_valid_values,
-                     orig_to_new_value_int,
-                     new_to_orig_value_int,
-                     tree_node.valid_samples_indices,
-                     tree_node.dataset.samples,
-                     tree_node.dataset.sample_class)
-
-                if curr_gain > best_gain:
-                    best_attrib_index = attrib_index
-                    best_gain = curr_gain
-                    best_split_left_values = left_int_values
-                    best_split_right_values = right_int_values
-        splits_values = [best_split_left_values, best_split_right_values]
-        return (best_attrib_index, splits_values, best_gain, None)
-
-    @staticmethod
-    def _get_attrib_valid_values(attrib_index, samples, valid_samples_indices):
-        #TESTED!
-        seen_values = set([])
-        orig_to_new_value_int = {}
-        new_to_orig_value_int = []
-        for sample_index in valid_samples_indices:
-            value_int = samples[sample_index][attrib_index]
-            if value_int not in seen_values:
-                orig_to_new_value_int[value_int] = len(seen_values)
-                new_to_orig_value_int.append(value_int)
-                seen_values.add(value_int)
-        return len(seen_values), orig_to_new_value_int, new_to_orig_value_int
-
-    @staticmethod
-    def _calculate_diff(valid_samples_indices, sample_costs):
-        #TESTED!
-        def _max_min_diff(list_of_values):
-            max_val = list_of_values[0]
-            min_val = max_val
-            for value in list_of_values[1:]:
-                if value > max_val:
-                    max_val = value
-                elif value < min_val:
-                    min_val = value
-            return abs(max_val - min_val)
-
-        diff_keys = []
-        diff_values = []
-        for sample_index in valid_samples_indices:
-            curr_costs = sample_costs[sample_index]
-            diff_values.append(_max_min_diff(curr_costs))
-            diff_keys.append(sample_index)
-        diff_keys_values = sorted(list(zip(diff_keys, diff_values)),
-                                  key=lambda key_value: key_value[1])
-        diff_keys, diff_values = zip(*diff_keys_values)
-        return diff_keys, diff_values
-
-    @classmethod
-    def _generate_best_split(cls, attrib_index, num_classes, attrib_num_valid_values,
-                             orig_to_new_value_int, new_to_orig_value_int, valid_samples_indices,
-                             samples, sample_class):
-        #TESTED!
-        def _init_values_histograms(attrib_index, num_classes, attrib_num_valid_values,
-                                    valid_samples_indices):
-            #TESTED!
-            values_histogram = np.zeros((attrib_num_valid_values), dtype=np.int64)
-            values_histogram_with_classes = np.zeros((attrib_num_valid_values, num_classes),
-                                                     dtype=np.int64)
-            for sample_index in valid_samples_indices:
-                orig_value = samples[sample_index][attrib_index]
-                new_value = orig_to_new_value_int[orig_value]
-                values_histogram[new_value] += 1
-                values_histogram_with_classes[new_value][sample_class[sample_index]] += 1
-            return values_histogram, values_histogram_with_classes
-
-        def _init_values_weights(num_classes, values_histogram, values_histogram_with_classes):
-            # TESTED!
-
-            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
-            weights = np.zeros((values_histogram.shape[0], values_histogram.shape[0]),
-                               dtype=np.float64)
-            num_values = sum(num_samples > 0 for num_samples in values_histogram)
-            for value_index_i in range(values_histogram.shape[0]):
-                if values_histogram[value_index_i] == 0:
-                    continue
-                for value_index_j in range(values_histogram.shape[0]):
-                    if value_index_i == value_index_j or values_histogram[value_index_j] == 0:
-                        continue
-
-                    num_samples_both_values = (values_histogram[value_index_i]
-                                               + values_histogram[value_index_j])
-                    for class_index in range(num_classes):
-                        num_samples_both_values_this_class = (
-                            values_histogram_with_classes[value_index_i, class_index]
-                            + values_histogram_with_classes[value_index_j, class_index])
-                        if num_samples_both_values_this_class == 0:
-                            continue
-                        expected_value_index_i_class = (
-                            values_histogram[value_index_i] * num_samples_both_values_this_class
-                            / num_samples_both_values)
-                        expected_value_index_j_class = (
-                            values_histogram[value_index_j] * num_samples_both_values_this_class
-                            / num_samples_both_values)
-                        diff_index_i = (
-                            values_histogram_with_classes[value_index_i, class_index]
-                            - expected_value_index_i_class)
-                        diff_index_j = (
-                            values_histogram_with_classes[value_index_j, class_index]
-                            - expected_value_index_j_class)
-
-                        edge_weight_curr_class = (
-                            diff_index_i * (diff_index_i / expected_value_index_i_class)
-                            + diff_index_j * (diff_index_j / expected_value_index_j_class))
-
-                        weights[value_index_i, value_index_j] += edge_weight_curr_class
-
-                        if edge_weight_curr_class < 0.0:
-                            print('='*90)
-                            print('VALOR DE CHI SQUARE DA ARESTA {}{} COM CLASSE {}: {} < 0'.format(
-                                value_index_i,
-                                value_index_j,
-                                class_index,
-                                edge_weight_curr_class))
-                            print('='*90)
-                    if num_values > 2:
-                        weights[value_index_i, value_index_j] /= (num_values - 1.)
-
-            return weights
-
-
-        (values_histogram,
-         values_histogram_with_classes) = _init_values_histograms(attrib_index,
-                                                                  num_classes,
-                                                                  attrib_num_valid_values,
-                                                                  valid_samples_indices)
-        weights = _init_values_weights(num_classes,
-                                       values_histogram,
-                                       values_histogram_with_classes)
-
-        frac_split_cholesky = cls._solve_max_cut(attrib_num_valid_values, weights)
-        (left_values,
-         right_values,
-         new_left_values,
-         new_right_values) = cls._generate_random_partition(frac_split_cholesky,
-                                                            new_to_orig_value_int)
-        gain = cls._calculate_split_gain(new_left_values,
-                                         new_right_values,
-                                         weights)
-        return gain, values_histogram, left_values, right_values
-
-    @staticmethod
-    def _calculate_split_gain(new_left_values, new_right_values, weights):
-        gain = 0.0
-        for value_left, value_right in itertools.product(new_left_values, new_right_values):
-            gain += weights[value_left, value_right]
-        return gain
-
-    @staticmethod
-    def _solve_max_cut(attrib_num_valid_values, weights):
-        #TESTED!
-        def _solve_sdp(size, weights):
-            #TESTED!
-            # See Max Cut approximate given by Goemans and Williamson, 1995.
-            var = cvx.Semidef(size)
-            obj = cvx.Minimize(0.25 * cvx.trace(weights.T * var))
-
-            constraints = [var == var.T, var >> 0]
-            for i in range(size):
-                constraints.append(var[i, i] == 1)
-
-            prob = cvx.Problem(obj, constraints)
-            prob.solve(solver=cvx.SCS, verbose=False)
-            return var.value
-
-        fractional_split_squared = _solve_sdp(attrib_num_valid_values, weights)
-        # The solution should be symmetric, but let's just make sure the approximations didn't
-        # change that.
-        sym_fractional_split_squared = 0.5 * (fractional_split_squared
-                                              + fractional_split_squared.T)
-        # We are interested in the Cholesky decomposition of the above matrix to finally choose a
-        # random partition based on it. Detail: the above matrix may be singular, so not every
-        # method works.
-        temp_P, temp_L, _ = chol.chol_higham(sym_fractional_split_squared)
-
-        # Note that temp_L.T is upper triangular, but
-        # frac_split_cholesky = np.dot(temp.L.T, temp_P)
-        # is not necessarily upper triangular. Since we are only interested in decomposing
-        # sym_fractional_split_squared = np.dot(frac_split_cholesky.T, frac_split_cholesky)
-        # that is not a problem.
-        return np.dot(temp_L.T, temp_P)
-
-    @staticmethod
-    def _generate_random_partition(frac_split_cholesky,
-                                   new_to_orig_value_int):
-        #TESTED!
-        random_vector = np.random.randn(frac_split_cholesky.shape[1])
-        values_split = np.zeros((frac_split_cholesky.shape[1]), dtype=np.float64)
-        for column_index in range(frac_split_cholesky.shape[1]):
-            column = frac_split_cholesky[:, column_index]
-            values_split[column_index] = np.dot(random_vector, column)
-        values_split_bool = np.apply_along_axis(lambda x: x > 0.0, axis=0, arr=values_split)
-        # Let's get the values on each side of this partition
-        left_values = set()
-        right_values = set()
-        new_left_values = set()
-        new_right_values = set()
-        for new_value in range(frac_split_cholesky.shape[1]):
-            if values_split_bool[new_value]:
-                left_values.add(new_to_orig_value_int[new_value])
-                new_left_values.add(new_value)
-            else:
-                right_values.add(new_to_orig_value_int[new_value])
-                new_right_values.add(new_value)
-
-        return left_values, right_values, new_left_values, new_right_values
-
-
-
-
 #################################################################################################
 #################################################################################################
 ###                                                                                           ###
@@ -1291,281 +1117,24 @@ class GWChiSquare(Criterion):
 
 
 class LSChiSquare(Criterion):
+    """Chi Square criterion using a greedy local search for solving the Max Cut problem.
+    """
     name = 'LS Chi Square'
 
     @classmethod
-    def evaluate_all_attributes_2(cls, tree_node, num_tests, num_fails_allowed):
-        # contains (attrib_index, gain, split_values, p_value, time_taken)
-        best_split_per_attrib = []
-
-        num_valid_attrib = 0
-        smaller_contingency_tables = {}
-        criterion_start_time = timeit.default_timer()
-
-        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                start_time = timeit.default_timer()
-                (orig_to_new_value_int,
-                 new_to_orig_value_int,
-                 smaller_contingency_table,
-                 smaller_values_num_samples) = cls._get_smaller_contingency_table(
-                     tree_node.contingency_tables[attrib_index][0],
-                     tree_node.contingency_tables[attrib_index][1])
-                if len(new_to_orig_value_int) <= 1:
-                    print("Attribute {} ({}) is valid but only has {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        len(new_to_orig_value_int)))
-                    continue
-                smaller_contingency_tables[attrib_index] = (orig_to_new_value_int,
-                                                            new_to_orig_value_int,
-                                                            smaller_contingency_table,
-                                                            smaller_values_num_samples)
-                num_valid_attrib += 1
-                (curr_gain,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     new_to_orig_value_int,
-                     smaller_contingency_table,
-                     smaller_values_num_samples)
-                best_split_per_attrib.append((attrib_index,
-                                              curr_gain,
-                                              [left_int_values, right_int_values],
-                                              None,
-                                              timeit.default_timer() - start_time))
-        criterion_total_time = timeit.default_timer() - criterion_start_time
-
-
-        ordered_start_time = timeit.default_timer()
-        preference_rank_full = sorted(best_split_per_attrib, key=lambda x: -x[1])
-        seen_attrib = [False] * len(tree_node.dataset.attrib_names)
-        preference_rank = []#(1,
-        #                     float('-inf'),
-        #                     None,
-        #                     None,
-        #                     None)]
-        # bad_attrib_indices = {3, 5, 6, 10, 11, 12, 13, 17, 18, 20, 21, 22, 25, 56, 57, 52, 55, 59,
-        #                       60, 61, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 476, 478}
-        # preference_rank_mailcode_first = []
-        for pref_elem in preference_rank_full:
-            if seen_attrib[pref_elem[0]]:
-                continue
-            seen_attrib[pref_elem[0]] = True
-            preference_rank.append(pref_elem)
-            # if pref_elem[0] in bad_attrib_indices:
-            #     preference_rank_mailcode_first.append(pref_elem)
-
-        # preference_rank_mailcode_first = sorted(preference_rank_mailcode_first,
-        #                                         key=lambda x: x[1])
-        # for pref_elem in preference_rank:
-        #     if pref_elem[0] in bad_attrib_indices:
-        #         continue
-        #     preference_rank_mailcode_first.append(pref_elem)
-
-        tests_done_ordered = 0
-        accepted_attribute_ordered = None
-        ordered_accepted_rank = None
-        for (rank_index,
-             (attrib_index, best_gain, _, _, _)) in enumerate(preference_rank):
-            if math.isinf(best_gain):
-                continue
-            (_,
-             new_to_orig_value_int,
-             smaller_contingency_table,
-             smaller_values_num_samples) = smaller_contingency_tables[attrib_index]
-            (should_accept,
-             num_tests_needed) = cls.accept_attribute(
-                 best_gain,
-                 num_tests,
-                 len(tree_node.valid_samples_indices),
-                 num_fails_allowed,
-                 new_to_orig_value_int,
-                 smaller_contingency_table,
-                 smaller_values_num_samples)
-            if not should_accept:
-                tests_done_ordered += num_tests_needed
-            else:
-                accepted_attribute_ordered = tree_node.dataset.attrib_names[attrib_index]
-                print('Accepted attribute:', accepted_attribute_ordered)
-                ordered_accepted_rank = rank_index + 1
-                tests_done_ordered += num_tests
-                break
-        ordered_total_time = timeit.default_timer() - ordered_start_time
-
-
-        rev_start_time = timeit.default_timer()
-        # Reversed ordered
-        rev_preference_rank = reversed(preference_rank)
-
-        tests_done_rev = 0
-        accepted_attribute_rev = None
-        for (attrib_index, best_gain, _, _, _) in rev_preference_rank:
-            if math.isinf(best_gain):
-                continue
-            (_,
-             new_to_orig_value_int,
-             smaller_contingency_table,
-             smaller_values_num_samples) = smaller_contingency_tables[attrib_index]
-            (should_accept,
-             num_tests_needed) = cls.accept_attribute(
-                 best_gain,
-                 num_tests,
-                 len(tree_node.valid_samples_indices),
-                 num_fails_allowed,
-                 new_to_orig_value_int,
-                 smaller_contingency_table,
-                 smaller_values_num_samples)
-            if not should_accept:
-                tests_done_rev += num_tests_needed
-            else:
-                accepted_attribute_rev = tree_node.dataset.attrib_names[attrib_index]
-                print('Accepted attribute:', accepted_attribute_rev)
-                tests_done_rev += num_tests
-                break
-        rev_total_time = timeit.default_timer() - rev_start_time
-
-
-        # Order splits randomly
-        random_start_time = timeit.default_timer()
-        random_order_rank = preference_rank[:]
-        random.shuffle(random_order_rank)
-
-        tests_done_random_order = 0
-        accepted_attribute_random = None
-        for (attrib_index, best_gain, _, _, _) in random_order_rank:
-            if math.isinf(best_gain):
-                continue
-            (_,
-             new_to_orig_value_int,
-             smaller_contingency_table,
-             smaller_values_num_samples) = smaller_contingency_tables[attrib_index]
-            (should_accept,
-             num_tests_needed) = cls.accept_attribute(
-                 best_gain,
-                 num_tests,
-                 len(tree_node.valid_samples_indices),
-                 num_fails_allowed,
-                 new_to_orig_value_int,
-                 smaller_contingency_table,
-                 smaller_values_num_samples)
-            if not should_accept:
-                tests_done_random_order += num_tests_needed
-            else:
-                accepted_attribute_random = tree_node.dataset.attrib_names[attrib_index]
-                print('Accepted attribute:', accepted_attribute_random)
-                tests_done_random_order += num_tests
-                break
-        random_total_time = timeit.default_timer() - random_start_time
-
-        if ordered_accepted_rank is None:
-            return (tests_done_ordered,
-                    accepted_attribute_ordered,
-                    tests_done_rev,
-                    accepted_attribute_rev,
-                    tests_done_random_order,
-                    accepted_attribute_random,
-                    num_valid_attrib,
-                    ordered_accepted_rank,
-                    criterion_total_time,
-                    ordered_total_time,
-                    rev_total_time,
-                    random_total_time,
-                    preference_rank[0],
-                    None)
-        return (tests_done_ordered,
-                accepted_attribute_ordered,
-                tests_done_rev,
-                accepted_attribute_rev,
-                tests_done_random_order,
-                accepted_attribute_random,
-                num_valid_attrib,
-                ordered_accepted_rank,
-                criterion_total_time,
-                ordered_total_time,
-                rev_total_time,
-                random_total_time,
-                preference_rank[0],
-                preference_rank[ordered_accepted_rank - 1])
-
-    @classmethod
-    def evaluate_all_attributes(cls, tree_node):
-        #TESTED!
-        ret = [] # contains (attrib_index, gain_ratio, split_values, p_value, time_taken)
-
-        for (attrib_index,
-             (is_valid_nominal_attrib,
-              is_valid_numeric_attrib)) in enumerate(
-                  zip(tree_node.valid_nominal_attribute,
-                      tree_node.dataset.valid_numeric_attribute)):
-            if is_valid_nominal_attrib:
-                start_time = timeit.default_timer()
-                (_,
-                 new_to_orig_value_int,
-                 smaller_contingency_table,
-                 smaller_values_num_samples) = cls._get_smaller_contingency_table(
-                     tree_node.contingency_tables[attrib_index][0],
-                     tree_node.contingency_tables[attrib_index][1])
-                if len(new_to_orig_value_int) <= 1:
-                    print("Attribute {} ({}) is valid but only has {} value(s).".format(
-                        attrib_index,
-                        tree_node.dataset.attrib_names[attrib_index],
-                        len(new_to_orig_value_int)))
-                    continue
-                (curr_gain,
-                 left_int_values,
-                 right_int_values) = cls._generate_best_split(
-                     new_to_orig_value_int,
-                     smaller_contingency_table,
-                     smaller_values_num_samples)
-                ret.append((attrib_index,
-                            curr_gain,
-                            [left_int_values, right_int_values],
-                            None,
-                            timeit.default_timer() - start_time,
-                            None,
-                            None))
-
-            elif is_valid_numeric_attrib:
-                start_time = timeit.default_timer()
-                values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
-                                                                  tree_node.dataset.samples,
-                                                                  tree_node.dataset.sample_class,
-                                                                  attrib_index)
-                values_and_classes.sort()
-                (best_cut_value,
-                 last_left_value,
-                 first_right_value) = cls._best_cut_for_numeric_chi_square(
-                     values_and_classes,
-                     tree_node.dataset.num_classes,
-                     tree_node.class_index_num_samples)
-                ret.append((attrib_index,
-                            best_cut_value,
-                            [{last_left_value}, {first_right_value}],
-                            None,
-                            timeit.default_timer() - start_time,
-                            None,
-                            None))
-
-        preference_rank_full = sorted(ret, key=lambda x: -x[1])
-        seen_attrib = [False] * len(tree_node.dataset.attrib_names)
-        preference_rank = []
-        for pref_elem in preference_rank_full:
-            if seen_attrib[pref_elem[0]]:
-                continue
-            seen_attrib[pref_elem[0]] = True
-            preference_rank.append(pref_elem)
-        ret_with_preference_full = [0] * len(tree_node.dataset.attrib_names)
-        for preference, elem in enumerate(preference_rank):
-            attrib_index = elem[0]
-            new_elem = list(elem)
-            new_elem.append(preference)
-            ret_with_preference_full[attrib_index] = tuple(new_elem)
-        ret_with_preference = [elem for elem in ret_with_preference_full if elem != 0]
-
-        return ret_with_preference
-
-    @classmethod
     def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, according to the LS Chi Square criterion.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns:
+            A tuple cointaining, in order:
+                - the index of the accepted attribute;
+                - a list of sets, each containing the values that should go to that split/subtree.
+                -  Split value according to the criterion. If no attribute has a valid split, this
+                value should be `float('-inf')`.
+        """
         best_attrib_index = 0
         best_gain = float('-inf')
         best_split_left_values = set([])
@@ -1846,11 +1415,11 @@ class LSChiSquare(Criterion):
         while improvement:
             improvement = False
             for value in values_seen:
-                new_cut_val = cls._calculate_split_gain_for_single_switch(curr_cut_val,
-                                                                          set_left_values,
-                                                                          set_right_values,
-                                                                          value,
-                                                                          weights)
+                new_cut_val = cls._split_gain_for_single_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                value,
+                                                                weights)
                 if new_cut_val - curr_cut_val > 0.000001:
                     curr_cut_val = new_cut_val
                     if value in set_left_values:
@@ -1867,11 +1436,11 @@ class LSChiSquare(Criterion):
                 if ((value1 in set_left_values and value2 in set_left_values) or
                         (value1 in set_right_values and value2 in set_right_values)):
                     continue
-                new_cut_val = cls._calculate_split_gain_for_double_switch(curr_cut_val,
-                                                                          set_left_values,
-                                                                          set_right_values,
-                                                                          (value1, value2),
-                                                                          weights)
+                new_cut_val = cls._split_gain_for_double_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                (value1, value2),
+                                                                weights)
                 if new_cut_val - curr_cut_val > 0.000001:
                     curr_cut_val = new_cut_val
                     if value1 in set_left_values:
@@ -1890,8 +1459,8 @@ class LSChiSquare(Criterion):
         return curr_cut_val, set_left_values, set_right_values
 
     @staticmethod
-    def _calculate_split_gain_for_single_switch(curr_gain, new_left_values, new_right_values,
-                                                new_value_to_change_sides, weights):
+    def _split_gain_for_single_switch(curr_gain, new_left_values, new_right_values,
+                                      new_value_to_change_sides, weights):
         new_gain = curr_gain
         if new_value_to_change_sides in new_left_values:
             for value in new_left_values:
@@ -1910,8 +1479,8 @@ class LSChiSquare(Criterion):
         return new_gain
 
     @staticmethod
-    def _calculate_split_gain_for_double_switch(curr_gain, new_left_values, new_right_values,
-                                                new_values_to_change_sides, weights):
+    def _split_gain_for_double_switch(curr_gain, new_left_values, new_right_values,
+                                      new_values_to_change_sides, weights):
         assert len(new_values_to_change_sides) == 2
         new_gain = curr_gain
         first_value_to_change_sides = new_values_to_change_sides[0]
@@ -1947,60 +1516,3 @@ class LSChiSquare(Criterion):
         for value_left, value_right in itertools.product(new_left_values, new_right_values):
             gain += weights[value_left, value_right]
         return gain
-
-    @staticmethod
-    def get_classes_dist(contingency_table, values_num_samples, num_valid_samples):
-        num_classes = contingency_table.shape[1]
-        classes_dist = [0] * num_classes
-        for value, value_num_samples in enumerate(values_num_samples):
-            if value_num_samples == 0:
-                continue
-            for class_index, num_samples in enumerate(contingency_table[value, :]):
-                if num_samples > 0:
-                    classes_dist[class_index] += num_samples
-        for class_index in range(num_classes):
-            classes_dist[class_index] /= float(num_valid_samples)
-        return classes_dist
-
-    @staticmethod
-    def generate_random_contingency_table(classes_dist, num_valid_samples, values_num_samples):
-        # TESTED!
-        random_classes = np.random.choice(len(classes_dist),
-                                          num_valid_samples,
-                                          replace=True,
-                                          p=classes_dist)
-        random_contingency_table = np.zeros((values_num_samples.shape[0], len(classes_dist)),
-                                            dtype=float)
-        samples_done = 0
-        for value, value_num_samples in enumerate(values_num_samples):
-            if value_num_samples > 0:
-                for class_index in random_classes[samples_done: samples_done + value_num_samples]:
-                    random_contingency_table[value, class_index] += 1
-                samples_done += value_num_samples
-        return random_contingency_table
-
-    @classmethod
-    def accept_attribute(cls, real_gain, num_tests, num_valid_samples, num_fails_allowed,
-                         new_to_orig_value_int, smaller_contingency_table,
-                         smaller_values_num_samples):
-        classes_dist = cls.get_classes_dist(smaller_contingency_table,
-                                            smaller_values_num_samples,
-                                            num_valid_samples)
-        num_fails_seen = 0
-        for test_number in range(1, num_tests + 1):
-            random_contingency_table = cls.generate_random_contingency_table(
-                classes_dist,
-                num_valid_samples,
-                smaller_values_num_samples)
-            (gain,
-             _,
-             _) = cls._generate_best_split(new_to_orig_value_int,
-                                           random_contingency_table,
-                                           smaller_values_num_samples)
-            if gain > real_gain:
-                num_fails_seen += 1
-                if num_fails_seen > num_fails_allowed:
-                    return False, test_number
-            if num_tests - test_number <= num_fails_allowed - num_fails_seen:
-                return True, None
-        return True, None
