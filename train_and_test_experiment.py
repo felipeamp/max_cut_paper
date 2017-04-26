@@ -132,8 +132,6 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Trial Number',
                    'Criterion',
                    'Maximum Depth Allowed',
-                   'Number of folds',
-                   'Is stratified?',
 
                    'Number of Samples Forcing a Leaf',
                    'Use Min Samples in Second Largest Class?',
@@ -148,8 +146,6 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Total Time Taken [s]',
                    'Time Taken to Create Tree [s]',
                    'Time Taken Prunning Trivial Subtrees [s]',
-                   'Time Taken to Calculate t and f [s]',
-                   'Time Taken to Calculate E [s]',
 
                    'Accuracy Percentage on Trivial Tree (with no splits)',
 
@@ -320,6 +316,7 @@ def save_trial_info(dataset_name, num_total_samples, num_training_samples, trial
                  str(time_taken_prunning),
 
                  str(trivial_accuracy_percentage),
+
                  str(accuracy_with_missing_values),
                  str(accuracy_without_missing_values),
                  str(num_unkown),
@@ -328,6 +325,5 @@ def save_trial_info(dataset_name, num_total_samples, num_training_samples, trial
                  str(num_nodes_found),
                  str(max_depth_found),
                  str(num_nodes_prunned)]
-
     print(output_split_char.join(line_list), file=output_file_descriptor)
     output_file_descriptor.flush()
