@@ -161,6 +161,7 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Number of Valid Numeric Attributes in Dataset (m_num)',
 
                    'Position in Criterion Order at Root Node',
+                   'Criterion Value in Root Node',
 
                    'Total Time Taken for Current Fold [s]',
 
@@ -291,7 +292,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                                                           curr_max_depth,
                                                           curr_num_nodes_prunned]
         attribute_criterion_value.sort(reverse=True)
-        for (position, (_, attrib_index)) in enumerate(attribute_criterion_value):
+        for (position, (criterion_value, attrib_index)) in enumerate(attribute_criterion_value):
             save_info(dataset_name,
                       use_numeric_attributes,
                       curr_dataset.attrib_names[attrib_index],
@@ -310,6 +311,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                       num_valid_nominal_attributes,
                       num_valid_numeric_attributes,
                       position + 1,
+                      criterion_value,
                       *print_information_per_attrib[attrib_index],
                       output_file_descriptor,
                       output_split_char)
@@ -379,8 +381,8 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
 def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num_samples,
               trial_number, criterion_name, max_depth, num_folds, curr_fold_number, is_stratified,
               min_num_samples_allowed, use_chi_sq_test, max_p_value_chi_sq, num_valid_attributes,
-              num_valid_nominal_attributes, num_valid_numeric_attributes, position, num_values,
-              total_time_taken, trivial_accuracy, accuracy_with_missing_values,
+              num_valid_nominal_attributes, num_valid_numeric_attributes, position, criterion_value,
+              num_values, total_time_taken, trivial_accuracy, accuracy_with_missing_values,
               accuracy_without_missing_values, num_unkown, percentage_unkown, curr_num_nodes,
               curr_max_depth, curr_num_nodes_prunned, output_file_descriptor,
               output_split_char=','):
@@ -413,6 +415,7 @@ def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num
                  str(num_valid_numeric_attributes),
 
                  str(position),
+                 str(criterion_value),
 
                  str(total_time_taken),
 
