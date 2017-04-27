@@ -23,6 +23,8 @@
         "LS Chi Square",
     ],
 
+    "use numeric attributes": true, // if false, all numeric attributes will be considered invalid.
+
     "output folder": "./outputs/multiple levels experiment", // this folder files may be overwritten!
 
     "num trials": 20,

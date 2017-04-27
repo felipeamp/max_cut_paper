@@ -67,6 +67,11 @@ def main(experiment_config):
             datasets_configs = dataset.load_all_configs(experiment_config["datasets basepath"])
             datasets = dataset.load_all_datasets(datasets_configs)
 
+            if not experiment_config["use numeric attributes"]:
+                for curr_dataset in datasets:
+                    curr_dataset.valid_numeric_attribute = [False] * len(
+                        curr_dataset.valid_numeric_attribute)
+
             for ((dataset_name, curr_dataset),
                  min_num_samples_allowed) in itertools.product(
                      datasets,
@@ -82,6 +87,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        use_numeric_attributes=experiment_config["use numeric attributes"],
                         use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
                         max_p_value_chi_sq=max_p_value_chi_sq,
                         output_file_descriptor=fout,
@@ -102,6 +108,11 @@ def main(experiment_config):
                                                dataset_config["class attrib index"],
                                                dataset_config["split char"],
                                                dataset_config["missing value string"])
+
+                if not experiment_config["use numeric attributes"]:
+                    curr_dataset.valid_numeric_attribute = [False] * len(
+                        curr_dataset.valid_numeric_attribute)
+
                 for criterion in criteria_list:
                     print('-'*100)
                     print(criterion.name)
@@ -113,6 +124,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        use_numeric_attributes=experiment_config["use numeric attributes"],
                         use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
                         max_p_value_chi_sq=max_p_value_chi_sq,
                         output_file_descriptor=fout,
@@ -128,6 +140,7 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Number of Training Samples',
                    'Number of Test Samples',
                    'Trial Number',
+                   'Use Numeric Attributes',
                    'Criterion',
                    'Maximum Depth Allowed',
 
@@ -183,8 +196,8 @@ def get_criteria(criteria_names_list):
 
 
 def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_samples_allowed,
-        max_depth, num_trials, use_chi_sq_test, max_p_value_chi_sq, output_file_descriptor,
-        output_split_char=',', seed=None):
+        max_depth, num_trials, use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq,
+        output_file_descriptor, output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one randomly selecting `num_training_samples` valid
     samples to use for training and testing the tree in the rest of the dataset. Saves the training
     and classification information in the `output_file_descriptor` file.
@@ -271,8 +284,8 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
         max_depth_found = tree.get_root_node().get_max_depth()
 
         save_trial_info(dataset_name, train_dataset.num_samples, num_training_samples,
-                        trial_number + 1, criterion.name, max_depth, min_num_samples_allowed,
-                        decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
+                        trial_number + 1, use_numeric_attributes, criterion.name, max_depth,
+                        min_num_samples_allowed, decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         decision_tree.MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         use_chi_sq_test, max_p_value_chi_sq,
                         decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE,
@@ -284,7 +297,7 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
 
 
 def save_trial_info(dataset_name, num_total_samples, num_training_samples, trial_number,
-                    criterion_name, max_depth, min_num_samples_allowed,
+                    use_numeric_attributes, criterion_name, max_depth, min_num_samples_allowed,
                     use_min_samples_second_largest_class, min_samples_second_largest_class,
                     use_chi_sq_test, max_p_value_chi_sq, min_num_second_most_freq_value,
                     num_valid_nominal_attributes, total_time_taken, time_taken_tree,
@@ -299,6 +312,7 @@ def save_trial_info(dataset_name, num_total_samples, num_training_samples, trial
                  str(num_training_samples),
                  str(num_total_samples - num_training_samples),
                  str(trial_number),
+                 str(use_numeric_attributes),
                  criterion_name,
                  str(max_depth),
 

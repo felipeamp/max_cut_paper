@@ -5,13 +5,13 @@
 
     "criteria": [
         "Twoing",
-        "GW Squared Gini",
-        "GW Chi Square",
         "LS Squared Gini",
         "LS Chi Square"
     ],
 
-    "output folder": "./outputs/multiple levels experiment",
+    "use numeric attributes": true,
+
+    "output folder": "./outputs/multiple levels experiment/only fast/with numeric",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,

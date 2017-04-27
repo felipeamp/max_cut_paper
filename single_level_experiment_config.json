@@ -11,6 +11,8 @@
         "LS Chi Square"
     ],
 
+    "use numeric attributes": true,
+
     "output folder": "./outputs/single level experiment",
 
     "num trials": 20,

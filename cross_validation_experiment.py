@@ -63,6 +63,11 @@ def main(experiment_config):
             datasets_configs = dataset.load_all_configs(experiment_config["datasets basepath"])
             datasets = dataset.load_all_datasets(datasets_configs)
 
+            if not experiment_config["use numeric attributes"]:
+                for curr_dataset in datasets:
+                    curr_dataset.valid_numeric_attribute = [False] * len(
+                        curr_dataset.valid_numeric_attribute)
+
             for ((dataset_name, curr_dataset),
                  min_num_samples_allowed) in itertools.product(
                      datasets,
@@ -79,6 +84,7 @@ def main(experiment_config):
                         num_trials=experiment_config["num trials"],
                         num_folds=experiment_config["num folds"],
                         is_stratified=experiment_config["is stratified"],
+                        use_numeric_attributes=experiment_config["use numeric attributes"],
                         use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
                         max_p_value_chi_sq=max_p_value_chi_sq,
                         output_file_descriptor=fout,
@@ -99,6 +105,11 @@ def main(experiment_config):
                                                dataset_config["class attrib index"],
                                                dataset_config["split char"],
                                                dataset_config["missing value string"])
+
+                if not experiment_config["use numeric attributes"]:
+                    curr_dataset.valid_numeric_attribute = [False] * len(
+                        curr_dataset.valid_numeric_attribute)
+
                 for criterion in criteria_list:
                     print('-'*100)
                     print(criterion.name)
@@ -111,6 +122,7 @@ def main(experiment_config):
                         num_trials=experiment_config["num trials"],
                         num_folds=experiment_config["num folds"],
                         is_stratified=experiment_config["is stratified"],
+                        use_numeric_attributes=experiment_config["use numeric attributes"],
                         use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
                         max_p_value_chi_sq=max_p_value_chi_sq,
                         output_file_descriptor=fout,
@@ -128,6 +140,7 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Maximum Depth Allowed',
                    'Number of folds',
                    'Is stratified?',
+                   'Use Numeric Attributes?',
 
                    'Number of Samples Forcing a Leaf',
                    'Use Min Samples in Second Largest Class?',
@@ -179,8 +192,8 @@ def get_criteria(criteria_names_list):
 
 
 def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_depth, num_trials,
-        num_folds, is_stratified, use_chi_sq_test, max_p_value_chi_sq, output_file_descriptor,
-        output_split_char=',', seed=None):
+        num_folds, is_stratified, use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq,
+        output_file_descriptor, output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one doing a stratified cross-validation in `num_folds`
     folds. Saves the training and classification information in the `output_file_descriptor` file.
     """
@@ -235,8 +248,8 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
         percentage_unkown = 100.0 * num_unkown / train_dataset.num_samples
 
         save_trial_info(dataset_name, train_dataset.num_samples, trial_number + 1, criterion.name,
-                        max_depth, num_folds, is_stratified, min_num_samples_allowed,
-                        decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
+                        max_depth, num_folds, is_stratified, use_numeric_attributes,
+                        min_num_samples_allowed, decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         decision_tree.MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         use_chi_sq_test, max_p_value_chi_sq,
                         decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE,
@@ -249,13 +262,14 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
 
 
 def save_trial_info(dataset_name, num_total_samples, trial_number, criterion_name,
-                    max_depth, num_folds, is_stratified, min_num_samples_allowed,
-                    use_min_samples_second_largest_class, min_samples_second_largest_class,
-                    use_chi_sq_test, max_p_value_chi_sq, min_num_second_most_freq_value,
-                    avg_num_valid_attributes_in_root, total_time_taken, trivial_accuracy_percentage,
-                    accuracy_with_missing_values, accuracy_without_missing_values, num_unkown,
-                    percentage_unkown, avg_num_nodes, avg_tree_depth, avg_num_nodes_pruned,
-                    output_split_char, output_file_descriptor):
+                    max_depth, num_folds, is_stratified, use_numeric_attributes,
+                    min_num_samples_allowed, use_min_samples_second_largest_class,
+                    min_samples_second_largest_class, use_chi_sq_test, max_p_value_chi_sq,
+                    min_num_second_most_freq_value, avg_num_valid_attributes_in_root,
+                    total_time_taken, trivial_accuracy_percentage, accuracy_with_missing_values,
+                    accuracy_without_missing_values, num_unkown, percentage_unkown, avg_num_nodes,
+                    avg_tree_depth, avg_num_nodes_pruned, output_split_char,
+                    output_file_descriptor):
     """Saves the experiment's trial information in the CSV file.
     """
     line_list = [str(datetime.datetime.now()),
@@ -266,6 +280,7 @@ def save_trial_info(dataset_name, num_total_samples, trial_number, criterion_nam
                  str(max_depth),
                  str(num_folds),
                  str(is_stratified),
+                 str(use_numeric_attributes),
 
                  str(min_num_samples_allowed),
                  str(use_min_samples_second_largest_class),
