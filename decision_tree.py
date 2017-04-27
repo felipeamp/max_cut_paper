@@ -141,15 +141,15 @@ class DecisionTree(object):
                 num_unkown,
                 unkown_value_attrib_index_array)
 
-    def train(self, dataset, training_samples_indices, max_depth, min_samples_per_node,
+    def train(self, curr_dataset, training_samples_indices, max_depth, min_samples_per_node,
               use_stop_conditions=False, max_p_value_chi_sq=0.1):
         """Trains the tree in a recursive fashion, starting at the root's TreeNode. Afterwards,
         prunes the trivial subtrees.
 
         Args:
-            dataset (Dataset): dataset containing the samples used for training.
+            curr_dataset (Dataset): dataset containing the samples used for training.
             training_samples_indices (:obj:'list' of 'int'): list containing the indices of samples
-                of `dataset` used for training.
+                of `curr_dataset` used for training.
             max_depth (int): maximum tree depth allowed. Zero means the root is a leaf.
             min_samples_per_node (int): if a node has less than this number of training samples, it
                 will necessarily be a leaf.
@@ -172,12 +172,12 @@ class DecisionTree(object):
                 - time_taken_prunning (float): time spent prunning the trained tree.
                 - nodes_prunned (int): number of nodes prunned.
         """
-        self._dataset = dataset
+        self._dataset = curr_dataset
         print('Starting tree training...')
-        self._root_node = TreeNode(dataset,
+        self._root_node = TreeNode(curr_dataset,
                                    training_samples_indices,
-                                   dataset.valid_nominal_attribute[:],
-                                   dataset.valid_numeric_attribute[:],
+                                   curr_dataset.valid_nominal_attribute[:],
+                                   curr_dataset.valid_numeric_attribute[:],
                                    max_depth,
                                    min_samples_per_node,
                                    use_stop_conditions,
@@ -190,21 +190,21 @@ class DecisionTree(object):
         print('Done!')
         return time_taken_prunning, num_nodes_prunned
 
-    def train_and_test(self, dataset, training_samples_indices, validation_sample_indices,
+    def train_and_test(self, curr_dataset, training_samples_indices, validation_sample_indices,
                        max_depth, min_samples_per_node, use_stop_conditions=False,
                        max_p_value_chi_sq=0.1):
-        """Trains a tree with part of the dataset (training samples) and tests the tree
+        """Trains a tree with part of the `curr_dataset` (training samples) and tests the tree
         classification in another part (validation samples).
 
         Note that although the training and test samples are part of the same Dataset class, they
         usually shouldn't intersect.
 
         Args:
-            dataset (Dataset): dataset containing the samples used for training.
+            curr_dataset (Dataset): dataset containing the samples used for training.
             training_samples_indices (:obj:'list' of 'int'): list containing the indices of samples
-                of `dataset` used for training.
+                of `curr_dataset` used for training.
             validation_sample_indices (:obj:'list' of 'int'): list containing the indices of samples
-                of `dataset` used to test the tree classification.
+                of `curr_dataset` used to test the tree classification.
             max_depth (int): maximum tree depth allowed. Zero means the root is a leaf.
             min_samples_per_node (int): if a node has less than this number of training samples, it
                 will necessarily be a leaf.
@@ -243,32 +243,32 @@ class DecisionTree(object):
                 - list where the i-th entry has the attribute index used for classification of the
                     i-th sample when an unkown value occurred.
         """
-        time_taken_prunning, num_nodes_prunned = self.train(dataset,
+        time_taken_prunning, num_nodes_prunned = self.train(curr_dataset,
                                                             training_samples_indices,
                                                             max_depth,
                                                             min_samples_per_node,
                                                             use_stop_conditions,
                                                             max_p_value_chi_sq)
         max_depth = self.get_root_node().get_max_depth()
-        return (self._classify_samples(self._dataset.samples,
-                                       self._dataset.sample_class,
-                                       self._dataset.sample_costs,
+        return (self._classify_samples(curr_dataset.samples,
+                                       curr_dataset.sample_class,
+                                       curr_dataset.sample_costs,
                                        validation_sample_indices,
-                                       self._dataset.sample_index_to_key),
+                                       curr_dataset.sample_index_to_key),
                 max_depth,
                 time_taken_prunning,
                 num_nodes_prunned)
 
-    def cross_validate(self, dataset, num_folds, max_depth, min_samples_per_node,
+    def cross_validate(self, curr_dataset, num_folds, max_depth, min_samples_per_node,
                        is_stratified=True, print_tree=False, seed=None, print_samples=False,
                        use_stop_conditions=False, max_p_value_chi_sq=0.1):
         """Does a cross-validation using a given dataset.
 
-        It splits this dataset in `num_folds` folds and calls `train_and_test` on each. Might be
-        given a seed for the dataset's random splitting and might be stratified.
+        It splits this dataset in `num_folds` folds and calls `train_and_test` on each. Might
+        be given a seed for the dataset's random splitting and might be stratified.
 
         Args:
-            dataset (Dataset): dataset containing the samples used for training.
+            curr_dataset (Dataset): dataset containing the samples used for training.
             num_folds (int): number of folds used in the cross-validation.
             max_depth (int): maximum tree depth allowed. Zero means the root is a leaf.
             min_samples_per_node (int): if a node has less than this number of training samples, it
@@ -324,24 +324,28 @@ class DecisionTree(object):
                 most common class among training samples.
         """
 
-        classifications = [0] * dataset.num_samples
+        classifications = [0] * curr_dataset.num_samples
         num_correct_classifications = 0
         num_correct_classifications_wo_unkown = 0
         total_cost = 0.0
         total_cost_wo_unkown = 0.0
-        classified_with_unkown_value_array = [False] * dataset.num_samples
+        classified_with_unkown_value_array = [False] * curr_dataset.num_samples
         num_unkown = 0
-        unkown_value_attrib_index_array = [0] * dataset.num_samples
+        unkown_value_attrib_index_array = [0] * curr_dataset.num_samples
         max_depth_per_fold = []
         num_nodes_per_fold = []
-        num_valid_attributes_in_root = []
+        num_valid_attributes_in_root_per_fold = []
+        num_valid_nominal_attributes_in_root_per_fold = []
+        num_valid_numeric_attributes_in_root_per_fold = []
+        num_values_root_attribute_list = []
+        num_trivial_splits = 0
         time_taken_prunning_per_fold = []
         num_nodes_prunned_per_fold = []
         num_correct_trivial_classifications = 0
 
         fold_count = 0
 
-        sample_indices_and_classes = list(enumerate(dataset.sample_class))
+        sample_indices_and_classes = list(enumerate(curr_dataset.sample_class))
         if seed is not None:
             random.seed(seed)
             np.random.seed(seed)
@@ -374,7 +378,7 @@ class DecisionTree(object):
                   curr_unkown_value_attrib_index_array),
                  curr_max_depth,
                  curr_time_taken_prunning,
-                 curr_num_nodes_prunned) = self.train_and_test(dataset,
+                 curr_num_nodes_prunned) = self.train_and_test(curr_dataset,
                                                                training_samples_indices,
                                                                validation_sample_indices,
                                                                max_depth,
@@ -383,8 +387,20 @@ class DecisionTree(object):
                                                                max_p_value_chi_sq)
                 max_depth_per_fold.append(curr_max_depth)
                 num_nodes_per_fold.append(self.get_root_node().get_num_nodes())
-                num_valid_attributes_in_root.append(
+                num_valid_nominal_attributes_in_root_per_fold.append(
                     sum(self._root_node.valid_nominal_attribute))
+                num_valid_numeric_attributes_in_root_per_fold.append(
+                    sum(self._root_node.valid_numeric_attribute))
+                num_valid_attributes_in_root_per_fold.append(
+                    num_valid_nominal_attributes_in_root_per_fold[-1]
+                    + num_valid_numeric_attributes_in_root_per_fold[-1])
+                try:
+                    root_node_split_attrib = self.get_root_node().node_split.separation_attrib_index
+                    num_values_root_attribute_list.append(sum(
+                        num_samples > 0 for num_samples in self.get_root_node().contingency_tables[
+                            root_node_split_attrib][1]))
+                except AttributeError:
+                    num_trivial_splits += 1
                 for curr_index, validation_sample_index in enumerate(validation_sample_indices):
                     classifications[validation_sample_index] = curr_classifications[curr_index]
                     classified_with_unkown_value_array[validation_sample_index] = (
@@ -424,7 +440,7 @@ class DecisionTree(object):
                   curr_unkown_value_attrib_index_array),
                  curr_max_depth,
                  curr_time_taken_prunning,
-                 curr_num_nodes_prunned) = self.train_and_test(dataset,
+                 curr_num_nodes_prunned) = self.train_and_test(curr_dataset,
                                                                training_samples_indices,
                                                                validation_sample_indices,
                                                                max_depth,
@@ -433,8 +449,20 @@ class DecisionTree(object):
                                                                max_p_value_chi_sq)
                 max_depth_per_fold.append(curr_max_depth)
                 num_nodes_per_fold.append(self.get_root_node().get_num_nodes())
-                num_valid_attributes_in_root.append(
+                num_valid_nominal_attributes_in_root_per_fold.append(
                     sum(self._root_node.valid_nominal_attribute))
+                num_valid_numeric_attributes_in_root_per_fold.append(
+                    sum(self._root_node.valid_numeric_attribute))
+                num_valid_attributes_in_root_per_fold.append(
+                    num_valid_nominal_attributes_in_root_per_fold[-1]
+                    + num_valid_numeric_attributes_in_root_per_fold[-1])
+                try:
+                    root_node_split_attrib = self.get_root_node().node_split.separation_attrib_index
+                    num_values_root_attribute_list.append(sum(
+                        num_samples > 0 for num_samples in self.get_root_node().contingency_tables[
+                            root_node_split_attrib][1]))
+                except AttributeError:
+                    num_trivial_splits += 1
                 for curr_index, validation_sample_index in enumerate(validation_sample_indices):
                     classifications[validation_sample_index] = curr_classifications[curr_index]
                     classified_with_unkown_value_array[validation_sample_index] = (
@@ -472,8 +500,12 @@ class DecisionTree(object):
                  num_nodes_prunned_per_fold,
                  max_depth_per_fold,
                  num_nodes_per_fold,
-                 num_valid_attributes_in_root,
-                 100.0 * num_correct_trivial_classifications / dataset.num_samples)
+                 num_valid_attributes_in_root_per_fold,
+                 num_valid_nominal_attributes_in_root_per_fold,
+                 num_valid_numeric_attributes_in_root_per_fold,
+                 num_values_root_attribute_list,
+                 num_trivial_splits,
+                 100.0 * num_correct_trivial_classifications / curr_dataset.num_samples)
 
     def test(self, test_sample_indices):
         """Tests the (already trained) tree over samples from the same dataset as the
@@ -639,7 +671,7 @@ class TreeNode(object):
             number of times a sample has value i in this attribute and training dataset). Used by
             many criteria when calculating the optimal split. Note that, for invalid attributes, the
             entry is a tuple with empty lists ([], []).
-        dataset (Dataset): dataset containing the training samples.
+        curr_dataset (Dataset): dataset containing the training samples.
         valid_samples_indices (:obj:'list' of 'int'): contains the indices of the valid training
             samples.
         valid_nominal_attribute (:obj:'list' of 'bool'): list where the i-th entry indicates wether
@@ -652,13 +684,13 @@ class TreeNode(object):
         most_common_int_class (int): index of the most frequent class.
         number_non_empty_classes (int): number of classes having no sample in this TreeNode.
     """
-    def __init__(self, dataset, valid_samples_indices, valid_nominal_attribute,
+    def __init__(self, curr_dataset, valid_samples_indices, valid_nominal_attribute,
                  valid_numeric_attribute, max_depth_remaining, min_samples_per_node,
                  use_stop_conditions=False, max_p_value_chi_sq=0.1):
         """Initializes a TreeNode instance with the given arguments.
 
         Args:
-            dataset (Dataset): dataset of samples used for training/split generation.
+            curr_dataset (Dataset): dataset of samples used for training/split generation.
             valid_samples_indices (:obj:'list' of 'int'): indices of samples that should be used for
                 training at this node.
             valid_nominal_attribute (:obj:'list' of 'bool'): the i-th entry informs wether the i-th
@@ -696,7 +728,7 @@ class TreeNode(object):
         self.nodes = []
         self.contingency_tables = None
 
-        self.dataset = dataset
+        self.dataset = curr_dataset
         self.valid_samples_indices = valid_samples_indices
         # Note that self.valid_nominal_attribute might be different from
         # self.dataset.valid_nominal_attribute when use_stop_conditions == True.
@@ -704,14 +736,14 @@ class TreeNode(object):
         self.valid_numeric_attribute = valid_numeric_attribute
 
         self.num_valid_samples = len(valid_samples_indices)
-        self.class_index_num_samples = [0] * dataset.num_classes
+        self.class_index_num_samples = [0] * curr_dataset.num_classes
         self.most_common_int_class = None
         self.number_non_empty_classes = 0
 
         # Fill self.class_index_num_samples
         for sample_index in valid_samples_indices:
             self.class_index_num_samples[
-                dataset.sample_class[sample_index]] += 1
+                curr_dataset.sample_class[sample_index]] += 1
 
         self.most_common_int_class = self.class_index_num_samples.index(
             max(self.class_index_num_samples))
@@ -966,8 +998,8 @@ class TreeNode(object):
         for curr_split_samples_indices in splits_samples_indices:
             self.nodes.append(TreeNode(self.dataset,
                                        curr_split_samples_indices,
-                                       self.valid_nominal_attribute,
-                                       self.valid_numeric_attribute,
+                                       self.valid_nominal_attribute[:],
+                                       self.valid_numeric_attribute[:],
                                        self.max_depth_remaining - 1,
                                        self._min_samples_per_node,
                                        self._use_stop_conditions,

@@ -151,6 +151,8 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Minimum Number in Second Most Frequent Value',
 
                    'Average Number of Valid Attributes in Root Node (m)',
+                   'Average Number of Valid Nominal Attributes in Root Node (m_nom)',
+                   'Average Number of Valid Numeric Attributes in Root Node (m_num)',
 
                    'Total Time Taken for Cross-Validation [s]',
 
@@ -161,8 +163,20 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Number of Samples Classified using Unkown Value',
                    'Percentage of Samples with Unkown Values for Accepted Attribute',
 
+                   'Average Number of Values of Attribute Chosen at Root Node'
+                   'Maximum Number of Values of Attribute Chosen at Root Node',
+                   'Minimum Number of Values of Attribute Chosen at Root Node',
+
+                   'Number of Trivial Splits [between 0 and number of folds]',
+
                    'Average Number of Nodes (after prunning)',
+                   'Maximum Number of Nodes (after prunning)',
+                   'Minimum Number of Nodes (after prunning)',
+
                    'Average Tree Depth (after prunning)',
+                   'Maximum Tree Depth (after prunning)',
+                   'Minimum Tree Depth (after prunning)',
+
                    'Average Number of Nodes Pruned']
     print(output_split_char.join(fields_list), file=raw_output_file_descriptor)
     raw_output_file_descriptor.flush()
@@ -226,8 +240,12 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
          max_depth_per_fold,
          num_nodes_per_fold,
          num_valid_attributes_in_root,
+         num_valid_nominal_attributes_in_root,
+         num_valid_numeric_attributes_in_root,
+         num_values_root_attribute_list,
+         num_trivial_splits,
          trivial_accuracy_percentage) = tree.cross_validate(
-             dataset=train_dataset,
+             curr_dataset=train_dataset,
              num_folds=num_folds,
              max_depth=max_depth,
              min_samples_per_node=min_num_samples_allowed,
@@ -247,16 +265,33 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
 
         percentage_unkown = 100.0 * num_unkown / train_dataset.num_samples
 
+        if num_values_root_attribute_list:
+            (avg_num_values_root_attribute,
+             max_num_values_root_attribute,
+             min_num_values_root_attribute) = (np.mean(num_values_root_attribute_list),
+                                               np.amax(num_values_root_attribute_list),
+                                               np.amin(num_values_root_attribute_list))
+        else:
+            (avg_num_values_root_attribute,
+             max_num_values_root_attribute,
+             min_num_values_root_attribute) = (None, None, None)
+
         save_trial_info(dataset_name, train_dataset.num_samples, trial_number + 1, criterion.name,
                         max_depth, num_folds, is_stratified, use_numeric_attributes,
                         min_num_samples_allowed, decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         decision_tree.MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         use_chi_sq_test, max_p_value_chi_sq,
                         decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE,
-                        np.mean(num_valid_attributes_in_root), total_time_taken,
+                        np.mean(num_valid_attributes_in_root),
+                        np.mean(num_valid_nominal_attributes_in_root),
+                        np.mean(num_valid_numeric_attributes_in_root), total_time_taken,
                         trivial_accuracy_percentage, accuracy_with_missing_values,
                         accuracy_without_missing_values, num_unkown, percentage_unkown,
-                        np.mean(num_nodes_per_fold), np.mean(max_depth_per_fold),
+                        avg_num_values_root_attribute, max_num_values_root_attribute,
+                        min_num_values_root_attribute, num_trivial_splits,
+                        np.mean(num_nodes_per_fold), np.amax(num_nodes_per_fold),
+                        np.amin(num_nodes_per_fold), np.mean(max_depth_per_fold),
+                        np.amax(max_depth_per_fold), np.amin(max_depth_per_fold),
                         np.mean(num_nodes_prunned_per_fold), output_split_char,
                         output_file_descriptor)
 
@@ -266,10 +301,14 @@ def save_trial_info(dataset_name, num_total_samples, trial_number, criterion_nam
                     min_num_samples_allowed, use_min_samples_second_largest_class,
                     min_samples_second_largest_class, use_chi_sq_test, max_p_value_chi_sq,
                     min_num_second_most_freq_value, avg_num_valid_attributes_in_root,
-                    total_time_taken, trivial_accuracy_percentage, accuracy_with_missing_values,
-                    accuracy_without_missing_values, num_unkown, percentage_unkown, avg_num_nodes,
-                    avg_tree_depth, avg_num_nodes_pruned, output_split_char,
-                    output_file_descriptor):
+                    avg_num_valid_nominal_attributes_in_root,
+                    avg_num_valid_numeric_attributes_in_root, total_time_taken,
+                    trivial_accuracy_percentage, accuracy_with_missing_values,
+                    accuracy_without_missing_values, num_unkown, percentage_unkown,
+                    avg_num_values_root_attribute, max_num_values_root_attribute,
+                    min_num_values_root_attribute, num_trivial_splits, avg_num_nodes, max_num_nodes,
+                    min_num_nodes, avg_tree_depth, max_tree_depth, min_tree_depth,
+                    avg_num_nodes_pruned, output_split_char, output_file_descriptor):
     """Saves the experiment's trial information in the CSV file.
     """
     line_list = [str(datetime.datetime.now()),
@@ -291,6 +330,8 @@ def save_trial_info(dataset_name, num_total_samples, trial_number, criterion_nam
                  str(min_num_second_most_freq_value),
 
                  str(avg_num_valid_attributes_in_root),
+                 str(avg_num_valid_nominal_attributes_in_root),
+                 str(avg_num_valid_numeric_attributes_in_root),
 
                  str(total_time_taken),
 
@@ -301,8 +342,19 @@ def save_trial_info(dataset_name, num_total_samples, trial_number, criterion_nam
                  str(num_unkown),
                  str(percentage_unkown),
 
+                 str(avg_num_values_root_attribute),
+                 str(max_num_values_root_attribute),
+                 str(min_num_values_root_attribute),
+                 str(num_trivial_splits),
+
                  str(avg_num_nodes),
+                 str(max_num_nodes),
+                 str(min_num_nodes),
+
                  str(avg_tree_depth),
+                 str(max_tree_depth),
+                 str(min_tree_depth),
+
                  str(avg_num_nodes_pruned)]
     print(output_split_char.join(line_list), file=output_file_descriptor)
     output_file_descriptor.flush()
