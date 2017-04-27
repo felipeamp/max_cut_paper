@@ -54,6 +54,7 @@ def main(experiment_config):
                 "prunning parameters"]["second most freq value min samples"]
         else:
             max_p_value_chi_sq = None
+            decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE = None
 
         decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS = experiment_config[
             "prunning parameters"]["use second most freq class min samples"]
