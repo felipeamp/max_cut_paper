@@ -28,6 +28,12 @@ if __name__ == '__main__':
     with open(experiment_config_filepath, 'r') as experiment_config_json:
         experiment_config = json.load(experiment_config_json)
 
+    # Num trials <= 100
+    if experiment_config["num trials"] > 100:
+        print('"num trials" must be a number between 1 and 100.')
+        print('Please change the configurarion file and try again.')
+        sys.exit(1)
+
     # Output folder
     if os.path.exists(experiment_config["output folder"]):
         print('Output folder already exists. This experiment may delete existing files inside it.')

@@ -8,6 +8,7 @@
 import datetime
 import itertools
 import os
+import random
 import sys
 import timeit
 
@@ -18,9 +19,7 @@ import decision_tree
 import numpy as np
 
 
-#: Initial seed used in `random` and `numpy.random` modules.
-RANDOM_SEED = 65537
-
+#: Initial seeds used in `random` and `numpy.random` modules, in order of `trial_number`.
 RANDOM_SEEDS = [65537, 986112772, 580170418, 897083807, 1286664107, 899169460, 1728505703,
                 423232363, 1576030107, 1102706565, 756372267, 1041481669, 500571641, 1196189230,
                 49471178, 827006267, 1581871235, 1249719834, 1281093615, 603059048, 1217122226,
@@ -181,14 +180,22 @@ def get_criteria(criteria_names_list):
 
 def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_depth, num_trials,
         num_folds, is_stratified, use_chi_sq_test, max_p_value_chi_sq, output_file_descriptor,
-        output_split_char=',', seed=RANDOM_SEED):
+        output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one doing a stratified cross-validation in `num_folds`
     folds. Saves the training and classification information in the `output_file_descriptor` file.
     """
+    if seed is not None:
+        random.seed(seed)
+        np.random.seed(seed)
+
     for trial_number in range(num_trials):
         print('*'*80)
         print('STARTING TRIAL #{}'.format(trial_number + 1))
         print()
+
+        if seed is None:
+            random.seed(RANDOM_SEEDS[trial_number])
+            np.random.seed(RANDOM_SEEDS[trial_number])
 
         tree = decision_tree.DecisionTree(criterion=criterion)
 
@@ -213,7 +220,6 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
              min_samples_per_node=min_num_samples_allowed,
              is_stratified=is_stratified,
              print_tree=False,
-             seed=seed,
              print_samples=False,
              use_stop_conditions=use_chi_sq_test,
              max_p_value_chi_sq=max_p_value_chi_sq)

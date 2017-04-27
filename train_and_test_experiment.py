@@ -19,9 +19,7 @@ import decision_tree
 import numpy as np
 
 
-#: Initial seed used in `random` and `numpy.random` modules.
-RANDOM_SEED = 65537
-
+#: Initial seeds used in `random` and `numpy.random` modules, in order of `trial_number`.
 RANDOM_SEEDS = [65537, 986112772, 580170418, 897083807, 1286664107, 899169460, 1728505703,
                 423232363, 1576030107, 1102706565, 756372267, 1041481669, 500571641, 1196189230,
                 49471178, 827006267, 1581871235, 1249719834, 1281093615, 603059048, 1217122226,
@@ -186,7 +184,7 @@ def get_criteria(criteria_names_list):
 
 def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_samples_allowed,
         max_depth, num_trials, use_chi_sq_test, max_p_value_chi_sq, output_file_descriptor,
-        output_split_char=',', seed=RANDOM_SEED):
+        output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one randomly selecting `num_training_samples` valid
     samples to use for training and testing the tree in the rest of the dataset. Saves the training
     and classification information in the `output_file_descriptor` file.
@@ -201,6 +199,9 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
         print('STARTING TRIAL #{}'.format(trial_number + 1))
         print()
 
+        if seed is None:
+            random.seed(RANDOM_SEEDS[trial_number])
+            np.random.seed(RANDOM_SEEDS[trial_number])
         random.shuffle(training_samples_indices)
         curr_training_samples_indices = training_samples_indices[:num_training_samples]
         curr_test_samples_indices = training_samples_indices[num_training_samples:]
