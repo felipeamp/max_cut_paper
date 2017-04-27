@@ -396,9 +396,11 @@ class DecisionTree(object):
                     + num_valid_numeric_attributes_in_root_per_fold[-1])
                 try:
                     root_node_split_attrib = self.get_root_node().node_split.separation_attrib_index
-                    num_values_root_attribute_list.append(sum(
-                        num_samples > 0 for num_samples in self.get_root_node().contingency_tables[
-                            root_node_split_attrib][1]))
+                    if curr_dataset.valid_nominal_attribute[root_node_split_attrib]:
+                        num_values_root_attribute_list.append(sum(
+                            num_samples > 0
+                            for num_samples in self.get_root_node().contingency_tables[
+                                root_node_split_attrib][1]))
                 except AttributeError:
                     num_trivial_splits += 1
                 for curr_index, validation_sample_index in enumerate(validation_sample_indices):
@@ -458,9 +460,11 @@ class DecisionTree(object):
                     + num_valid_numeric_attributes_in_root_per_fold[-1])
                 try:
                     root_node_split_attrib = self.get_root_node().node_split.separation_attrib_index
-                    num_values_root_attribute_list.append(sum(
-                        num_samples > 0 for num_samples in self.get_root_node().contingency_tables[
-                            root_node_split_attrib][1]))
+                    if curr_dataset.valid_nominal_attribute[root_node_split_attrib]:
+                        num_values_root_attribute_list.append(sum(
+                            num_samples > 0
+                            for num_samples in self.get_root_node().contingency_tables[
+                                root_node_split_attrib][1]))
                 except AttributeError:
                     num_trivial_splits += 1
                 for curr_index, validation_sample_index in enumerate(validation_sample_indices):
