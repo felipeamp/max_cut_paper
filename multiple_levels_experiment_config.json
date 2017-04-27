@@ -9,9 +9,9 @@
         "LS Chi Square"
     ],
 
-    "use numeric attributes": true,
+    "use numeric attributes": false,
 
-    "output folder": "./outputs/multiple levels experiment/only fast/with numeric",
+    "output folder": "./outputs/multiple levels experiment/only fast/without numeric",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,
@@ -23,7 +23,9 @@
     "is stratified": true,
 
     "prunning parameters": {
-        "use chi-sq test": false,
+        "use chi-sq test": true,
+        "max chi-sq p-value": 0.1,
+        "second most freq value min samples": 40,
 
         "min num samples allowed": [1],
         "use second most freq class min samples": false

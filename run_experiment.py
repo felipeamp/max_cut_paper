@@ -37,6 +37,7 @@ if __name__ == '__main__':
     # Output folder
     if os.path.exists(experiment_config["output folder"]):
         print('Output folder already exists. This experiment may delete existing files inside it.')
+        print('output folder:', experiment_config["output folder"])
         input_char = input('Should we continue? [y/N]\n')
         input_char = input_char.lower()
         if input_char != 'y' and input_char != 'yes':

@@ -47,7 +47,7 @@ def main(experiment_config):
         if experiment_config["prunning parameters"]["use chi-sq test"]:
             max_p_value_chi_sq = experiment_config["prunning parameters"]["max chi-sq p-value"]
             decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE = experiment_config[
-                "second most freq value min samples"]
+                "prunning parameters"]["second most freq value min samples"]
         else:
             max_p_value_chi_sq = None
 
