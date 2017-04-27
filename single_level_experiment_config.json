@@ -19,6 +19,7 @@
     "calculate t-test on accuracy": false,
 
     "max depth": 1,
+    "rank attributes": false,
     "use cross-validation": false,
     "num training samples": 10,
 

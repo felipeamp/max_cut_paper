@@ -32,9 +32,10 @@
     "t-test single-sided p-value": 0.1, // only used when "calculate t-test on accuracy" is true
 
     "max depth": 5,
-    "use cross-validation": true, // when false, do not supply "num folds"
-    "num folds": 10, // only used when "use cross-validation" is true
-    "is stratified": true, // only used when "use cross-validation" is true
+    "rank attributes": false, // if true, will rank the attributes using a cross-validation
+    "use cross-validation": true,
+    "num folds": 10, // only used when "use cross-validation" or "rank attributes" is true
+    "is stratified": true, // only used when "use cross-validation" or "rank attributes" is true
 
     "prunning parameters": {
         "use chi-sq test": false, // when false, do not supply "max chi-sq p-value"

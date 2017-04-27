@@ -11,6 +11,7 @@ import shutil
 import sys
 
 import cross_validation_experiment
+import rank_experiment
 import train_and_test_experiment
 
 
@@ -49,7 +50,9 @@ if __name__ == '__main__':
     shutil.copyfile(experiment_config_filepath,
                     os.path.join(experiment_config["output folder"], 'experiment_config.json'))
 
-    if experiment_config["use cross-validation"]:
+    if experiment_config["rank attributes"]:
+        rank_experiment.main(experiment_config)
+    elif experiment_config["use cross-validation"]:
         cross_validation_experiment.main(experiment_config)
     else:
         train_and_test_experiment.main(experiment_config)
