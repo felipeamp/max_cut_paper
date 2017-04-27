@@ -64,7 +64,7 @@ def main(experiment_config):
             datasets = dataset.load_all_datasets(datasets_configs)
 
             if not experiment_config["use numeric attributes"]:
-                for curr_dataset in datasets:
+                for _, curr_dataset in datasets:
                     curr_dataset.valid_numeric_attribute = [False] * len(
                         curr_dataset.valid_numeric_attribute)
 
@@ -163,7 +163,7 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Number of Samples Classified using Unkown Value',
                    'Percentage of Samples with Unkown Values for Accepted Attribute',
 
-                   'Average Number of Values of Attribute Chosen at Root Node'
+                   'Average Number of Values of Attribute Chosen at Root Node',
                    'Maximum Number of Values of Attribute Chosen at Root Node',
                    'Minimum Number of Values of Attribute Chosen at Root Node',
 

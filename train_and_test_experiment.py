@@ -68,7 +68,7 @@ def main(experiment_config):
             datasets = dataset.load_all_datasets(datasets_configs)
 
             if not experiment_config["use numeric attributes"]:
-                for curr_dataset in datasets:
+                for _, curr_dataset in datasets:
                     curr_dataset.valid_numeric_attribute = [False] * len(
                         curr_dataset.valid_numeric_attribute)
 
