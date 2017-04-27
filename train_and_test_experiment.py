@@ -224,7 +224,7 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
         # First let's train the tree and save the training information
         start_time = timeit.default_timer()
         (time_taken_prunning,
-         num_nodes_prunned) = tree.train(dataset=train_dataset,
+         num_nodes_prunned) = tree.train(curr_dataset=train_dataset,
                                          training_samples_indices=curr_training_samples_indices,
                                          max_depth=max_depth,
                                          min_samples_per_node=min_num_samples_allowed,
@@ -249,7 +249,7 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
 
             start_time = timeit.default_timer()
             (time_taken_prunning,
-             num_nodes_prunned) = tree.train(dataset=train_dataset,
+             num_nodes_prunned) = tree.train(curr_dataset=train_dataset,
                                              training_samples_indices=curr_training_samples_indices,
                                              max_depth=max_depth,
                                              min_samples_per_node=min_num_samples_allowed,
