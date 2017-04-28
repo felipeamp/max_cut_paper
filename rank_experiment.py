@@ -392,6 +392,10 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                           num_valid_attributes, training_samples_indices, validation_sample_indices,
                           output_file_descriptor, output_split_char)
 
+    # Resets the valid attributes lists to the original values to be used in any future experiment.
+    curr_dataset.valid_nominal_attribute = original_valid_nominal_attributes
+    curr_dataset.valid_numeric_attribute = original_valid_numeric_attributes
+
 
 def _count_inversions_and_ties(accuracy_criterion_value):
     num_inversions = 0.0
