@@ -306,7 +306,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
          num_ties,
          num_correct) = _count_inversions_and_ties(accuracy_criterion_value)
 
-        for attrib_index, print_information in sorted(print_information_per_attrib):
+        for attrib_index in sorted(print_information_per_attrib):
             save_info(dataset_name,
                       use_numeric_attributes,
                       curr_dataset.attrib_names[attrib_index],
@@ -326,7 +326,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                       num_inversions,
                       num_ties,
                       num_correct,
-                      *print_information,
+                      *print_information_per_attrib[attrib_index],
                       output_file_descriptor,
                       output_split_char)
 
