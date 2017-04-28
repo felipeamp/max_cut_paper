@@ -163,6 +163,9 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Position in Criterion Order at Root Node',
                    'Criterion Value in Root Node',
 
+                   'Position in Accuracy Order (without missing values)',
+                   'Inversion Contribution of Current Attribute/Trial/Fold',
+
                    'Total Time Taken for Current Fold [s]',
 
                    'Accuracy Percentage on Trivial Trees (with no splits)',
@@ -217,6 +220,8 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
         print('Fold #{}'.format(fold_number + 1))
         attribute_criterion_value = [] # list of pairs (attrib_index, criterion_value)
         print_information_per_attrib = {} # ...[attrib_index] = print_information
+        attrib_accuracy = [] # contains entries of the type (attrib_index,
+                                 #                           accuracy_without_missing_values)
         tree = decision_tree.DecisionTree(criterion)
 
         for (attrib_index,
@@ -291,8 +296,19 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                                                           curr_num_nodes,
                                                           curr_max_depth,
                                                           curr_num_nodes_prunned]
+            attrib_accuracy.append((attrib_index, accuracy_without_missing_values))
+
         attribute_criterion_value.sort(reverse=True)
-        for (position, (criterion_value, attrib_index)) in enumerate(attribute_criterion_value):
+        attribute_criterion_value_with_position = list(enumerate(attribute_criterion_value))
+        attribute_criterion_value_with_position.sort(key=lambda x: x[1][1])
+
+        attrib_accuracy.sort(key=lambda x: x[1], reverse=True)
+        attrib_accuracy_position = {}
+        for (accuracy_position, (attrib_index, _))in enumerate(attrib_accuracy):
+            attrib_accuracy_position[attrib_index] = accuracy_position
+
+        for (crit_position,
+             (criterion_value, attrib_index)) in attribute_criterion_value_with_position:
             save_info(dataset_name,
                       use_numeric_attributes,
                       curr_dataset.attrib_names[attrib_index],
@@ -302,7 +318,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                       criterion.name,
                       max_depth,
                       num_folds,
-                      fold_number,
+                      fold_number + 1,
                       is_stratified,
                       min_num_samples_allowed,
                       use_chi_sq_test,
@@ -310,8 +326,9 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                       num_valid_attributes,
                       num_valid_nominal_attributes,
                       num_valid_numeric_attributes,
-                      position + 1,
+                      crit_position + 1,
                       criterion_value,
+                      attrib_accuracy_position[attrib_index] + 1,
                       *print_information_per_attrib[attrib_index],
                       output_file_descriptor,
                       output_split_char)
@@ -381,11 +398,11 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
 def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num_samples,
               trial_number, criterion_name, max_depth, num_folds, curr_fold_number, is_stratified,
               min_num_samples_allowed, use_chi_sq_test, max_p_value_chi_sq, num_valid_attributes,
-              num_valid_nominal_attributes, num_valid_numeric_attributes, position, criterion_value,
-              num_values, total_time_taken, trivial_accuracy, accuracy_with_missing_values,
-              accuracy_without_missing_values, num_unkown, percentage_unkown, curr_num_nodes,
-              curr_max_depth, curr_num_nodes_prunned, output_file_descriptor,
-              output_split_char=','):
+              num_valid_nominal_attributes, num_valid_numeric_attributes, crit_position,
+              criterion_value, accuracy_position, num_values, total_time_taken, trivial_accuracy,
+              accuracy_with_missing_values, accuracy_without_missing_values, num_unkown,
+              percentage_unkown, curr_num_nodes, curr_max_depth, curr_num_nodes_prunned,
+              output_file_descriptor, output_split_char=','):
     """Saves the experiment's trial information in the CSV file.
     """
     line_list = [str(datetime.datetime.now()),
@@ -414,8 +431,11 @@ def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num
                  str(num_valid_nominal_attributes),
                  str(num_valid_numeric_attributes),
 
-                 str(position),
+                 str(crit_position),
                  str(criterion_value),
+
+                 str(accuracy_position),
+                 str(max(0, accuracy_position - crit_position)),
 
                  str(total_time_taken),
 
