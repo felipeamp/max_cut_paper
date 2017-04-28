@@ -8,6 +8,7 @@
 import datetime
 import itertools
 import os
+import math
 import random
 import sys
 import timeit
@@ -44,6 +45,9 @@ def main(experiment_config):
     with open(raw_output_filepath, 'w') as fout:
         init_raw_output_csv(fout, output_split_char=',')
         criteria_list = get_criteria(experiment_config["criteria"])
+
+        if experiment_config["use enough depth per attribute"]:
+            experiment_config["max depth"] = None
 
         if experiment_config["prunning parameters"]["use chi-sq test"]:
             max_p_value_chi_sq = experiment_config["prunning parameters"]["max chi-sq p-value"]
@@ -163,7 +167,7 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Position in Criterion Order at Root Node',
                    'Criterion Value in Root Node',
 
-                   'Position in Accuracy Order (without missing values)',
+                   'Position in Accuracy Order (with missing values)',
                    'Inversion Contribution of Current Attribute/Trial/Fold',
 
                    'Total Time Taken for Current Fold [s]',
@@ -221,7 +225,8 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
         attribute_criterion_value = [] # list of pairs (attrib_index, criterion_value)
         print_information_per_attrib = {} # ...[attrib_index] = print_information
         attrib_accuracy = [] # contains entries of the type (attrib_index,
-                                 #                           accuracy_without_missing_values)
+                                 #                           accuracy_with_missing_values)
+        attrib_accuracy_position = {}
         tree = decision_tree.DecisionTree(criterion)
 
         for (attrib_index,
@@ -237,6 +242,15 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
             curr_dataset.valid_numeric_attribute = [False] * num_attributes
             curr_dataset.valid_numeric_attribute[attrib_index] = is_valid_numeric_attrib
 
+            num_values = len(curr_dataset.attrib_int_to_value[attrib_index])
+            if not num_values:
+                continue
+
+            if max_depth is None:
+                curr_max_depth_allowed = 1 + math.ceil(math.log2(num_values))
+            else:
+                curr_max_depth_allowed = max_depth
+
             start_time = timeit.default_timer()
             ((_,
               num_correct_classifications_w_unkown,
@@ -246,13 +260,13 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
               _,
               num_unkown,
               _),
-             curr_max_depth,
+             curr_max_depth_found,
              _,
              curr_num_nodes_prunned) = tree.train_and_test(
                  curr_dataset,
                  training_samples_indices,
                  validation_sample_indices,
-                 max_depth=max_depth,
+                 max_depth=curr_max_depth_allowed,
                  min_samples_per_node=min_num_samples_allowed,
                  use_stop_conditions=use_chi_sq_test,
                  max_p_value_chi_sq=max_p_value_chi_sq)
@@ -266,27 +280,20 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
             except AttributeError:
                 continue
 
-            root_node_split_attrib = tree.get_root_node().node_split.separation_attrib_index
-            if original_valid_nominal_attributes[root_node_split_attrib]:
-                num_values = sum(curr_num_samples > 0
-                                 for curr_num_samples in tree.get_root_node().contingency_tables[
-                                     root_node_split_attrib][1])
-            else:
-                num_values = None
-
             trivial_accuracy = tree.get_trivial_accuracy(validation_sample_indices)
             accuracy_with_missing_values = (100.0 * num_correct_classifications_w_unkown
-                                            / curr_dataset.num_samples)
+                                            / len(validation_sample_indices))
             try:
                 accuracy_without_missing_values = (100.0 * num_correct_classifications_wo_unkown
-                                                   / (curr_dataset.num_samples - num_unkown))
+                                                   / (len(validation_sample_indices) - num_unkown))
             except ZeroDivisionError:
                 accuracy_without_missing_values = None
 
-            percentage_unkown = 100.0 * num_unkown / curr_dataset.num_samples
+            percentage_unkown = 100.0 * num_unkown / len(validation_sample_indices)
             curr_num_nodes = tree.get_root_node().get_num_nodes()
 
-            print_information_per_attrib[attrib_index] = [num_values,
+            print_information_per_attrib[attrib_index] = [curr_max_depth_allowed,
+                                                          num_values,
                                                           total_time_taken,
                                                           trivial_accuracy,
                                                           accuracy_with_missing_values,
@@ -294,16 +301,15 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                                                           num_unkown,
                                                           percentage_unkown,
                                                           curr_num_nodes,
-                                                          curr_max_depth,
+                                                          curr_max_depth_found,
                                                           curr_num_nodes_prunned]
-            attrib_accuracy.append((attrib_index, accuracy_without_missing_values))
+            attrib_accuracy.append((attrib_index, accuracy_with_missing_values))
 
         attribute_criterion_value.sort(reverse=True)
         attribute_criterion_value_with_position = list(enumerate(attribute_criterion_value))
         attribute_criterion_value_with_position.sort(key=lambda x: x[1][1])
 
         attrib_accuracy.sort(key=lambda x: x[1], reverse=True)
-        attrib_accuracy_position = {}
         for (accuracy_position, (attrib_index, _))in enumerate(attrib_accuracy):
             attrib_accuracy_position[attrib_index] = accuracy_position
 
@@ -314,9 +320,8 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                       curr_dataset.attrib_names[attrib_index],
                       original_valid_numeric_attributes[attrib_index],
                       num_samples,
-                      trial_number,
+                      trial_number + 1,
                       criterion.name,
-                      max_depth,
                       num_folds,
                       fold_number + 1,
                       is_stratified,
@@ -395,14 +400,16 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                           num_valid_attributes, training_samples_indices, validation_sample_indices,
                           output_file_descriptor, output_split_char)
 
+
 def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num_samples,
-              trial_number, criterion_name, max_depth, num_folds, curr_fold_number, is_stratified,
+              trial_number, criterion_name, num_folds, curr_fold_number, is_stratified,
               min_num_samples_allowed, use_chi_sq_test, max_p_value_chi_sq, num_valid_attributes,
               num_valid_nominal_attributes, num_valid_numeric_attributes, crit_position,
-              criterion_value, accuracy_position, num_values, total_time_taken, trivial_accuracy,
-              accuracy_with_missing_values, accuracy_without_missing_values, num_unkown,
-              percentage_unkown, curr_num_nodes, curr_max_depth, curr_num_nodes_prunned,
-              output_file_descriptor, output_split_char=','):
+              criterion_value, accuracy_position, curr_max_depth_allowed, num_values,
+              total_time_taken, trivial_accuracy, accuracy_with_missing_values,
+              accuracy_without_missing_values, num_unkown, percentage_unkown, curr_num_nodes,
+              curr_max_depth_found, curr_num_nodes_prunned, output_file_descriptor,
+              output_split_char=','):
     """Saves the experiment's trial information in the CSV file.
     """
     line_list = [str(datetime.datetime.now()),
@@ -414,7 +421,7 @@ def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num
                  str(num_samples),
                  str(trial_number),
                  criterion_name,
-                 str(max_depth),
+                 str(curr_max_depth_allowed),
                  str(num_folds),
                  str(curr_fold_number),
                  str(is_stratified),
@@ -447,7 +454,7 @@ def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num
                  str(percentage_unkown),
 
                  str(curr_num_nodes),
-                 str(curr_max_depth),
+                 str(curr_max_depth_found),
                  str(curr_num_nodes_prunned)]
     print(output_split_char.join(line_list), file=output_file_descriptor)
     output_file_descriptor.flush()

@@ -11,14 +11,16 @@
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/multiple levels experiment/only fast/without numeric",
+    "output folder": "./outputs/rank experiment/single level/only fast/without numeric",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,
     "t-test single-sided p-value": 0.1,
 
-    "max depth": 5,
+
     "rank attributes": true,
+    "use enough depth per attribute": false,
+    "max depth": 1,
     "num folds": 10,
     "is stratified": true,
 
