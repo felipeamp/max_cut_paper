@@ -47,8 +47,11 @@ if __name__ == '__main__':
         os.makedirs(experiment_config["output folder"])
 
     # Copy experiment config file to output folder.
-    shutil.copyfile(experiment_config_filepath,
-                    os.path.join(experiment_config["output folder"], 'experiment_config.json'))
+    try:
+        shutil.copyfile(experiment_config_filepath,
+                        os.path.join(experiment_config["output folder"], 'experiment_config.json'))
+    except shutil.SameFileError:
+        pass
 
     if experiment_config["rank attributes"]:
         rank_experiment.main(experiment_config)
