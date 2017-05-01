@@ -67,13 +67,8 @@ def main(experiment_config):
 
         if experiment_config["use all datasets"]:
             datasets_configs = dataset.load_all_configs(experiment_config["datasets basepath"])
-            datasets = dataset.load_all_datasets(datasets_configs)
-
-            if not experiment_config["use numeric attributes"]:
-                for _, curr_dataset in datasets:
-                    curr_dataset.valid_numeric_attribute = [False] * len(
-                        curr_dataset.valid_numeric_attribute)
-
+            datasets = dataset.load_all_datasets(datasets_configs,
+                                                 experiment_config["use numeric attributes"])
             for ((dataset_name, curr_dataset),
                  min_num_samples_allowed) in itertools.product(
                      datasets,
@@ -110,12 +105,8 @@ def main(experiment_config):
                                                dataset_config["key attrib index"],
                                                dataset_config["class attrib index"],
                                                dataset_config["split char"],
-                                               dataset_config["missing value string"])
-
-                if not experiment_config["use numeric attributes"]:
-                    curr_dataset.valid_numeric_attribute = [False] * len(
-                        curr_dataset.valid_numeric_attribute)
-
+                                               dataset_config["missing value string"],
+                                               experiment_config["use numeric attributes"])
                 for criterion in criteria_list:
                     print('-'*100)
                     print(criterion.name)

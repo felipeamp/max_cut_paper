@@ -669,8 +669,9 @@ def load_all_configs(dataset_basepath):
     return config_list
 
 
-def load_all_datasets(datasets_configs):
+def load_all_datasets(datasets_configs, load_numeric):
     """Creates a Dataset object for every dataset available in the `datasets_configs` list.
+    The argument `load_numeric` informs wether we should load numeric attributes or not.
 
     Returns:
         List of tuples (dataset_name, Dataset object).
@@ -683,5 +684,6 @@ def load_all_datasets(datasets_configs):
                                       dataset_config["key attrib index"],
                                       dataset_config["class attrib index"],
                                       dataset_config["split char"],
-                                      dataset_config["missing value string"])))
+                                      dataset_config["missing value string"],
+                                      load_numeric)))
     return datasets_list
