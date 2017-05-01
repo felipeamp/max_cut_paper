@@ -151,6 +151,7 @@ def init_raw_output_csv(raw_output_file_descriptor, output_split_char=','):
                    'Maximum p-value Allowed by Chi-Square Test [between 0 and 1]',
                    'Minimum Number in Second Most Frequent Value',
 
+                   'Number of Attributes in Dataset',
                    'Number of Valid Attributes in Dataset (m)',
                    'Number of Valid Nominal Attributes in Dataset (m_nom)',
                    'Number of Valid Numeric Attributes in Dataset (m_num)',
@@ -209,14 +210,14 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
     def _run_fold(dataset_name, curr_dataset, criterion, trial_number, min_num_samples_allowed,
                   max_depth, num_folds, is_stratified, use_numeric_attributes, use_chi_sq_test,
                   max_p_value_chi_sq, num_samples, original_valid_nominal_attributes,
-                  original_valid_numeric_attributes, num_valid_nominal_attributes,
-                  num_valid_numeric_attributes, num_valid_attributes, training_samples_indices,
+                  original_valid_numeric_attributes, training_samples_indices,
                   validation_sample_indices, output_file_descriptor, output_split_char=','):
         print('Fold #{}'.format(fold_number + 1))
         print_information_per_attrib = {} # ...[attrib_index] = print_information
         accuracy_criterion_value = [] # ...[...] = (accuracy_with_missing_values, criterion_value)
         tree = decision_tree.DecisionTree(criterion)
 
+        num_attributes = len(original_valid_nominal_attributes)
         for (attrib_index,
              (is_valid_nominal_attrib,
               is_valid_numeric_attrib)) in enumerate(zip(original_valid_nominal_attributes,
@@ -297,6 +298,11 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
          num_ties,
          num_correct) = _count_inversions_and_ties(accuracy_criterion_value)
 
+        num_valid_attributes = len(print_information_per_attrib)
+        num_valid_numeric_attributes = sum(original_valid_numeric_attributes[attrib_index]
+                                           for attrib_index in print_information_per_attrib)
+        num_valid_nominal_attributes = num_valid_attributes - num_valid_numeric_attributes
+
         for attrib_index in sorted(print_information_per_attrib):
             save_info(dataset_name,
                       use_numeric_attributes,
@@ -311,6 +317,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                       min_num_samples_allowed,
                       use_chi_sq_test,
                       max_p_value_chi_sq,
+                      num_attributes,
                       num_valid_attributes,
                       num_valid_nominal_attributes,
                       num_valid_numeric_attributes,
@@ -331,9 +338,6 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
         curr_dataset.valid_numeric_attribute = [False] * num_attributes
     original_valid_nominal_attributes = curr_dataset.valid_nominal_attribute[:]
     original_valid_numeric_attributes = curr_dataset.valid_numeric_attribute[:]
-    num_valid_nominal_attributes = sum(original_valid_nominal_attributes)
-    num_valid_numeric_attributes = sum(original_valid_numeric_attributes)
-    num_valid_attributes = num_valid_nominal_attributes + num_valid_numeric_attributes
 
     sample_indices_and_classes = list(enumerate(curr_dataset.sample_class))
     num_samples = len(sample_indices_and_classes)
@@ -363,8 +367,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                           min_num_samples_allowed, max_depth, num_folds, is_stratified,
                           use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq, num_samples,
                           original_valid_nominal_attributes, original_valid_numeric_attributes,
-                          num_valid_nominal_attributes, num_valid_numeric_attributes,
-                          num_valid_attributes, training_samples_indices, validation_sample_indices,
+                          training_samples_indices, validation_sample_indices,
                           output_file_descriptor, output_split_char)
         else: # is NOT stratified
             for (fold_number,
@@ -379,8 +382,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                           min_num_samples_allowed, max_depth, num_folds, is_stratified,
                           use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq, num_samples,
                           original_valid_nominal_attributes, original_valid_numeric_attributes,
-                          num_valid_nominal_attributes, num_valid_numeric_attributes,
-                          num_valid_attributes, training_samples_indices, validation_sample_indices,
+                          training_samples_indices, validation_sample_indices,
                           output_file_descriptor, output_split_char)
 
     # Resets the valid attributes lists to the original values to be used in any future experiment.
@@ -410,12 +412,13 @@ def _count_inversions_and_ties(accuracy_criterion_value):
 
 def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num_samples,
               trial_number, criterion_name, num_folds, curr_fold_number, is_stratified,
-              min_num_samples_allowed, use_chi_sq_test, max_p_value_chi_sq, num_valid_attributes,
-              num_valid_nominal_attributes, num_valid_numeric_attributes, num_inversions, num_ties,
-              num_correct, criterion_value, curr_max_depth_allowed, num_values, total_time_taken,
-              trivial_accuracy, accuracy_with_missing_values, accuracy_without_missing_values,
-              num_unkown, percentage_unkown, curr_num_nodes, curr_max_depth_found,
-              curr_num_nodes_prunned, output_file_descriptor, output_split_char=','):
+              min_num_samples_allowed, use_chi_sq_test, max_p_value_chi_sq, num_attributes,
+              num_valid_attributes, num_valid_nominal_attributes, num_valid_numeric_attributes,
+              num_inversions, num_ties, num_correct, criterion_value, curr_max_depth_allowed,
+              num_values, total_time_taken, trivial_accuracy, accuracy_with_missing_values,
+              accuracy_without_missing_values, num_unkown, percentage_unkown, curr_num_nodes,
+              curr_max_depth_found, curr_num_nodes_prunned, output_file_descriptor,
+              output_split_char=','):
     """Saves the experiment's trial information in the CSV file.
     """
     line_list = [str(datetime.datetime.now()),
@@ -440,6 +443,7 @@ def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num
                  str(max_p_value_chi_sq),
                  str(decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE),
 
+                 str(num_attributes),
                  str(num_valid_attributes),
                  str(num_valid_nominal_attributes),
                  str(num_valid_numeric_attributes),
