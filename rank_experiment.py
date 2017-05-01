@@ -244,7 +244,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                 continue
 
             if max_depth is None:
-                curr_max_depth_allowed = 1 + math.ceil(math.log2(num_values))
+                curr_max_depth_allowed = 1 + math.ceil(math.log2(curr_dataset.num_classes))
             else:
                 curr_max_depth_allowed = max_depth
 
@@ -452,7 +452,6 @@ def save_info(dataset_name, use_numeric_attributes, attrib_name, is_numeric, num
                  str(num_valid_attributes),
                  str(num_valid_nominal_attributes),
                  str(num_valid_numeric_attributes),
-
 
                  str(num_inversions),
                  str(num_ties),
