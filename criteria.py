@@ -110,8 +110,8 @@ class Twoing(Criterion):
                      values_and_classes,
                      tree_node.dataset.num_classes)
                 best_splits_per_attrib.append((attrib_index,
-                                               best_twoing,
-                                               [{last_left_value}, {first_right_value}]))
+                                               [{last_left_value}, {first_right_value}],
+                                               best_twoing))
 
         best_attribute_and_split = (None, [], float('-inf'))
         for curr_attrib_split in best_splits_per_attrib:
@@ -802,8 +802,8 @@ class LSSquaredGini(Criterion):
                      values_and_classes,
                      tree_node.dataset.num_classes)
                 best_splits_per_attrib.append((attrib_index,
-                                               cut_val,
-                                               [{last_left_value}, {first_right_value}]))
+                                               [{last_left_value}, {first_right_value}],
+                                               cut_val))
 
         best_attribute_and_split = (None, [], float('-inf'))
         for curr_attrib_split in best_splits_per_attrib:
@@ -1137,8 +1137,8 @@ class LSChiSquare(Criterion):
                      tree_node.dataset.num_classes,
                      tree_node.class_index_num_samples)
                 best_splits_per_attrib.append((attrib_index,
-                                               cut_val,
-                                               [{last_left_value}, {first_right_value}]))
+                                               [{last_left_value}, {first_right_value}],
+                                               cut_val))
 
         best_attribute_and_split = (None, [], float('-inf'))
         for curr_attrib_split in best_splits_per_attrib:
