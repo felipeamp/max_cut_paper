@@ -66,6 +66,12 @@ def main(experiment_config):
 
         if experiment_config["use all datasets"]:
             datasets_configs = dataset.load_all_configs(experiment_config["datasets basepath"])
+        else:
+            datasets_folders = [os.path.join(experiment_config["datasets basepath"], folderpath)
+                                for folderpath in experiment_config["datasets folders"]]
+            datasets_configs = [dataset.load_config(folderpath)
+                                for folderpath in datasets_folders]
+        if experiment_config["load one dataset at a time"]:
             datasets = dataset.load_all_datasets(datasets_configs,
                                                  experiment_config["use numeric attributes"])
             for ((dataset_name, curr_dataset),
@@ -89,10 +95,6 @@ def main(experiment_config):
                         output_file_descriptor=fout,
                         output_split_char=',')
         else:
-            datasets_folders = [os.path.join(experiment_config["datasets basepath"], folderpath)
-                                for folderpath in experiment_config["datasets folders"]]
-            datasets_configs = [dataset.load_config(folderpath)
-                                for folderpath in datasets_folders]
             for (dataset_config,
                  min_num_samples_allowed) in itertools.product(
                      datasets_configs,

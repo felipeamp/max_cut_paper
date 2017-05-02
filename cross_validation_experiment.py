@@ -62,34 +62,12 @@ def main(experiment_config):
 
         if experiment_config["use all datasets"]:
             datasets_configs = dataset.load_all_configs(experiment_config["datasets basepath"])
-            datasets = dataset.load_all_datasets(datasets_configs,
-                                                 experiment_config["use numeric attributes"])
-            for ((dataset_name, curr_dataset),
-                 min_num_samples_allowed) in itertools.product(
-                     datasets,
-                     experiment_config["prunning parameters"]["min num samples allowed"]):
-                for criterion in criteria_list:
-                    print('-'*100)
-                    print(criterion.name)
-                    print()
-                    run(dataset_name,
-                        curr_dataset,
-                        criterion,
-                        min_num_samples_allowed=min_num_samples_allowed,
-                        max_depth=experiment_config["max depth"],
-                        num_trials=experiment_config["num trials"],
-                        num_folds=experiment_config["num folds"],
-                        is_stratified=experiment_config["is stratified"],
-                        use_numeric_attributes=experiment_config["use numeric attributes"],
-                        use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
-                        max_p_value_chi_sq=max_p_value_chi_sq,
-                        output_file_descriptor=fout,
-                        output_split_char=',')
         else:
             datasets_folders = [os.path.join(experiment_config["datasets basepath"], folderpath)
                                 for folderpath in experiment_config["datasets folders"]]
             datasets_configs = [dataset.load_config(folderpath)
                                 for folderpath in datasets_folders]
+        if experiment_config["load one dataset at a time"]:
             for (dataset_config,
                  min_num_samples_allowed) in itertools.product(
                      datasets_configs,
@@ -105,6 +83,30 @@ def main(experiment_config):
                     print(criterion.name)
                     print()
                     run(dataset_config["dataset name"],
+                        curr_dataset,
+                        criterion,
+                        min_num_samples_allowed=min_num_samples_allowed,
+                        max_depth=experiment_config["max depth"],
+                        num_trials=experiment_config["num trials"],
+                        num_folds=experiment_config["num folds"],
+                        is_stratified=experiment_config["is stratified"],
+                        use_numeric_attributes=experiment_config["use numeric attributes"],
+                        use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
+                        max_p_value_chi_sq=max_p_value_chi_sq,
+                        output_file_descriptor=fout,
+                        output_split_char=',')
+        else:
+            datasets = dataset.load_all_datasets(datasets_configs,
+                                                 experiment_config["use numeric attributes"])
+            for ((dataset_name, curr_dataset),
+                 min_num_samples_allowed) in itertools.product(
+                     datasets,
+                     experiment_config["prunning parameters"]["min num samples allowed"]):
+                for criterion in criteria_list:
+                    print('-'*100)
+                    print(criterion.name)
+                    print()
+                    run(dataset_name,
                         curr_dataset,
                         criterion,
                         min_num_samples_allowed=min_num_samples_allowed,

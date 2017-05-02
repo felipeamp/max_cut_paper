@@ -676,7 +676,6 @@ def load_all_datasets(datasets_configs, load_numeric):
     Returns:
         List of tuples (dataset_name, Dataset object).
     """
-    datasets_configs.sort(key=lambda x: x["dataset name"].lower())
     datasets_list = []
     for dataset_config in datasets_configs:
         datasets_list.append((dataset_config["dataset name"],
