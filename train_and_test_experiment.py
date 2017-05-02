@@ -93,12 +93,10 @@ def main(experiment_config):
                                 for folderpath in experiment_config["datasets folders"]]
             datasets_configs = [dataset.load_config(folderpath)
                                 for folderpath in datasets_folders]
-            datasets_configs.sort(key=lambda x: x["dataset name"].lower())
-
             for (dataset_config,
                  min_num_samples_allowed) in itertools.product(
-                     datasets,
-                     experiment_config["min num samples allowed"]):
+                     datasets_configs,
+                     experiment_config["prunning parameters"]["min num samples allowed"]):
                 curr_dataset = dataset.Dataset(dataset_config["filepath"],
                                                dataset_config["key attrib index"],
                                                dataset_config["class attrib index"],
