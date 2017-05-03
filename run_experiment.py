@@ -13,15 +13,12 @@ import sys
 import cross_validation_experiment
 import rank_experiment
 import train_and_test_experiment
+import t_student
 
 
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        print('Please include a path to an experiment configuration file.')
-        sys.exit(1)
-
-    # Experiment config
-    experiment_config_filepath = sys.argv[1]
+def main(experiment_config_filepath):
+    """Runs experiment according to the `experiment_config_filepath` file.
+    """
     if (not os.path.exists(experiment_config_filepath)
             or not os.path.isfile(experiment_config_filepath)):
         print('The path entered is NOT a valid experiment configuration file.')
@@ -29,7 +26,7 @@ if __name__ == '__main__':
     with open(experiment_config_filepath, 'r') as experiment_config_json:
         experiment_config = json.load(experiment_config_json)
 
-    # Num trials <= 100
+    # Num trials must be <= 100
     if experiment_config["num trials"] > 100:
         print('"num trials" must be a number between 1 and 100.')
         print('Please change the configurarion file and try again.')
@@ -59,3 +56,14 @@ if __name__ == '__main__':
         cross_validation_experiment.main(experiment_config)
     else:
         train_and_test_experiment.main(experiment_config)
+
+    if experiment_config["calculate t-test on accuracy"]:
+        t_student.main(experiment_config["output folder"])
+
+
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        print('Please include a path to an experiment configuration file.')
+        sys.exit(1)
+
+    main(sys.argv[1])

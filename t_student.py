@@ -223,6 +223,19 @@ def _save_raw_stats(raw_data, output_path, is_rank):
                           file=fout)
 
 
+def _calculate_t_statistic(samples_list):
+    mean = statistics.mean(samples_list)
+    variance = statistics.variance(samples_list)
+    if variance == 0.0:
+        return 0.0, 100.0
+
+    num_samples = len(samples_list)
+    t_statistic = mean / math.sqrt(variance / num_samples)
+    degrees_of_freedom = num_samples - 1
+    p_value = 1. - student_t.cdf(t_statistic, degrees_of_freedom)
+    return t_statistic, p_value
+
+
 def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
     # aggreg_data[(dataset, attribute, criterion)] = [num_times_stat_better_w_missing,
     #                                                 num_times_stat_better_wo_missing]
@@ -264,18 +277,6 @@ def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
         print(','.join(header), file=fout)
         for key, value in aggreg_data.items():
             print(','.join([*key, *value]), file=fout)
-
-def _calculate_t_statistic(samples_list):
-    mean = statistics.mean(samples_list)
-    variance = statistics.variance(samples_list)
-    if variance == 0.0:
-        return 0.0, 100.0
-
-    num_samples = len(samples_list)
-    t_statistic = mean / math.sqrt(variance / num_samples)
-    degrees_of_freedom = num_samples - 1
-    p_value = 1. - student_t.cdf(t_statistic, degrees_of_freedom)
-    return t_statistic, p_value
 
 
 if __name__ == '__main__':
