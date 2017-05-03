@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+'''Module used to calculate the Cholesky Decomposition of Singular Matrices.
+'''
 
 import numpy as np
 
