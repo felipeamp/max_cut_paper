@@ -38,6 +38,7 @@ RANDOM_SEEDS = [65537, 986112772, 580170418, 897083807, 1286664107, 899169460, 1
                 760815609, 504204359, 1424661575, 1228406087, 1971630940, 1758874112, 1403628276,
                 643422904, 1196432617]
 
+
 def main(experiment_config):
     """Sets the configurations according to `experiment_config` and runs them.
     """
@@ -46,7 +47,7 @@ def main(experiment_config):
         init_raw_output_csv(fout, output_split_char=',')
         criteria_list = get_criteria(experiment_config["criteria"])
 
-        if experiment_config["use enough depth per attribute"]:
+        if experiment_config["use enough depth"]:
             experiment_config["max depth"] = None
 
         if experiment_config["prunning parameters"]["use chi-sq test"]:
