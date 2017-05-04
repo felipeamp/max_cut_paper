@@ -309,30 +309,36 @@ def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
                 aggreg_data[(dataset_name, attribute, criterion_name_2)] = [0, 0, 0]
 
             try:
+                t_statistic_w_missing = float(line_list[4])
                 p_value_w_missing = float(line_list[5])
                 if p_value_w_missing <= single_sided_p_value_threshold:
-                    aggreg_data[(dataset_name, attribute, criterion_name_1)][0] += 1
-                elif p_value_w_missing >= 1. - single_sided_p_value_threshold:
-                    aggreg_data[(dataset_name, attribute, criterion_name_2)][0] += 1
+                    if t_statistic_w_missing > 0.:
+                        aggreg_data[(dataset_name, attribute, criterion_name_1)][0] += 1
+                    else:
+                        aggreg_data[(dataset_name, attribute, criterion_name_2)][0] += 1
             except ValueError:
                 pass
 
             try:
+                t_statistic_wo_missing = float(line_list[7])
                 p_value_wo_missing = float(line_list[8])
-                if p_value_wo_missing is not None:
-                    if p_value_wo_missing <= single_sided_p_value_threshold:
+                if (p_value_wo_missing is not None
+                        and p_value_wo_missing <= single_sided_p_value_threshold):
+                    if t_statistic_wo_missing > 0.:
                         aggreg_data[(dataset_name, attribute, criterion_name_1)][1] += 1
-                    elif p_value_wo_missing >= 1. - single_sided_p_value_threshold:
+                    else:
                         aggreg_data[(dataset_name, attribute, criterion_name_2)][1] += 1
             except ValueError:
                 pass
 
             try:
+                t_statistic_num_nodes = float(line_list[10])
                 p_value_num_nodes = float(line_list[11])
-                if p_value_num_nodes is not None:
-                    if p_value_num_nodes <= single_sided_p_value_threshold:
+                if (p_value_num_nodes is not None
+                        and p_value_num_nodes <= single_sided_p_value_threshold):
+                    if t_statistic_num_nodes > 0.:
                         aggreg_data[(dataset_name, attribute, criterion_name_1)][2] += 1
-                    elif p_value_num_nodes >= 1. - single_sided_p_value_threshold:
+                    else:
                         aggreg_data[(dataset_name, attribute, criterion_name_2)][2] += 1
             except ValueError:
                 pass
