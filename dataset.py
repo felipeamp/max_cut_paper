@@ -665,7 +665,9 @@ def load_all_configs(dataset_basepath):
                        if os.path.isdir(os.path.join(dataset_basepath, entry))]
     config_list = []
     for curr_folder in dataset_folders:
-        config_list.append(load_config(curr_folder))
+        curr_config = load_config(curr_folder)
+        if curr_config is not None:
+            config_list.append(curr_config)
     return config_list
 
 
