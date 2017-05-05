@@ -29,7 +29,7 @@
 
     "num trials": 20,
     "calculate t-test on accuracy": true, // when false, do not supply "t-test single-sided p-value"
-    "t-test single-sided p-value": 0.1, // only used when "calculate t-test on accuracy" is true
+    "t-test single-sided p-value": 0.05, // only used when "calculate t-test on accuracy" is true
 
     "rank attributes": false, // if true, will rank the attributes using a cross-validation
     // "use enough depth": false, // only used when "rank attributes" is true. If set to true,

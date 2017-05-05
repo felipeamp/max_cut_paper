@@ -11,23 +11,21 @@
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/rank experiment/single level/only fast/without numeric",
+    "output folder": "./outputs/rank experiment/20 trials/only fast/log2 plus 1 levels/without numeric",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,
-    "t-test single-sided p-value": 0.1,
-
+    "t-test single-sided p-value": 0.05,
 
     "rank attributes": true,
-    "use enough depth per attribute": false,
-    "max depth": 1,
-    "num folds": 10,
+    "use enough depth": true,
+    "num folds": 3,
     "is stratified": true,
 
     "prunning parameters": {
         "use chi-sq test": true,
         "max chi-sq p-value": 0.1,
-        "second most freq value min samples": 40,
+        "second most freq value min samples": 15,
 
         "min num samples allowed": [1],
         "use second most freq class min samples": false
