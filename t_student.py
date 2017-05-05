@@ -275,7 +275,7 @@ def _calculate_t_statistic(samples_list):
     mean = statistics.mean(samples_list)
     variance = statistics.variance(samples_list)
     if variance == 0.0:
-        return 0.0, 100.0
+        return 0.0, 50.0
 
     num_samples = len(samples_list)
     t_statistic = mean / math.sqrt(variance / num_samples)
