@@ -15,7 +15,7 @@
 
     "num trials": 10,
     "calculate t-test on accuracy": true,
-    "t-test single-sided p-value": 0.1,
+    "t-test single-sided p-value": 0.05,
 
     "max depth": 5,
     "rank attributes": false,
