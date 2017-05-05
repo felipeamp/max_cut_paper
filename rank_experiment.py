@@ -68,6 +68,7 @@ def main(experiment_config):
 
         if experiment_config["use all datasets"]:
             datasets_configs = dataset.load_all_configs(experiment_config["datasets basepath"])
+            datasets_configs.sort(key=lambda config: config["dataset name"])
         else:
             datasets_folders = [os.path.join(experiment_config["datasets basepath"], folderpath)
                                 for folderpath in experiment_config["datasets folders"]]
