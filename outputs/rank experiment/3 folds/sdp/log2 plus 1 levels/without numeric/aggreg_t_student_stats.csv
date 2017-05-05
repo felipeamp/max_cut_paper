@@ -1,0 +1,537 @@
+Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes
+Adult Census Income,education,GW Chi Square,1,1,0
+Adult Census Income,education,GW Squared Gini,0,0,1
+Adult Census Income,marital.status,GW Chi Square,0,0,0
+Adult Census Income,marital.status,GW Squared Gini,1,1,1
+Adult Census Income,native.country,GW Chi Square,0,0,0
+Adult Census Income,native.country,GW Squared Gini,1,1,1
+Adult Census Income,occupation,GW Chi Square,0,0,0
+Adult Census Income,occupation,GW Squared Gini,0,0,1
+Adult Census Income,race,GW Chi Square,0,0,0
+Adult Census Income,race,GW Squared Gini,1,1,1
+Adult Census Income,relationship,GW Chi Square,0,0,0
+Adult Census Income,relationship,GW Squared Gini,1,1,1
+Adult Census Income,sex,GW Chi Square,0,0,0
+Adult Census Income,sex,GW Squared Gini,1,1,1
+Adult Census Income,workclass,GW Chi Square,1,1,0
+Adult Census Income,workclass,GW Squared Gini,0,0,1
+Cars with Aggreg,PRICE,GW Chi Square,0,0,0
+Cars with Aggreg,PRICE,GW Squared Gini,1,1,1
+Cars with Aggreg,buying,GW Chi Square,0,0,0
+Cars with Aggreg,buying,GW Squared Gini,1,1,1
+Cars with Aggreg,lug_boot,GW Chi Square,0,0,0
+Cars with Aggreg,lug_boot,GW Squared Gini,1,1,1
+Cars with Aggreg,maint,GW Chi Square,0,0,0
+Cars with Aggreg,maint,GW Squared Gini,1,1,1
+Cars with Aggreg,safety,GW Chi Square,0,0,0
+Cars with Aggreg,safety,GW Squared Gini,1,1,1
+Contraceptive with Aggreg,aggreg_education,GW Chi Square,0,0,0
+Contraceptive with Aggreg,aggreg_education,GW Squared Gini,1,1,1
+Contraceptive with Aggreg,aggreg_working_occupation_sol,GW Chi Square,0,0,0
+Contraceptive with Aggreg,aggreg_working_occupation_sol,GW Squared Gini,0,0,1
+Contraceptive with Aggreg,husbands_education,GW Chi Square,0,0,0
+Contraceptive with Aggreg,husbands_education,GW Squared Gini,0,0,1
+Contraceptive with Aggreg,husbands_occupation,GW Chi Square,0,0,0
+Contraceptive with Aggreg,husbands_occupation,GW Squared Gini,1,1,1
+Contraceptive with Aggreg,media_exposure,GW Chi Square,0,0,1
+Contraceptive with Aggreg,media_exposure,GW Squared Gini,0,0,0
+Contraceptive with Aggreg,standard_of_living_index,GW Chi Square,0,0,0
+Contraceptive with Aggreg,standard_of_living_index,GW Squared Gini,1,1,1
+Contraceptive with Aggreg,wife_is_working,GW Chi Square,0,0,0
+Contraceptive with Aggreg,wife_is_working,GW Squared Gini,1,1,1
+Contraceptive with Aggreg,wifes_education,GW Chi Square,0,0,0
+Contraceptive with Aggreg,wifes_education,GW Squared Gini,0,0,1
+Contraceptive with Aggreg,wifes_religion,GW Chi Square,0,0,0
+Contraceptive with Aggreg,wifes_religion,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_1,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_1,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_10,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_10,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_11,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_11,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_12,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_12,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_13,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_13,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_14,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_14,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_16,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_16,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_17,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_17,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_18,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_18,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_19,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_19,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_2,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_2,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_20,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_20,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_21,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_21,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_22,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_22,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_23,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_23,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_24,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_24,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_25,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_25,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_26,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_26,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_27,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_27,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_28,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_28,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_29,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_29,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_3,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_3,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_30,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_30,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_31,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_31,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_32,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_32,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_33,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_33,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_34,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_34,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_35,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_35,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_36,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_36,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_37,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_37,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_38,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_38,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_39,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_39,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_4,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_4,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_40,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_40,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_5,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_5,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_6,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_6,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_8,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_8,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_9,GW Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_9,GW Squared Gini,1,1,1
+Cover Type with Aggreg,soil_type_aggreg,GW Chi Square,1,1,0
+Cover Type with Aggreg,soil_type_aggreg,GW Squared Gini,0,0,1
+Cover Type with Aggreg,wilderness_area_2,GW Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_2,GW Squared Gini,1,1,1
+Cover Type with Aggreg,wilderness_area_3,GW Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_3,GW Squared Gini,1,1,1
+Cover Type with Aggreg,wilderness_area_4,GW Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_4,GW Squared Gini,1,1,1
+Cover Type with Aggreg,wilderness_area_aggreg,GW Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_aggreg,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,AGEFLAG,GW Chi Square,0,0,0
+KDD98 Multiclass 2,AGEFLAG,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,BIBLE,GW Chi Square,0,0,1
+KDD98 Multiclass 2,BIBLE,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,CATLG,GW Chi Square,0,0,1
+KDD98 Multiclass 2,CATLG,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,CDPLAY,GW Chi Square,0,0,0
+KDD98 Multiclass 2,CDPLAY,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,DOMAIN,GW Chi Square,0,0,0
+KDD98 Multiclass 2,DOMAIN,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,FISHER,GW Chi Square,0,0,0
+KDD98 Multiclass 2,FISHER,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,GARDENIN,GW Chi Square,0,0,0
+KDD98 Multiclass 2,GARDENIN,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,GEOCODE2,GW Chi Square,0,0,0
+KDD98 Multiclass 2,GEOCODE2,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,HOMEOWNR,GW Chi Square,0,0,0
+KDD98 Multiclass 2,HOMEOWNR,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,OSOURCE,GW Chi Square,0,0,0
+KDD98 Multiclass 2,OSOURCE,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,PCOWNERS,GW Chi Square,0,0,0
+KDD98 Multiclass 2,PCOWNERS,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,PEPSTRFL,GW Chi Square,0,0,0
+KDD98 Multiclass 2,PEPSTRFL,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,PETS,GW Chi Square,0,0,0
+KDD98 Multiclass 2,PETS,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,PHOTO,GW Chi Square,0,0,1
+KDD98 Multiclass 2,PHOTO,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,RECINHSE,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RECINHSE,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,RFA_10,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_10,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_11,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_11,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_12,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_12,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_13,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_13,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_14,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_14,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,RFA_15,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_15,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_16,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_16,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_17,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_17,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_18,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_18,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_19,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_19,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_2,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_2,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_20,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_20,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_21,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_21,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_22,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_22,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_23,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_23,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_24,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_24,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_2A,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_2A,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,RFA_3,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_3,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_4,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_4,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_5,GW Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_5,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_6,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_6,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_7,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_7,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_8,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_8,GW Squared Gini,0,0,1
+KDD98 Multiclass 2,RFA_9,GW Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_9,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,STATE,GW Chi Square,0,0,0
+KDD98 Multiclass 2,STATE,GW Squared Gini,1,1,1
+KDD98 Multiclass 2,VETERANS,GW Chi Square,0,0,1
+KDD98 Multiclass 2,VETERANS,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,WALKER,GW Chi Square,0,0,0
+KDD98 Multiclass 2,WALKER,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,AGEFLAG,GW Chi Square,1,1,0
+KDD98 Multiclass 3,AGEFLAG,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,BIBLE,GW Chi Square,0,0,1
+KDD98 Multiclass 3,BIBLE,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,CDPLAY,GW Chi Square,0,0,0
+KDD98 Multiclass 3,CDPLAY,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,COLLECT1,GW Chi Square,0,0,1
+KDD98 Multiclass 3,COLLECT1,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,CRAFTS,GW Chi Square,0,0,0
+KDD98 Multiclass 3,CRAFTS,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,DOMAIN,GW Chi Square,1,1,0
+KDD98 Multiclass 3,DOMAIN,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,FISHER,GW Chi Square,0,0,0
+KDD98 Multiclass 3,FISHER,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,GARDENIN,GW Chi Square,0,0,0
+KDD98 Multiclass 3,GARDENIN,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,GENDER,GW Chi Square,0,0,0
+KDD98 Multiclass 3,GENDER,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,GEOCODE2,GW Chi Square,0,0,0
+KDD98 Multiclass 3,GEOCODE2,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,HOMEOWNR,GW Chi Square,0,0,0
+KDD98 Multiclass 3,HOMEOWNR,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,OSOURCE,GW Chi Square,0,0,0
+KDD98 Multiclass 3,OSOURCE,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,PCOWNERS,GW Chi Square,0,0,0
+KDD98 Multiclass 3,PCOWNERS,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,PEPSTRFL,GW Chi Square,0,0,0
+KDD98 Multiclass 3,PEPSTRFL,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RECP3,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RECP3,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_10,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_10,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_11,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_11,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_12,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_12,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_13,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_13,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_14,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_14,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_15,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_15,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_16,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_16,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_17,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_17,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_18,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_18,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_19,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_19,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_2,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_2,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_20,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_20,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_21,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_21,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_22,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_22,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_23,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_23,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_24,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_24,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_2A,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_2A,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_3,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_3,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_4,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_4,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_5,GW Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_5,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_6,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_6,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_7,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_7,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_8,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_8,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,RFA_9,GW Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_9,GW Squared Gini,1,1,1
+KDD98 Multiclass 3,STATE,GW Chi Square,0,0,0
+KDD98 Multiclass 3,STATE,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,STEREO,GW Chi Square,0,0,1
+KDD98 Multiclass 3,STEREO,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,WALKER,GW Chi Square,0,0,1
+KDD98 Multiclass 3,WALKER,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,AGEFLAG,GW Chi Square,1,1,0
+KDD98 Multiclass 5,AGEFLAG,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,BIBLE,GW Chi Square,0,0,0
+KDD98 Multiclass 5,BIBLE,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,CATLG,GW Chi Square,0,0,0
+KDD98 Multiclass 5,CATLG,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,CDPLAY,GW Chi Square,0,0,0
+KDD98 Multiclass 5,CDPLAY,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,COLLECT1,GW Chi Square,0,0,1
+KDD98 Multiclass 5,COLLECT1,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,CRAFTS,GW Chi Square,0,0,0
+KDD98 Multiclass 5,CRAFTS,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,DOMAIN,GW Chi Square,1,1,0
+KDD98 Multiclass 5,DOMAIN,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,FISHER,GW Chi Square,0,0,0
+KDD98 Multiclass 5,FISHER,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,GARDENIN,GW Chi Square,0,0,0
+KDD98 Multiclass 5,GARDENIN,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,GENDER,GW Chi Square,0,0,1
+KDD98 Multiclass 5,GENDER,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,GEOCODE2,GW Chi Square,1,1,0
+KDD98 Multiclass 5,GEOCODE2,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,HOMEOWNR,GW Chi Square,0,0,0
+KDD98 Multiclass 5,HOMEOWNR,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,OSOURCE,GW Chi Square,0,0,0
+KDD98 Multiclass 5,OSOURCE,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,PCOWNERS,GW Chi Square,0,0,0
+KDD98 Multiclass 5,PCOWNERS,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,PEPSTRFL,GW Chi Square,0,0,0
+KDD98 Multiclass 5,PEPSTRFL,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,PETS,GW Chi Square,0,0,0
+KDD98 Multiclass 5,PETS,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RECINHSE,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RECINHSE,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_10,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_10,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_11,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_11,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_12,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_12,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_13,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_13,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_14,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_14,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_15,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_15,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_16,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_16,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_17,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_17,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_18,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_18,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_19,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_19,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_2,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_2,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_20,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_20,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_21,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_21,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_22,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_22,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_23,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_23,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_24,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_24,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_2A,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_2A,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_3,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_3,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_4,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_4,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_5,GW Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_5,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_6,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_6,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_7,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_7,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,RFA_8,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_8,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,RFA_9,GW Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_9,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,STATE,GW Chi Square,0,0,0
+KDD98 Multiclass 5,STATE,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,STEREO,GW Chi Square,0,0,0
+KDD98 Multiclass 5,STEREO,GW Squared Gini,1,1,1
+KDD98 Multiclass 5,VETERANS,GW Chi Square,0,0,1
+KDD98 Multiclass 5,VETERANS,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,WALKER,GW Chi Square,0,0,0
+KDD98 Multiclass 5,WALKER,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,AGEFLAG,GW Chi Square,0,0,0
+KDD98 Multiclass 9,AGEFLAG,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,BIBLE,GW Chi Square,0,0,0
+KDD98 Multiclass 9,BIBLE,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,CATLG,GW Chi Square,0,0,0
+KDD98 Multiclass 9,CATLG,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,CDPLAY,GW Chi Square,0,0,0
+KDD98 Multiclass 9,CDPLAY,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,COLLECT1,GW Chi Square,0,0,0
+KDD98 Multiclass 9,COLLECT1,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,CRAFTS,GW Chi Square,0,0,0
+KDD98 Multiclass 9,CRAFTS,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,DOMAIN,GW Chi Square,0,0,0
+KDD98 Multiclass 9,DOMAIN,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,FISHER,GW Chi Square,0,0,0
+KDD98 Multiclass 9,FISHER,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,GARDENIN,GW Chi Square,0,0,0
+KDD98 Multiclass 9,GARDENIN,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,GENDER,GW Chi Square,0,0,1
+KDD98 Multiclass 9,GENDER,GW Squared Gini,0,0,0
+KDD98 Multiclass 9,GEOCODE2,GW Chi Square,0,0,0
+KDD98 Multiclass 9,GEOCODE2,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,OSOURCE,GW Chi Square,0,0,0
+KDD98 Multiclass 9,OSOURCE,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,PCOWNERS,GW Chi Square,0,0,0
+KDD98 Multiclass 9,PCOWNERS,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,PEPSTRFL,GW Chi Square,0,0,0
+KDD98 Multiclass 9,PEPSTRFL,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,PETS,GW Chi Square,0,0,0
+KDD98 Multiclass 9,PETS,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RECINHSE,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RECINHSE,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RECP3,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RECP3,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RFA_10,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_10,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_11,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_11,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_12,GW Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_12,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_13,GW Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_13,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_14,GW Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_14,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_15,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_15,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_16,GW Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_16,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_17,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_17,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_18,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_18,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_19,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_19,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_2,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_2,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_20,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_20,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RFA_21,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_21,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RFA_22,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_22,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_23,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_23,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_24,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_24,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_2A,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_2A,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RFA_3,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_3,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RFA_4,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_4,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_5,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_5,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,RFA_6,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_6,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_7,GW Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_7,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_8,GW Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_8,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,RFA_9,GW Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_9,GW Squared Gini,0,0,1
+KDD98 Multiclass 9,STATE,GW Chi Square,0,0,1
+KDD98 Multiclass 9,STATE,GW Squared Gini,0,0,0
+KDD98 Multiclass 9,STEREO,GW Chi Square,0,0,0
+KDD98 Multiclass 9,STEREO,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,VETERANS,GW Chi Square,0,0,0
+KDD98 Multiclass 9,VETERANS,GW Squared Gini,1,1,1
+KDD98 Multiclass 9,WALKER,GW Chi Square,0,0,0
+KDD98 Multiclass 9,WALKER,GW Squared Gini,1,1,1
+Mushroom,bruises?,GW Chi Square,0,0,0
+Mushroom,bruises?,GW Squared Gini,1,1,1
+Mushroom,cap-color,GW Chi Square,0,0,0
+Mushroom,cap-color,GW Squared Gini,0,0,1
+Mushroom,cap-shape,GW Chi Square,0,0,0
+Mushroom,cap-shape,GW Squared Gini,1,1,1
+Mushroom,cap-surface,GW Chi Square,0,0,0
+Mushroom,cap-surface,GW Squared Gini,1,1,1
+Mushroom,gill-color,GW Chi Square,0,0,0
+Mushroom,gill-color,GW Squared Gini,1,1,1
+Mushroom,gill-size,GW Chi Square,0,0,0
+Mushroom,gill-size,GW Squared Gini,1,1,1
+Mushroom,gill-spacing,GW Chi Square,0,0,0
+Mushroom,gill-spacing,GW Squared Gini,1,1,1
+Mushroom,habitat,GW Chi Square,0,0,0
+Mushroom,habitat,GW Squared Gini,1,1,1
+Mushroom,odor,GW Chi Square,0,0,0
+Mushroom,odor,GW Squared Gini,1,1,1
+Mushroom,population,GW Chi Square,0,0,0
+Mushroom,population,GW Squared Gini,0,0,1
+Mushroom,ring-number,GW Chi Square,0,0,0
+Mushroom,ring-number,GW Squared Gini,1,1,1
+Mushroom,ring-type,GW Chi Square,0,0,0
+Mushroom,ring-type,GW Squared Gini,1,1,1
+Mushroom,spore-print-color,GW Chi Square,0,0,0
+Mushroom,spore-print-color,GW Squared Gini,0,0,1
+Mushroom,stalk-color-above-ring,GW Chi Square,0,0,0
+Mushroom,stalk-color-above-ring,GW Squared Gini,1,1,1
+Mushroom,stalk-color-below-ring,GW Chi Square,0,0,0
+Mushroom,stalk-color-below-ring,GW Squared Gini,1,1,1
+Mushroom,stalk-root,GW Chi Square,0,0,0
+Mushroom,stalk-root,GW Squared Gini,1,1,1
+Mushroom,stalk-shape,GW Chi Square,0,0,0
+Mushroom,stalk-shape,GW Squared Gini,1,1,1
+Mushroom,stalk-surface-above-ring,GW Chi Square,0,0,0
+Mushroom,stalk-surface-above-ring,GW Squared Gini,1,1,1
+Mushroom,stalk-surface-below-ring,GW Chi Square,0,0,0
+Mushroom,stalk-surface-below-ring,GW Squared Gini,1,1,1
+Nursery with Aggreg,NewAttrib1,GW Chi Square,1,1,0
+Nursery with Aggreg,NewAttrib1,GW Squared Gini,0,0,1
+Nursery with Aggreg,NewAttrib2,GW Chi Square,1,1,0
+Nursery with Aggreg,NewAttrib2,GW Squared Gini,0,0,1
+Nursery with Aggreg,NewAttrib3,GW Chi Square,0,0,0
+Nursery with Aggreg,NewAttrib3,GW Squared Gini,0,0,1
+Nursery with Aggreg,finance,GW Chi Square,0,0,0
+Nursery with Aggreg,finance,GW Squared Gini,1,1,1
+Nursery with Aggreg,form,GW Chi Square,0,0,0
+Nursery with Aggreg,form,GW Squared Gini,0,0,1
+Nursery with Aggreg,has_nurs,GW Chi Square,0,0,0
+Nursery with Aggreg,has_nurs,GW Squared Gini,1,1,1
+Nursery with Aggreg,health,GW Chi Square,0,0,0
+Nursery with Aggreg,health,GW Squared Gini,1,1,1
+Nursery with Aggreg,housing,GW Chi Square,1,1,0
+Nursery with Aggreg,housing,GW Squared Gini,0,0,1
+Nursery with Aggreg,parents,GW Chi Square,0,0,0
+Nursery with Aggreg,parents,GW Squared Gini,1,1,1
+Nursery with Aggreg,social,GW Chi Square,1,1,0
+Nursery with Aggreg,social,GW Squared Gini,0,0,1
