@@ -160,11 +160,11 @@ def _save_raw_stats(raw_data, output_path, is_rank):
                   'Degrees of Freedom of Accuracy with Missing Values',
                   'P-value t-statistics on Accuracy with Missing Values',
                   'Paired t-statistics on Accuracy without Missing Values',
-                  'P-value t-statistics on Accuracy without Missing Values',
                   'Degrees of Freedom of Accuracy without Missing Values',
+                  'P-value t-statistics on Accuracy without Missing Values',
                   'Paired t-statistics on Number of Nodes',
-                  'P-value t-statistics on Number of Nodes',
-                  'Degrees of Freedom of Number of Nodes']
+                  'Degrees of Freedom of Number of Nodes',
+                  'P-value t-statistics on Number of Nodes']
         print(','.join(header), file=fout)
         if is_rank:
             for dataset_name in raw_data:
@@ -219,8 +219,8 @@ def _save_raw_stats(raw_data, output_path, is_rank):
                                         str(len(accuracy_wo_missing_diff) - 1),
                                         str(p_value_wo_missing),
                                         str(t_statistic_num_nodes),
-                                        str(p_value_num_nodes),
-                                        str(len(num_nodes_diff) - 1)]),
+                                        str(len(num_nodes_diff) - 1),
+                                        str(p_value_num_nodes)]),
                               file=fout)
         else:
             for dataset_name in raw_data:
@@ -275,7 +275,7 @@ def _calculate_t_statistic(samples_list):
     mean = statistics.mean(samples_list)
     variance = statistics.variance(samples_list)
     if variance == 0.0:
-        return 0.0, 50.0
+        return 0.0, 0.5
 
     num_samples = len(samples_list)
     t_statistic = mean / math.sqrt(variance / num_samples)
