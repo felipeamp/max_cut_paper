@@ -228,6 +228,9 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                 continue
 
             # Let's pretend only the current attribute is valid.
+            print()
+            print('Current attribute: {} ({})'.format(
+                curr_dataset.attrib_names[attrib_index], attrib_index))
             curr_dataset.valid_nominal_attribute = [False] * num_attributes
             curr_dataset.valid_nominal_attribute[attrib_index] = is_valid_nominal_attrib
             curr_dataset.valid_numeric_attribute = [False] * num_attributes
