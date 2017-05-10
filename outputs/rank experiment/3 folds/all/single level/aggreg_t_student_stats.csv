@@ -1,1341 +1,1341 @@
 Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes
-Adult Census Income,education,GW Chi Square,4,4,4
+Adult Census Income,education,GW Chi Square,0,0,0
 Adult Census Income,education,GW Squared Gini,0,0,0
-Adult Census Income,education,LS Chi Square,2,2,2
-Adult Census Income,education,LS Squared Gini,1,1,1
-Adult Census Income,education,Twoing,3,3,3
-Adult Census Income,marital.status,GW Chi Square,4,4,4
+Adult Census Income,education,LS Chi Square,0,0,0
+Adult Census Income,education,LS Squared Gini,0,0,0
+Adult Census Income,education,Twoing,0,0,0
+Adult Census Income,marital.status,GW Chi Square,0,0,0
 Adult Census Income,marital.status,GW Squared Gini,0,0,0
-Adult Census Income,marital.status,LS Chi Square,2,2,2
-Adult Census Income,marital.status,LS Squared Gini,1,1,1
-Adult Census Income,marital.status,Twoing,3,3,3
-Adult Census Income,native.country,GW Chi Square,4,4,4
+Adult Census Income,marital.status,LS Chi Square,0,0,0
+Adult Census Income,marital.status,LS Squared Gini,0,0,0
+Adult Census Income,marital.status,Twoing,0,0,0
+Adult Census Income,native.country,GW Chi Square,0,0,0
 Adult Census Income,native.country,GW Squared Gini,0,0,0
-Adult Census Income,native.country,LS Chi Square,2,2,2
-Adult Census Income,native.country,LS Squared Gini,1,1,1
-Adult Census Income,native.country,Twoing,3,3,3
-Adult Census Income,occupation,GW Chi Square,4,4,4
+Adult Census Income,native.country,LS Chi Square,0,0,0
+Adult Census Income,native.country,LS Squared Gini,0,0,0
+Adult Census Income,native.country,Twoing,0,0,0
+Adult Census Income,occupation,GW Chi Square,0,0,0
 Adult Census Income,occupation,GW Squared Gini,0,0,0
-Adult Census Income,occupation,LS Chi Square,2,2,2
-Adult Census Income,occupation,LS Squared Gini,1,1,1
-Adult Census Income,occupation,Twoing,3,3,3
-Adult Census Income,race,GW Chi Square,4,4,4
+Adult Census Income,occupation,LS Chi Square,0,0,0
+Adult Census Income,occupation,LS Squared Gini,0,0,0
+Adult Census Income,occupation,Twoing,0,0,0
+Adult Census Income,race,GW Chi Square,0,0,0
 Adult Census Income,race,GW Squared Gini,0,0,0
-Adult Census Income,race,LS Chi Square,2,2,2
-Adult Census Income,race,LS Squared Gini,1,1,1
-Adult Census Income,race,Twoing,3,3,3
-Adult Census Income,relationship,GW Chi Square,4,4,4
+Adult Census Income,race,LS Chi Square,0,0,0
+Adult Census Income,race,LS Squared Gini,0,0,0
+Adult Census Income,race,Twoing,0,0,0
+Adult Census Income,relationship,GW Chi Square,0,0,0
 Adult Census Income,relationship,GW Squared Gini,0,0,0
-Adult Census Income,relationship,LS Chi Square,2,2,2
-Adult Census Income,relationship,LS Squared Gini,1,1,1
-Adult Census Income,relationship,Twoing,3,3,3
-Adult Census Income,sex,GW Chi Square,4,4,4
+Adult Census Income,relationship,LS Chi Square,0,0,0
+Adult Census Income,relationship,LS Squared Gini,0,0,0
+Adult Census Income,relationship,Twoing,0,0,0
+Adult Census Income,sex,GW Chi Square,0,0,0
 Adult Census Income,sex,GW Squared Gini,0,0,0
-Adult Census Income,sex,LS Chi Square,2,2,2
-Adult Census Income,sex,LS Squared Gini,1,1,1
-Adult Census Income,sex,Twoing,3,3,3
-Adult Census Income,workclass,GW Chi Square,4,4,4
+Adult Census Income,sex,LS Chi Square,0,0,0
+Adult Census Income,sex,LS Squared Gini,0,0,0
+Adult Census Income,sex,Twoing,0,0,0
+Adult Census Income,workclass,GW Chi Square,1,1,0
 Adult Census Income,workclass,GW Squared Gini,1,1,0
-Adult Census Income,workclass,LS Chi Square,3,3,2
-Adult Census Income,workclass,LS Squared Gini,2,2,1
-Adult Census Income,workclass,Twoing,0,0,3
-Cars with Aggreg,PRICE,GW Chi Square,4,4,4
+Adult Census Income,workclass,LS Chi Square,1,1,0
+Adult Census Income,workclass,LS Squared Gini,1,1,0
+Adult Census Income,workclass,Twoing,0,0,4
+Cars with Aggreg,PRICE,GW Chi Square,0,0,0
 Cars with Aggreg,PRICE,GW Squared Gini,0,0,0
-Cars with Aggreg,PRICE,LS Chi Square,2,2,2
-Cars with Aggreg,PRICE,LS Squared Gini,1,1,1
-Cars with Aggreg,PRICE,Twoing,3,3,3
-Cars with Aggreg,buying,GW Chi Square,4,4,4
+Cars with Aggreg,PRICE,LS Chi Square,0,0,0
+Cars with Aggreg,PRICE,LS Squared Gini,0,0,0
+Cars with Aggreg,PRICE,Twoing,0,0,0
+Cars with Aggreg,buying,GW Chi Square,0,0,0
 Cars with Aggreg,buying,GW Squared Gini,0,0,0
-Cars with Aggreg,buying,LS Chi Square,2,2,2
-Cars with Aggreg,buying,LS Squared Gini,1,1,1
-Cars with Aggreg,buying,Twoing,3,3,3
-Cars with Aggreg,lug_boot,GW Chi Square,4,4,4
+Cars with Aggreg,buying,LS Chi Square,0,0,0
+Cars with Aggreg,buying,LS Squared Gini,0,0,0
+Cars with Aggreg,buying,Twoing,0,0,0
+Cars with Aggreg,lug_boot,GW Chi Square,0,0,0
 Cars with Aggreg,lug_boot,GW Squared Gini,0,0,0
-Cars with Aggreg,lug_boot,LS Chi Square,2,2,2
-Cars with Aggreg,lug_boot,LS Squared Gini,1,1,1
-Cars with Aggreg,lug_boot,Twoing,3,3,3
-Cars with Aggreg,maint,GW Chi Square,4,4,4
+Cars with Aggreg,lug_boot,LS Chi Square,0,0,0
+Cars with Aggreg,lug_boot,LS Squared Gini,0,0,0
+Cars with Aggreg,lug_boot,Twoing,0,0,0
+Cars with Aggreg,maint,GW Chi Square,0,0,0
 Cars with Aggreg,maint,GW Squared Gini,0,0,0
-Cars with Aggreg,maint,LS Chi Square,2,2,2
-Cars with Aggreg,maint,LS Squared Gini,1,1,1
-Cars with Aggreg,maint,Twoing,3,3,3
-Cars with Aggreg,safety,GW Chi Square,4,4,4
+Cars with Aggreg,maint,LS Chi Square,0,0,0
+Cars with Aggreg,maint,LS Squared Gini,0,0,0
+Cars with Aggreg,maint,Twoing,0,0,0
+Cars with Aggreg,safety,GW Chi Square,0,0,0
 Cars with Aggreg,safety,GW Squared Gini,0,0,0
-Cars with Aggreg,safety,LS Chi Square,2,2,2
-Cars with Aggreg,safety,LS Squared Gini,1,1,1
-Cars with Aggreg,safety,Twoing,3,3,3
-Contraceptive with Aggreg,aggreg_education,GW Chi Square,0,0,4
-Contraceptive with Aggreg,aggreg_education,GW Squared Gini,2,2,0
-Contraceptive with Aggreg,aggreg_education,LS Chi Square,0,0,2
-Contraceptive with Aggreg,aggreg_education,LS Squared Gini,1,1,1
-Contraceptive with Aggreg,aggreg_education,Twoing,1,1,3
-Contraceptive with Aggreg,aggreg_working_occupation_sol,GW Chi Square,3,3,4
-Contraceptive with Aggreg,aggreg_working_occupation_sol,GW Squared Gini,3,2,0
-Contraceptive with Aggreg,aggreg_working_occupation_sol,LS Chi Square,2,2,2
-Contraceptive with Aggreg,aggreg_working_occupation_sol,LS Squared Gini,0,0,1
-Contraceptive with Aggreg,aggreg_working_occupation_sol,Twoing,0,0,3
-Contraceptive with Aggreg,husbands_education,GW Chi Square,1,1,4
+Cars with Aggreg,safety,LS Chi Square,0,0,0
+Cars with Aggreg,safety,LS Squared Gini,0,0,0
+Cars with Aggreg,safety,Twoing,0,0,0
+Contraceptive with Aggreg,aggreg_education,GW Chi Square,0,0,0
+Contraceptive with Aggreg,aggreg_education,GW Squared Gini,2,2,2
+Contraceptive with Aggreg,aggreg_education,LS Chi Square,0,0,0
+Contraceptive with Aggreg,aggreg_education,LS Squared Gini,1,1,2
+Contraceptive with Aggreg,aggreg_education,Twoing,1,1,2
+Contraceptive with Aggreg,aggreg_working_occupation_sol,GW Chi Square,3,3,0
+Contraceptive with Aggreg,aggreg_working_occupation_sol,GW Squared Gini,3,2,2
+Contraceptive with Aggreg,aggreg_working_occupation_sol,LS Chi Square,2,2,0
+Contraceptive with Aggreg,aggreg_working_occupation_sol,LS Squared Gini,0,0,2
+Contraceptive with Aggreg,aggreg_working_occupation_sol,Twoing,0,0,2
+Contraceptive with Aggreg,husbands_education,GW Chi Square,0,0,0
 Contraceptive with Aggreg,husbands_education,GW Squared Gini,0,0,0
-Contraceptive with Aggreg,husbands_education,LS Chi Square,0,0,2
-Contraceptive with Aggreg,husbands_education,LS Squared Gini,1,1,1
-Contraceptive with Aggreg,husbands_education,Twoing,2,2,3
-Contraceptive with Aggreg,husbands_occupation,GW Chi Square,2,2,4
-Contraceptive with Aggreg,husbands_occupation,GW Squared Gini,1,1,0
+Contraceptive with Aggreg,husbands_education,LS Chi Square,0,0,0
+Contraceptive with Aggreg,husbands_education,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,husbands_education,Twoing,0,0,0
+Contraceptive with Aggreg,husbands_occupation,GW Chi Square,1,1,2
+Contraceptive with Aggreg,husbands_occupation,GW Squared Gini,1,1,1
 Contraceptive with Aggreg,husbands_occupation,LS Chi Square,1,1,2
-Contraceptive with Aggreg,husbands_occupation,LS Squared Gini,0,0,1
-Contraceptive with Aggreg,husbands_occupation,Twoing,0,0,3
+Contraceptive with Aggreg,husbands_occupation,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,husbands_occupation,Twoing,0,0,2
 Contraceptive with Aggreg,media_exposure,GW Chi Square,0,0,0
-Contraceptive with Aggreg,media_exposure,GW Squared Gini,0,0,4
-Contraceptive with Aggreg,media_exposure,LS Chi Square,0,0,2
-Contraceptive with Aggreg,media_exposure,LS Squared Gini,0,0,3
-Contraceptive with Aggreg,media_exposure,Twoing,0,0,1
-Contraceptive with Aggreg,standard_of_living_index,GW Chi Square,4,4,4
+Contraceptive with Aggreg,media_exposure,GW Squared Gini,0,0,0
+Contraceptive with Aggreg,media_exposure,LS Chi Square,0,0,0
+Contraceptive with Aggreg,media_exposure,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,media_exposure,Twoing,0,0,0
+Contraceptive with Aggreg,standard_of_living_index,GW Chi Square,0,0,0
 Contraceptive with Aggreg,standard_of_living_index,GW Squared Gini,0,0,0
-Contraceptive with Aggreg,standard_of_living_index,LS Chi Square,2,2,2
-Contraceptive with Aggreg,standard_of_living_index,LS Squared Gini,1,1,1
-Contraceptive with Aggreg,standard_of_living_index,Twoing,3,3,3
-Contraceptive with Aggreg,wife_is_working,GW Chi Square,4,4,4
+Contraceptive with Aggreg,standard_of_living_index,LS Chi Square,0,0,0
+Contraceptive with Aggreg,standard_of_living_index,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,standard_of_living_index,Twoing,0,0,0
+Contraceptive with Aggreg,wife_is_working,GW Chi Square,0,0,0
 Contraceptive with Aggreg,wife_is_working,GW Squared Gini,0,0,0
-Contraceptive with Aggreg,wife_is_working,LS Chi Square,2,2,2
-Contraceptive with Aggreg,wife_is_working,LS Squared Gini,1,1,1
-Contraceptive with Aggreg,wife_is_working,Twoing,3,3,3
-Contraceptive with Aggreg,wifes_education,GW Chi Square,1,1,4
-Contraceptive with Aggreg,wifes_education,GW Squared Gini,2,2,0
-Contraceptive with Aggreg,wifes_education,LS Chi Square,1,1,2
-Contraceptive with Aggreg,wifes_education,LS Squared Gini,0,0,1
-Contraceptive with Aggreg,wifes_education,Twoing,1,1,3
-Contraceptive with Aggreg,wifes_religion,GW Chi Square,4,4,4
+Contraceptive with Aggreg,wife_is_working,LS Chi Square,0,0,0
+Contraceptive with Aggreg,wife_is_working,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,wife_is_working,Twoing,0,0,0
+Contraceptive with Aggreg,wifes_education,GW Chi Square,1,1,1
+Contraceptive with Aggreg,wifes_education,GW Squared Gini,2,2,1
+Contraceptive with Aggreg,wifes_education,LS Chi Square,1,1,3
+Contraceptive with Aggreg,wifes_education,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,wifes_education,Twoing,1,1,2
+Contraceptive with Aggreg,wifes_religion,GW Chi Square,0,0,0
 Contraceptive with Aggreg,wifes_religion,GW Squared Gini,0,0,0
-Contraceptive with Aggreg,wifes_religion,LS Chi Square,2,2,2
-Contraceptive with Aggreg,wifes_religion,LS Squared Gini,1,1,1
-Contraceptive with Aggreg,wifes_religion,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_1,GW Chi Square,4,4,4
+Contraceptive with Aggreg,wifes_religion,LS Chi Square,0,0,0
+Contraceptive with Aggreg,wifes_religion,LS Squared Gini,0,0,0
+Contraceptive with Aggreg,wifes_religion,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_1,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_1,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_1,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_1,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_1,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_10,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_1,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_1,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_1,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_10,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_10,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_10,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_10,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_10,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_11,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_10,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_10,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_10,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_11,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_11,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_11,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_11,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_11,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_12,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_11,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_11,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_11,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_12,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_12,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_12,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_12,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_12,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_13,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_12,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_12,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_12,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_13,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_13,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_13,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_13,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_13,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_14,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_13,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_13,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_13,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_14,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_14,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_14,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_14,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_14,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_16,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_14,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_14,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_14,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_16,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_16,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_16,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_16,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_16,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_17,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_16,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_16,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_16,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_17,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_17,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_17,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_17,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_17,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_18,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_17,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_17,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_17,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_18,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_18,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_18,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_18,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_18,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_19,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_18,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_18,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_18,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_19,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_19,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_19,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_19,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_19,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_2,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_19,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_19,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_19,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_2,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_2,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_2,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_2,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_2,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_20,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_2,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_2,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_2,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_20,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_20,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_20,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_20,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_20,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_21,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_20,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_20,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_20,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_21,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_21,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_21,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_21,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_21,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_22,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_21,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_21,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_21,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_22,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_22,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_22,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_22,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_22,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_23,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_22,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_22,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_22,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_23,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_23,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_23,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_23,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_23,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_24,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_23,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_23,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_23,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_24,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_24,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_24,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_24,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_24,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_25,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_24,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_24,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_24,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_25,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_25,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_25,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_25,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_25,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_26,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_25,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_25,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_25,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_26,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_26,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_26,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_26,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_26,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_27,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_26,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_26,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_26,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_27,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_27,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_27,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_27,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_27,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_28,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_27,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_27,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_27,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_28,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_28,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_28,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_28,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_28,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_29,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_28,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_28,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_28,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_29,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_29,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_29,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_29,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_29,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_3,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_29,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_29,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_29,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_3,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_3,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_3,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_3,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_3,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_30,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_3,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_3,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_3,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_30,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_30,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_30,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_30,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_30,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_31,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_30,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_30,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_30,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_31,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_31,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_31,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_31,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_31,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_32,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_31,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_31,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_31,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_32,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_32,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_32,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_32,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_32,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_33,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_32,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_32,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_32,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_33,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_33,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_33,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_33,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_33,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_34,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_33,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_33,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_33,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_34,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_34,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_34,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_34,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_34,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_35,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_34,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_34,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_34,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_35,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_35,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_35,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_35,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_35,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_36,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_35,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_35,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_35,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_36,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_36,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_36,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_36,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_36,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_37,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_36,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_36,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_36,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_37,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_37,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_37,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_37,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_37,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_38,GW Chi Square,1,1,4
+Cover Type with Aggreg,soil_type_37,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_37,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_37,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_38,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_38,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_38,LS Chi Square,1,1,2
-Cover Type with Aggreg,soil_type_38,LS Squared Gini,0,0,1
-Cover Type with Aggreg,soil_type_38,Twoing,2,2,3
-Cover Type with Aggreg,soil_type_39,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_38,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_38,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_38,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_39,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_39,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_39,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_39,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_39,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_4,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_39,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_39,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_39,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_4,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_4,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_4,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_4,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_4,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_40,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_4,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_4,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_4,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_40,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_40,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_40,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_40,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_40,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_5,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_40,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_40,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_40,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_5,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_5,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_5,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_5,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_5,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_6,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_5,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_5,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_5,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_6,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_6,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_6,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_6,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_6,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_8,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_6,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_6,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_6,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_8,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_8,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_8,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_8,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_8,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_9,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_8,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_8,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_8,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_9,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_9,GW Squared Gini,0,0,0
-Cover Type with Aggreg,soil_type_9,LS Chi Square,2,2,2
-Cover Type with Aggreg,soil_type_9,LS Squared Gini,1,1,1
-Cover Type with Aggreg,soil_type_9,Twoing,3,3,3
-Cover Type with Aggreg,soil_type_aggreg,GW Chi Square,0,0,4
+Cover Type with Aggreg,soil_type_9,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_9,LS Squared Gini,0,0,0
+Cover Type with Aggreg,soil_type_9,Twoing,0,0,0
+Cover Type with Aggreg,soil_type_aggreg,GW Chi Square,0,0,0
 Cover Type with Aggreg,soil_type_aggreg,GW Squared Gini,3,3,0
-Cover Type with Aggreg,soil_type_aggreg,LS Chi Square,0,0,2
-Cover Type with Aggreg,soil_type_aggreg,LS Squared Gini,4,4,1
-Cover Type with Aggreg,soil_type_aggreg,Twoing,2,2,3
-Cover Type with Aggreg,wilderness_area_2,GW Chi Square,4,4,4
+Cover Type with Aggreg,soil_type_aggreg,LS Chi Square,0,0,0
+Cover Type with Aggreg,soil_type_aggreg,LS Squared Gini,4,4,0
+Cover Type with Aggreg,soil_type_aggreg,Twoing,2,2,0
+Cover Type with Aggreg,wilderness_area_2,GW Chi Square,0,0,0
 Cover Type with Aggreg,wilderness_area_2,GW Squared Gini,0,0,0
-Cover Type with Aggreg,wilderness_area_2,LS Chi Square,2,2,2
-Cover Type with Aggreg,wilderness_area_2,LS Squared Gini,1,1,1
-Cover Type with Aggreg,wilderness_area_2,Twoing,3,3,3
-Cover Type with Aggreg,wilderness_area_3,GW Chi Square,4,4,4
+Cover Type with Aggreg,wilderness_area_2,LS Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_2,LS Squared Gini,0,0,0
+Cover Type with Aggreg,wilderness_area_2,Twoing,0,0,0
+Cover Type with Aggreg,wilderness_area_3,GW Chi Square,0,0,0
 Cover Type with Aggreg,wilderness_area_3,GW Squared Gini,0,0,0
-Cover Type with Aggreg,wilderness_area_3,LS Chi Square,2,2,2
-Cover Type with Aggreg,wilderness_area_3,LS Squared Gini,1,1,1
-Cover Type with Aggreg,wilderness_area_3,Twoing,3,3,3
-Cover Type with Aggreg,wilderness_area_4,GW Chi Square,4,4,4
+Cover Type with Aggreg,wilderness_area_3,LS Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_3,LS Squared Gini,0,0,0
+Cover Type with Aggreg,wilderness_area_3,Twoing,0,0,0
+Cover Type with Aggreg,wilderness_area_4,GW Chi Square,0,0,0
 Cover Type with Aggreg,wilderness_area_4,GW Squared Gini,0,0,0
-Cover Type with Aggreg,wilderness_area_4,LS Chi Square,2,2,2
-Cover Type with Aggreg,wilderness_area_4,LS Squared Gini,1,1,1
-Cover Type with Aggreg,wilderness_area_4,Twoing,3,3,3
-Cover Type with Aggreg,wilderness_area_aggreg,GW Chi Square,4,4,4
+Cover Type with Aggreg,wilderness_area_4,LS Chi Square,0,0,0
+Cover Type with Aggreg,wilderness_area_4,LS Squared Gini,0,0,0
+Cover Type with Aggreg,wilderness_area_4,Twoing,0,0,0
+Cover Type with Aggreg,wilderness_area_aggreg,GW Chi Square,2,2,0
 Cover Type with Aggreg,wilderness_area_aggreg,GW Squared Gini,0,0,0
-Cover Type with Aggreg,wilderness_area_aggreg,LS Chi Square,2,2,2
-Cover Type with Aggreg,wilderness_area_aggreg,LS Squared Gini,1,1,1
-Cover Type with Aggreg,wilderness_area_aggreg,Twoing,3,3,3
-KDD98 Multiclass 2,AGEFLAG,GW Chi Square,2,2,4
+Cover Type with Aggreg,wilderness_area_aggreg,LS Chi Square,2,2,0
+Cover Type with Aggreg,wilderness_area_aggreg,LS Squared Gini,0,0,0
+Cover Type with Aggreg,wilderness_area_aggreg,Twoing,2,2,0
+KDD98 Multiclass 2,AGEFLAG,GW Chi Square,0,0,0
 KDD98 Multiclass 2,AGEFLAG,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,AGEFLAG,LS Chi Square,0,0,2
-KDD98 Multiclass 2,AGEFLAG,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,AGEFLAG,Twoing,1,1,3
+KDD98 Multiclass 2,AGEFLAG,LS Chi Square,0,0,0
+KDD98 Multiclass 2,AGEFLAG,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,AGEFLAG,Twoing,0,0,0
 KDD98 Multiclass 2,BIBLE,GW Chi Square,0,0,0
-KDD98 Multiclass 2,BIBLE,GW Squared Gini,0,0,4
-KDD98 Multiclass 2,BIBLE,LS Chi Square,0,0,2
-KDD98 Multiclass 2,BIBLE,LS Squared Gini,0,0,3
-KDD98 Multiclass 2,BIBLE,Twoing,0,0,1
+KDD98 Multiclass 2,BIBLE,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,BIBLE,LS Chi Square,0,0,0
+KDD98 Multiclass 2,BIBLE,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,BIBLE,Twoing,0,0,0
 KDD98 Multiclass 2,CATLG,GW Chi Square,0,0,0
-KDD98 Multiclass 2,CATLG,GW Squared Gini,0,0,4
-KDD98 Multiclass 2,CATLG,LS Chi Square,0,0,2
-KDD98 Multiclass 2,CATLG,LS Squared Gini,0,0,3
-KDD98 Multiclass 2,CATLG,Twoing,0,0,1
-KDD98 Multiclass 2,CDPLAY,GW Chi Square,4,4,4
+KDD98 Multiclass 2,CATLG,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,CATLG,LS Chi Square,0,0,0
+KDD98 Multiclass 2,CATLG,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,CATLG,Twoing,0,0,0
+KDD98 Multiclass 2,CDPLAY,GW Chi Square,0,0,0
 KDD98 Multiclass 2,CDPLAY,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,CDPLAY,LS Chi Square,2,2,2
-KDD98 Multiclass 2,CDPLAY,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,CDPLAY,Twoing,3,3,3
-KDD98 Multiclass 2,DOMAIN,GW Chi Square,0,0,4
+KDD98 Multiclass 2,CDPLAY,LS Chi Square,0,0,0
+KDD98 Multiclass 2,CDPLAY,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,CDPLAY,Twoing,0,0,0
+KDD98 Multiclass 2,DOMAIN,GW Chi Square,0,0,0
 KDD98 Multiclass 2,DOMAIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,DOMAIN,LS Chi Square,0,0,2
-KDD98 Multiclass 2,DOMAIN,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,DOMAIN,Twoing,0,0,3
-KDD98 Multiclass 2,FISHER,GW Chi Square,4,4,4
+KDD98 Multiclass 2,DOMAIN,LS Chi Square,0,0,0
+KDD98 Multiclass 2,DOMAIN,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,DOMAIN,Twoing,0,0,0
+KDD98 Multiclass 2,FISHER,GW Chi Square,0,0,0
 KDD98 Multiclass 2,FISHER,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,FISHER,LS Chi Square,2,2,2
-KDD98 Multiclass 2,FISHER,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,FISHER,Twoing,3,3,3
-KDD98 Multiclass 2,GARDENIN,GW Chi Square,4,4,4
+KDD98 Multiclass 2,FISHER,LS Chi Square,0,0,0
+KDD98 Multiclass 2,FISHER,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,FISHER,Twoing,0,0,0
+KDD98 Multiclass 2,GARDENIN,GW Chi Square,0,0,0
 KDD98 Multiclass 2,GARDENIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,GARDENIN,LS Chi Square,2,2,2
-KDD98 Multiclass 2,GARDENIN,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,GARDENIN,Twoing,3,3,3
-KDD98 Multiclass 2,GEOCODE2,GW Chi Square,4,4,4
-KDD98 Multiclass 2,GEOCODE2,GW Squared Gini,1,1,0
+KDD98 Multiclass 2,GARDENIN,LS Chi Square,0,0,0
+KDD98 Multiclass 2,GARDENIN,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,GARDENIN,Twoing,0,0,0
+KDD98 Multiclass 2,GEOCODE2,GW Chi Square,2,2,2
+KDD98 Multiclass 2,GEOCODE2,GW Squared Gini,1,1,1
 KDD98 Multiclass 2,GEOCODE2,LS Chi Square,2,2,2
-KDD98 Multiclass 2,GEOCODE2,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,GEOCODE2,Twoing,3,3,3
-KDD98 Multiclass 2,HOMEOWNR,GW Chi Square,2,2,4
+KDD98 Multiclass 2,GEOCODE2,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,GEOCODE2,Twoing,2,2,2
+KDD98 Multiclass 2,HOMEOWNR,GW Chi Square,0,0,0
 KDD98 Multiclass 2,HOMEOWNR,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,HOMEOWNR,LS Chi Square,0,0,2
-KDD98 Multiclass 2,HOMEOWNR,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,HOMEOWNR,Twoing,1,1,3
-KDD98 Multiclass 2,OSOURCE,GW Chi Square,0,0,4
+KDD98 Multiclass 2,HOMEOWNR,LS Chi Square,0,0,0
+KDD98 Multiclass 2,HOMEOWNR,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,HOMEOWNR,Twoing,0,0,0
+KDD98 Multiclass 2,OSOURCE,GW Chi Square,0,0,0
 KDD98 Multiclass 2,OSOURCE,GW Squared Gini,3,3,0
-KDD98 Multiclass 2,OSOURCE,LS Chi Square,0,0,2
-KDD98 Multiclass 2,OSOURCE,LS Squared Gini,3,3,1
-KDD98 Multiclass 2,OSOURCE,Twoing,0,0,3
-KDD98 Multiclass 2,PCOWNERS,GW Chi Square,4,4,4
+KDD98 Multiclass 2,OSOURCE,LS Chi Square,0,0,0
+KDD98 Multiclass 2,OSOURCE,LS Squared Gini,3,3,0
+KDD98 Multiclass 2,OSOURCE,Twoing,0,0,0
+KDD98 Multiclass 2,PCOWNERS,GW Chi Square,0,0,0
 KDD98 Multiclass 2,PCOWNERS,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,PCOWNERS,LS Chi Square,2,2,2
-KDD98 Multiclass 2,PCOWNERS,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,PCOWNERS,Twoing,3,3,3
-KDD98 Multiclass 2,PEPSTRFL,GW Chi Square,4,4,4
+KDD98 Multiclass 2,PCOWNERS,LS Chi Square,0,0,0
+KDD98 Multiclass 2,PCOWNERS,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,PCOWNERS,Twoing,0,0,0
+KDD98 Multiclass 2,PEPSTRFL,GW Chi Square,0,0,0
 KDD98 Multiclass 2,PEPSTRFL,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,PEPSTRFL,LS Chi Square,2,2,2
-KDD98 Multiclass 2,PEPSTRFL,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,PEPSTRFL,Twoing,3,3,3
-KDD98 Multiclass 2,PETS,GW Chi Square,4,4,4
+KDD98 Multiclass 2,PEPSTRFL,LS Chi Square,0,0,0
+KDD98 Multiclass 2,PEPSTRFL,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,PEPSTRFL,Twoing,0,0,0
+KDD98 Multiclass 2,PETS,GW Chi Square,0,0,0
 KDD98 Multiclass 2,PETS,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,PETS,LS Chi Square,2,2,2
-KDD98 Multiclass 2,PETS,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,PETS,Twoing,3,3,3
+KDD98 Multiclass 2,PETS,LS Chi Square,0,0,0
+KDD98 Multiclass 2,PETS,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,PETS,Twoing,0,0,0
 KDD98 Multiclass 2,PHOTO,GW Chi Square,0,0,0
-KDD98 Multiclass 2,PHOTO,GW Squared Gini,0,0,4
-KDD98 Multiclass 2,PHOTO,LS Chi Square,0,0,2
-KDD98 Multiclass 2,PHOTO,LS Squared Gini,0,0,3
-KDD98 Multiclass 2,PHOTO,Twoing,0,0,1
-KDD98 Multiclass 2,RECINHSE,GW Chi Square,4,4,4
+KDD98 Multiclass 2,PHOTO,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,PHOTO,LS Chi Square,0,0,0
+KDD98 Multiclass 2,PHOTO,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,PHOTO,Twoing,0,0,0
+KDD98 Multiclass 2,RECINHSE,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RECINHSE,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RECINHSE,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RECINHSE,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,RECINHSE,Twoing,3,3,3
-KDD98 Multiclass 2,RFA_10,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RECINHSE,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RECINHSE,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RECINHSE,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_10,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_10,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_10,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_10,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_10,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_11,GW Chi Square,0,0,4
+KDD98 Multiclass 2,RFA_10,LS Chi Square,2,2,0
+KDD98 Multiclass 2,RFA_10,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_10,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_11,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_11,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_11,LS Chi Square,1,1,2
-KDD98 Multiclass 2,RFA_11,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_11,Twoing,0,0,3
-KDD98 Multiclass 2,RFA_12,GW Chi Square,0,0,4
+KDD98 Multiclass 2,RFA_11,LS Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_11,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_11,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_12,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_12,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_12,LS Chi Square,0,0,2
-KDD98 Multiclass 2,RFA_12,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_12,Twoing,0,0,3
-KDD98 Multiclass 2,RFA_13,GW Chi Square,3,3,4
+KDD98 Multiclass 2,RFA_12,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_12,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_12,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_13,GW Chi Square,3,3,0
 KDD98 Multiclass 2,RFA_13,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_13,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_13,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_13,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_14,GW Chi Square,0,0,4
+KDD98 Multiclass 2,RFA_13,LS Chi Square,3,3,0
+KDD98 Multiclass 2,RFA_13,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_13,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_14,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_14,GW Squared Gini,2,2,0
-KDD98 Multiclass 2,RFA_14,LS Chi Square,0,0,2
-KDD98 Multiclass 2,RFA_14,LS Squared Gini,2,2,1
-KDD98 Multiclass 2,RFA_14,Twoing,1,1,3
-KDD98 Multiclass 2,RFA_15,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_14,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_14,LS Squared Gini,2,2,0
+KDD98 Multiclass 2,RFA_14,Twoing,1,1,0
+KDD98 Multiclass 2,RFA_15,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_15,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_15,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_15,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_15,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_16,GW Chi Square,3,3,4
+KDD98 Multiclass 2,RFA_15,LS Chi Square,2,2,0
+KDD98 Multiclass 2,RFA_15,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_15,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_16,GW Chi Square,3,3,0
 KDD98 Multiclass 2,RFA_16,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_16,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_16,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,RFA_16,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_17,GW Chi Square,3,3,4
+KDD98 Multiclass 2,RFA_16,LS Chi Square,3,3,0
+KDD98 Multiclass 2,RFA_16,LS Squared Gini,1,1,0
+KDD98 Multiclass 2,RFA_16,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_17,GW Chi Square,3,3,0
 KDD98 Multiclass 2,RFA_17,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_17,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_17,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_17,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_18,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_17,LS Chi Square,3,3,0
+KDD98 Multiclass 2,RFA_17,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_17,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_18,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_18,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_18,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_18,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_18,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_19,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_18,LS Chi Square,2,2,0
+KDD98 Multiclass 2,RFA_18,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_18,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_19,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_19,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_19,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_19,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_19,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_2,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_19,LS Chi Square,2,2,0
+KDD98 Multiclass 2,RFA_19,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_19,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_2,GW Chi Square,1,1,0
 KDD98 Multiclass 2,RFA_2,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_2,LS Chi Square,1,1,2
-KDD98 Multiclass 2,RFA_2,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_2,Twoing,1,1,3
-KDD98 Multiclass 2,RFA_20,GW Chi Square,2,2,4
-KDD98 Multiclass 2,RFA_20,GW Squared Gini,1,1,0
+KDD98 Multiclass 2,RFA_2,LS Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_2,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_2,Twoing,1,1,0
+KDD98 Multiclass 2,RFA_20,GW Chi Square,2,2,2
+KDD98 Multiclass 2,RFA_20,GW Squared Gini,1,1,1
 KDD98 Multiclass 2,RFA_20,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_20,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_20,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_21,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_20,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_20,Twoing,2,2,2
+KDD98 Multiclass 2,RFA_21,GW Chi Square,2,2,1
 KDD98 Multiclass 2,RFA_21,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_21,LS Chi Square,2,2,2
+KDD98 Multiclass 2,RFA_21,LS Chi Square,2,2,1
 KDD98 Multiclass 2,RFA_21,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_21,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_22,GW Chi Square,1,1,4
+KDD98 Multiclass 2,RFA_21,Twoing,2,2,1
+KDD98 Multiclass 2,RFA_22,GW Chi Square,1,1,0
 KDD98 Multiclass 2,RFA_22,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_22,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_22,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,RFA_22,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_23,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_22,LS Chi Square,3,3,0
+KDD98 Multiclass 2,RFA_22,LS Squared Gini,1,1,0
+KDD98 Multiclass 2,RFA_22,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_23,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_23,GW Squared Gini,1,1,0
-KDD98 Multiclass 2,RFA_23,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_23,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_23,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_24,GW Chi Square,3,3,4
+KDD98 Multiclass 2,RFA_23,LS Chi Square,3,3,0
+KDD98 Multiclass 2,RFA_23,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_23,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_24,GW Chi Square,3,3,0
 KDD98 Multiclass 2,RFA_24,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_24,LS Chi Square,3,3,2
-KDD98 Multiclass 2,RFA_24,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,RFA_24,Twoing,2,2,3
-KDD98 Multiclass 2,RFA_2A,GW Chi Square,4,4,4
+KDD98 Multiclass 2,RFA_24,LS Chi Square,3,3,0
+KDD98 Multiclass 2,RFA_24,LS Squared Gini,1,1,0
+KDD98 Multiclass 2,RFA_24,Twoing,2,2,0
+KDD98 Multiclass 2,RFA_2A,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_2A,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_2A,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_2A,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,RFA_2A,Twoing,3,3,3
-KDD98 Multiclass 2,RFA_3,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_2A,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_2A,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_2A,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_3,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_3,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_3,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_3,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_3,Twoing,3,3,3
-KDD98 Multiclass 2,RFA_4,GW Chi Square,0,0,4
+KDD98 Multiclass 2,RFA_3,LS Chi Square,2,2,0
+KDD98 Multiclass 2,RFA_3,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_3,Twoing,3,3,0
+KDD98 Multiclass 2,RFA_4,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_4,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_4,LS Chi Square,0,0,2
-KDD98 Multiclass 2,RFA_4,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_4,Twoing,0,0,3
-KDD98 Multiclass 2,RFA_5,GW Chi Square,2,2,4
+KDD98 Multiclass 2,RFA_4,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_4,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_4,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_5,GW Chi Square,2,2,0
 KDD98 Multiclass 2,RFA_5,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_5,LS Chi Square,2,2,2
-KDD98 Multiclass 2,RFA_5,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,RFA_5,Twoing,4,4,3
-KDD98 Multiclass 2,RFA_6,GW Chi Square,1,1,4
+KDD98 Multiclass 2,RFA_5,LS Chi Square,2,2,0
+KDD98 Multiclass 2,RFA_5,LS Squared Gini,1,1,0
+KDD98 Multiclass 2,RFA_5,Twoing,4,4,0
+KDD98 Multiclass 2,RFA_6,GW Chi Square,1,1,0
 KDD98 Multiclass 2,RFA_6,GW Squared Gini,1,1,0
-KDD98 Multiclass 2,RFA_6,LS Chi Square,1,1,2
-KDD98 Multiclass 2,RFA_6,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_6,Twoing,0,0,3
-KDD98 Multiclass 2,RFA_7,GW Chi Square,1,1,4
+KDD98 Multiclass 2,RFA_6,LS Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_6,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_6,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_7,GW Chi Square,1,1,0
 KDD98 Multiclass 2,RFA_7,GW Squared Gini,2,2,0
-KDD98 Multiclass 2,RFA_7,LS Chi Square,1,1,2
-KDD98 Multiclass 2,RFA_7,LS Squared Gini,2,2,1
-KDD98 Multiclass 2,RFA_7,Twoing,0,0,3
-KDD98 Multiclass 2,RFA_8,GW Chi Square,0,0,4
+KDD98 Multiclass 2,RFA_7,LS Chi Square,1,1,0
+KDD98 Multiclass 2,RFA_7,LS Squared Gini,2,2,0
+KDD98 Multiclass 2,RFA_7,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_8,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_8,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,RFA_8,LS Chi Square,0,0,2
-KDD98 Multiclass 2,RFA_8,LS Squared Gini,0,0,1
-KDD98 Multiclass 2,RFA_8,Twoing,0,0,3
-KDD98 Multiclass 2,RFA_9,GW Chi Square,0,0,4
+KDD98 Multiclass 2,RFA_8,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_8,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,RFA_8,Twoing,0,0,0
+KDD98 Multiclass 2,RFA_9,GW Chi Square,0,0,0
 KDD98 Multiclass 2,RFA_9,GW Squared Gini,3,3,0
-KDD98 Multiclass 2,RFA_9,LS Chi Square,0,0,2
-KDD98 Multiclass 2,RFA_9,LS Squared Gini,3,3,1
-KDD98 Multiclass 2,RFA_9,Twoing,2,2,3
-KDD98 Multiclass 2,STATE,GW Chi Square,1,1,4
+KDD98 Multiclass 2,RFA_9,LS Chi Square,0,0,0
+KDD98 Multiclass 2,RFA_9,LS Squared Gini,3,3,0
+KDD98 Multiclass 2,RFA_9,Twoing,2,2,0
+KDD98 Multiclass 2,STATE,GW Chi Square,1,1,0
 KDD98 Multiclass 2,STATE,GW Squared Gini,3,3,0
-KDD98 Multiclass 2,STATE,LS Chi Square,1,1,2
-KDD98 Multiclass 2,STATE,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,STATE,Twoing,0,0,3
+KDD98 Multiclass 2,STATE,LS Chi Square,1,1,0
+KDD98 Multiclass 2,STATE,LS Squared Gini,1,1,0
+KDD98 Multiclass 2,STATE,Twoing,0,0,0
 KDD98 Multiclass 2,VETERANS,GW Chi Square,0,0,0
-KDD98 Multiclass 2,VETERANS,GW Squared Gini,0,0,4
-KDD98 Multiclass 2,VETERANS,LS Chi Square,0,0,2
-KDD98 Multiclass 2,VETERANS,LS Squared Gini,0,0,3
-KDD98 Multiclass 2,VETERANS,Twoing,0,0,1
-KDD98 Multiclass 2,WALKER,GW Chi Square,4,4,4
+KDD98 Multiclass 2,VETERANS,GW Squared Gini,0,0,0
+KDD98 Multiclass 2,VETERANS,LS Chi Square,0,0,0
+KDD98 Multiclass 2,VETERANS,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,VETERANS,Twoing,0,0,0
+KDD98 Multiclass 2,WALKER,GW Chi Square,0,0,0
 KDD98 Multiclass 2,WALKER,GW Squared Gini,0,0,0
-KDD98 Multiclass 2,WALKER,LS Chi Square,2,2,2
-KDD98 Multiclass 2,WALKER,LS Squared Gini,1,1,1
-KDD98 Multiclass 2,WALKER,Twoing,3,3,3
-KDD98 Multiclass 3,AGEFLAG,GW Chi Square,4,4,4
+KDD98 Multiclass 2,WALKER,LS Chi Square,0,0,0
+KDD98 Multiclass 2,WALKER,LS Squared Gini,0,0,0
+KDD98 Multiclass 2,WALKER,Twoing,0,0,0
+KDD98 Multiclass 3,AGEFLAG,GW Chi Square,0,0,0
 KDD98 Multiclass 3,AGEFLAG,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,AGEFLAG,LS Chi Square,2,2,2
-KDD98 Multiclass 3,AGEFLAG,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,AGEFLAG,Twoing,3,3,3
+KDD98 Multiclass 3,AGEFLAG,LS Chi Square,0,0,0
+KDD98 Multiclass 3,AGEFLAG,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,AGEFLAG,Twoing,0,0,0
 KDD98 Multiclass 3,BIBLE,GW Chi Square,0,0,0
-KDD98 Multiclass 3,BIBLE,GW Squared Gini,0,0,4
-KDD98 Multiclass 3,BIBLE,LS Chi Square,0,0,2
-KDD98 Multiclass 3,BIBLE,LS Squared Gini,0,0,3
-KDD98 Multiclass 3,BIBLE,Twoing,0,0,1
-KDD98 Multiclass 3,CDPLAY,GW Chi Square,4,4,4
+KDD98 Multiclass 3,BIBLE,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,BIBLE,LS Chi Square,0,0,0
+KDD98 Multiclass 3,BIBLE,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,BIBLE,Twoing,0,0,0
+KDD98 Multiclass 3,CDPLAY,GW Chi Square,0,0,0
 KDD98 Multiclass 3,CDPLAY,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,CDPLAY,LS Chi Square,2,2,2
-KDD98 Multiclass 3,CDPLAY,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,CDPLAY,Twoing,3,3,3
+KDD98 Multiclass 3,CDPLAY,LS Chi Square,0,0,0
+KDD98 Multiclass 3,CDPLAY,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,CDPLAY,Twoing,0,0,0
 KDD98 Multiclass 3,COLLECT1,GW Chi Square,0,0,0
-KDD98 Multiclass 3,COLLECT1,GW Squared Gini,0,0,4
-KDD98 Multiclass 3,COLLECT1,LS Chi Square,0,0,2
-KDD98 Multiclass 3,COLLECT1,LS Squared Gini,0,0,3
-KDD98 Multiclass 3,COLLECT1,Twoing,0,0,1
-KDD98 Multiclass 3,CRAFTS,GW Chi Square,4,4,4
+KDD98 Multiclass 3,COLLECT1,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,COLLECT1,LS Chi Square,0,0,0
+KDD98 Multiclass 3,COLLECT1,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,COLLECT1,Twoing,0,0,0
+KDD98 Multiclass 3,CRAFTS,GW Chi Square,0,0,0
 KDD98 Multiclass 3,CRAFTS,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,CRAFTS,LS Chi Square,2,2,2
-KDD98 Multiclass 3,CRAFTS,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,CRAFTS,Twoing,3,3,3
-KDD98 Multiclass 3,DOMAIN,GW Chi Square,2,2,4
+KDD98 Multiclass 3,CRAFTS,LS Chi Square,0,0,0
+KDD98 Multiclass 3,CRAFTS,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,CRAFTS,Twoing,0,0,0
+KDD98 Multiclass 3,DOMAIN,GW Chi Square,2,2,0
 KDD98 Multiclass 3,DOMAIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,DOMAIN,LS Chi Square,2,2,2
+KDD98 Multiclass 3,DOMAIN,LS Chi Square,2,2,1
 KDD98 Multiclass 3,DOMAIN,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,DOMAIN,Twoing,2,2,3
-KDD98 Multiclass 3,FISHER,GW Chi Square,4,4,4
+KDD98 Multiclass 3,DOMAIN,Twoing,2,2,1
+KDD98 Multiclass 3,FISHER,GW Chi Square,0,0,0
 KDD98 Multiclass 3,FISHER,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,FISHER,LS Chi Square,2,2,2
-KDD98 Multiclass 3,FISHER,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,FISHER,Twoing,3,3,3
-KDD98 Multiclass 3,GARDENIN,GW Chi Square,4,4,4
+KDD98 Multiclass 3,FISHER,LS Chi Square,0,0,0
+KDD98 Multiclass 3,FISHER,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,FISHER,Twoing,0,0,0
+KDD98 Multiclass 3,GARDENIN,GW Chi Square,0,0,0
 KDD98 Multiclass 3,GARDENIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,GARDENIN,LS Chi Square,2,2,2
-KDD98 Multiclass 3,GARDENIN,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,GARDENIN,Twoing,3,3,3
-KDD98 Multiclass 3,GENDER,GW Chi Square,4,4,4
+KDD98 Multiclass 3,GARDENIN,LS Chi Square,0,0,0
+KDD98 Multiclass 3,GARDENIN,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,GARDENIN,Twoing,0,0,0
+KDD98 Multiclass 3,GENDER,GW Chi Square,0,0,0
 KDD98 Multiclass 3,GENDER,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,GENDER,LS Chi Square,2,2,2
-KDD98 Multiclass 3,GENDER,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,GENDER,Twoing,3,3,3
-KDD98 Multiclass 3,GEOCODE2,GW Chi Square,1,1,4
-KDD98 Multiclass 3,GEOCODE2,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,GEOCODE2,LS Chi Square,0,0,2
-KDD98 Multiclass 3,GEOCODE2,LS Squared Gini,3,3,1
-KDD98 Multiclass 3,GEOCODE2,Twoing,0,0,3
-KDD98 Multiclass 3,HOMEOWNR,GW Chi Square,4,4,4
+KDD98 Multiclass 3,GENDER,LS Chi Square,0,0,0
+KDD98 Multiclass 3,GENDER,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,GENDER,Twoing,0,0,0
+KDD98 Multiclass 3,GEOCODE2,GW Chi Square,0,0,1
+KDD98 Multiclass 3,GEOCODE2,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,GEOCODE2,LS Chi Square,0,0,1
+KDD98 Multiclass 3,GEOCODE2,LS Squared Gini,3,3,0
+KDD98 Multiclass 3,GEOCODE2,Twoing,0,0,1
+KDD98 Multiclass 3,HOMEOWNR,GW Chi Square,0,0,0
 KDD98 Multiclass 3,HOMEOWNR,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,HOMEOWNR,LS Chi Square,2,2,2
-KDD98 Multiclass 3,HOMEOWNR,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,HOMEOWNR,Twoing,3,3,3
-KDD98 Multiclass 3,OSOURCE,GW Chi Square,0,0,4
+KDD98 Multiclass 3,HOMEOWNR,LS Chi Square,0,0,0
+KDD98 Multiclass 3,HOMEOWNR,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,HOMEOWNR,Twoing,0,0,0
+KDD98 Multiclass 3,OSOURCE,GW Chi Square,0,0,1
 KDD98 Multiclass 3,OSOURCE,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,OSOURCE,LS Chi Square,1,1,2
+KDD98 Multiclass 3,OSOURCE,LS Chi Square,1,1,0
 KDD98 Multiclass 3,OSOURCE,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,OSOURCE,Twoing,3,3,3
-KDD98 Multiclass 3,PCOWNERS,GW Chi Square,4,4,4
+KDD98 Multiclass 3,OSOURCE,Twoing,3,3,1
+KDD98 Multiclass 3,PCOWNERS,GW Chi Square,0,0,0
 KDD98 Multiclass 3,PCOWNERS,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,PCOWNERS,LS Chi Square,2,2,2
-KDD98 Multiclass 3,PCOWNERS,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,PCOWNERS,Twoing,3,3,3
-KDD98 Multiclass 3,PEPSTRFL,GW Chi Square,4,4,4
+KDD98 Multiclass 3,PCOWNERS,LS Chi Square,0,0,0
+KDD98 Multiclass 3,PCOWNERS,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,PCOWNERS,Twoing,0,0,0
+KDD98 Multiclass 3,PEPSTRFL,GW Chi Square,0,0,0
 KDD98 Multiclass 3,PEPSTRFL,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,PEPSTRFL,LS Chi Square,2,2,2
-KDD98 Multiclass 3,PEPSTRFL,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,PEPSTRFL,Twoing,3,3,3
-KDD98 Multiclass 3,RECP3,GW Chi Square,4,4,4
+KDD98 Multiclass 3,PEPSTRFL,LS Chi Square,0,0,0
+KDD98 Multiclass 3,PEPSTRFL,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,PEPSTRFL,Twoing,0,0,0
+KDD98 Multiclass 3,RECP3,GW Chi Square,0,0,0
 KDD98 Multiclass 3,RECP3,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RECP3,LS Chi Square,2,2,2
-KDD98 Multiclass 3,RECP3,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RECP3,Twoing,3,3,3
-KDD98 Multiclass 3,RFA_10,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RECP3,LS Chi Square,0,0,0
+KDD98 Multiclass 3,RECP3,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RECP3,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_10,GW Chi Square,3,3,0
 KDD98 Multiclass 3,RFA_10,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_10,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_10,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_10,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_11,GW Chi Square,1,1,4
+KDD98 Multiclass 3,RFA_10,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_10,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_10,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_11,GW Chi Square,1,1,0
 KDD98 Multiclass 3,RFA_11,GW Squared Gini,3,3,0
-KDD98 Multiclass 3,RFA_11,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_11,LS Squared Gini,3,3,1
-KDD98 Multiclass 3,RFA_11,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_12,GW Chi Square,0,0,4
+KDD98 Multiclass 3,RFA_11,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_11,LS Squared Gini,3,3,0
+KDD98 Multiclass 3,RFA_11,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_12,GW Chi Square,0,0,0
 KDD98 Multiclass 3,RFA_12,GW Squared Gini,2,2,0
-KDD98 Multiclass 3,RFA_12,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_12,LS Squared Gini,4,4,1
-KDD98 Multiclass 3,RFA_12,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_13,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_12,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_12,LS Squared Gini,4,4,0
+KDD98 Multiclass 3,RFA_12,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_13,GW Chi Square,3,3,0
 KDD98 Multiclass 3,RFA_13,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_13,LS Chi Square,4,4,2
+KDD98 Multiclass 3,RFA_13,LS Chi Square,4,4,1
 KDD98 Multiclass 3,RFA_13,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_13,Twoing,1,1,3
-KDD98 Multiclass 3,RFA_14,GW Chi Square,1,1,4
+KDD98 Multiclass 3,RFA_13,Twoing,1,1,1
+KDD98 Multiclass 3,RFA_14,GW Chi Square,1,1,0
 KDD98 Multiclass 3,RFA_14,GW Squared Gini,2,2,0
-KDD98 Multiclass 3,RFA_14,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_14,LS Squared Gini,3,3,1
-KDD98 Multiclass 3,RFA_14,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_15,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_14,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_14,LS Squared Gini,3,3,0
+KDD98 Multiclass 3,RFA_14,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_15,GW Chi Square,3,3,2
 KDD98 Multiclass 3,RFA_15,GW Squared Gini,0,0,0
 KDD98 Multiclass 3,RFA_15,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_15,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_15,Twoing,2,2,3
-KDD98 Multiclass 3,RFA_16,GW Chi Square,0,0,4
+KDD98 Multiclass 3,RFA_15,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_15,Twoing,2,2,2
+KDD98 Multiclass 3,RFA_16,GW Chi Square,0,0,0
 KDD98 Multiclass 3,RFA_16,GW Squared Gini,1,1,0
-KDD98 Multiclass 3,RFA_16,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_16,LS Squared Gini,4,4,1
-KDD98 Multiclass 3,RFA_16,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_17,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_16,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_16,LS Squared Gini,4,4,0
+KDD98 Multiclass 3,RFA_16,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_17,GW Chi Square,3,3,0
 KDD98 Multiclass 3,RFA_17,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_17,LS Chi Square,4,4,2
-KDD98 Multiclass 3,RFA_17,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_17,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_18,GW Chi Square,0,0,4
+KDD98 Multiclass 3,RFA_17,LS Chi Square,4,4,0
+KDD98 Multiclass 3,RFA_17,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_17,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_18,GW Chi Square,0,0,0
 KDD98 Multiclass 3,RFA_18,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_18,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_18,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RFA_18,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_19,GW Chi Square,2,2,4
+KDD98 Multiclass 3,RFA_18,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_18,LS Squared Gini,1,1,0
+KDD98 Multiclass 3,RFA_18,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_19,GW Chi Square,2,2,0
 KDD98 Multiclass 3,RFA_19,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_19,LS Chi Square,2,2,2
-KDD98 Multiclass 3,RFA_19,LS Squared Gini,2,2,1
-KDD98 Multiclass 3,RFA_19,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_2,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_19,LS Chi Square,2,2,0
+KDD98 Multiclass 3,RFA_19,LS Squared Gini,2,2,0
+KDD98 Multiclass 3,RFA_19,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_2,GW Chi Square,2,2,0
 KDD98 Multiclass 3,RFA_2,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_2,LS Chi Square,2,2,2
-KDD98 Multiclass 3,RFA_2,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RFA_2,Twoing,1,1,3
-KDD98 Multiclass 3,RFA_20,GW Chi Square,3,3,4
-KDD98 Multiclass 3,RFA_20,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_20,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_20,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_20,Twoing,2,2,3
-KDD98 Multiclass 3,RFA_21,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_2,LS Chi Square,2,2,0
+KDD98 Multiclass 3,RFA_2,LS Squared Gini,1,1,0
+KDD98 Multiclass 3,RFA_2,Twoing,1,1,0
+KDD98 Multiclass 3,RFA_20,GW Chi Square,3,3,1
+KDD98 Multiclass 3,RFA_20,GW Squared Gini,0,0,1
+KDD98 Multiclass 3,RFA_20,LS Chi Square,3,3,1
+KDD98 Multiclass 3,RFA_20,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_20,Twoing,2,2,1
+KDD98 Multiclass 3,RFA_21,GW Chi Square,3,3,1
 KDD98 Multiclass 3,RFA_21,GW Squared Gini,1,1,0
-KDD98 Multiclass 3,RFA_21,LS Chi Square,3,3,2
+KDD98 Multiclass 3,RFA_21,LS Chi Square,3,3,1
 KDD98 Multiclass 3,RFA_21,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_21,Twoing,1,1,3
-KDD98 Multiclass 3,RFA_22,GW Chi Square,2,2,4
+KDD98 Multiclass 3,RFA_21,Twoing,1,1,1
+KDD98 Multiclass 3,RFA_22,GW Chi Square,2,2,0
 KDD98 Multiclass 3,RFA_22,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_22,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_22,LS Squared Gini,2,2,1
-KDD98 Multiclass 3,RFA_22,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_23,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_22,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_22,LS Squared Gini,2,2,0
+KDD98 Multiclass 3,RFA_22,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_23,GW Chi Square,3,3,2
 KDD98 Multiclass 3,RFA_23,GW Squared Gini,0,0,0
 KDD98 Multiclass 3,RFA_23,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_23,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_23,Twoing,2,2,3
-KDD98 Multiclass 3,RFA_24,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_23,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_23,Twoing,2,2,2
+KDD98 Multiclass 3,RFA_24,GW Chi Square,3,3,0
 KDD98 Multiclass 3,RFA_24,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_24,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_24,LS Squared Gini,2,2,1
-KDD98 Multiclass 3,RFA_24,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_2A,GW Chi Square,4,4,4
+KDD98 Multiclass 3,RFA_24,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_24,LS Squared Gini,2,2,0
+KDD98 Multiclass 3,RFA_24,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_2A,GW Chi Square,0,0,0
 KDD98 Multiclass 3,RFA_2A,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_2A,LS Chi Square,2,2,2
-KDD98 Multiclass 3,RFA_2A,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RFA_2A,Twoing,3,3,3
-KDD98 Multiclass 3,RFA_3,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_2A,LS Chi Square,0,0,0
+KDD98 Multiclass 3,RFA_2A,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_2A,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_3,GW Chi Square,3,3,0
 KDD98 Multiclass 3,RFA_3,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_3,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_3,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RFA_3,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_4,GW Chi Square,3,3,4
+KDD98 Multiclass 3,RFA_3,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_3,LS Squared Gini,1,1,0
+KDD98 Multiclass 3,RFA_3,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_4,GW Chi Square,3,3,0
 KDD98 Multiclass 3,RFA_4,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,RFA_4,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_4,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RFA_4,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_5,GW Chi Square,2,2,4
+KDD98 Multiclass 3,RFA_4,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_4,LS Squared Gini,1,1,0
+KDD98 Multiclass 3,RFA_4,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_5,GW Chi Square,2,2,0
 KDD98 Multiclass 3,RFA_5,GW Squared Gini,1,1,0
-KDD98 Multiclass 3,RFA_5,LS Chi Square,3,3,2
-KDD98 Multiclass 3,RFA_5,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,RFA_5,Twoing,2,2,3
-KDD98 Multiclass 3,RFA_6,GW Chi Square,1,1,4
+KDD98 Multiclass 3,RFA_5,LS Chi Square,3,3,0
+KDD98 Multiclass 3,RFA_5,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,RFA_5,Twoing,2,2,0
+KDD98 Multiclass 3,RFA_6,GW Chi Square,1,1,0
 KDD98 Multiclass 3,RFA_6,GW Squared Gini,1,1,0
-KDD98 Multiclass 3,RFA_6,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_6,LS Squared Gini,1,1,1
-KDD98 Multiclass 3,RFA_6,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_7,GW Chi Square,1,1,4
+KDD98 Multiclass 3,RFA_6,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_6,LS Squared Gini,1,1,0
+KDD98 Multiclass 3,RFA_6,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_7,GW Chi Square,1,1,0
 KDD98 Multiclass 3,RFA_7,GW Squared Gini,1,1,0
-KDD98 Multiclass 3,RFA_7,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_7,LS Squared Gini,2,2,1
-KDD98 Multiclass 3,RFA_7,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_8,GW Chi Square,1,1,4
+KDD98 Multiclass 3,RFA_7,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_7,LS Squared Gini,2,2,0
+KDD98 Multiclass 3,RFA_7,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_8,GW Chi Square,1,1,0
 KDD98 Multiclass 3,RFA_8,GW Squared Gini,1,1,0
-KDD98 Multiclass 3,RFA_8,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_8,LS Squared Gini,2,2,1
-KDD98 Multiclass 3,RFA_8,Twoing,0,0,3
-KDD98 Multiclass 3,RFA_9,GW Chi Square,1,1,4
+KDD98 Multiclass 3,RFA_8,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_8,LS Squared Gini,2,2,0
+KDD98 Multiclass 3,RFA_8,Twoing,0,0,0
+KDD98 Multiclass 3,RFA_9,GW Chi Square,1,1,0
 KDD98 Multiclass 3,RFA_9,GW Squared Gini,3,3,0
-KDD98 Multiclass 3,RFA_9,LS Chi Square,1,1,2
-KDD98 Multiclass 3,RFA_9,LS Squared Gini,2,2,1
-KDD98 Multiclass 3,RFA_9,Twoing,0,0,3
-KDD98 Multiclass 3,STATE,GW Chi Square,0,0,4
+KDD98 Multiclass 3,RFA_9,LS Chi Square,1,1,0
+KDD98 Multiclass 3,RFA_9,LS Squared Gini,2,2,0
+KDD98 Multiclass 3,RFA_9,Twoing,0,0,0
+KDD98 Multiclass 3,STATE,GW Chi Square,0,0,0
 KDD98 Multiclass 3,STATE,GW Squared Gini,0,0,0
-KDD98 Multiclass 3,STATE,LS Chi Square,0,0,2
-KDD98 Multiclass 3,STATE,LS Squared Gini,0,0,1
-KDD98 Multiclass 3,STATE,Twoing,0,0,3
+KDD98 Multiclass 3,STATE,LS Chi Square,0,0,3
+KDD98 Multiclass 3,STATE,LS Squared Gini,0,0,3
+KDD98 Multiclass 3,STATE,Twoing,0,0,0
 KDD98 Multiclass 3,STEREO,GW Chi Square,0,0,0
-KDD98 Multiclass 3,STEREO,GW Squared Gini,0,0,4
-KDD98 Multiclass 3,STEREO,LS Chi Square,0,0,2
-KDD98 Multiclass 3,STEREO,LS Squared Gini,0,0,3
-KDD98 Multiclass 3,STEREO,Twoing,0,0,1
+KDD98 Multiclass 3,STEREO,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,STEREO,LS Chi Square,0,0,0
+KDD98 Multiclass 3,STEREO,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,STEREO,Twoing,0,0,0
 KDD98 Multiclass 3,WALKER,GW Chi Square,0,0,0
-KDD98 Multiclass 3,WALKER,GW Squared Gini,0,0,4
-KDD98 Multiclass 3,WALKER,LS Chi Square,0,0,2
-KDD98 Multiclass 3,WALKER,LS Squared Gini,0,0,3
-KDD98 Multiclass 3,WALKER,Twoing,0,0,1
-KDD98 Multiclass 5,AGEFLAG,GW Chi Square,0,0,4
+KDD98 Multiclass 3,WALKER,GW Squared Gini,0,0,0
+KDD98 Multiclass 3,WALKER,LS Chi Square,0,0,0
+KDD98 Multiclass 3,WALKER,LS Squared Gini,0,0,0
+KDD98 Multiclass 3,WALKER,Twoing,0,0,0
+KDD98 Multiclass 5,AGEFLAG,GW Chi Square,0,0,0
 KDD98 Multiclass 5,AGEFLAG,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,AGEFLAG,LS Chi Square,0,0,2
-KDD98 Multiclass 5,AGEFLAG,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,AGEFLAG,Twoing,0,0,3
-KDD98 Multiclass 5,BIBLE,GW Chi Square,4,4,4
+KDD98 Multiclass 5,AGEFLAG,LS Chi Square,0,0,0
+KDD98 Multiclass 5,AGEFLAG,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,AGEFLAG,Twoing,0,0,0
+KDD98 Multiclass 5,BIBLE,GW Chi Square,0,0,0
 KDD98 Multiclass 5,BIBLE,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,BIBLE,LS Chi Square,2,2,2
-KDD98 Multiclass 5,BIBLE,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,BIBLE,Twoing,3,3,3
-KDD98 Multiclass 5,CATLG,GW Chi Square,4,4,4
+KDD98 Multiclass 5,BIBLE,LS Chi Square,0,0,0
+KDD98 Multiclass 5,BIBLE,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,BIBLE,Twoing,0,0,0
+KDD98 Multiclass 5,CATLG,GW Chi Square,0,0,0
 KDD98 Multiclass 5,CATLG,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,CATLG,LS Chi Square,2,2,2
-KDD98 Multiclass 5,CATLG,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,CATLG,Twoing,3,3,3
-KDD98 Multiclass 5,CDPLAY,GW Chi Square,4,4,4
+KDD98 Multiclass 5,CATLG,LS Chi Square,0,0,0
+KDD98 Multiclass 5,CATLG,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,CATLG,Twoing,0,0,0
+KDD98 Multiclass 5,CDPLAY,GW Chi Square,0,0,0
 KDD98 Multiclass 5,CDPLAY,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,CDPLAY,LS Chi Square,2,2,2
-KDD98 Multiclass 5,CDPLAY,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,CDPLAY,Twoing,3,3,3
+KDD98 Multiclass 5,CDPLAY,LS Chi Square,0,0,0
+KDD98 Multiclass 5,CDPLAY,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,CDPLAY,Twoing,0,0,0
 KDD98 Multiclass 5,COLLECT1,GW Chi Square,0,0,0
-KDD98 Multiclass 5,COLLECT1,GW Squared Gini,0,0,4
-KDD98 Multiclass 5,COLLECT1,LS Chi Square,0,0,2
-KDD98 Multiclass 5,COLLECT1,LS Squared Gini,0,0,3
-KDD98 Multiclass 5,COLLECT1,Twoing,0,0,1
-KDD98 Multiclass 5,CRAFTS,GW Chi Square,4,4,4
+KDD98 Multiclass 5,COLLECT1,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,COLLECT1,LS Chi Square,0,0,0
+KDD98 Multiclass 5,COLLECT1,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,COLLECT1,Twoing,0,0,0
+KDD98 Multiclass 5,CRAFTS,GW Chi Square,0,0,0
 KDD98 Multiclass 5,CRAFTS,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,CRAFTS,LS Chi Square,2,2,2
-KDD98 Multiclass 5,CRAFTS,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,CRAFTS,Twoing,3,3,3
-KDD98 Multiclass 5,DOMAIN,GW Chi Square,1,1,4
+KDD98 Multiclass 5,CRAFTS,LS Chi Square,0,0,0
+KDD98 Multiclass 5,CRAFTS,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,CRAFTS,Twoing,0,0,0
+KDD98 Multiclass 5,DOMAIN,GW Chi Square,1,1,0
 KDD98 Multiclass 5,DOMAIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,DOMAIN,LS Chi Square,2,2,2
-KDD98 Multiclass 5,DOMAIN,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,DOMAIN,Twoing,1,1,3
-KDD98 Multiclass 5,FISHER,GW Chi Square,4,4,4
+KDD98 Multiclass 5,DOMAIN,LS Chi Square,2,2,0
+KDD98 Multiclass 5,DOMAIN,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,DOMAIN,Twoing,1,1,0
+KDD98 Multiclass 5,FISHER,GW Chi Square,0,0,0
 KDD98 Multiclass 5,FISHER,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,FISHER,LS Chi Square,2,2,2
-KDD98 Multiclass 5,FISHER,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,FISHER,Twoing,3,3,3
-KDD98 Multiclass 5,GARDENIN,GW Chi Square,4,4,4
+KDD98 Multiclass 5,FISHER,LS Chi Square,0,0,0
+KDD98 Multiclass 5,FISHER,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,FISHER,Twoing,0,0,0
+KDD98 Multiclass 5,GARDENIN,GW Chi Square,0,0,0
 KDD98 Multiclass 5,GARDENIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,GARDENIN,LS Chi Square,2,2,2
-KDD98 Multiclass 5,GARDENIN,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,GARDENIN,Twoing,3,3,3
+KDD98 Multiclass 5,GARDENIN,LS Chi Square,0,0,0
+KDD98 Multiclass 5,GARDENIN,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,GARDENIN,Twoing,0,0,0
 KDD98 Multiclass 5,GENDER,GW Chi Square,0,0,0
-KDD98 Multiclass 5,GENDER,GW Squared Gini,0,0,4
-KDD98 Multiclass 5,GENDER,LS Chi Square,0,0,2
-KDD98 Multiclass 5,GENDER,LS Squared Gini,0,0,3
-KDD98 Multiclass 5,GENDER,Twoing,0,0,1
-KDD98 Multiclass 5,GEOCODE2,GW Chi Square,2,2,4
-KDD98 Multiclass 5,GEOCODE2,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,GEOCODE2,LS Chi Square,1,1,2
-KDD98 Multiclass 5,GEOCODE2,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,GEOCODE2,Twoing,2,2,3
-KDD98 Multiclass 5,HOMEOWNR,GW Chi Square,4,4,4
+KDD98 Multiclass 5,GENDER,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,GENDER,LS Chi Square,0,0,0
+KDD98 Multiclass 5,GENDER,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,GENDER,Twoing,0,0,0
+KDD98 Multiclass 5,GEOCODE2,GW Chi Square,2,2,1
+KDD98 Multiclass 5,GEOCODE2,GW Squared Gini,0,0,1
+KDD98 Multiclass 5,GEOCODE2,LS Chi Square,1,1,1
+KDD98 Multiclass 5,GEOCODE2,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,GEOCODE2,Twoing,2,2,1
+KDD98 Multiclass 5,HOMEOWNR,GW Chi Square,0,0,0
 KDD98 Multiclass 5,HOMEOWNR,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,HOMEOWNR,LS Chi Square,2,2,2
-KDD98 Multiclass 5,HOMEOWNR,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,HOMEOWNR,Twoing,3,3,3
-KDD98 Multiclass 5,OSOURCE,GW Chi Square,1,1,4
+KDD98 Multiclass 5,HOMEOWNR,LS Chi Square,0,0,0
+KDD98 Multiclass 5,HOMEOWNR,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,HOMEOWNR,Twoing,0,0,0
+KDD98 Multiclass 5,OSOURCE,GW Chi Square,1,1,0
 KDD98 Multiclass 5,OSOURCE,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,OSOURCE,LS Chi Square,0,0,2
-KDD98 Multiclass 5,OSOURCE,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,OSOURCE,Twoing,3,3,3
-KDD98 Multiclass 5,PCOWNERS,GW Chi Square,4,4,4
+KDD98 Multiclass 5,OSOURCE,LS Chi Square,0,0,0
+KDD98 Multiclass 5,OSOURCE,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,OSOURCE,Twoing,3,3,0
+KDD98 Multiclass 5,PCOWNERS,GW Chi Square,0,0,0
 KDD98 Multiclass 5,PCOWNERS,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,PCOWNERS,LS Chi Square,2,2,2
-KDD98 Multiclass 5,PCOWNERS,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,PCOWNERS,Twoing,3,3,3
-KDD98 Multiclass 5,PEPSTRFL,GW Chi Square,4,4,4
+KDD98 Multiclass 5,PCOWNERS,LS Chi Square,0,0,0
+KDD98 Multiclass 5,PCOWNERS,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,PCOWNERS,Twoing,0,0,0
+KDD98 Multiclass 5,PEPSTRFL,GW Chi Square,0,0,0
 KDD98 Multiclass 5,PEPSTRFL,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,PEPSTRFL,LS Chi Square,2,2,2
-KDD98 Multiclass 5,PEPSTRFL,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,PEPSTRFL,Twoing,3,3,3
-KDD98 Multiclass 5,PETS,GW Chi Square,4,4,4
+KDD98 Multiclass 5,PEPSTRFL,LS Chi Square,0,0,0
+KDD98 Multiclass 5,PEPSTRFL,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,PEPSTRFL,Twoing,0,0,0
+KDD98 Multiclass 5,PETS,GW Chi Square,0,0,0
 KDD98 Multiclass 5,PETS,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,PETS,LS Chi Square,2,2,2
-KDD98 Multiclass 5,PETS,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,PETS,Twoing,3,3,3
-KDD98 Multiclass 5,RECINHSE,GW Chi Square,4,4,4
+KDD98 Multiclass 5,PETS,LS Chi Square,0,0,0
+KDD98 Multiclass 5,PETS,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,PETS,Twoing,0,0,0
+KDD98 Multiclass 5,RECINHSE,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RECINHSE,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RECINHSE,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RECINHSE,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RECINHSE,Twoing,3,3,3
-KDD98 Multiclass 5,RFA_10,GW Chi Square,1,1,4
+KDD98 Multiclass 5,RECINHSE,LS Chi Square,0,0,0
+KDD98 Multiclass 5,RECINHSE,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RECINHSE,Twoing,0,0,0
+KDD98 Multiclass 5,RFA_10,GW Chi Square,1,1,0
 KDD98 Multiclass 5,RFA_10,GW Squared Gini,1,1,0
-KDD98 Multiclass 5,RFA_10,LS Chi Square,4,4,2
-KDD98 Multiclass 5,RFA_10,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_10,Twoing,1,1,3
-KDD98 Multiclass 5,RFA_11,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_10,LS Chi Square,4,4,0
+KDD98 Multiclass 5,RFA_10,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_10,Twoing,1,1,0
+KDD98 Multiclass 5,RFA_11,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RFA_11,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_11,LS Chi Square,1,1,2
-KDD98 Multiclass 5,RFA_11,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_11,Twoing,1,1,3
-KDD98 Multiclass 5,RFA_12,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_11,LS Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_11,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_11,Twoing,1,1,0
+KDD98 Multiclass 5,RFA_12,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RFA_12,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_12,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_12,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_12,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_13,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_12,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_12,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_12,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_13,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_13,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_13,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_13,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_13,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_14,GW Chi Square,1,1,4
+KDD98 Multiclass 5,RFA_13,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_13,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_13,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_14,GW Chi Square,1,1,0
 KDD98 Multiclass 5,RFA_14,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_14,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_14,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_14,Twoing,1,1,3
-KDD98 Multiclass 5,RFA_15,GW Chi Square,3,3,4
+KDD98 Multiclass 5,RFA_14,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_14,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_14,Twoing,1,1,0
+KDD98 Multiclass 5,RFA_15,GW Chi Square,3,3,2
 KDD98 Multiclass 5,RFA_15,GW Squared Gini,0,0,0
 KDD98 Multiclass 5,RFA_15,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_15,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_15,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_16,GW Chi Square,3,3,4
+KDD98 Multiclass 5,RFA_15,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_15,Twoing,2,2,2
+KDD98 Multiclass 5,RFA_16,GW Chi Square,3,3,0
 KDD98 Multiclass 5,RFA_16,GW Squared Gini,1,1,0
-KDD98 Multiclass 5,RFA_16,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_16,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_16,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_17,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_16,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_16,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_16,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_17,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_17,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_17,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_17,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_17,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_18,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_17,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_17,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_17,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_18,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_18,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_18,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_18,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_18,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_19,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_18,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_18,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_18,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_19,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_19,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_19,LS Chi Square,4,4,2
-KDD98 Multiclass 5,RFA_19,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_19,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_2,GW Chi Square,3,3,4
+KDD98 Multiclass 5,RFA_19,LS Chi Square,4,4,0
+KDD98 Multiclass 5,RFA_19,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_19,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_2,GW Chi Square,1,1,0
 KDD98 Multiclass 5,RFA_2,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_2,LS Chi Square,1,1,2
-KDD98 Multiclass 5,RFA_2,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_2,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_20,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_2,LS Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_2,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_2,Twoing,1,1,0
+KDD98 Multiclass 5,RFA_20,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_20,GW Squared Gini,1,1,0
-KDD98 Multiclass 5,RFA_20,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_20,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_20,Twoing,4,4,3
-KDD98 Multiclass 5,RFA_21,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_20,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_20,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_20,Twoing,4,4,0
+KDD98 Multiclass 5,RFA_21,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_21,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_21,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_21,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_21,Twoing,4,4,3
-KDD98 Multiclass 5,RFA_22,GW Chi Square,1,1,4
+KDD98 Multiclass 5,RFA_21,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_21,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_21,Twoing,4,4,0
+KDD98 Multiclass 5,RFA_22,GW Chi Square,1,1,0
 KDD98 Multiclass 5,RFA_22,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_22,LS Chi Square,4,4,2
-KDD98 Multiclass 5,RFA_22,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_22,Twoing,3,3,3
-KDD98 Multiclass 5,RFA_23,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_22,LS Chi Square,4,4,0
+KDD98 Multiclass 5,RFA_22,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_22,Twoing,3,3,0
+KDD98 Multiclass 5,RFA_23,GW Chi Square,2,2,2
 KDD98 Multiclass 5,RFA_23,GW Squared Gini,0,0,0
 KDD98 Multiclass 5,RFA_23,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_23,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_23,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_24,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_23,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_23,Twoing,2,2,2
+KDD98 Multiclass 5,RFA_24,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_24,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_24,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_24,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_24,Twoing,3,3,3
-KDD98 Multiclass 5,RFA_2A,GW Chi Square,1,1,4
+KDD98 Multiclass 5,RFA_24,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_24,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_24,Twoing,3,3,0
+KDD98 Multiclass 5,RFA_2A,GW Chi Square,1,1,0
 KDD98 Multiclass 5,RFA_2A,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_2A,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_2A,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_2A,Twoing,3,3,3
-KDD98 Multiclass 5,RFA_3,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_2A,LS Chi Square,1,1,0
+KDD98 Multiclass 5,RFA_2A,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_2A,Twoing,1,1,0
+KDD98 Multiclass 5,RFA_3,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_3,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_3,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_3,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_3,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_4,GW Chi Square,2,2,4
+KDD98 Multiclass 5,RFA_3,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_3,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_3,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_4,GW Chi Square,2,2,0
 KDD98 Multiclass 5,RFA_4,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_4,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_4,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_4,Twoing,2,2,3
-KDD98 Multiclass 5,RFA_5,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_4,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_4,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_4,Twoing,2,2,0
+KDD98 Multiclass 5,RFA_5,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RFA_5,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_5,LS Chi Square,3,3,2
-KDD98 Multiclass 5,RFA_5,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_5,Twoing,3,3,3
-KDD98 Multiclass 5,RFA_6,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_5,LS Chi Square,3,3,0
+KDD98 Multiclass 5,RFA_5,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_5,Twoing,3,3,0
+KDD98 Multiclass 5,RFA_6,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RFA_6,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_6,LS Chi Square,0,0,2
-KDD98 Multiclass 5,RFA_6,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,RFA_6,Twoing,1,1,3
-KDD98 Multiclass 5,RFA_7,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_6,LS Chi Square,0,0,0
+KDD98 Multiclass 5,RFA_6,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,RFA_6,Twoing,1,1,0
+KDD98 Multiclass 5,RFA_7,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RFA_7,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_7,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_7,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_7,Twoing,0,0,3
-KDD98 Multiclass 5,RFA_8,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_7,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_7,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_7,Twoing,0,0,0
+KDD98 Multiclass 5,RFA_8,GW Chi Square,0,0,0
 KDD98 Multiclass 5,RFA_8,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_8,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_8,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_8,Twoing,3,3,3
-KDD98 Multiclass 5,RFA_9,GW Chi Square,1,1,4
+KDD98 Multiclass 5,RFA_8,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_8,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_8,Twoing,3,3,0
+KDD98 Multiclass 5,RFA_9,GW Chi Square,1,1,0
 KDD98 Multiclass 5,RFA_9,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,RFA_9,LS Chi Square,2,2,2
-KDD98 Multiclass 5,RFA_9,LS Squared Gini,0,0,1
-KDD98 Multiclass 5,RFA_9,Twoing,0,0,3
-KDD98 Multiclass 5,STATE,GW Chi Square,0,0,4
+KDD98 Multiclass 5,RFA_9,LS Chi Square,2,2,0
+KDD98 Multiclass 5,RFA_9,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,RFA_9,Twoing,0,0,0
+KDD98 Multiclass 5,STATE,GW Chi Square,0,0,0
 KDD98 Multiclass 5,STATE,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,STATE,LS Chi Square,0,0,2
-KDD98 Multiclass 5,STATE,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,STATE,Twoing,1,1,3
-KDD98 Multiclass 5,STEREO,GW Chi Square,4,4,4
+KDD98 Multiclass 5,STATE,LS Chi Square,0,0,0
+KDD98 Multiclass 5,STATE,LS Squared Gini,1,1,0
+KDD98 Multiclass 5,STATE,Twoing,1,1,0
+KDD98 Multiclass 5,STEREO,GW Chi Square,0,0,0
 KDD98 Multiclass 5,STEREO,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,STEREO,LS Chi Square,2,2,2
-KDD98 Multiclass 5,STEREO,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,STEREO,Twoing,3,3,3
+KDD98 Multiclass 5,STEREO,LS Chi Square,0,0,0
+KDD98 Multiclass 5,STEREO,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,STEREO,Twoing,0,0,0
 KDD98 Multiclass 5,VETERANS,GW Chi Square,0,0,0
-KDD98 Multiclass 5,VETERANS,GW Squared Gini,0,0,4
-KDD98 Multiclass 5,VETERANS,LS Chi Square,0,0,2
-KDD98 Multiclass 5,VETERANS,LS Squared Gini,0,0,3
-KDD98 Multiclass 5,VETERANS,Twoing,0,0,1
-KDD98 Multiclass 5,WALKER,GW Chi Square,4,4,4
+KDD98 Multiclass 5,VETERANS,GW Squared Gini,0,0,0
+KDD98 Multiclass 5,VETERANS,LS Chi Square,0,0,0
+KDD98 Multiclass 5,VETERANS,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,VETERANS,Twoing,0,0,0
+KDD98 Multiclass 5,WALKER,GW Chi Square,0,0,0
 KDD98 Multiclass 5,WALKER,GW Squared Gini,0,0,0
-KDD98 Multiclass 5,WALKER,LS Chi Square,2,2,2
-KDD98 Multiclass 5,WALKER,LS Squared Gini,1,1,1
-KDD98 Multiclass 5,WALKER,Twoing,3,3,3
-KDD98 Multiclass 9,AGEFLAG,GW Chi Square,0,0,4
+KDD98 Multiclass 5,WALKER,LS Chi Square,0,0,0
+KDD98 Multiclass 5,WALKER,LS Squared Gini,0,0,0
+KDD98 Multiclass 5,WALKER,Twoing,0,0,0
+KDD98 Multiclass 9,AGEFLAG,GW Chi Square,0,0,0
 KDD98 Multiclass 9,AGEFLAG,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,AGEFLAG,LS Chi Square,0,0,2
-KDD98 Multiclass 9,AGEFLAG,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,AGEFLAG,Twoing,0,0,3
-KDD98 Multiclass 9,BIBLE,GW Chi Square,4,4,4
+KDD98 Multiclass 9,AGEFLAG,LS Chi Square,0,0,0
+KDD98 Multiclass 9,AGEFLAG,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,AGEFLAG,Twoing,0,0,0
+KDD98 Multiclass 9,BIBLE,GW Chi Square,0,0,0
 KDD98 Multiclass 9,BIBLE,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,BIBLE,LS Chi Square,2,2,2
-KDD98 Multiclass 9,BIBLE,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,BIBLE,Twoing,3,3,3
-KDD98 Multiclass 9,CATLG,GW Chi Square,4,4,4
+KDD98 Multiclass 9,BIBLE,LS Chi Square,0,0,0
+KDD98 Multiclass 9,BIBLE,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,BIBLE,Twoing,0,0,0
+KDD98 Multiclass 9,CATLG,GW Chi Square,0,0,0
 KDD98 Multiclass 9,CATLG,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,CATLG,LS Chi Square,2,2,2
-KDD98 Multiclass 9,CATLG,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,CATLG,Twoing,3,3,3
-KDD98 Multiclass 9,CDPLAY,GW Chi Square,4,4,4
+KDD98 Multiclass 9,CATLG,LS Chi Square,0,0,0
+KDD98 Multiclass 9,CATLG,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,CATLG,Twoing,0,0,0
+KDD98 Multiclass 9,CDPLAY,GW Chi Square,0,0,0
 KDD98 Multiclass 9,CDPLAY,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,CDPLAY,LS Chi Square,2,2,2
-KDD98 Multiclass 9,CDPLAY,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,CDPLAY,Twoing,3,3,3
-KDD98 Multiclass 9,COLLECT1,GW Chi Square,4,4,4
+KDD98 Multiclass 9,CDPLAY,LS Chi Square,0,0,0
+KDD98 Multiclass 9,CDPLAY,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,CDPLAY,Twoing,0,0,0
+KDD98 Multiclass 9,COLLECT1,GW Chi Square,0,0,0
 KDD98 Multiclass 9,COLLECT1,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,COLLECT1,LS Chi Square,2,2,2
-KDD98 Multiclass 9,COLLECT1,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,COLLECT1,Twoing,3,3,3
-KDD98 Multiclass 9,CRAFTS,GW Chi Square,4,4,4
+KDD98 Multiclass 9,COLLECT1,LS Chi Square,0,0,0
+KDD98 Multiclass 9,COLLECT1,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,COLLECT1,Twoing,0,0,0
+KDD98 Multiclass 9,CRAFTS,GW Chi Square,0,0,0
 KDD98 Multiclass 9,CRAFTS,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,CRAFTS,LS Chi Square,2,2,2
-KDD98 Multiclass 9,CRAFTS,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,CRAFTS,Twoing,3,3,3
-KDD98 Multiclass 9,DOMAIN,GW Chi Square,0,0,4
+KDD98 Multiclass 9,CRAFTS,LS Chi Square,0,0,0
+KDD98 Multiclass 9,CRAFTS,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,CRAFTS,Twoing,0,0,0
+KDD98 Multiclass 9,DOMAIN,GW Chi Square,0,0,0
 KDD98 Multiclass 9,DOMAIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,DOMAIN,LS Chi Square,1,1,2
-KDD98 Multiclass 9,DOMAIN,LS Squared Gini,2,2,1
-KDD98 Multiclass 9,DOMAIN,Twoing,0,0,3
-KDD98 Multiclass 9,FISHER,GW Chi Square,4,4,4
+KDD98 Multiclass 9,DOMAIN,LS Chi Square,1,1,0
+KDD98 Multiclass 9,DOMAIN,LS Squared Gini,2,2,0
+KDD98 Multiclass 9,DOMAIN,Twoing,0,0,0
+KDD98 Multiclass 9,FISHER,GW Chi Square,0,0,0
 KDD98 Multiclass 9,FISHER,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,FISHER,LS Chi Square,2,2,2
-KDD98 Multiclass 9,FISHER,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,FISHER,Twoing,3,3,3
-KDD98 Multiclass 9,GARDENIN,GW Chi Square,4,4,4
+KDD98 Multiclass 9,FISHER,LS Chi Square,0,0,0
+KDD98 Multiclass 9,FISHER,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,FISHER,Twoing,0,0,0
+KDD98 Multiclass 9,GARDENIN,GW Chi Square,0,0,0
 KDD98 Multiclass 9,GARDENIN,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,GARDENIN,LS Chi Square,2,2,2
-KDD98 Multiclass 9,GARDENIN,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,GARDENIN,Twoing,3,3,3
+KDD98 Multiclass 9,GARDENIN,LS Chi Square,0,0,0
+KDD98 Multiclass 9,GARDENIN,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,GARDENIN,Twoing,0,0,0
 KDD98 Multiclass 9,GENDER,GW Chi Square,0,0,0
-KDD98 Multiclass 9,GENDER,GW Squared Gini,0,0,4
-KDD98 Multiclass 9,GENDER,LS Chi Square,0,0,2
-KDD98 Multiclass 9,GENDER,LS Squared Gini,0,0,3
-KDD98 Multiclass 9,GENDER,Twoing,0,0,1
-KDD98 Multiclass 9,GEOCODE2,GW Chi Square,2,2,4
-KDD98 Multiclass 9,GEOCODE2,GW Squared Gini,1,1,0
+KDD98 Multiclass 9,GENDER,GW Squared Gini,0,0,0
+KDD98 Multiclass 9,GENDER,LS Chi Square,0,0,0
+KDD98 Multiclass 9,GENDER,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,GENDER,Twoing,0,0,0
+KDD98 Multiclass 9,GEOCODE2,GW Chi Square,2,2,2
+KDD98 Multiclass 9,GEOCODE2,GW Squared Gini,1,1,1
 KDD98 Multiclass 9,GEOCODE2,LS Chi Square,2,2,2
-KDD98 Multiclass 9,GEOCODE2,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,GEOCODE2,Twoing,2,2,3
-KDD98 Multiclass 9,OSOURCE,GW Chi Square,0,0,4
+KDD98 Multiclass 9,GEOCODE2,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,GEOCODE2,Twoing,2,2,2
+KDD98 Multiclass 9,OSOURCE,GW Chi Square,0,0,0
 KDD98 Multiclass 9,OSOURCE,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,OSOURCE,LS Chi Square,0,0,2
-KDD98 Multiclass 9,OSOURCE,LS Squared Gini,2,2,1
-KDD98 Multiclass 9,OSOURCE,Twoing,4,4,3
-KDD98 Multiclass 9,PCOWNERS,GW Chi Square,4,4,4
+KDD98 Multiclass 9,OSOURCE,LS Chi Square,0,0,0
+KDD98 Multiclass 9,OSOURCE,LS Squared Gini,2,2,0
+KDD98 Multiclass 9,OSOURCE,Twoing,4,4,0
+KDD98 Multiclass 9,PCOWNERS,GW Chi Square,0,0,0
 KDD98 Multiclass 9,PCOWNERS,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,PCOWNERS,LS Chi Square,2,2,2
-KDD98 Multiclass 9,PCOWNERS,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,PCOWNERS,Twoing,3,3,3
-KDD98 Multiclass 9,PEPSTRFL,GW Chi Square,4,4,4
+KDD98 Multiclass 9,PCOWNERS,LS Chi Square,0,0,0
+KDD98 Multiclass 9,PCOWNERS,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,PCOWNERS,Twoing,0,0,0
+KDD98 Multiclass 9,PEPSTRFL,GW Chi Square,0,0,0
 KDD98 Multiclass 9,PEPSTRFL,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,PEPSTRFL,LS Chi Square,2,2,2
-KDD98 Multiclass 9,PEPSTRFL,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,PEPSTRFL,Twoing,3,3,3
-KDD98 Multiclass 9,PETS,GW Chi Square,4,4,4
+KDD98 Multiclass 9,PEPSTRFL,LS Chi Square,0,0,0
+KDD98 Multiclass 9,PEPSTRFL,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,PEPSTRFL,Twoing,0,0,0
+KDD98 Multiclass 9,PETS,GW Chi Square,0,0,0
 KDD98 Multiclass 9,PETS,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,PETS,LS Chi Square,2,2,2
-KDD98 Multiclass 9,PETS,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,PETS,Twoing,3,3,3
-KDD98 Multiclass 9,RECINHSE,GW Chi Square,4,4,4
+KDD98 Multiclass 9,PETS,LS Chi Square,0,0,0
+KDD98 Multiclass 9,PETS,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,PETS,Twoing,0,0,0
+KDD98 Multiclass 9,RECINHSE,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RECINHSE,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RECINHSE,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RECINHSE,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,RECINHSE,Twoing,3,3,3
-KDD98 Multiclass 9,RECP3,GW Chi Square,4,4,4
+KDD98 Multiclass 9,RECINHSE,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RECINHSE,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RECINHSE,Twoing,0,0,0
+KDD98 Multiclass 9,RECP3,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RECP3,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RECP3,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RECP3,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,RECP3,Twoing,3,3,3
-KDD98 Multiclass 9,RFA_10,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RECP3,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RECP3,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RECP3,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_10,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_10,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_10,LS Chi Square,3,3,2
-KDD98 Multiclass 9,RFA_10,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_10,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_11,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_10,LS Chi Square,3,3,0
+KDD98 Multiclass 9,RFA_10,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_10,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_11,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_11,GW Squared Gini,3,3,0
-KDD98 Multiclass 9,RFA_11,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_11,LS Squared Gini,3,3,1
-KDD98 Multiclass 9,RFA_11,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_12,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_11,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_11,LS Squared Gini,3,3,0
+KDD98 Multiclass 9,RFA_11,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_12,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_12,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_12,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_12,LS Squared Gini,3,3,1
-KDD98 Multiclass 9,RFA_12,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_13,GW Chi Square,3,3,4
+KDD98 Multiclass 9,RFA_12,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_12,LS Squared Gini,3,3,0
+KDD98 Multiclass 9,RFA_12,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_13,GW Chi Square,3,3,0
 KDD98 Multiclass 9,RFA_13,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_13,LS Chi Square,3,3,2
-KDD98 Multiclass 9,RFA_13,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_13,Twoing,2,2,3
-KDD98 Multiclass 9,RFA_14,GW Chi Square,1,1,4
+KDD98 Multiclass 9,RFA_13,LS Chi Square,3,3,0
+KDD98 Multiclass 9,RFA_13,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_13,Twoing,2,2,0
+KDD98 Multiclass 9,RFA_14,GW Chi Square,1,1,0
 KDD98 Multiclass 9,RFA_14,GW Squared Gini,1,1,0
-KDD98 Multiclass 9,RFA_14,LS Chi Square,1,1,2
-KDD98 Multiclass 9,RFA_14,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_14,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_15,GW Chi Square,2,2,4
+KDD98 Multiclass 9,RFA_14,LS Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_14,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_14,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_15,GW Chi Square,2,2,2
 KDD98 Multiclass 9,RFA_15,GW Squared Gini,0,0,0
 KDD98 Multiclass 9,RFA_15,LS Chi Square,3,3,2
-KDD98 Multiclass 9,RFA_15,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_15,Twoing,2,2,3
-KDD98 Multiclass 9,RFA_16,GW Chi Square,1,1,4
+KDD98 Multiclass 9,RFA_15,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_15,Twoing,2,2,2
+KDD98 Multiclass 9,RFA_16,GW Chi Square,1,1,0
 KDD98 Multiclass 9,RFA_16,GW Squared Gini,1,1,0
-KDD98 Multiclass 9,RFA_16,LS Chi Square,1,1,2
-KDD98 Multiclass 9,RFA_16,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_16,Twoing,1,1,3
-KDD98 Multiclass 9,RFA_17,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_16,LS Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_16,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_16,Twoing,1,1,0
+KDD98 Multiclass 9,RFA_17,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_17,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_17,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_17,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_17,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_18,GW Chi Square,2,2,4
+KDD98 Multiclass 9,RFA_17,LS Chi Square,2,2,0
+KDD98 Multiclass 9,RFA_17,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_17,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_18,GW Chi Square,2,2,0
 KDD98 Multiclass 9,RFA_18,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_18,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_18,LS Squared Gini,2,2,1
-KDD98 Multiclass 9,RFA_18,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_19,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_18,LS Chi Square,2,2,0
+KDD98 Multiclass 9,RFA_18,LS Squared Gini,2,2,0
+KDD98 Multiclass 9,RFA_18,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_19,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_19,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_19,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_19,LS Squared Gini,4,4,1
-KDD98 Multiclass 9,RFA_19,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_2,GW Chi Square,2,2,4
+KDD98 Multiclass 9,RFA_19,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_19,LS Squared Gini,4,4,0
+KDD98 Multiclass 9,RFA_19,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_2,GW Chi Square,2,2,0
 KDD98 Multiclass 9,RFA_2,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_2,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_2,LS Squared Gini,3,3,1
-KDD98 Multiclass 9,RFA_2,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_20,GW Chi Square,2,2,4
+KDD98 Multiclass 9,RFA_2,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_2,LS Squared Gini,3,3,0
+KDD98 Multiclass 9,RFA_2,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_20,GW Chi Square,2,2,0
 KDD98 Multiclass 9,RFA_20,GW Squared Gini,1,1,0
-KDD98 Multiclass 9,RFA_20,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_20,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_20,Twoing,2,2,3
-KDD98 Multiclass 9,RFA_21,GW Chi Square,1,1,4
+KDD98 Multiclass 9,RFA_20,LS Chi Square,2,2,0
+KDD98 Multiclass 9,RFA_20,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_20,Twoing,2,2,0
+KDD98 Multiclass 9,RFA_21,GW Chi Square,1,1,0
 KDD98 Multiclass 9,RFA_21,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_21,LS Chi Square,1,1,2
-KDD98 Multiclass 9,RFA_21,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,RFA_21,Twoing,1,1,3
-KDD98 Multiclass 9,RFA_22,GW Chi Square,1,1,4
+KDD98 Multiclass 9,RFA_21,LS Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_21,LS Squared Gini,1,1,0
+KDD98 Multiclass 9,RFA_21,Twoing,1,1,0
+KDD98 Multiclass 9,RFA_22,GW Chi Square,1,1,0
 KDD98 Multiclass 9,RFA_22,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_22,LS Chi Square,1,1,2
-KDD98 Multiclass 9,RFA_22,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,RFA_22,Twoing,1,1,3
-KDD98 Multiclass 9,RFA_23,GW Chi Square,3,3,4
+KDD98 Multiclass 9,RFA_22,LS Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_22,LS Squared Gini,1,1,0
+KDD98 Multiclass 9,RFA_22,Twoing,1,1,0
+KDD98 Multiclass 9,RFA_23,GW Chi Square,3,3,0
 KDD98 Multiclass 9,RFA_23,GW Squared Gini,1,1,0
-KDD98 Multiclass 9,RFA_23,LS Chi Square,3,3,2
-KDD98 Multiclass 9,RFA_23,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_23,Twoing,2,2,3
-KDD98 Multiclass 9,RFA_24,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_23,LS Chi Square,3,3,0
+KDD98 Multiclass 9,RFA_23,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_23,Twoing,2,2,0
+KDD98 Multiclass 9,RFA_24,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_24,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_24,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_24,LS Squared Gini,2,2,1
-KDD98 Multiclass 9,RFA_24,Twoing,2,2,3
-KDD98 Multiclass 9,RFA_2A,GW Chi Square,4,4,4
+KDD98 Multiclass 9,RFA_24,LS Chi Square,2,2,0
+KDD98 Multiclass 9,RFA_24,LS Squared Gini,2,2,0
+KDD98 Multiclass 9,RFA_24,Twoing,2,2,0
+KDD98 Multiclass 9,RFA_2A,GW Chi Square,1,1,0
 KDD98 Multiclass 9,RFA_2A,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_2A,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_2A,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,RFA_2A,Twoing,3,3,3
-KDD98 Multiclass 9,RFA_3,GW Chi Square,2,2,4
+KDD98 Multiclass 9,RFA_2A,LS Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_2A,LS Squared Gini,1,1,0
+KDD98 Multiclass 9,RFA_2A,Twoing,1,1,0
+KDD98 Multiclass 9,RFA_3,GW Chi Square,2,2,0
 KDD98 Multiclass 9,RFA_3,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_3,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_3,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_3,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_4,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_3,LS Chi Square,2,2,0
+KDD98 Multiclass 9,RFA_3,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_3,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_4,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_4,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_4,LS Chi Square,1,1,2
-KDD98 Multiclass 9,RFA_4,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_4,Twoing,0,0,3
-KDD98 Multiclass 9,RFA_5,GW Chi Square,1,1,4
+KDD98 Multiclass 9,RFA_4,LS Chi Square,1,1,0
+KDD98 Multiclass 9,RFA_4,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_4,Twoing,0,0,0
+KDD98 Multiclass 9,RFA_5,GW Chi Square,1,1,0
 KDD98 Multiclass 9,RFA_5,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_5,LS Chi Square,2,2,2
-KDD98 Multiclass 9,RFA_5,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_5,Twoing,3,3,3
-KDD98 Multiclass 9,RFA_6,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_5,LS Chi Square,2,2,0
+KDD98 Multiclass 9,RFA_5,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_5,Twoing,3,3,0
+KDD98 Multiclass 9,RFA_6,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_6,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,RFA_6,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_6,LS Squared Gini,0,0,1
-KDD98 Multiclass 9,RFA_6,Twoing,3,3,3
-KDD98 Multiclass 9,RFA_7,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_6,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_6,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,RFA_6,Twoing,3,3,0
+KDD98 Multiclass 9,RFA_7,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_7,GW Squared Gini,1,1,0
-KDD98 Multiclass 9,RFA_7,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_7,LS Squared Gini,2,2,1
-KDD98 Multiclass 9,RFA_7,Twoing,3,3,3
-KDD98 Multiclass 9,RFA_8,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_7,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_7,LS Squared Gini,2,2,0
+KDD98 Multiclass 9,RFA_7,Twoing,3,3,0
+KDD98 Multiclass 9,RFA_8,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_8,GW Squared Gini,2,2,0
-KDD98 Multiclass 9,RFA_8,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_8,LS Squared Gini,3,3,1
-KDD98 Multiclass 9,RFA_8,Twoing,2,2,3
-KDD98 Multiclass 9,RFA_9,GW Chi Square,0,0,4
+KDD98 Multiclass 9,RFA_8,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_8,LS Squared Gini,3,3,0
+KDD98 Multiclass 9,RFA_8,Twoing,2,2,0
+KDD98 Multiclass 9,RFA_9,GW Chi Square,0,0,0
 KDD98 Multiclass 9,RFA_9,GW Squared Gini,3,3,0
-KDD98 Multiclass 9,RFA_9,LS Chi Square,0,0,2
-KDD98 Multiclass 9,RFA_9,LS Squared Gini,3,3,1
-KDD98 Multiclass 9,RFA_9,Twoing,2,2,3
+KDD98 Multiclass 9,RFA_9,LS Chi Square,0,0,0
+KDD98 Multiclass 9,RFA_9,LS Squared Gini,3,3,0
+KDD98 Multiclass 9,RFA_9,Twoing,2,2,0
 KDD98 Multiclass 9,STATE,GW Chi Square,0,0,0
-KDD98 Multiclass 9,STATE,GW Squared Gini,0,0,4
-KDD98 Multiclass 9,STATE,LS Chi Square,0,0,2
-KDD98 Multiclass 9,STATE,LS Squared Gini,0,0,3
-KDD98 Multiclass 9,STATE,Twoing,0,0,1
-KDD98 Multiclass 9,STEREO,GW Chi Square,4,4,4
+KDD98 Multiclass 9,STATE,GW Squared Gini,0,0,0
+KDD98 Multiclass 9,STATE,LS Chi Square,0,0,0
+KDD98 Multiclass 9,STATE,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,STATE,Twoing,0,0,0
+KDD98 Multiclass 9,STEREO,GW Chi Square,0,0,0
 KDD98 Multiclass 9,STEREO,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,STEREO,LS Chi Square,2,2,2
-KDD98 Multiclass 9,STEREO,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,STEREO,Twoing,3,3,3
-KDD98 Multiclass 9,VETERANS,GW Chi Square,4,4,4
+KDD98 Multiclass 9,STEREO,LS Chi Square,0,0,0
+KDD98 Multiclass 9,STEREO,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,STEREO,Twoing,0,0,0
+KDD98 Multiclass 9,VETERANS,GW Chi Square,0,0,0
 KDD98 Multiclass 9,VETERANS,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,VETERANS,LS Chi Square,2,2,2
-KDD98 Multiclass 9,VETERANS,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,VETERANS,Twoing,3,3,3
-KDD98 Multiclass 9,WALKER,GW Chi Square,4,4,4
+KDD98 Multiclass 9,VETERANS,LS Chi Square,0,0,0
+KDD98 Multiclass 9,VETERANS,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,VETERANS,Twoing,0,0,0
+KDD98 Multiclass 9,WALKER,GW Chi Square,0,0,0
 KDD98 Multiclass 9,WALKER,GW Squared Gini,0,0,0
-KDD98 Multiclass 9,WALKER,LS Chi Square,2,2,2
-KDD98 Multiclass 9,WALKER,LS Squared Gini,1,1,1
-KDD98 Multiclass 9,WALKER,Twoing,3,3,3
-Mushroom,bruises?,GW Chi Square,4,4,4
+KDD98 Multiclass 9,WALKER,LS Chi Square,0,0,0
+KDD98 Multiclass 9,WALKER,LS Squared Gini,0,0,0
+KDD98 Multiclass 9,WALKER,Twoing,0,0,0
+Mushroom,bruises?,GW Chi Square,0,0,0
 Mushroom,bruises?,GW Squared Gini,0,0,0
-Mushroom,bruises?,LS Chi Square,2,2,2
-Mushroom,bruises?,LS Squared Gini,1,1,1
-Mushroom,bruises?,Twoing,3,3,3
-Mushroom,cap-color,GW Chi Square,1,1,4
+Mushroom,bruises?,LS Chi Square,0,0,0
+Mushroom,bruises?,LS Squared Gini,0,0,0
+Mushroom,bruises?,Twoing,0,0,0
+Mushroom,cap-color,GW Chi Square,1,1,0
 Mushroom,cap-color,GW Squared Gini,3,3,0
-Mushroom,cap-color,LS Chi Square,1,1,2
-Mushroom,cap-color,LS Squared Gini,4,4,1
-Mushroom,cap-color,Twoing,0,0,3
-Mushroom,cap-shape,GW Chi Square,4,4,4
+Mushroom,cap-color,LS Chi Square,1,1,0
+Mushroom,cap-color,LS Squared Gini,4,4,0
+Mushroom,cap-color,Twoing,0,0,0
+Mushroom,cap-shape,GW Chi Square,0,0,0
 Mushroom,cap-shape,GW Squared Gini,0,0,0
-Mushroom,cap-shape,LS Chi Square,2,2,2
-Mushroom,cap-shape,LS Squared Gini,1,1,1
-Mushroom,cap-shape,Twoing,3,3,3
-Mushroom,cap-surface,GW Chi Square,4,4,4
+Mushroom,cap-shape,LS Chi Square,0,0,0
+Mushroom,cap-shape,LS Squared Gini,0,0,0
+Mushroom,cap-shape,Twoing,0,0,0
+Mushroom,cap-surface,GW Chi Square,0,0,0
 Mushroom,cap-surface,GW Squared Gini,0,0,0
-Mushroom,cap-surface,LS Chi Square,2,2,2
-Mushroom,cap-surface,LS Squared Gini,1,1,1
-Mushroom,cap-surface,Twoing,3,3,3
-Mushroom,gill-color,GW Chi Square,3,3,4
+Mushroom,cap-surface,LS Chi Square,0,0,0
+Mushroom,cap-surface,LS Squared Gini,0,0,0
+Mushroom,cap-surface,Twoing,0,0,0
+Mushroom,gill-color,GW Chi Square,0,0,0
 Mushroom,gill-color,GW Squared Gini,0,0,0
-Mushroom,gill-color,LS Chi Square,2,2,2
-Mushroom,gill-color,LS Squared Gini,1,1,1
-Mushroom,gill-color,Twoing,4,4,3
-Mushroom,gill-size,GW Chi Square,4,4,4
+Mushroom,gill-color,LS Chi Square,0,0,0
+Mushroom,gill-color,LS Squared Gini,0,0,0
+Mushroom,gill-color,Twoing,4,4,0
+Mushroom,gill-size,GW Chi Square,0,0,0
 Mushroom,gill-size,GW Squared Gini,0,0,0
-Mushroom,gill-size,LS Chi Square,2,2,2
-Mushroom,gill-size,LS Squared Gini,1,1,1
-Mushroom,gill-size,Twoing,3,3,3
-Mushroom,gill-spacing,GW Chi Square,4,4,4
+Mushroom,gill-size,LS Chi Square,0,0,0
+Mushroom,gill-size,LS Squared Gini,0,0,0
+Mushroom,gill-size,Twoing,0,0,0
+Mushroom,gill-spacing,GW Chi Square,0,0,0
 Mushroom,gill-spacing,GW Squared Gini,0,0,0
-Mushroom,gill-spacing,LS Chi Square,2,2,2
-Mushroom,gill-spacing,LS Squared Gini,1,1,1
-Mushroom,gill-spacing,Twoing,3,3,3
-Mushroom,habitat,GW Chi Square,2,2,4
+Mushroom,gill-spacing,LS Chi Square,0,0,0
+Mushroom,gill-spacing,LS Squared Gini,0,0,0
+Mushroom,gill-spacing,Twoing,0,0,0
+Mushroom,habitat,GW Chi Square,2,2,2
 Mushroom,habitat,GW Squared Gini,0,0,0
 Mushroom,habitat,LS Chi Square,2,2,2
-Mushroom,habitat,LS Squared Gini,1,1,1
-Mushroom,habitat,Twoing,3,3,3
-Mushroom,odor,GW Chi Square,4,4,4
+Mushroom,habitat,LS Squared Gini,0,0,0
+Mushroom,habitat,Twoing,2,2,2
+Mushroom,odor,GW Chi Square,0,0,0
 Mushroom,odor,GW Squared Gini,0,0,0
-Mushroom,odor,LS Chi Square,2,2,2
-Mushroom,odor,LS Squared Gini,1,1,1
-Mushroom,odor,Twoing,3,3,3
-Mushroom,population,GW Chi Square,1,1,4
-Mushroom,population,GW Squared Gini,1,1,0
-Mushroom,population,LS Chi Square,1,1,2
-Mushroom,population,LS Squared Gini,0,0,1
-Mushroom,population,Twoing,2,2,3
-Mushroom,ring-number,GW Chi Square,0,0,4
+Mushroom,odor,LS Chi Square,0,0,0
+Mushroom,odor,LS Squared Gini,0,0,0
+Mushroom,odor,Twoing,0,0,0
+Mushroom,population,GW Chi Square,1,1,0
+Mushroom,population,GW Squared Gini,1,1,2
+Mushroom,population,LS Chi Square,1,1,0
+Mushroom,population,LS Squared Gini,0,0,4
+Mushroom,population,Twoing,1,1,0
+Mushroom,ring-number,GW Chi Square,0,0,0
 Mushroom,ring-number,GW Squared Gini,3,3,0
-Mushroom,ring-number,LS Chi Square,0,0,2
-Mushroom,ring-number,LS Squared Gini,4,4,1
-Mushroom,ring-number,Twoing,1,1,3
-Mushroom,ring-type,GW Chi Square,4,4,4
+Mushroom,ring-number,LS Chi Square,0,0,0
+Mushroom,ring-number,LS Squared Gini,3,3,0
+Mushroom,ring-number,Twoing,0,0,0
+Mushroom,ring-type,GW Chi Square,0,0,0
 Mushroom,ring-type,GW Squared Gini,0,0,0
-Mushroom,ring-type,LS Chi Square,2,2,2
-Mushroom,ring-type,LS Squared Gini,1,1,1
-Mushroom,ring-type,Twoing,3,3,3
-Mushroom,spore-print-color,GW Chi Square,4,4,4
+Mushroom,ring-type,LS Chi Square,0,0,0
+Mushroom,ring-type,LS Squared Gini,0,0,0
+Mushroom,ring-type,Twoing,0,0,0
+Mushroom,spore-print-color,GW Chi Square,2,2,0
 Mushroom,spore-print-color,GW Squared Gini,0,0,0
-Mushroom,spore-print-color,LS Chi Square,2,2,2
-Mushroom,spore-print-color,LS Squared Gini,1,1,1
-Mushroom,spore-print-color,Twoing,3,3,3
-Mushroom,stalk-color-above-ring,GW Chi Square,4,4,4
+Mushroom,spore-print-color,LS Chi Square,2,2,0
+Mushroom,spore-print-color,LS Squared Gini,0,0,0
+Mushroom,spore-print-color,Twoing,2,2,0
+Mushroom,stalk-color-above-ring,GW Chi Square,2,2,0
 Mushroom,stalk-color-above-ring,GW Squared Gini,0,0,0
-Mushroom,stalk-color-above-ring,LS Chi Square,2,2,2
-Mushroom,stalk-color-above-ring,LS Squared Gini,1,1,1
-Mushroom,stalk-color-above-ring,Twoing,3,3,3
-Mushroom,stalk-color-below-ring,GW Chi Square,4,4,4
+Mushroom,stalk-color-above-ring,LS Chi Square,2,2,0
+Mushroom,stalk-color-above-ring,LS Squared Gini,0,0,0
+Mushroom,stalk-color-above-ring,Twoing,2,2,0
+Mushroom,stalk-color-below-ring,GW Chi Square,2,2,0
 Mushroom,stalk-color-below-ring,GW Squared Gini,0,0,0
-Mushroom,stalk-color-below-ring,LS Chi Square,2,2,2
-Mushroom,stalk-color-below-ring,LS Squared Gini,1,1,1
-Mushroom,stalk-color-below-ring,Twoing,3,3,3
-Mushroom,stalk-root,GW Chi Square,4,4,4
+Mushroom,stalk-color-below-ring,LS Chi Square,2,2,0
+Mushroom,stalk-color-below-ring,LS Squared Gini,0,0,0
+Mushroom,stalk-color-below-ring,Twoing,2,2,0
+Mushroom,stalk-root,GW Chi Square,0,0,0
 Mushroom,stalk-root,GW Squared Gini,0,0,0
-Mushroom,stalk-root,LS Chi Square,2,2,2
-Mushroom,stalk-root,LS Squared Gini,1,1,1
-Mushroom,stalk-root,Twoing,3,3,3
-Mushroom,stalk-shape,GW Chi Square,4,4,4
+Mushroom,stalk-root,LS Chi Square,0,0,0
+Mushroom,stalk-root,LS Squared Gini,0,0,0
+Mushroom,stalk-root,Twoing,0,0,0
+Mushroom,stalk-shape,GW Chi Square,0,0,0
 Mushroom,stalk-shape,GW Squared Gini,0,0,0
-Mushroom,stalk-shape,LS Chi Square,2,2,2
-Mushroom,stalk-shape,LS Squared Gini,1,1,1
-Mushroom,stalk-shape,Twoing,3,3,3
-Mushroom,stalk-surface-above-ring,GW Chi Square,4,4,4
+Mushroom,stalk-shape,LS Chi Square,0,0,0
+Mushroom,stalk-shape,LS Squared Gini,0,0,0
+Mushroom,stalk-shape,Twoing,0,0,0
+Mushroom,stalk-surface-above-ring,GW Chi Square,2,2,0
 Mushroom,stalk-surface-above-ring,GW Squared Gini,0,0,0
-Mushroom,stalk-surface-above-ring,LS Chi Square,2,2,2
-Mushroom,stalk-surface-above-ring,LS Squared Gini,0,0,1
-Mushroom,stalk-surface-above-ring,Twoing,3,3,3
-Mushroom,stalk-surface-below-ring,GW Chi Square,4,4,4
+Mushroom,stalk-surface-above-ring,LS Chi Square,2,2,0
+Mushroom,stalk-surface-above-ring,LS Squared Gini,0,0,0
+Mushroom,stalk-surface-above-ring,Twoing,2,2,0
+Mushroom,stalk-surface-below-ring,GW Chi Square,2,2,0
 Mushroom,stalk-surface-below-ring,GW Squared Gini,0,0,0
-Mushroom,stalk-surface-below-ring,LS Chi Square,2,2,2
-Mushroom,stalk-surface-below-ring,LS Squared Gini,1,1,1
-Mushroom,stalk-surface-below-ring,Twoing,3,3,3
-Nursery with Aggreg,NewAttrib1,GW Chi Square,0,0,4
+Mushroom,stalk-surface-below-ring,LS Chi Square,2,2,0
+Mushroom,stalk-surface-below-ring,LS Squared Gini,0,0,0
+Mushroom,stalk-surface-below-ring,Twoing,2,2,0
+Nursery with Aggreg,NewAttrib1,GW Chi Square,0,0,0
 Nursery with Aggreg,NewAttrib1,GW Squared Gini,2,2,0
-Nursery with Aggreg,NewAttrib1,LS Chi Square,0,0,2
-Nursery with Aggreg,NewAttrib1,LS Squared Gini,3,3,1
-Nursery with Aggreg,NewAttrib1,Twoing,3,3,3
-Nursery with Aggreg,NewAttrib2,GW Chi Square,3,3,4
+Nursery with Aggreg,NewAttrib1,LS Chi Square,0,0,0
+Nursery with Aggreg,NewAttrib1,LS Squared Gini,3,3,0
+Nursery with Aggreg,NewAttrib1,Twoing,3,3,0
+Nursery with Aggreg,NewAttrib2,GW Chi Square,3,3,0
 Nursery with Aggreg,NewAttrib2,GW Squared Gini,0,0,0
-Nursery with Aggreg,NewAttrib2,LS Chi Square,3,3,2
-Nursery with Aggreg,NewAttrib2,LS Squared Gini,0,0,1
-Nursery with Aggreg,NewAttrib2,Twoing,2,2,3
-Nursery with Aggreg,NewAttrib3,GW Chi Square,4,4,4
+Nursery with Aggreg,NewAttrib2,LS Chi Square,3,3,0
+Nursery with Aggreg,NewAttrib2,LS Squared Gini,0,0,0
+Nursery with Aggreg,NewAttrib2,Twoing,2,2,0
+Nursery with Aggreg,NewAttrib3,GW Chi Square,1,1,0
 Nursery with Aggreg,NewAttrib3,GW Squared Gini,0,0,0
-Nursery with Aggreg,NewAttrib3,LS Chi Square,2,2,2
-Nursery with Aggreg,NewAttrib3,LS Squared Gini,1,1,1
-Nursery with Aggreg,NewAttrib3,Twoing,3,3,3
-Nursery with Aggreg,finance,GW Chi Square,1,1,4
+Nursery with Aggreg,NewAttrib3,LS Chi Square,1,1,0
+Nursery with Aggreg,NewAttrib3,LS Squared Gini,1,1,0
+Nursery with Aggreg,NewAttrib3,Twoing,1,1,0
+Nursery with Aggreg,finance,GW Chi Square,0,0,0
 Nursery with Aggreg,finance,GW Squared Gini,2,2,0
-Nursery with Aggreg,finance,LS Chi Square,0,0,2
-Nursery with Aggreg,finance,LS Squared Gini,3,3,1
-Nursery with Aggreg,finance,Twoing,4,4,3
-Nursery with Aggreg,form,GW Chi Square,2,2,4
+Nursery with Aggreg,finance,LS Chi Square,0,0,0
+Nursery with Aggreg,finance,LS Squared Gini,2,2,0
+Nursery with Aggreg,finance,Twoing,2,2,0
+Nursery with Aggreg,form,GW Chi Square,1,1,0
 Nursery with Aggreg,form,GW Squared Gini,1,1,0
-Nursery with Aggreg,form,LS Chi Square,1,1,2
-Nursery with Aggreg,form,LS Squared Gini,1,1,1
-Nursery with Aggreg,form,Twoing,0,0,3
-Nursery with Aggreg,has_nurs,GW Chi Square,0,0,4
+Nursery with Aggreg,form,LS Chi Square,1,1,0
+Nursery with Aggreg,form,LS Squared Gini,1,1,0
+Nursery with Aggreg,form,Twoing,0,0,0
+Nursery with Aggreg,has_nurs,GW Chi Square,0,0,0
 Nursery with Aggreg,has_nurs,GW Squared Gini,0,0,0
-Nursery with Aggreg,has_nurs,LS Chi Square,0,0,2
-Nursery with Aggreg,has_nurs,LS Squared Gini,3,3,1
-Nursery with Aggreg,has_nurs,Twoing,4,4,3
-Nursery with Aggreg,health,GW Chi Square,4,4,4
+Nursery with Aggreg,has_nurs,LS Chi Square,0,0,0
+Nursery with Aggreg,has_nurs,LS Squared Gini,3,3,0
+Nursery with Aggreg,has_nurs,Twoing,3,3,0
+Nursery with Aggreg,health,GW Chi Square,1,1,0
 Nursery with Aggreg,health,GW Squared Gini,0,0,0
-Nursery with Aggreg,health,LS Chi Square,2,2,2
-Nursery with Aggreg,health,LS Squared Gini,1,1,1
-Nursery with Aggreg,health,Twoing,3,3,3
-Nursery with Aggreg,housing,GW Chi Square,3,3,4
+Nursery with Aggreg,health,LS Chi Square,1,1,0
+Nursery with Aggreg,health,LS Squared Gini,1,1,0
+Nursery with Aggreg,health,Twoing,1,1,0
+Nursery with Aggreg,housing,GW Chi Square,2,2,2
 Nursery with Aggreg,housing,GW Squared Gini,0,0,0
 Nursery with Aggreg,housing,LS Chi Square,2,2,2
-Nursery with Aggreg,housing,LS Squared Gini,0,0,1
-Nursery with Aggreg,housing,Twoing,4,4,3
-Nursery with Aggreg,parents,GW Chi Square,1,1,4
+Nursery with Aggreg,housing,LS Squared Gini,0,0,0
+Nursery with Aggreg,housing,Twoing,4,4,2
+Nursery with Aggreg,parents,GW Chi Square,0,0,0
 Nursery with Aggreg,parents,GW Squared Gini,2,2,0
-Nursery with Aggreg,parents,LS Chi Square,0,0,2
-Nursery with Aggreg,parents,LS Squared Gini,3,3,1
-Nursery with Aggreg,parents,Twoing,4,4,3
-Nursery with Aggreg,social,GW Chi Square,1,1,4
+Nursery with Aggreg,parents,LS Chi Square,0,0,0
+Nursery with Aggreg,parents,LS Squared Gini,3,3,0
+Nursery with Aggreg,parents,Twoing,4,4,0
+Nursery with Aggreg,social,GW Chi Square,0,0,1
 Nursery with Aggreg,social,GW Squared Gini,0,0,0
-Nursery with Aggreg,social,LS Chi Square,0,0,2
-Nursery with Aggreg,social,LS Squared Gini,0,0,1
-Nursery with Aggreg,social,Twoing,4,4,3
+Nursery with Aggreg,social,LS Chi Square,0,0,1
+Nursery with Aggreg,social,LS Squared Gini,0,0,0
+Nursery with Aggreg,social,Twoing,4,4,1
