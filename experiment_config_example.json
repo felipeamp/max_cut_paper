@@ -28,6 +28,7 @@
     "output folder": "./outputs/multiple levels experiment", // this folder files may be overwritten!
 
     "num trials": 20,
+    "starting seed index": 1, // optional, defaults to 1. Starts counting at 1.
     "calculate t-test on accuracy": true, // when false, do not supply "t-test single-sided p-value"
     "t-test single-sided p-value": 0.05, // only used when "calculate t-test on accuracy" is true
 

@@ -44,6 +44,11 @@ def main(experiment_config):
         init_raw_output_csv(fout, output_split_char=',')
         criteria_list = get_criteria(experiment_config["criteria"])
 
+        if "starting seed index" not in experiment_config:
+            starting_seed = 1
+        else:
+            starting_seed = experiment_config["starting seed index"]
+
         if experiment_config["prunning parameters"]["use chi-sq test"]:
             max_p_value_chi_sq = experiment_config["prunning parameters"]["max chi-sq p-value"]
             decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE = experiment_config[
@@ -89,6 +94,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        starting_seed=starting_seed,
                         num_folds=experiment_config["num folds"],
                         is_stratified=experiment_config["is stratified"],
                         use_numeric_attributes=experiment_config["use numeric attributes"],
@@ -113,6 +119,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        starting_seed=starting_seed,
                         num_folds=experiment_config["num folds"],
                         is_stratified=experiment_config["is stratified"],
                         use_numeric_attributes=experiment_config["use numeric attributes"],
@@ -199,8 +206,8 @@ def get_criteria(criteria_names_list):
 
 
 def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_depth, num_trials,
-        num_folds, is_stratified, use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq,
-        output_file_descriptor, output_split_char=',', seed=None):
+        starting_seed, num_folds, is_stratified, use_numeric_attributes, use_chi_sq_test,
+        max_p_value_chi_sq, output_file_descriptor, output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one doing a stratified cross-validation in `num_folds`
     folds. Saves the training and classification information in the `output_file_descriptor` file.
     """
@@ -210,12 +217,12 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
 
     for trial_number in range(num_trials):
         print('*'*80)
-        print('STARTING TRIAL #{}'.format(trial_number + 1))
+        print('STARTING TRIAL #{} WITH SEED #{}'.format(trial_number + 1, starting_seed))
         print()
 
         if seed is None:
-            random.seed(RANDOM_SEEDS[trial_number])
-            np.random.seed(RANDOM_SEEDS[trial_number])
+            random.seed(RANDOM_SEEDS[trial_number + starting_seed - 1])
+            np.random.seed(RANDOM_SEEDS[trial_number + starting_seed - 1])
 
         tree = decision_tree.DecisionTree(criterion=criterion)
 
@@ -269,8 +276,8 @@ def run(dataset_name, train_dataset, criterion, min_num_samples_allowed, max_dep
              max_num_values_root_attribute,
              min_num_values_root_attribute) = (None, None, None)
 
-        save_trial_info(dataset_name, train_dataset.num_samples, trial_number + 1, criterion.name,
-                        max_depth, num_folds, is_stratified, use_numeric_attributes,
+        save_trial_info(dataset_name, train_dataset.num_samples, trial_number + starting_seed,
+                        criterion.name, max_depth, num_folds, is_stratified, use_numeric_attributes,
                         min_num_samples_allowed, decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         decision_tree.MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         use_chi_sq_test, max_p_value_chi_sq,

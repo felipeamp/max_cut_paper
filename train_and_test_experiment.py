@@ -48,6 +48,11 @@ def main(experiment_config):
         init_raw_output_csv(fout, output_split_char=',')
         criteria_list = get_criteria(experiment_config["criteria"])
 
+        if "starting seed index" not in experiment_config:
+            starting_seed = 1
+        else:
+            starting_seed = experiment_config["starting seed index"]
+
         if experiment_config["prunning parameters"]["use chi-sq test"]:
             max_p_value_chi_sq = experiment_config["prunning parameters"]["max chi-sq p-value"]
             decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE = experiment_config[
@@ -90,6 +95,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        starting_seed=starting_seed,
                         use_numeric_attributes=experiment_config["use numeric attributes"],
                         use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
                         max_p_value_chi_sq=max_p_value_chi_sq,
@@ -117,6 +123,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        starting_seed=starting_seed,
                         use_numeric_attributes=experiment_config["use numeric attributes"],
                         use_chi_sq_test=experiment_config["prunning parameters"]["use chi-sq test"],
                         max_p_value_chi_sq=max_p_value_chi_sq,
@@ -189,8 +196,8 @@ def get_criteria(criteria_names_list):
 
 
 def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_samples_allowed,
-        max_depth, num_trials, use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq,
-        output_file_descriptor, output_split_char=',', seed=None):
+        max_depth, num_trials, starting_seed, use_numeric_attributes, use_chi_sq_test,
+        max_p_value_chi_sq, output_file_descriptor, output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one randomly selecting `num_training_samples` valid
     samples to use for training and testing the tree in the rest of the dataset. Saves the training
     and classification information in the `output_file_descriptor` file.
@@ -202,12 +209,12 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
     training_samples_indices = list(range(train_dataset.num_samples))
     for trial_number in range(num_trials):
         print('*'*80)
-        print('STARTING TRIAL #{}'.format(trial_number + 1))
+        print('STARTING TRIAL #{} WITH SEED #{}'.format(trial_number + 1, starting_seed))
         print()
 
         if seed is None:
-            random.seed(RANDOM_SEEDS[trial_number])
-            np.random.seed(RANDOM_SEEDS[trial_number])
+            random.seed(RANDOM_SEEDS[trial_number + starting_seed - 1])
+            np.random.seed(RANDOM_SEEDS[trial_number + starting_seed - 1])
         random.shuffle(training_samples_indices)
         curr_training_samples_indices = training_samples_indices[:num_training_samples]
         curr_test_samples_indices = training_samples_indices[num_training_samples:]
@@ -277,8 +284,9 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
         max_depth_found = tree.get_root_node().get_max_depth()
 
         save_trial_info(dataset_name, train_dataset.num_samples, num_training_samples,
-                        trial_number + 1, use_numeric_attributes, criterion.name, max_depth,
-                        min_num_samples_allowed, decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
+                        trial_number + starting_seed, use_numeric_attributes, criterion.name,
+                        max_depth, min_num_samples_allowed,
+                        decision_tree.USE_MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         decision_tree.MIN_SAMPLES_SECOND_LARGEST_CLASS,
                         use_chi_sq_test, max_p_value_chi_sq,
                         decision_tree.MIN_SAMPLES_IN_SECOND_MOST_FREQUENT_VALUE,

@@ -47,6 +47,11 @@ def main(experiment_config):
         init_raw_output_csv(fout, output_split_char=',')
         criteria_list = get_criteria(experiment_config["criteria"])
 
+        if "starting seed index" not in experiment_config:
+            starting_seed = 1
+        else:
+            starting_seed = experiment_config["starting seed index"]
+
         if experiment_config["use enough depth"]:
             experiment_config["max depth"] = None
 
@@ -95,6 +100,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        starting_seed=starting_seed,
                         num_folds=experiment_config["num folds"],
                         is_stratified=experiment_config["is stratified"],
                         use_numeric_attributes=experiment_config["use numeric attributes"],
@@ -119,6 +125,7 @@ def main(experiment_config):
                         min_num_samples_allowed=min_num_samples_allowed,
                         max_depth=experiment_config["max depth"],
                         num_trials=experiment_config["num trials"],
+                        starting_seed=starting_seed,
                         num_folds=experiment_config["num folds"],
                         is_stratified=experiment_config["is stratified"],
                         use_numeric_attributes=experiment_config["use numeric attributes"],
@@ -204,8 +211,8 @@ def get_criteria(criteria_names_list):
 
 
 def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_depth, num_trials,
-        num_folds, is_stratified, use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq,
-        output_file_descriptor, output_split_char=',', seed=None):
+        starting_seed, num_folds, is_stratified, use_numeric_attributes, use_chi_sq_test,
+        max_p_value_chi_sq, output_file_descriptor, output_split_char=',', seed=None):
     """Runs `num_trials` experiments, each one doing a stratified cross-validation in `num_folds`
     folds. Saves the training and classification information in the `output_file_descriptor` file.
     """
@@ -348,12 +355,12 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
     num_samples = len(sample_indices_and_classes)
     for trial_number in range(num_trials):
         print('*'*80)
-        print('STARTING TRIAL #{}'.format(trial_number + 1))
+        print('STARTING TRIAL #{} WITH SEED #{}'.format(trial_number + 1, starting_seed))
         print()
 
         if seed is None:
-            random.seed(RANDOM_SEEDS[trial_number])
-            np.random.seed(RANDOM_SEEDS[trial_number])
+            random.seed(RANDOM_SEEDS[trial_number + starting_seed - 1])
+            np.random.seed(RANDOM_SEEDS[trial_number + starting_seed - 1])
         random.shuffle(sample_indices_and_classes)
         shuffled_sample_indices, shuffled_sample_classes = zip(*sample_indices_and_classes)
 
@@ -368,7 +375,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                                             for index in training_randomized_indices]
                 validation_sample_indices = [shuffled_sample_indices[index]
                                              for index in validation_randomized_indices]
-                _run_fold(dataset_name, curr_dataset, criterion, trial_number,
+                _run_fold(dataset_name, curr_dataset, criterion, trial_number + starting_seed - 1,
                           min_num_samples_allowed, max_depth, num_folds, is_stratified,
                           use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq, num_samples,
                           original_valid_nominal_attributes, original_valid_numeric_attributes,
@@ -383,7 +390,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                                             for index in training_randomized_indices]
                 validation_sample_indices = [shuffled_sample_indices[index]
                                              for index in validation_randomized_indices]
-                _run_fold(dataset_name, curr_dataset, criterion, trial_number,
+                _run_fold(dataset_name, curr_dataset, criterion, trial_number + starting_seed - 1,
                           min_num_samples_allowed, max_depth, num_folds, is_stratified,
                           use_numeric_attributes, use_chi_sq_test, max_p_value_chi_sq, num_samples,
                           original_valid_nominal_attributes, original_valid_numeric_attributes,
