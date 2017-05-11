@@ -304,15 +304,17 @@ def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
             criterion_name_1, criterion_name_2 = criterion_diff_name.split(' - ')
 
             if (dataset_name, attribute, criterion_name_1) not in aggreg_data:
-                aggreg_data[(dataset_name, attribute, criterion_name_1)] = [0, 0, 0]
+                aggreg_data[(dataset_name, attribute, criterion_name_1)] = [0, 0, 0, 0, 0, 0]
             if (dataset_name, attribute, criterion_name_2) not in aggreg_data:
-                aggreg_data[(dataset_name, attribute, criterion_name_2)] = [0, 0, 0]
+                aggreg_data[(dataset_name, attribute, criterion_name_2)] = [0, 0, 0, 0, 0, 0]
 
             try:
                 p_value_w_missing = float(line_list[5])
                 if p_value_w_missing <= single_sided_p_value_threshold:
                     aggreg_data[(dataset_name, attribute, criterion_name_1)][0] += 1
+                    aggreg_data[(dataset_name, attribute, criterion_name_2)][3] += 1
                 elif p_value_w_missing >= 1. - single_sided_p_value_threshold:
+                    aggreg_data[(dataset_name, attribute, criterion_name_1)][3] += 1
                     aggreg_data[(dataset_name, attribute, criterion_name_2)][0] += 1
             except ValueError:
                 pass
@@ -322,7 +324,9 @@ def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
                 if p_value_wo_missing is not None:
                     if p_value_wo_missing <= single_sided_p_value_threshold:
                         aggreg_data[(dataset_name, attribute, criterion_name_1)][1] += 1
+                        aggreg_data[(dataset_name, attribute, criterion_name_2)][4] += 1
                     elif p_value_wo_missing >= 1. - single_sided_p_value_threshold:
+                        aggreg_data[(dataset_name, attribute, criterion_name_1)][4] += 1
                         aggreg_data[(dataset_name, attribute, criterion_name_2)][1] += 1
             except ValueError:
                 pass
@@ -332,7 +336,9 @@ def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
                 if p_value_num_nodes is not None:
                     if p_value_num_nodes <= single_sided_p_value_threshold:
                         aggreg_data[(dataset_name, attribute, criterion_name_1)][2] += 1
+                        aggreg_data[(dataset_name, attribute, criterion_name_2)][5] += 1
                     elif p_value_num_nodes >= 1. - single_sided_p_value_threshold:
+                        aggreg_data[(dataset_name, attribute, criterion_name_1)][5] += 1
                         aggreg_data[(dataset_name, attribute, criterion_name_2)][2] += 1
             except ValueError:
                 pass
@@ -344,7 +350,10 @@ def _save_aggreg_stats(output_path, single_sided_p_value_threshold):
                   'Criterion',
                   'Number of times is statistically better with missing values',
                   'Number of times is statistically better without missing values',
-                  'Number of times has statistically larger number of nodes']
+                  'Number of times has statistically larger number of nodes',
+                  'Number of times is statistically worse with missing values',
+                  'Number of times is statistically worse without missing values',
+                  'Number of times has statistically smaller number of nodes']
         print(','.join(header), file=fout)
         for keys in sorted(aggreg_data):
             values = map(str, aggreg_data[keys])
