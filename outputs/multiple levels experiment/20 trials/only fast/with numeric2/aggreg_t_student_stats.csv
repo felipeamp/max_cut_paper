@@ -1,0 +1,7 @@
+Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes
+Adult Census Income,None,LS Chi Square,1,1,1
+Adult Census Income,None,LS Squared Gini,0,0,2
+Adult Census Income,None,Twoing,1,1,0
+Cover Type,None,LS Chi Square,0,0,1
+Cover Type,None,LS Squared Gini,1,1,2
+Cover Type,None,Twoing,1,1,0

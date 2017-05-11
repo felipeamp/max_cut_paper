@@ -1,0 +1,37 @@
+{
+    "datasets basepath": "./datasets",
+    "use all datasets": false,
+    "load one dataset at a time": false,
+    "datasets folders": [
+        "adult census income",
+        "cover type"
+    ],
+
+    "criteria": [
+        "Twoing",
+        "LS Squared Gini",
+        "LS Chi Square"
+    ],
+
+    "use numeric attributes": false,
+
+    "output folder": "./outputs/rank experiment/20 trials/only fast/log2 plus 1 levels/without numeric2",
+
+    "num trials": 20,
+    "calculate t-test on accuracy": true,
+    "t-test single-sided p-value": 0.05,
+
+    "rank attributes": true,
+    "use enough depth": true,
+    "num folds": 3,
+    "is stratified": true,
+
+    "prunning parameters": {
+        "use chi-sq test": true,
+        "max chi-sq p-value": 0.1,
+        "second most freq value min samples": 15,
+
+        "min num samples allowed": [1],
+        "use second most freq class min samples": false
+    }
+}
