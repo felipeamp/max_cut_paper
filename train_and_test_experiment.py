@@ -209,7 +209,8 @@ def run(dataset_name, train_dataset, num_training_samples, criterion, min_num_sa
     training_samples_indices = list(range(train_dataset.num_samples))
     for trial_number in range(num_trials):
         print('*'*80)
-        print('STARTING TRIAL #{} WITH SEED #{}'.format(trial_number + 1, starting_seed))
+        print('STARTING TRIAL #{} USING SEED #{}'.format(
+            trial_number + 1, starting_seed + trial_number))
         print()
 
         if seed is None:
