@@ -221,7 +221,7 @@ def run(dataset_name, curr_dataset, criterion, min_num_samples_allowed, max_dept
                   max_p_value_chi_sq, num_samples, original_valid_nominal_attributes,
                   original_valid_numeric_attributes, training_samples_indices,
                   validation_sample_indices, output_file_descriptor, output_split_char=','):
-        print('Fold #{}'.format(fold_number + 1))
+        print('\nFold #{}'.format(fold_number + 1))
         print_information_per_attrib = {} # ...[attrib_index] = print_information
         accuracy_criterion_value = [] # ...[...] = (accuracy_with_missing_values, criterion_value)
         tree = decision_tree.DecisionTree(criterion)
