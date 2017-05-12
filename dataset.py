@@ -280,9 +280,9 @@ class Dataset(object):
         """Prints basic information of the loaded CSV.
         """
         print('Number of attributes: {}'.format(
-            len(self.valid_nominal_attribute) + len(self.valid_numeric_attribute)))
-        print('Number of nominal attributes: {}'.format(len(self.valid_nominal_attribute)))
-        print('Number of numeric attributes: {}'.format(len(self.valid_numeric_attribute)))
+            sum(self.valid_nominal_attribute) + sum(self.valid_numeric_attribute)))
+        print('Number of nominal attributes: {}'.format(sum(self.valid_nominal_attribute)))
+        print('Number of numeric attributes: {}'.format(sum(self.valid_numeric_attribute)))
         print('{} samples found!'.format(self.num_samples))
         print('{} classes found:'.format(self.num_classes))
         for class_index in range(self.num_classes):
