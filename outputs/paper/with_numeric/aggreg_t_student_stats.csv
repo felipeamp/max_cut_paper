@@ -1,43 +1,43 @@
 Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes,Number of times is statistically worse with missing values,Number of times is statistically worse without missing values,Number of times has statistically smaller number of nodes
-Adult Census Income,None,LS Chi Square,1,1,0,0,0,2
-Adult Census Income,None,LS Squared Gini,0,0,2,2,2,0
-Adult Census Income,None,Twoing,1,1,1,0,0,1
-Cars,None,LS Chi Square,0,0,0,1,1,2
-Cars,None,LS Squared Gini,2,2,2,0,0,0
-Cars,None,Twoing,0,0,1,1,1,1
-Cars with Aggreg,None,LS Chi Square,0,0,0,0,0,2
-Cars with Aggreg,None,LS Squared Gini,1,1,2,0,0,0
-Cars with Aggreg,None,Twoing,0,0,1,1,1,1
-Contraceptive,None,LS Chi Square,1,1,0,0,0,2
-Contraceptive,None,LS Squared Gini,0,0,2,2,2,0
-Contraceptive,None,Twoing,1,1,1,0,0,1
-Contraceptive with Aggreg,None,LS Chi Square,2,2,0,0,0,2
-Contraceptive with Aggreg,None,LS Squared Gini,0,0,2,1,1,0
-Contraceptive with Aggreg,None,Twoing,0,0,1,1,1,1
-Cover Type,None,LS Chi Square,0,0,0,1,1,2
-Cover Type,None,LS Squared Gini,1,1,2,0,0,0
-Cover Type,None,Twoing,1,1,1,1,1,1
-Cover Type with Aggreg,None,LS Chi Square,0,0,0,2,2,2
-Cover Type with Aggreg,None,LS Squared Gini,1,1,2,1,1,0
-Cover Type with Aggreg,None,Twoing,2,2,1,0,0,1
-KDD98 Multiclass 2,None,LS Chi Square,1,1,0,0,0,2
-KDD98 Multiclass 2,None,LS Squared Gini,1,1,2,0,0,0
-KDD98 Multiclass 2,None,Twoing,0,0,1,2,2,1
-KDD98 Multiclass 3,None,LS Chi Square,1,1,0,1,0,2
-KDD98 Multiclass 3,None,LS Squared Gini,0,0,2,2,2,0
-KDD98 Multiclass 3,None,Twoing,2,1,1,0,0,1
-KDD98 Multiclass 5,None,LS Chi Square,2,1,0,0,0,2
-KDD98 Multiclass 5,None,LS Squared Gini,0,1,2,1,0,0
-KDD98 Multiclass 5,None,Twoing,0,0,1,1,2,1
-KDD98 Multiclass 9,None,LS Chi Square,2,2,0,0,0,2
-KDD98 Multiclass 9,None,LS Squared Gini,0,0,2,2,1,0
-KDD98 Multiclass 9,None,Twoing,1,0,1,1,1,1
-Mushroom,None,LS Chi Square,0,0,0,2,2,2
-Mushroom,None,LS Squared Gini,1,1,2,0,0,0
-Mushroom,None,Twoing,1,1,1,0,0,1
-Nursery,None,LS Chi Square,0,0,0,2,2,2
-Nursery,None,LS Squared Gini,1,1,2,0,0,0
-Nursery,None,Twoing,1,1,1,0,0,1
-Nursery with Aggreg,None,LS Chi Square,0,0,0,2,2,2
-Nursery with Aggreg,None,LS Squared Gini,1,1,2,1,1,0
-Nursery with Aggreg,None,Twoing,2,2,1,0,0,1
+Adult Census Income,None,LS Chi Square,1,1,2,0,0,0
+Adult Census Income,None,LS Squared Gini,0,0,1,2,2,1
+Adult Census Income,None,Twoing,1,1,0,0,0,2
+Cars,None,LS Chi Square,0,0,2,1,1,0
+Cars,None,LS Squared Gini,2,2,1,0,0,1
+Cars,None,Twoing,0,0,0,1,1,2
+Cars with Aggreg,None,LS Chi Square,0,0,2,0,0,0
+Cars with Aggreg,None,LS Squared Gini,1,1,1,0,0,1
+Cars with Aggreg,None,Twoing,0,0,0,1,1,2
+Contraceptive,None,LS Chi Square,1,1,2,0,0,0
+Contraceptive,None,LS Squared Gini,0,0,1,2,2,1
+Contraceptive,None,Twoing,1,1,0,0,0,2
+Contraceptive with Aggreg,None,LS Chi Square,2,2,2,0,0,0
+Contraceptive with Aggreg,None,LS Squared Gini,0,0,1,1,1,1
+Contraceptive with Aggreg,None,Twoing,0,0,0,1,1,2
+Cover Type,None,LS Chi Square,1,1,2,1,1,0
+Cover Type,None,LS Squared Gini,0,0,1,2,2,1
+Cover Type,None,Twoing,2,2,0,0,0,2
+Cover Type with Aggreg,None,LS Chi Square,0,0,2,2,2,0
+Cover Type with Aggreg,None,LS Squared Gini,1,1,1,1,1,1
+Cover Type with Aggreg,None,Twoing,2,2,0,0,0,2
+KDD98 Multiclass 2,None,LS Chi Square,1,1,2,0,0,0
+KDD98 Multiclass 2,None,LS Squared Gini,1,1,1,0,0,1
+KDD98 Multiclass 2,None,Twoing,0,0,0,2,2,2
+KDD98 Multiclass 3,None,LS Chi Square,1,1,2,1,0,0
+KDD98 Multiclass 3,None,LS Squared Gini,0,0,1,2,2,1
+KDD98 Multiclass 3,None,Twoing,2,1,0,0,0,2
+KDD98 Multiclass 5,None,LS Chi Square,2,1,2,0,0,0
+KDD98 Multiclass 5,None,LS Squared Gini,0,1,1,1,0,1
+KDD98 Multiclass 5,None,Twoing,0,0,0,1,2,2
+KDD98 Multiclass 9,None,LS Chi Square,2,2,2,0,0,0
+KDD98 Multiclass 9,None,LS Squared Gini,0,0,1,2,1,1
+KDD98 Multiclass 9,None,Twoing,1,0,0,1,1,2
+Mushroom,None,LS Chi Square,0,0,2,2,2,0
+Mushroom,None,LS Squared Gini,1,1,1,0,0,1
+Mushroom,None,Twoing,1,1,0,0,0,2
+Nursery,None,LS Chi Square,0,0,2,2,2,0
+Nursery,None,LS Squared Gini,1,1,1,0,0,1
+Nursery,None,Twoing,1,1,0,0,0,2
+Nursery with Aggreg,None,LS Chi Square,0,0,2,2,2,0
+Nursery with Aggreg,None,LS Squared Gini,1,1,1,1,1,1
+Nursery with Aggreg,None,Twoing,2,2,0,0,0,2
