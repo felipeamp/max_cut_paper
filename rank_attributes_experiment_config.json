@@ -1,24 +1,30 @@
 {
     "datasets basepath": "./datasets",
-    "use all datasets": true,
+    "use all datasets": false,
     "load one dataset at a time": false,
+    "datasets folders": [
+        "poker hand"
+    ],
 
     "criteria": [
         "Twoing",
         "LS Squared Gini",
-        "LS Chi Square"
+        "LS Chi Square",
+        "GW Squared Gini",
+        "GW Chi Square"
     ],
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/rank experiment/20 trials/only fast/log2 plus 1 levels/without numeric",
+    "output folder": "./outputs/rank experiment/poker_single_level",
 
-    "num trials": 20,
+    "num trials": 10,
     "calculate t-test on accuracy": true,
     "t-test single-sided p-value": 0.05,
 
     "rank attributes": true,
-    "use enough depth": true,
+    "use enough depth": false,
+    "max depth": 1,
     "num folds": 3,
     "is stratified": true,
 

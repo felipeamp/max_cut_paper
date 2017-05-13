@@ -1,17 +1,19 @@
 {
     "datasets basepath": "./datasets",
-    "use all datasets": true,
+    "use all datasets": false,
     "load one dataset at a time": false,
+    "datasets folders": [
+        "poker hand"
+    ],
 
     "criteria": [
-        "Twoing",
-        "LS Squared Gini",
-        "LS Chi Square"
+        "GW Squared Gini",
+        "GW Chi Square"
     ],
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/multiple levels experiment/20 trials/only fast/without numeric",
+    "output folder": "./outputs/multiple levels experiment/poker_sdp",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,
