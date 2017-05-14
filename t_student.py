@@ -264,8 +264,8 @@ def _save_raw_stats(raw_data, output_path, is_rank):
                                     str(len(accuracy_wo_missing_diff) - 1),
                                     str(p_value_wo_missing),
                                     str(t_statistic_num_nodes),
-                                    str(p_value_num_nodes),
-                                    str(len(num_nodes_diff) - 1)]),
+                                    str(len(num_nodes_diff) - 1),
+                                    str(p_value_num_nodes)]),
                           file=fout)
 
 
