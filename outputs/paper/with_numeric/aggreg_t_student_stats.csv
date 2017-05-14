@@ -33,8 +33,8 @@ KDD98 Multiclass 9,None,LS Chi Square,2,2,0,0,0,2
 KDD98 Multiclass 9,None,LS Squared Gini,0,0,1,2,1,1
 KDD98 Multiclass 9,None,Twoing,1,0,2,1,1,0
 Mushroom,None,LS Chi Square,0,0,2,2,2,0
-Mushroom,None,LS Squared Gini,1,1,0,0,0,1
-Mushroom,None,Twoing,1,1,0,0,0,1
+Mushroom,None,LS Squared Gini,1,1,1,0,0,1
+Mushroom,None,Twoing,1,1,0,0,0,2
 Nursery,None,LS Chi Square,0,0,1,2,2,0
 Nursery,None,LS Squared Gini,1,1,0,0,0,2
 Nursery,None,Twoing,1,1,1,0,0,0

@@ -1,9 +1,9 @@
 Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes,Number of times is statistically worse with missing values,Number of times is statistically worse without missing values,Number of times has statistically smaller number of nodes
-Adult Census Income,education,GW Chi Square,2,2,1,1,1,0
+Adult Census Income,education,GW Chi Square,2,2,2,1,1,0
 Adult Census Income,education,GW Squared Gini,1,1,1,3,3,3
-Adult Census Income,education,LS Chi Square,2,2,1,1,1,0
-Adult Census Income,education,LS Squared Gini,0,0,0,4,4,1
-Adult Census Income,education,Twoing,4,4,1,0,0,0
+Adult Census Income,education,LS Chi Square,2,2,2,1,1,0
+Adult Census Income,education,LS Squared Gini,0,0,0,4,4,4
+Adult Census Income,education,Twoing,4,4,2,0,0,0
 Adult Census Income,marital.status,GW Chi Square,0,0,0,0,0,0
 Adult Census Income,marital.status,GW Squared Gini,0,0,0,0,0,0
 Adult Census Income,marital.status,LS Chi Square,0,0,0,0,0,0
@@ -35,9 +35,9 @@ Adult Census Income,sex,LS Chi Square,0,0,0,0,0,0
 Adult Census Income,sex,LS Squared Gini,0,0,0,0,0,0
 Adult Census Income,sex,Twoing,0,0,0,0,0,0
 Adult Census Income,workclass,GW Chi Square,2,2,2,0,0,0
-Adult Census Income,workclass,GW Squared Gini,0,0,0,3,3,2
-Adult Census Income,workclass,LS Chi Square,2,2,0,0,0,0
-Adult Census Income,workclass,LS Squared Gini,0,0,0,3,3,2
+Adult Census Income,workclass,GW Squared Gini,0,0,0,3,3,3
+Adult Census Income,workclass,LS Chi Square,2,2,2,0,0,0
+Adult Census Income,workclass,LS Squared Gini,0,0,0,3,3,3
 Adult Census Income,workclass,Twoing,2,2,2,0,0,0
 Cars,buying,GW Chi Square,0,0,0,0,0,0
 Cars,buying,GW Squared Gini,0,0,0,0,0,0
@@ -615,10 +615,10 @@ Cover Type with Aggreg,wilderness_area_4,LS Chi Square,0,0,0,0,0,0
 Cover Type with Aggreg,wilderness_area_4,LS Squared Gini,0,0,0,0,0,0
 Cover Type with Aggreg,wilderness_area_4,Twoing,0,0,0,0,0,0
 Cover Type with Aggreg,wilderness_area_aggreg,GW Chi Square,0,0,1,0,0,3
-Cover Type with Aggreg,wilderness_area_aggreg,GW Squared Gini,0,0,1,0,0,0
-Cover Type with Aggreg,wilderness_area_aggreg,LS Chi Square,0,0,1,0,0,0
-Cover Type with Aggreg,wilderness_area_aggreg,LS Squared Gini,0,0,1,0,0,0
-Cover Type with Aggreg,wilderness_area_aggreg,Twoing,0,0,0,0,0,1
+Cover Type with Aggreg,wilderness_area_aggreg,GW Squared Gini,0,0,2,0,0,0
+Cover Type with Aggreg,wilderness_area_aggreg,LS Chi Square,0,0,2,0,0,0
+Cover Type with Aggreg,wilderness_area_aggreg,LS Squared Gini,0,0,2,0,0,0
+Cover Type with Aggreg,wilderness_area_aggreg,Twoing,0,0,0,0,0,4
 KDD98 Multiclass 2,AGEFLAG,GW Chi Square,2,2,0,0,0,2
 KDD98 Multiclass 2,AGEFLAG,GW Squared Gini,0,0,3,3,3,0
 KDD98 Multiclass 2,AGEFLAG,LS Chi Square,2,2,0,0,0,2
@@ -779,21 +779,21 @@ KDD98 Multiclass 2,RFA_12,GW Squared Gini,3,3,0,0,0,1
 KDD98 Multiclass 2,RFA_12,LS Chi Square,0,0,0,2,2,1
 KDD98 Multiclass 2,RFA_12,LS Squared Gini,3,3,0,0,0,1
 KDD98 Multiclass 2,RFA_12,Twoing,0,0,4,2,2,0
-KDD98 Multiclass 2,RFA_13,GW Chi Square,3,3,0,0,0,1
+KDD98 Multiclass 2,RFA_13,GW Chi Square,3,3,0,0,0,2
 KDD98 Multiclass 2,RFA_13,GW Squared Gini,1,1,3,3,3,1
-KDD98 Multiclass 2,RFA_13,LS Chi Square,3,3,0,0,0,1
-KDD98 Multiclass 2,RFA_13,LS Squared Gini,0,0,1,4,4,0
-KDD98 Multiclass 2,RFA_13,Twoing,2,2,0,2,2,1
+KDD98 Multiclass 2,RFA_13,LS Chi Square,3,3,0,0,0,2
+KDD98 Multiclass 2,RFA_13,LS Squared Gini,0,0,4,4,4,0
+KDD98 Multiclass 2,RFA_13,Twoing,2,2,0,2,2,2
 KDD98 Multiclass 2,RFA_14,GW Chi Square,1,1,0,2,2,0
 KDD98 Multiclass 2,RFA_14,GW Squared Gini,3,3,0,0,0,0
 KDD98 Multiclass 2,RFA_14,LS Chi Square,1,1,0,2,2,0
 KDD98 Multiclass 2,RFA_14,LS Squared Gini,3,3,0,0,0,0
 KDD98 Multiclass 2,RFA_14,Twoing,0,0,0,4,4,0
-KDD98 Multiclass 2,RFA_15,GW Chi Square,1,1,0,1,1,1
+KDD98 Multiclass 2,RFA_15,GW Chi Square,1,1,0,1,1,2
 KDD98 Multiclass 2,RFA_15,GW Squared Gini,0,0,3,1,1,0
-KDD98 Multiclass 2,RFA_15,LS Chi Square,0,0,0,1,1,1
-KDD98 Multiclass 2,RFA_15,LS Squared Gini,0,0,0,2,2,0
-KDD98 Multiclass 2,RFA_15,Twoing,4,4,0,0,0,1
+KDD98 Multiclass 2,RFA_15,LS Chi Square,0,0,0,1,1,2
+KDD98 Multiclass 2,RFA_15,LS Squared Gini,0,0,3,2,2,0
+KDD98 Multiclass 2,RFA_15,Twoing,4,4,0,0,0,2
 KDD98 Multiclass 2,RFA_16,GW Chi Square,2,2,0,0,0,0
 KDD98 Multiclass 2,RFA_16,GW Squared Gini,0,0,0,4,4,0
 KDD98 Multiclass 2,RFA_16,LS Chi Square,2,2,0,0,0,0
@@ -821,8 +821,8 @@ KDD98 Multiclass 2,RFA_2,LS Squared Gini,0,0,0,3,3,0
 KDD98 Multiclass 2,RFA_2,Twoing,2,2,0,0,0,0
 KDD98 Multiclass 2,RFA_20,GW Chi Square,3,3,0,0,0,2
 KDD98 Multiclass 2,RFA_20,GW Squared Gini,0,0,3,3,3,0
-KDD98 Multiclass 2,RFA_20,LS Chi Square,3,3,0,0,0,1
-KDD98 Multiclass 2,RFA_20,LS Squared Gini,0,0,2,3,3,0
+KDD98 Multiclass 2,RFA_20,LS Chi Square,3,3,0,0,0,2
+KDD98 Multiclass 2,RFA_20,LS Squared Gini,0,0,3,3,3,0
 KDD98 Multiclass 2,RFA_20,Twoing,2,2,0,2,2,2
 KDD98 Multiclass 2,RFA_21,GW Chi Square,3,3,0,0,0,2
 KDD98 Multiclass 2,RFA_21,GW Squared Gini,1,1,3,3,3,1
@@ -834,11 +834,11 @@ KDD98 Multiclass 2,RFA_22,GW Squared Gini,1,1,4,3,3,0
 KDD98 Multiclass 2,RFA_22,LS Chi Square,3,3,0,0,0,2
 KDD98 Multiclass 2,RFA_22,LS Squared Gini,0,0,3,4,4,1
 KDD98 Multiclass 2,RFA_22,Twoing,2,2,0,2,2,2
-KDD98 Multiclass 2,RFA_23,GW Chi Square,1,1,0,1,1,1
+KDD98 Multiclass 2,RFA_23,GW Chi Square,1,1,0,1,1,2
 KDD98 Multiclass 2,RFA_23,GW Squared Gini,1,1,3,1,1,0
-KDD98 Multiclass 2,RFA_23,LS Chi Square,1,1,0,1,1,1
-KDD98 Multiclass 2,RFA_23,LS Squared Gini,4,4,0,0,0,0
-KDD98 Multiclass 2,RFA_23,Twoing,0,0,0,4,4,1
+KDD98 Multiclass 2,RFA_23,LS Chi Square,1,1,0,1,1,2
+KDD98 Multiclass 2,RFA_23,LS Squared Gini,4,4,3,0,0,0
+KDD98 Multiclass 2,RFA_23,Twoing,0,0,0,4,4,2
 KDD98 Multiclass 2,RFA_24,GW Chi Square,3,3,0,0,0,2
 KDD98 Multiclass 2,RFA_24,GW Squared Gini,0,0,3,3,3,0
 KDD98 Multiclass 2,RFA_24,LS Chi Square,3,3,0,0,0,2
@@ -1784,11 +1784,11 @@ Mushroom,gill-spacing,GW Squared Gini,0,0,0,0,0,0
 Mushroom,gill-spacing,LS Chi Square,0,0,0,0,0,0
 Mushroom,gill-spacing,LS Squared Gini,0,0,0,0,0,0
 Mushroom,gill-spacing,Twoing,0,0,0,0,0,0
-Mushroom,habitat,GW Chi Square,0,0,0,0,0,0
-Mushroom,habitat,GW Squared Gini,0,0,0,0,0,0
-Mushroom,habitat,LS Chi Square,0,0,0,0,0,0
-Mushroom,habitat,LS Squared Gini,0,0,0,0,0,0
-Mushroom,habitat,Twoing,0,0,0,0,0,0
+Mushroom,habitat,GW Chi Square,0,0,0,0,0,2
+Mushroom,habitat,GW Squared Gini,0,0,3,0,0,0
+Mushroom,habitat,LS Chi Square,0,0,0,0,0,2
+Mushroom,habitat,LS Squared Gini,0,0,3,0,0,0
+Mushroom,habitat,Twoing,0,0,0,0,0,2
 Mushroom,odor,GW Chi Square,0,0,0,0,0,0
 Mushroom,odor,GW Squared Gini,0,0,0,0,0,0
 Mushroom,odor,LS Chi Square,0,0,0,0,0,0
@@ -1810,20 +1810,20 @@ Mushroom,ring-type,LS Chi Square,0,0,0,0,0,0
 Mushroom,ring-type,LS Squared Gini,0,0,0,0,0,0
 Mushroom,ring-type,Twoing,0,0,0,0,0,0
 Mushroom,spore-print-color,GW Chi Square,0,0,0,0,0,2
-Mushroom,spore-print-color,GW Squared Gini,0,0,1,0,0,0
-Mushroom,spore-print-color,LS Chi Square,0,0,0,0,0,0
-Mushroom,spore-print-color,LS Squared Gini,0,0,1,0,0,0
-Mushroom,spore-print-color,Twoing,0,0,0,0,0,0
-Mushroom,stalk-color-above-ring,GW Chi Square,0,0,0,0,0,0
-Mushroom,stalk-color-above-ring,GW Squared Gini,0,0,0,0,0,0
-Mushroom,stalk-color-above-ring,LS Chi Square,0,0,0,0,0,0
-Mushroom,stalk-color-above-ring,LS Squared Gini,0,0,0,0,0,0
-Mushroom,stalk-color-above-ring,Twoing,0,0,0,0,0,0
+Mushroom,spore-print-color,GW Squared Gini,0,0,3,0,0,0
+Mushroom,spore-print-color,LS Chi Square,0,0,0,0,0,2
+Mushroom,spore-print-color,LS Squared Gini,0,0,3,0,0,0
+Mushroom,spore-print-color,Twoing,0,0,0,0,0,2
+Mushroom,stalk-color-above-ring,GW Chi Square,0,0,0,0,0,2
+Mushroom,stalk-color-above-ring,GW Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-color-above-ring,LS Chi Square,0,0,0,0,0,2
+Mushroom,stalk-color-above-ring,LS Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-color-above-ring,Twoing,0,0,0,0,0,2
 Mushroom,stalk-color-below-ring,GW Chi Square,0,0,0,0,0,2
-Mushroom,stalk-color-below-ring,GW Squared Gini,0,0,1,0,0,0
-Mushroom,stalk-color-below-ring,LS Chi Square,0,0,0,0,0,0
-Mushroom,stalk-color-below-ring,LS Squared Gini,0,0,1,0,0,0
-Mushroom,stalk-color-below-ring,Twoing,0,0,0,0,0,0
+Mushroom,stalk-color-below-ring,GW Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-color-below-ring,LS Chi Square,0,0,0,0,0,2
+Mushroom,stalk-color-below-ring,LS Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-color-below-ring,Twoing,0,0,0,0,0,2
 Mushroom,stalk-root,GW Chi Square,0,0,0,0,0,0
 Mushroom,stalk-root,GW Squared Gini,0,0,0,0,0,0
 Mushroom,stalk-root,LS Chi Square,0,0,0,0,0,0
@@ -1835,15 +1835,15 @@ Mushroom,stalk-shape,LS Chi Square,0,0,0,0,0,0
 Mushroom,stalk-shape,LS Squared Gini,0,0,0,0,0,0
 Mushroom,stalk-shape,Twoing,0,0,0,0,0,0
 Mushroom,stalk-surface-above-ring,GW Chi Square,0,0,0,0,0,2
-Mushroom,stalk-surface-above-ring,GW Squared Gini,0,0,1,0,0,0
-Mushroom,stalk-surface-above-ring,LS Chi Square,0,0,0,0,0,0
-Mushroom,stalk-surface-above-ring,LS Squared Gini,0,0,1,0,0,0
-Mushroom,stalk-surface-above-ring,Twoing,0,0,0,0,0,0
-Mushroom,stalk-surface-below-ring,GW Chi Square,0,0,0,0,0,0
-Mushroom,stalk-surface-below-ring,GW Squared Gini,0,0,0,0,0,0
-Mushroom,stalk-surface-below-ring,LS Chi Square,0,0,0,0,0,0
-Mushroom,stalk-surface-below-ring,LS Squared Gini,0,0,0,0,0,0
-Mushroom,stalk-surface-below-ring,Twoing,0,0,0,0,0,0
+Mushroom,stalk-surface-above-ring,GW Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-surface-above-ring,LS Chi Square,0,0,0,0,0,2
+Mushroom,stalk-surface-above-ring,LS Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-surface-above-ring,Twoing,0,0,0,0,0,2
+Mushroom,stalk-surface-below-ring,GW Chi Square,0,0,0,0,0,2
+Mushroom,stalk-surface-below-ring,GW Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-surface-below-ring,LS Chi Square,0,0,0,0,0,2
+Mushroom,stalk-surface-below-ring,LS Squared Gini,0,0,3,0,0,0
+Mushroom,stalk-surface-below-ring,Twoing,0,0,0,0,0,2
 Nursery,children,GW Chi Square,2,2,0,1,1,2
 Nursery,children,GW Squared Gini,0,0,3,3,3,1
 Nursery,children,LS Chi Square,3,3,0,0,0,2
@@ -1871,9 +1871,9 @@ Nursery,health,LS Squared Gini,0,0,0,0,0,0
 Nursery,health,Twoing,0,0,0,0,0,0
 Nursery,housing,GW Chi Square,2,2,0,0,0,2
 Nursery,housing,GW Squared Gini,0,0,3,3,3,0
-Nursery,housing,LS Chi Square,2,2,0,0,0,1
-Nursery,housing,LS Squared Gini,0,0,1,3,3,0
-Nursery,housing,Twoing,2,2,0,0,0,1
+Nursery,housing,LS Chi Square,2,2,0,0,0,2
+Nursery,housing,LS Squared Gini,0,0,3,3,3,0
+Nursery,housing,Twoing,2,2,0,0,0,2
 Nursery,parents,GW Chi Square,0,0,0,0,0,2
 Nursery,parents,GW Squared Gini,0,0,4,0,0,0
 Nursery,parents,LS Chi Square,0,0,0,0,0,2
@@ -1886,19 +1886,19 @@ Nursery,social,LS Squared Gini,0,0,3,0,0,0
 Nursery,social,Twoing,0,0,0,0,0,2
 Nursery with Aggreg,NewAttrib1,GW Chi Square,0,0,1,0,0,2
 Nursery with Aggreg,NewAttrib1,GW Squared Gini,0,0,4,0,0,0
-Nursery with Aggreg,NewAttrib1,LS Chi Square,0,0,1,0,0,1
-Nursery with Aggreg,NewAttrib1,LS Squared Gini,0,0,2,0,0,1
+Nursery with Aggreg,NewAttrib1,LS Chi Square,0,0,1,0,0,2
+Nursery with Aggreg,NewAttrib1,LS Squared Gini,0,0,3,0,0,1
 Nursery with Aggreg,NewAttrib1,Twoing,0,0,0,0,0,4
-Nursery with Aggreg,NewAttrib2,GW Chi Square,2,2,0,0,0,1
+Nursery with Aggreg,NewAttrib2,GW Chi Square,2,2,0,0,0,2
 Nursery with Aggreg,NewAttrib2,GW Squared Gini,0,0,4,4,4,0
-Nursery with Aggreg,NewAttrib2,LS Chi Square,2,2,0,0,0,1
-Nursery with Aggreg,NewAttrib2,LS Squared Gini,1,1,0,3,3,1
-Nursery with Aggreg,NewAttrib2,Twoing,2,2,0,0,0,1
+Nursery with Aggreg,NewAttrib2,LS Chi Square,2,2,0,0,0,2
+Nursery with Aggreg,NewAttrib2,LS Squared Gini,1,1,3,3,3,1
+Nursery with Aggreg,NewAttrib2,Twoing,2,2,0,0,0,2
 Nursery with Aggreg,NewAttrib3,GW Chi Square,0,0,2,0,0,1
 Nursery with Aggreg,NewAttrib3,GW Squared Gini,0,0,4,0,0,0
-Nursery with Aggreg,NewAttrib3,LS Chi Square,0,0,0,0,0,2
-Nursery with Aggreg,NewAttrib3,LS Squared Gini,0,0,0,0,0,1
-Nursery with Aggreg,NewAttrib3,Twoing,0,0,0,0,0,2
+Nursery with Aggreg,NewAttrib3,LS Chi Square,0,0,0,0,0,3
+Nursery with Aggreg,NewAttrib3,LS Squared Gini,0,0,2,0,0,1
+Nursery with Aggreg,NewAttrib3,Twoing,0,0,0,0,0,3
 Nursery with Aggreg,children,GW Chi Square,2,2,0,0,0,2
 Nursery with Aggreg,children,GW Squared Gini,0,0,3,3,3,1
 Nursery with Aggreg,children,LS Chi Square,2,2,0,0,0,2
@@ -1924,11 +1924,11 @@ Nursery with Aggreg,health,GW Squared Gini,0,0,0,0,0,0
 Nursery with Aggreg,health,LS Chi Square,0,0,0,0,0,0
 Nursery with Aggreg,health,LS Squared Gini,0,0,0,0,0,0
 Nursery with Aggreg,health,Twoing,0,0,0,0,0,0
-Nursery with Aggreg,housing,GW Chi Square,2,2,0,0,0,1
+Nursery with Aggreg,housing,GW Chi Square,2,2,0,0,0,2
 Nursery with Aggreg,housing,GW Squared Gini,0,0,3,3,3,1
-Nursery with Aggreg,housing,LS Chi Square,2,2,0,0,0,1
-Nursery with Aggreg,housing,LS Squared Gini,0,0,1,3,3,0
-Nursery with Aggreg,housing,Twoing,2,2,0,0,0,1
+Nursery with Aggreg,housing,LS Chi Square,2,2,0,0,0,2
+Nursery with Aggreg,housing,LS Squared Gini,0,0,4,3,3,0
+Nursery with Aggreg,housing,Twoing,2,2,0,0,0,2
 Nursery with Aggreg,parents,GW Chi Square,0,0,0,0,0,2
 Nursery with Aggreg,parents,GW Squared Gini,0,0,4,0,0,0
 Nursery with Aggreg,parents,LS Chi Square,0,0,0,0,0,2

@@ -24,10 +24,10 @@ Contraceptive with Aggreg,None,GW Squared Gini,3,3,4,0,0,0
 Contraceptive with Aggreg,None,LS Chi Square,0,0,1,2,2,2
 Contraceptive with Aggreg,None,LS Squared Gini,3,3,2,0,0,1
 Contraceptive with Aggreg,None,Twoing,0,0,0,2,2,4
-Cover Type,None,GW Chi Square,0,0,0,1,1,0
-Cover Type,None,GW Squared Gini,1,1,1,0,0,0
-Cover Type,None,LS Chi Square,0,0,0,1,1,0
-Cover Type,None,LS Squared Gini,1,1,1,0,0,0
+Cover Type,None,GW Chi Square,0,0,0,3,3,2
+Cover Type,None,GW Squared Gini,3,3,3,0,0,0
+Cover Type,None,LS Chi Square,0,0,0,3,3,2
+Cover Type,None,LS Squared Gini,3,3,3,0,0,0
 Cover Type,None,Twoing,2,2,0,2,2,2
 Cover Type with Aggreg,None,GW Chi Square,0,0,0,4,4,4
 Cover Type with Aggreg,None,GW Squared Gini,2,2,2,2,2,1
@@ -57,8 +57,8 @@ KDD98 Multiclass 9,None,Twoing,2,2,2,2,2,2
 Mushroom,None,GW Chi Square,0,0,3,2,2,1
 Mushroom,None,GW Squared Gini,0,0,4,0,0,0
 Mushroom,None,LS Chi Square,0,0,2,2,2,2
-Mushroom,None,LS Squared Gini,2,2,0,0,0,3
-Mushroom,None,Twoing,2,2,0,0,0,3
+Mushroom,None,LS Squared Gini,2,2,1,0,0,3
+Mushroom,None,Twoing,2,2,0,0,0,4
 Nursery,None,GW Chi Square,0,0,3,2,2,0
 Nursery,None,GW Squared Gini,0,0,3,2,2,0
 Nursery,None,LS Chi Square,0,0,1,2,2,2

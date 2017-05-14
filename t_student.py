@@ -275,7 +275,13 @@ def _calculate_t_statistic(samples_list):
     mean = statistics.mean(samples_list)
     variance = statistics.variance(samples_list)
     if variance == 0.0:
-        return 0.0, 0.5
+        # Every sample has the same value.
+        if mean == 0.0:
+            return 0.0, 0.5
+        elif mean > 0.0:
+            return float('+inf'), 0.0
+        else:
+            return float('-inf'), 1.0
 
     num_samples = len(samples_list)
     t_statistic = mean / math.sqrt(variance / num_samples)
