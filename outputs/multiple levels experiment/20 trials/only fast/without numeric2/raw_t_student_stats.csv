@@ -1,7 +1,0 @@
-Dataset,Attribute,Criterion Difference Name,Paired t-statistics on Accuracy with Missing Values,Degrees of Freedom of Accuracy with Missing Values,P-value t-statistics on Accuracy with Missing Values,Paired t-statistics on Accuracy without Missing Values,Degrees of Freedom of Accuracy without Missing Values,P-value t-statistics on Accuracy without Missing Values,Paired t-statistics on Number of Nodes,Degrees of Freedom of Number of Nodes,P-value t-statistics on Number of Nodes
-Cover Type,None,LS Chi Square - Twoing,-15.683966519006649,19,0.999999999999,-15.683966519006649,19,0.999999999999,1.2853691739286082,0.107055364681,19
-Cover Type,None,LS Chi Square - LS Squared Gini,0.0,19,0.5,0.0,19,0.5,0.0,0.5,19
-Cover Type,None,Twoing - LS Squared Gini,-17.09427386629557,19,1.0,-17.09427386629557,19,1.0,-78.40751960289703,1.0,19
-Adult Census Income,None,LS Chi Square - Twoing,1.1178323840221471,19,0.138787048884,1.1268533257845512,19,0.136917802335,-3.969218326655461,0.999588997019,19
-Adult Census Income,None,LS Chi Square - LS Squared Gini,14.874836584589145,19,3.18878257133e-12,15.109768777061365,19,2.42050823829e-12,38.527587518578784,0.0,19
-Adult Census Income,None,Twoing - LS Squared Gini,12.10201949811459,19,1.12270415187e-10,12.328419178878613,19,8.19949663722e-11,28.768216126954854,0.0,19
