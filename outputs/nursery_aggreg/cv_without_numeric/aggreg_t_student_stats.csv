@@ -1,0 +1,6 @@
+Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes,Number of times is statistically worse with missing values,Number of times is statistically worse without missing values,Number of times has statistically smaller number of nodes
+Nursery with Aggreg,None,GW Chi Square,2,2,4,1,1,0
+Nursery with Aggreg,None,GW Squared Gini,0,0,3,3,3,1
+Nursery with Aggreg,None,LS Chi Square,2,2,1,1,1,2
+Nursery with Aggreg,None,LS Squared Gini,0,0,0,3,3,4
+Nursery with Aggreg,None,Twoing,4,4,1,0,0,2

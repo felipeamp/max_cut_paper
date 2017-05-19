@@ -1,0 +1,56 @@
+Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes,Number of times is statistically worse with missing values,Number of times is statistically worse without missing values,Number of times has statistically smaller number of nodes
+Nursery with Aggreg,children,GW Chi Square,2,2,2,0,0,0
+Nursery with Aggreg,children,GW Squared Gini,1,1,1,3,3,3
+Nursery with Aggreg,children,LS Chi Square,2,2,2,0,0,0
+Nursery with Aggreg,children,LS Squared Gini,0,0,0,4,4,4
+Nursery with Aggreg,children,Twoing,2,2,2,0,0,0
+Nursery with Aggreg,employ,GW Chi Square,0,0,0,3,3,0
+Nursery with Aggreg,employ,GW Squared Gini,2,2,0,2,2,0
+Nursery with Aggreg,employ,LS Chi Square,0,0,0,3,3,0
+Nursery with Aggreg,employ,LS Squared Gini,3,3,0,1,1,0
+Nursery with Aggreg,employ,Twoing,4,4,0,0,0,0
+Nursery with Aggreg,finance,GW Chi Square,0,0,0,0,0,0
+Nursery with Aggreg,finance,GW Squared Gini,0,0,0,0,0,0
+Nursery with Aggreg,finance,LS Chi Square,0,0,0,0,0,0
+Nursery with Aggreg,finance,LS Squared Gini,0,0,0,0,0,0
+Nursery with Aggreg,finance,Twoing,0,0,0,0,0,0
+Nursery with Aggreg,form,GW Chi Square,0,0,0,0,0,0
+Nursery with Aggreg,form,GW Squared Gini,1,1,0,0,0,0
+Nursery with Aggreg,form,LS Chi Square,0,0,0,2,2,0
+Nursery with Aggreg,form,LS Squared Gini,1,1,0,0,0,0
+Nursery with Aggreg,form,Twoing,0,0,0,0,0,0
+Nursery with Aggreg,has_nurs,GW Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,has_nurs,GW Squared Gini,0,0,0,4,4,0
+Nursery with Aggreg,has_nurs,LS Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,has_nurs,LS Squared Gini,1,1,0,3,3,0
+Nursery with Aggreg,has_nurs,Twoing,2,2,0,0,0,0
+Nursery with Aggreg,health,GW Chi Square,1,1,0,0,0,0
+Nursery with Aggreg,health,GW Squared Gini,0,0,0,4,4,0
+Nursery with Aggreg,health,LS Chi Square,1,1,0,0,0,0
+Nursery with Aggreg,health,LS Squared Gini,1,1,0,0,0,0
+Nursery with Aggreg,health,Twoing,1,1,0,0,0,0
+Nursery with Aggreg,housing,GW Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,housing,GW Squared Gini,0,0,0,3,3,0
+Nursery with Aggreg,housing,LS Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,housing,LS Squared Gini,0,0,0,3,3,0
+Nursery with Aggreg,housing,Twoing,2,2,0,0,0,0
+Nursery with Aggreg,parents,GW Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,parents,GW Squared Gini,0,0,0,4,4,0
+Nursery with Aggreg,parents,LS Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,parents,LS Squared Gini,1,1,0,3,3,0
+Nursery with Aggreg,parents,Twoing,2,2,0,0,0,0
+Nursery with Aggreg,soc_health,GW Chi Square,1,1,0,0,0,0
+Nursery with Aggreg,soc_health,GW Squared Gini,0,0,0,4,4,0
+Nursery with Aggreg,soc_health,LS Chi Square,1,1,0,0,0,0
+Nursery with Aggreg,soc_health,LS Squared Gini,1,1,0,0,0,0
+Nursery with Aggreg,soc_health,Twoing,1,1,0,0,0,0
+Nursery with Aggreg,social,GW Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,social,GW Squared Gini,1,1,0,3,3,0
+Nursery with Aggreg,social,LS Chi Square,2,2,0,0,0,0
+Nursery with Aggreg,social,LS Squared Gini,0,0,0,4,4,0
+Nursery with Aggreg,social,Twoing,2,2,0,0,0,0
+Nursery with Aggreg,struct_finan,GW Chi Square,1,1,0,0,0,0
+Nursery with Aggreg,struct_finan,GW Squared Gini,0,0,0,0,0,0
+Nursery with Aggreg,struct_finan,LS Chi Square,1,1,0,0,0,0
+Nursery with Aggreg,struct_finan,LS Squared Gini,0,0,0,0,0,0
+Nursery with Aggreg,struct_finan,Twoing,0,0,0,2,2,0

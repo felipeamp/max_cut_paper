@@ -1,0 +1,39 @@
+{
+    "datasets basepath": "./datasets",
+    "use all datasets": false,
+    "datasets folders": [
+        "nursery with aggreg correct"
+    ],
+    "load one dataset at a time": false,
+
+    "criteria": [
+        "Twoing",
+        "LS Squared Gini",
+        "LS Chi Square",
+        "GW Squared Gini",
+        "GW Chi Square"
+    ],
+
+    "use numeric attributes": false,
+
+    "output folder": "./outputs/nursery_aggreg/rank_inversions",
+
+    "num trials": 10,
+    "calculate t-test on accuracy": true,
+    "t-test single-sided p-value": 0.05,
+
+    "rank attributes": true,
+    "use enough depth": false,
+    "max depth": 1,
+    "num folds": 3,
+    "is stratified": true,
+
+    "prunning parameters": {
+        "use chi-sq test": true,
+        "max chi-sq p-value": 0.1,
+        "second most freq value min samples": 15,
+
+        "min num samples allowed": [1],
+        "use second most freq class min samples": false
+    }
+}
