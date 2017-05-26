@@ -741,16 +741,15 @@ class TreeNode(object):
 
         self.num_valid_samples = len(valid_samples_indices)
         self.class_index_num_samples = [0] * curr_dataset.num_classes
-        self.most_common_int_class = None
-        self.number_non_empty_classes = 0
-
         # Fill self.class_index_num_samples
         for sample_index in valid_samples_indices:
             self.class_index_num_samples[
                 curr_dataset.sample_class[sample_index]] += 1
-
+        self.number_non_empty_classes = sum(
+            num_samples_curr_class > 0 for num_samples_curr_class in self.class_index_num_samples)
         self.most_common_int_class = self.class_index_num_samples.index(
             max(self.class_index_num_samples))
+
         self._calculate_contingency_tables()
 
 
