@@ -204,6 +204,10 @@ def get_criteria(criteria_names_list):
             criteria_list.append(criteria.ConditionalInferenceTreeLSSquaredGini())
         elif criterion_name == "Conditional Inference Tree LS Chi Square":
             criteria_list.append(criteria.ConditionalInferenceTreeLSChiSquare())
+        elif criterion_name == "Conditional Inference Tree GW Squared Gini":
+            criteria_list.append(criteria.ConditionalInferenceTreeGWSquaredGini())
+        elif criterion_name == "Conditional Inference Tree GW Chi Square":
+            criteria_list.append(criteria.ConditionalInferenceTreeGWChiSquare())
         else:
             print('Unkown criterion name:', criterion_name)
             print('Exiting.')

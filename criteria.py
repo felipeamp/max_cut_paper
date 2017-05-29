@@ -20,7 +20,7 @@ import scipy
 EPSILON = 0.000001
 
 #: Maximum rank allowed for sigma_j matrices in Conditional Inferente Tree framework
-BIG_CONTINGENCY_TABLE_THRESHOLD = 50
+BIG_CONTINGENCY_TABLE_THRESHOLD = 300
 
 #: Contains the information about a given split. When empty, defaults to
 #: `(None, [], float('-inf'))`.
@@ -1459,29 +1459,37 @@ class ConditionalInferenceTreeTwoing(Criterion):
         Returns the best split found.
         """
         best_splits_per_attrib = []
+        use_chi2 = False
         for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                if cls._is_big_contingency_table(
-                        tree_node.contingency_tables[attrib_index].values_num_samples,
-                        tree_node.class_index_num_samples):
-                    # In this case, the chi^2-test is a good approximation.
-                    curr_c_quad_cdf = cls._get_chi_square_test_p_value(
+            if is_valid_attrib and cls._is_big_contingency_table(
+                    tree_node.contingency_tables[attrib_index].values_num_samples,
+                    tree_node.class_index_num_samples):
+                use_chi2 = True
+                break
+        if use_chi2: # Use Chi²-test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_chi2_cdf = cls._calculate_c_quad_cdf(
                         tree_node.contingency_tables[attrib_index].contingency_table,
                         tree_node.contingency_tables[attrib_index].values_num_samples,
-                        tree_node.class_index_num_samples)
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
                     best_splits_per_attrib.append(Split(attrib_index=attrib_index,
-                                                        splits_values=[], # will be calculated later
-                                                        criterion_value=curr_c_quad_cdf))
-                else:
+                                                        splits_values=[],
+                                                        criterion_value=curr_chi2_cdf))
+        else: # Use Conditional Inference Trees' test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
                     curr_c_quad_cdf = cls._calculate_c_quad_cdf(
                         tree_node.contingency_tables[attrib_index].contingency_table,
                         tree_node.contingency_tables[attrib_index].values_num_samples,
                         tree_node.class_index_num_samples,
                         len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
                     best_splits_per_attrib.append(Split(attrib_index=attrib_index,
-                                                        splits_values=[], # will be calculated later
+                                                        splits_values=[],
                                                         criterion_value=curr_c_quad_cdf))
-
         if best_splits_per_attrib:
             best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
             # Let's find the best split for this attribute using the Twoing criterion.
@@ -1820,29 +1828,37 @@ class ConditionalInferenceTreeLSSquaredGini(Criterion):
         Returns the best split found.
         """
         best_splits_per_attrib = []
+        use_chi2 = False
         for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                if cls._is_big_contingency_table(
-                        tree_node.contingency_tables[attrib_index].values_num_samples,
-                        tree_node.class_index_num_samples):
-                    # In this case, the chi^2-test is a good approximation.
-                    curr_c_quad_cdf = cls._get_chi_square_test_p_value(
+            if is_valid_attrib and cls._is_big_contingency_table(
+                    tree_node.contingency_tables[attrib_index].values_num_samples,
+                    tree_node.class_index_num_samples):
+                use_chi2 = True
+                break
+        if use_chi2: # Use Chi²-test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_chi2_cdf = cls._calculate_c_quad_cdf(
                         tree_node.contingency_tables[attrib_index].contingency_table,
                         tree_node.contingency_tables[attrib_index].values_num_samples,
-                        tree_node.class_index_num_samples)
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
                     best_splits_per_attrib.append(Split(attrib_index=attrib_index,
-                                                        splits_values=[], # will be calculated later
-                                                        criterion_value=curr_c_quad_cdf))
-                else:
+                                                        splits_values=[],
+                                                        criterion_value=curr_chi2_cdf))
+        else: # Use Conditional Inference Trees' test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
                     curr_c_quad_cdf = cls._calculate_c_quad_cdf(
                         tree_node.contingency_tables[attrib_index].contingency_table,
                         tree_node.contingency_tables[attrib_index].values_num_samples,
                         tree_node.class_index_num_samples,
                         len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
                     best_splits_per_attrib.append(Split(attrib_index=attrib_index,
-                                                        splits_values=[], # will be calculated later
+                                                        splits_values=[],
                                                         criterion_value=curr_c_quad_cdf))
-
         if best_splits_per_attrib:
             best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
             # Let's find the best split for this attribute using the LS Squared Gini criterion.
@@ -2196,29 +2212,37 @@ class ConditionalInferenceTreeLSChiSquare(Criterion):
         Returns the best split found.
         """
         best_splits_per_attrib = []
+        use_chi2 = False
         for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
-            if is_valid_attrib:
-                if cls._is_big_contingency_table(
-                        tree_node.contingency_tables[attrib_index].values_num_samples,
-                        tree_node.class_index_num_samples):
-                    # In this case, the chi^2-test is a good approximation.
-                    curr_c_quad_cdf = cls._get_chi_square_test_p_value(
+            if is_valid_attrib and cls._is_big_contingency_table(
+                    tree_node.contingency_tables[attrib_index].values_num_samples,
+                    tree_node.class_index_num_samples):
+                use_chi2 = True
+                break
+        if use_chi2: # Use Chi²-test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_chi2_cdf = cls._calculate_c_quad_cdf(
                         tree_node.contingency_tables[attrib_index].contingency_table,
                         tree_node.contingency_tables[attrib_index].values_num_samples,
-                        tree_node.class_index_num_samples)
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
                     best_splits_per_attrib.append(Split(attrib_index=attrib_index,
-                                                        splits_values=[], # will be calculated later
-                                                        criterion_value=curr_c_quad_cdf))
-                else:
+                                                        splits_values=[],
+                                                        criterion_value=curr_chi2_cdf))
+        else: # Use Conditional Inference Trees' test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
                     curr_c_quad_cdf = cls._calculate_c_quad_cdf(
                         tree_node.contingency_tables[attrib_index].contingency_table,
                         tree_node.contingency_tables[attrib_index].values_num_samples,
                         tree_node.class_index_num_samples,
                         len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
                     best_splits_per_attrib.append(Split(attrib_index=attrib_index,
-                                                        splits_values=[], # will be calculated later
+                                                        splits_values=[],
                                                         criterion_value=curr_c_quad_cdf))
-
         if best_splits_per_attrib:
             best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
             # Let's find the best split for this attribute using the LS Chi Square criterion.
@@ -2555,6 +2579,606 @@ class ConditionalInferenceTreeLSChiSquare(Criterion):
                 new_gain += weights[value][first_value_to_change_sides]
                 new_gain -= weights[value][second_value_to_change_sides]
         return new_gain
+
+    @staticmethod
+    def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
+        # Let's get the original values on each side of this partition
+        left_orig_values = set(new_to_orig_value_int[left_new_value]
+                               for left_new_value in left_new_values)
+        right_orig_values = set(new_to_orig_value_int[right_new_value]
+                                for right_new_value in right_new_values)
+        return left_orig_values, right_orig_values
+
+
+
+#################################################################################################
+#################################################################################################
+###                                                                                           ###
+###                        CONDITIONAL INFERENCE TREE GW SQUARED GINI                         ###
+###                                                                                           ###
+#################################################################################################
+#################################################################################################
+
+
+class ConditionalInferenceTreeGWSquaredGini(Criterion):
+    """
+    Conditional Inference Tree using GW Squared Gini criterion to find best split. For reference,
+    see "Unbiased Recursive Partitioning: A Conditional Inference Framework, T. Hothorn, K. Hornik
+    & A. Zeileis. Journal of Computational and Graphical Statistics Vol. 15 , Iss. 3,2006".
+    """
+    name = 'Conditional Inference Tree GW Squared Gini'
+
+    @classmethod
+    def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, using the Conditional Inference Tree
+        Framework to choose the best attribute and using the GW Squared Gini criterion to find the
+        best split for it.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns the best split found.
+        """
+        best_splits_per_attrib = []
+        use_chi2 = False
+        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_attrib and cls._is_big_contingency_table(
+                    tree_node.contingency_tables[attrib_index].values_num_samples,
+                    tree_node.class_index_num_samples):
+                use_chi2 = True
+                break
+        if use_chi2: # Use Chi²-test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_chi2_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[],
+                                                        criterion_value=curr_chi2_cdf))
+        else: # Use Conditional Inference Trees' test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_c_quad_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[],
+                                                        criterion_value=curr_c_quad_cdf))
+        if best_splits_per_attrib:
+            best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+            # Let's find the best split for this attribute using the GW Squared Gini criterion.
+            (new_to_orig_value_int,
+             new_contingency_table,
+             new_values_num_seen) = cls._remove_empty_values(
+                 tree_node.contingency_tables[best_split.attrib_index].contingency_table,
+                 tree_node.contingency_tables[best_split.attrib_index].values_num_samples)
+
+            (left_int_values,
+             right_int_values) = cls._generate_best_split(new_to_orig_value_int,
+                                                          new_contingency_table,
+                                                          new_values_num_seen)
+            return Split(attrib_index=best_split.attrib_index,
+                         splits_values=[left_int_values, right_int_values],
+                         criterion_value=best_split.criterion_value)
+        return Split()
+
+    @classmethod
+    def _is_big_contingency_table(cls, values_num_samples, class_index_num_samples):
+        num_values_seen = sum(value_num_samples > 0 for value_num_samples in values_num_samples)
+        num_classes_seen = sum(class_num_samples > 0
+                               for class_num_samples in class_index_num_samples)
+        return num_values_seen * num_classes_seen > BIG_CONTINGENCY_TABLE_THRESHOLD
+
+    @classmethod
+    def _get_chi_square_test_p_value(cls, contingency_table, values_num_samples,
+                                     class_index_num_samples):
+        classes_seen = set(class_index for class_index, class_num_samples
+                           in enumerate(class_index_num_samples) if class_num_samples > 0)
+        num_classes = len(classes_seen)
+        if num_classes == 1:
+            return 0.0
+
+        num_values = sum(num_samples > 0 for num_samples in values_num_samples)
+        num_samples = sum(num_samples for num_samples in values_num_samples)
+        curr_chi_square_value = 0.0
+        for value, value_num_sample in enumerate(values_num_samples):
+            if value_num_sample == 0:
+                continue
+            for class_index in classes_seen:
+                expected_value_class = (
+                    values_num_samples[value] * class_index_num_samples[class_index] / num_samples)
+                diff = contingency_table[value][class_index] - expected_value_class
+                curr_chi_square_value += diff * (diff / expected_value_class)
+        return 1. - scipy.stats.chi2.cdf(x=curr_chi_square_value,
+                                         df=((num_classes - 1) * (num_values - 1)))
+
+    @classmethod
+    def _calculate_c_quad_cdf(cls, contingency_table, values_num_samples, class_index_num_samples,
+                              num_valid_samples):
+        def _calculate_expected_value_h(class_index_num_samples, num_valid_samples):
+            return (1./num_valid_samples) * np.array(class_index_num_samples)
+
+        def _calculate_covariance_h(expected_value_h, class_index_num_samples, num_valid_samples):
+            num_classes = len(class_index_num_samples)
+            covariance_h = np.zeros((num_classes, num_classes))
+            for class_index, class_num_samples in enumerate(class_index_num_samples):
+                if class_num_samples:
+                    curr_class_one_hot_encoding = np.zeros((num_classes))
+                    curr_class_one_hot_encoding[class_index] = 1.
+                    diff = curr_class_one_hot_encoding - expected_value_h
+                    covariance_h += class_num_samples * np.outer(diff, diff)
+            return covariance_h / num_valid_samples
+
+        def _calculate_mu_j(values_num_samples, expected_value_h):
+            return np.outer(values_num_samples, expected_value_h).flatten(order='F')
+
+        def _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h):
+            values_num_samples_correct_dim = values_num_samples.reshape(
+                (values_num_samples.shape[0], 1))
+            return (((num_valid_samples / (num_valid_samples - 1))
+                     * np.kron(covariance_h, np.diag(values_num_samples)))
+                    - ((1 / (num_valid_samples - 1))
+                       * np.kron(covariance_h,
+                                 np.kron(values_num_samples_correct_dim,
+                                         values_num_samples_correct_dim.transpose()))))
+
+
+        expected_value_h = _calculate_expected_value_h(class_index_num_samples, num_valid_samples)
+        covariance_h = _calculate_covariance_h(expected_value_h,
+                                               class_index_num_samples,
+                                               num_valid_samples)
+        mu_j = _calculate_mu_j(values_num_samples, expected_value_h)
+        sigma_j = _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h)
+
+        temp_diff = contingency_table.flatten(order='F') - mu_j
+
+        curr_rcond = 1e-15
+        while True:
+            try:
+                sigma_j_pinv = np.linalg.pinv(sigma_j)
+                sigma_j_rank = np.linalg.matrix_rank(sigma_j)
+                break
+            except np.linalg.linalg.LinAlgError:
+                # Happens when sigma_j is (very) badly conditioned
+                pass
+            try:
+                (sigma_j_pinv, sigma_j_rank) = scipy.linalg.pinv(sigma_j, return_rank=True)
+                break
+            except:
+                # Happens when sigma_j is (very) badly conditioned
+                curr_rcond *= 10.
+                if curr_rcond > 1e-6:
+                    # We give up on this attribute
+                    print('Warning: attribute has sigma_j matrix that is not decomposable in SVD.')
+                    return float('-inf')
+
+        c_quad = np.dot(temp_diff, np.dot(sigma_j_pinv, temp_diff.transpose()))
+        return scipy.stats.chi2.cdf(x=c_quad, df=sigma_j_rank)
+
+    @staticmethod
+    def _remove_empty_values(contingency_table, values_num_samples):
+        # Define conversion from original values to new values
+        orig_to_new_value_int = {}
+        new_to_orig_value_int = []
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                orig_to_new_value_int[orig_value] = len(new_to_orig_value_int)
+                new_to_orig_value_int.append(orig_value)
+
+        # Generate the new contingency tables
+        new_contingency_table = np.zeros((len(new_to_orig_value_int), contingency_table.shape[1]),
+                                         dtype=int)
+        new_value_num_seen = np.zeros((len(new_to_orig_value_int)), dtype=int)
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                curr_new_value = orig_to_new_value_int[orig_value]
+                new_value_num_seen[curr_new_value] = curr_num_samples
+                np.copyto(dst=new_contingency_table[curr_new_value, :],
+                          src=contingency_table[orig_value, :])
+
+        return (new_to_orig_value_int,
+                new_contingency_table,
+                new_value_num_seen)
+
+    @classmethod
+    def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
+                             new_values_num_seen):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
+            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut).
+            weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
+                               dtype=np.float64)
+            for value_index_i in range(new_values_num_seen.shape[0]):
+                for value_index_j in range(new_values_num_seen.shape[0]):
+                    if value_index_i == value_index_j:
+                        continue
+                    for class_index in range(new_contingency_table.shape[1]):
+                        num_elems_value_j_diff_class = (
+                            new_values_num_seen[value_index_j]
+                            - new_contingency_table[value_index_j, class_index])
+                        weights[value_index_i, value_index_j] += (
+                            new_contingency_table[value_index_i, class_index]
+                            * num_elems_value_j_diff_class)
+            return weights
+
+        weights = _init_values_weights(new_contingency_table, new_values_num_seen)
+        frac_split_cholesky = cls._solve_max_cut(weights)
+        left_new_values, right_new_values = cls._generate_random_partition(frac_split_cholesky)
+
+        left_orig_values, right_orig_values = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                            left_new_values,
+                                                                            right_new_values)
+        return left_orig_values, right_orig_values
+
+
+    @staticmethod
+    def _solve_max_cut(weights):
+        def _solve_sdp(weights):
+            # See Max Cut approximation given by Goemans and Williamson, 1995.
+            var = cvx.Semidef(weights.shape[0])
+            obj = cvx.Minimize(0.25 * cvx.trace(weights.T * var))
+
+            constraints = [var == var.T, var >> 0]
+            for i in range(weights.shape[0]):
+                constraints.append(var[i, i] == 1)
+
+            prob = cvx.Problem(obj, constraints)
+            prob.solve(solver=cvx.SCS, verbose=False)
+            return var.value
+
+        fractional_split_squared = _solve_sdp(weights)
+        # The solution should already be symmetric, but let's just make sure the approximations
+        # didn't change that.
+        sym_fractional_split_squared = 0.5 * (fractional_split_squared
+                                              + fractional_split_squared.T)
+        # We are interested in the Cholesky decomposition of the above matrix to finally choose a
+        # random partition based on it. Detail: the above matrix may be singular, so not every
+        # method works.
+        permutation_matrix, lower_triang_matrix, _ = chol.chol_higham(sym_fractional_split_squared)
+
+        # Note that lower_triang_matrix.T is upper triangular, but
+        # frac_split_cholesky = np.dot(lower_triang_matrix.T, permutation_matrix)
+        # is not necessarily upper triangular. Since we are only interested in decomposing
+        # sym_fractional_split_squared = np.dot(frac_split_cholesky.T, frac_split_cholesky)
+        # that is not a problem.
+        return np.dot(lower_triang_matrix.T, permutation_matrix)
+
+    @staticmethod
+    def _generate_random_partition(frac_split_cholesky):
+        random_vector = np.random.randn(frac_split_cholesky.shape[1])
+        values_split = np.zeros((frac_split_cholesky.shape[1]), dtype=np.float64)
+        for column_index in range(frac_split_cholesky.shape[1]):
+            column = frac_split_cholesky[:, column_index]
+            values_split[column_index] = np.dot(random_vector, column)
+        values_split_bool = np.apply_along_axis(lambda x: x > 0.0, axis=0, arr=values_split)
+
+        left_new_values = set()
+        right_new_values = set()
+        for new_value in range(frac_split_cholesky.shape[1]):
+            if values_split_bool[new_value]:
+                left_new_values.add(new_value)
+            else:
+                right_new_values.add(new_value)
+        return left_new_values, right_new_values
+
+    @staticmethod
+    def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
+        # Let's get the original values on each side of this partition
+        left_orig_values = set(new_to_orig_value_int[left_new_value]
+                               for left_new_value in left_new_values)
+        right_orig_values = set(new_to_orig_value_int[right_new_value]
+                                for right_new_value in right_new_values)
+        return left_orig_values, right_orig_values
+
+
+
+#################################################################################################
+#################################################################################################
+###                                                                                           ###
+###                          CONDITIONAL INFERENCE TREE GW CHI SQUARE                         ###
+###                                                                                           ###
+#################################################################################################
+#################################################################################################
+
+
+class ConditionalInferenceTreeGWChiSquare(Criterion):
+    """
+    Conditional Inference Tree using GW Chi Square criterion to find best split. For reference,
+    see "Unbiased Recursive Partitioning: A Conditional Inference Framework, T. Hothorn, K. Hornik
+    & A. Zeileis. Journal of Computational and Graphical Statistics Vol. 15 , Iss. 3,2006".
+    """
+    name = 'Conditional Inference Tree GW Chi Square'
+
+    @classmethod
+    def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, using the Conditional Inference Tree
+        Framework to choose the best attribute and using the GW CHi Square criterion to find the
+        best split for it.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns the best split found.
+        """
+        best_splits_per_attrib = []
+        use_chi2 = False
+        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_attrib and cls._is_big_contingency_table(
+                    tree_node.contingency_tables[attrib_index].values_num_samples,
+                    tree_node.class_index_num_samples):
+                use_chi2 = True
+                break
+        if use_chi2: # Use Chi²-test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_chi2_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[],
+                                                        criterion_value=curr_chi2_cdf))
+        else: # Use Conditional Inference Trees' test
+            for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+                if is_valid_attrib:
+                    curr_c_quad_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    # Split will be calculated later
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[],
+                                                        criterion_value=curr_c_quad_cdf))
+        if best_splits_per_attrib:
+            best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+            # Let's find the best split for this attribute using the GW Chi Square criterion.
+            (new_to_orig_value_int,
+             new_contingency_table,
+             new_values_num_seen) = cls._remove_empty_values(
+                 tree_node.contingency_tables[best_split.attrib_index].contingency_table,
+                 tree_node.contingency_tables[best_split.attrib_index].values_num_samples)
+
+            (left_int_values,
+             right_int_values) = cls._generate_best_split(new_to_orig_value_int,
+                                                          new_contingency_table,
+                                                          new_values_num_seen)
+            return Split(attrib_index=best_split.attrib_index,
+                         splits_values=[left_int_values, right_int_values],
+                         criterion_value=best_split.criterion_value)
+        return Split()
+
+    @classmethod
+    def _is_big_contingency_table(cls, values_num_samples, class_index_num_samples):
+        num_values_seen = sum(value_num_samples > 0 for value_num_samples in values_num_samples)
+        num_classes_seen = sum(class_num_samples > 0
+                               for class_num_samples in class_index_num_samples)
+        return num_values_seen * num_classes_seen > BIG_CONTINGENCY_TABLE_THRESHOLD
+
+    @classmethod
+    def _get_chi_square_test_p_value(cls, contingency_table, values_num_samples,
+                                     class_index_num_samples):
+        classes_seen = set(class_index for class_index, class_num_samples
+                           in enumerate(class_index_num_samples) if class_num_samples > 0)
+        num_classes = len(classes_seen)
+        if num_classes == 1:
+            return 0.0
+
+        num_values = sum(num_samples > 0 for num_samples in values_num_samples)
+        num_samples = sum(num_samples for num_samples in values_num_samples)
+        curr_chi_square_value = 0.0
+        for value, value_num_sample in enumerate(values_num_samples):
+            if value_num_sample == 0:
+                continue
+            for class_index in classes_seen:
+                expected_value_class = (
+                    values_num_samples[value] * class_index_num_samples[class_index] / num_samples)
+                diff = contingency_table[value][class_index] - expected_value_class
+                curr_chi_square_value += diff * (diff / expected_value_class)
+        return 1. - scipy.stats.chi2.cdf(x=curr_chi_square_value,
+                                         df=((num_classes - 1) * (num_values - 1)))
+
+    @classmethod
+    def _calculate_c_quad_cdf(cls, contingency_table, values_num_samples, class_index_num_samples,
+                              num_valid_samples):
+        def _calculate_expected_value_h(class_index_num_samples, num_valid_samples):
+            return (1./num_valid_samples) * np.array(class_index_num_samples)
+
+        def _calculate_covariance_h(expected_value_h, class_index_num_samples, num_valid_samples):
+            num_classes = len(class_index_num_samples)
+            covariance_h = np.zeros((num_classes, num_classes))
+            for class_index, class_num_samples in enumerate(class_index_num_samples):
+                if class_num_samples:
+                    curr_class_one_hot_encoding = np.zeros((num_classes))
+                    curr_class_one_hot_encoding[class_index] = 1.
+                    diff = curr_class_one_hot_encoding - expected_value_h
+                    covariance_h += class_num_samples * np.outer(diff, diff)
+            return covariance_h / num_valid_samples
+
+        def _calculate_mu_j(values_num_samples, expected_value_h):
+            return np.outer(values_num_samples, expected_value_h).flatten(order='F')
+
+        def _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h):
+            values_num_samples_correct_dim = values_num_samples.reshape(
+                (values_num_samples.shape[0], 1))
+            return (((num_valid_samples / (num_valid_samples - 1))
+                     * np.kron(covariance_h, np.diag(values_num_samples)))
+                    - ((1 / (num_valid_samples - 1))
+                       * np.kron(covariance_h,
+                                 np.kron(values_num_samples_correct_dim,
+                                         values_num_samples_correct_dim.transpose()))))
+
+
+        expected_value_h = _calculate_expected_value_h(class_index_num_samples, num_valid_samples)
+        covariance_h = _calculate_covariance_h(expected_value_h,
+                                               class_index_num_samples,
+                                               num_valid_samples)
+        mu_j = _calculate_mu_j(values_num_samples, expected_value_h)
+        sigma_j = _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h)
+
+        temp_diff = contingency_table.flatten(order='F') - mu_j
+
+        curr_rcond = 1e-15
+        while True:
+            try:
+                sigma_j_pinv = np.linalg.pinv(sigma_j)
+                sigma_j_rank = np.linalg.matrix_rank(sigma_j)
+                break
+            except np.linalg.linalg.LinAlgError:
+                # Happens when sigma_j is (very) badly conditioned
+                pass
+            try:
+                (sigma_j_pinv, sigma_j_rank) = scipy.linalg.pinv(sigma_j, return_rank=True)
+                break
+            except:
+                # Happens when sigma_j is (very) badly conditioned
+                curr_rcond *= 10.
+                if curr_rcond > 1e-6:
+                    # We give up on this attribute
+                    print('Warning: attribute has sigma_j matrix that is not decomposable in SVD.')
+                    return float('-inf')
+
+        c_quad = np.dot(temp_diff, np.dot(sigma_j_pinv, temp_diff.transpose()))
+        return scipy.stats.chi2.cdf(x=c_quad, df=sigma_j_rank)
+
+    @staticmethod
+    def _remove_empty_values(contingency_table, values_num_samples):
+        # Define conversion from original values to new values
+        orig_to_new_value_int = {}
+        new_to_orig_value_int = []
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                orig_to_new_value_int[orig_value] = len(new_to_orig_value_int)
+                new_to_orig_value_int.append(orig_value)
+
+        # Generate the new contingency tables
+        new_contingency_table = np.zeros((len(new_to_orig_value_int), contingency_table.shape[1]),
+                                         dtype=int)
+        new_value_num_seen = np.zeros((len(new_to_orig_value_int)), dtype=int)
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                curr_new_value = orig_to_new_value_int[orig_value]
+                new_value_num_seen[curr_new_value] = curr_num_samples
+                np.copyto(dst=new_contingency_table[curr_new_value, :],
+                          src=contingency_table[orig_value, :])
+
+        return (new_to_orig_value_int,
+                new_contingency_table,
+                new_value_num_seen)
+
+    @classmethod
+    def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
+                             new_values_num_seen):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
+            # TESTED!
+            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
+            weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
+                               dtype=np.float64)
+            for value_index_i, num_samples_value_index_i in enumerate(new_values_num_seen):
+                for value_index_j, num_samples_value_index_j in enumerate(new_values_num_seen):
+                    if value_index_i >= value_index_j:
+                        continue
+
+                    # Let's calculate the weight of the (i,j)-th edge using the chi-square value.
+                    num_samples_both_values = (num_samples_value_index_i
+                                               + num_samples_value_index_j) # is always > 0.
+                    for curr_class_index in range(new_contingency_table.shape[1]):
+                        num_samples_both_values_curr_class = (
+                            new_contingency_table[value_index_i, curr_class_index]
+                            + new_contingency_table[value_index_j, curr_class_index])
+                        if num_samples_both_values_curr_class == 0:
+                            continue
+
+                        expected_value_index_i_class = (
+                            num_samples_value_index_i * num_samples_both_values_curr_class
+                            / num_samples_both_values)
+                        diff_index_i = (
+                            new_contingency_table[value_index_i, curr_class_index]
+                            - expected_value_index_i_class)
+
+                        expected_value_index_j_class = (
+                            num_samples_value_index_j * num_samples_both_values_curr_class
+                            / num_samples_both_values)
+                        diff_index_j = (
+                            new_contingency_table[value_index_j, curr_class_index]
+                            - expected_value_index_j_class)
+
+                        edge_weight_curr_class = (
+                            diff_index_i * (diff_index_i / expected_value_index_i_class)
+                            + diff_index_j * (diff_index_j / expected_value_index_j_class))
+                        weights[value_index_i, value_index_j] += edge_weight_curr_class
+
+                    if new_values_num_seen.shape[0] > 2:
+                        weights[value_index_i, value_index_j] /= (new_values_num_seen.shape[0] - 1.)
+                    weights[value_index_j, value_index_i] = weights[value_index_i, value_index_j]
+            return weights
+
+        weights = _init_values_weights(new_contingency_table, new_values_num_seen)
+        frac_split_cholesky = cls._solve_max_cut(weights)
+        left_new_values, right_new_values = cls._generate_random_partition(frac_split_cholesky)
+
+        left_orig_values, right_orig_values = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                            left_new_values,
+                                                                            right_new_values)
+        return left_orig_values, right_orig_values
+
+    @staticmethod
+    def _solve_max_cut(weights):
+        def _solve_sdp(weights):
+            # See Max Cut approximation given by Goemans and Williamson, 1995.
+            var = cvx.Semidef(weights.shape[0])
+            obj = cvx.Minimize(0.25 * cvx.trace(weights.T * var))
+
+            constraints = [var == var.T, var >> 0]
+            for i in range(weights.shape[0]):
+                constraints.append(var[i, i] == 1)
+
+            prob = cvx.Problem(obj, constraints)
+            prob.solve(solver=cvx.SCS, verbose=False)
+            return var.value
+
+        fractional_split_squared = _solve_sdp(weights)
+        # The solution should already be symmetric, but let's just make sure the approximations
+        # didn't change that.
+        sym_fractional_split_squared = 0.5 * (fractional_split_squared
+                                              + fractional_split_squared.T)
+        # We are interested in the Cholesky decomposition of the above matrix to finally choose a
+        # random partition based on it. Detail: the above matrix may be singular, so not every
+        # method works.
+        permutation_matrix, lower_triang_matrix, _ = chol.chol_higham(sym_fractional_split_squared)
+
+        # Note that lower_triang_matrix.T is upper triangular, but
+        # frac_split_cholesky = np.dot(lower_triang_matrix.T, permutation_matrix)
+        # is not necessarily upper triangular. Since we are only interested in decomposing
+        # sym_fractional_split_squared = np.dot(frac_split_cholesky.T, frac_split_cholesky)
+        # that is not a problem.
+        return np.dot(lower_triang_matrix.T, permutation_matrix)
+
+    @staticmethod
+    def _generate_random_partition(frac_split_cholesky):
+        random_vector = np.random.randn(frac_split_cholesky.shape[1])
+        values_split = np.zeros((frac_split_cholesky.shape[1]), dtype=np.float64)
+        for column_index in range(frac_split_cholesky.shape[1]):
+            column = frac_split_cholesky[:, column_index]
+            values_split[column_index] = np.dot(random_vector, column)
+        values_split_bool = np.apply_along_axis(lambda x: x > 0.0, axis=0, arr=values_split)
+
+        left_new_values = set()
+        right_new_values = set()
+        for new_value in range(frac_split_cholesky.shape[1]):
+            if values_split_bool[new_value]:
+                left_new_values.add(new_value)
+            else:
+                right_new_values.add(new_value)
+        return left_new_values, right_new_values
 
     @staticmethod
     def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
