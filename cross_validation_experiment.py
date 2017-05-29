@@ -198,6 +198,12 @@ def get_criteria(criteria_names_list):
             criteria_list.append(criteria.LSSquaredGini())
         elif criterion_name == "LS Chi Square":
             criteria_list.append(criteria.LSChiSquare())
+        elif criterion_name == "Conditional Inference Tree Twoing":
+            criteria_list.append(criteria.ConditionalInferenceTreeTwoing())
+        elif criterion_name == "Conditional Inference Tree LS Squared Gini":
+            criteria_list.append(criteria.ConditionalInferenceTreeLSSquaredGini())
+        elif criterion_name == "Conditional Inference Tree LS Chi Square":
+            criteria_list.append(criteria.ConditionalInferenceTreeLSChiSquare())
         else:
             print('Unkown criterion name:', criterion_name)
             print('Exiting.')
