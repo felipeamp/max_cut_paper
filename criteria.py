@@ -7,14 +7,28 @@
 """
 
 import abc
+import collections
 import itertools
 
 import chol
 import cvxpy as cvx
 import numpy as np
+import scipy
+
 
 #: Minimum gain allowed for Local Search methods to continue searching.
 EPSILON = 0.000001
+
+#: Maximum rank allowed for sigma_j matrices in Conditional Inferente Tree framework
+BIG_CONTINGENCY_TABLE_THRESHOLD = 50
+
+#: Contains the information about a given split. When empty, defaults to
+#: `(None, [], float('-inf'))`.
+Split = collections.namedtuple('Split',
+                               ['attrib_index',
+                                'splits_values',
+                                'criterion_value'])
+Split.__new__.__defaults__ = (None, [], float('-inf'))
 
 
 class Criterion(object):
@@ -54,12 +68,7 @@ class Twoing(Criterion):
         Args:
           tree_node (TreeNode): tree node where we want to find the best attribute/split.
 
-        Returns:
-            A tuple cointaining, in order:
-                - the index of the accepted attribute;
-                - a list of sets, each containing the values that should go to that split/subtree.
-                -  Split value according to the criterion. If no attribute has a valid split, this
-                value should be `float('-inf')`.
+        Returns the best split found.
         """
         best_splits_per_attrib = []
         for (attrib_index,
@@ -71,13 +80,13 @@ class Twoing(Criterion):
                 best_left_values = set()
                 best_right_values = set()
                 values_seen = cls._get_values_seen(
-                    tree_node.contingency_tables[attrib_index][1])
+                    tree_node.contingency_tables[attrib_index].values_num_samples)
                 for (set_left_classes,
                      set_right_classes) in cls._generate_twoing(tree_node.class_index_num_samples):
                     (twoing_contingency_table,
                      superclass_index_num_samples) = cls._get_twoing_contingency_table(
-                         tree_node.contingency_tables[attrib_index][0],
-                         tree_node.contingency_tables[attrib_index][1],
+                         tree_node.contingency_tables[attrib_index].contingency_table,
+                         tree_node.contingency_tables[attrib_index].values_num_samples,
                          set_left_classes,
                          set_right_classes)
                     original_gini = cls._calculate_gini_index(len(tree_node.valid_samples_indices),
@@ -88,16 +97,17 @@ class Twoing(Criterion):
                          original_gini,
                          superclass_index_num_samples,
                          values_seen,
-                         tree_node.contingency_tables[attrib_index][1],
+                         tree_node.contingency_tables[attrib_index].values_num_samples,
                          twoing_contingency_table,
                          len(tree_node.valid_samples_indices))
                     if curr_gini_gain > best_total_gini_gain:
                         best_total_gini_gain = curr_gini_gain
                         best_left_values = left_values
                         best_right_values = right_values
-                best_splits_per_attrib.append((attrib_index,
-                                               [best_left_values, best_right_values],
-                                               best_total_gini_gain))
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[best_left_values, best_right_values],
+                          criterion_value=best_total_gini_gain))
             elif is_valid_numeric_attrib:
                 values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
                                                                   tree_node.dataset.samples,
@@ -109,15 +119,13 @@ class Twoing(Criterion):
                  first_right_value) = cls._twoing_for_numeric(
                      values_and_classes,
                      tree_node.dataset.num_classes)
-                best_splits_per_attrib.append((attrib_index,
-                                               [{last_left_value}, {first_right_value}],
-                                               best_twoing))
-
-        best_attribute_and_split = (None, [], float('-inf'))
-        for curr_attrib_split in best_splits_per_attrib:
-            if curr_attrib_split[2] > best_attribute_and_split[2]:
-                best_attribute_and_split = curr_attrib_split
-        return best_attribute_and_split
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[{last_left_value}, {first_right_value}],
+                          criterion_value=best_twoing))
+        if best_splits_per_attrib:
+            return max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+        return Split()
 
     @staticmethod
     def _get_values_seen(values_num_samples):
@@ -384,12 +392,7 @@ class GWSquaredGini(Criterion):
         Args:
           tree_node (TreeNode): tree node where we want to find the best attribute/split.
 
-        Returns:
-            A tuple cointaining, in order:
-                - the index of the accepted attribute;
-                - a list of sets, each containing the values that should go to that split/subtree.
-                -  Split value according to the criterion. If no attribute has a valid split, this
-                value should be `float('-inf')`.
+        Returns the best split found.
         """
         best_splits_per_attrib = []
         for attrib_index, is_valid_nominal_attrib in enumerate(tree_node.valid_nominal_attribute):
@@ -397,23 +400,21 @@ class GWSquaredGini(Criterion):
                 (new_to_orig_value_int,
                  new_contingency_table,
                  new_values_num_seen) = cls._remove_empty_values(
-                     tree_node.contingency_tables[attrib_index][0],
-                     tree_node.contingency_tables[attrib_index][1])
+                     tree_node.contingency_tables[attrib_index].contingency_table,
+                     tree_node.contingency_tables[attrib_index].values_num_samples)
 
                 (curr_cut_value,
                  left_int_values,
                  right_int_values) = cls._generate_best_split(new_to_orig_value_int,
                                                               new_contingency_table,
                                                               new_values_num_seen)
-                best_splits_per_attrib.append((attrib_index,
-                                               [left_int_values, right_int_values],
-                                               curr_cut_value))
-
-        best_attribute_and_split = (None, [], float('-inf'))
-        for curr_attrib_split in best_splits_per_attrib:
-            if curr_attrib_split[2] > best_attribute_and_split[2]:
-                best_attribute_and_split = curr_attrib_split
-        return best_attribute_and_split
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[left_int_values, right_int_values],
+                          criterion_value=curr_cut_value))
+        if best_splits_per_attrib:
+            return max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+        return Split()
 
     @staticmethod
     def _remove_empty_values(contingency_table, values_num_samples):
@@ -561,12 +562,7 @@ class GWChiSquare(Criterion):
         Args:
           tree_node (TreeNode): tree node where we want to find the best attribute/split.
 
-        Returns:
-            A tuple cointaining, in order:
-                - the index of the accepted attribute;
-                - a list of sets, each containing the values that should go to that split/subtree.
-                -  Split value according to the criterion. If no attribute has a valid split, this
-                value should be `float('-inf')`.
+        Returns the best split found.
         """
         best_splits_per_attrib = []
         for attrib_index, is_valid_nominal_attrib in enumerate(tree_node.valid_nominal_attribute):
@@ -574,23 +570,21 @@ class GWChiSquare(Criterion):
                 (new_to_orig_value_int,
                  new_contingency_table,
                  new_values_num_seen) = cls._remove_empty_values(
-                     tree_node.contingency_tables[attrib_index][0],
-                     tree_node.contingency_tables[attrib_index][1])
+                     tree_node.contingency_tables[attrib_index].contingency_table,
+                     tree_node.contingency_tables[attrib_index].values_num_samples)
 
                 (curr_cut_value,
                  left_int_values,
                  right_int_values) = cls._generate_best_split(new_to_orig_value_int,
                                                               new_contingency_table,
                                                               new_values_num_seen)
-                best_splits_per_attrib.append((attrib_index,
-                                               [left_int_values, right_int_values],
-                                               curr_cut_value))
-
-        best_attribute_and_split = (None, [], float('-inf'))
-        for curr_attrib_split in best_splits_per_attrib:
-            if curr_attrib_split[2] > best_attribute_and_split[2]:
-                best_attribute_and_split = curr_attrib_split
-        return best_attribute_and_split
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[left_int_values, right_int_values],
+                          criterion_value=curr_cut_value))
+        if best_splits_per_attrib:
+            return max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+        return Split()
 
     @staticmethod
     def _remove_empty_values(contingency_table, values_num_samples):
@@ -764,12 +758,7 @@ class LSSquaredGini(Criterion):
         Args:
           tree_node (TreeNode): tree node where we want to find the best attribute/split.
 
-        Returns:
-            A tuple cointaining, in order:
-                - the index of the accepted attribute;
-                - a list of sets, each containing the values that should go to that split/subtree.
-                -  Split value according to the criterion. If no attribute has a valid split, this
-                value should be `float('-inf')`.
+        Returns the best split found.
         """
         best_splits_per_attrib = []
         for (attrib_index,
@@ -780,16 +769,17 @@ class LSSquaredGini(Criterion):
                 (new_to_orig_value_int,
                  new_contingency_table,
                  new_values_num_seen) = cls._remove_empty_values(
-                     tree_node.contingency_tables[attrib_index][0],
-                     tree_node.contingency_tables[attrib_index][1])
+                     tree_node.contingency_tables[attrib_index].contingency_table,
+                     tree_node.contingency_tables[attrib_index].values_num_samples)
                 (curr_cut_value,
                  left_int_values,
                  right_int_values) = cls._generate_best_split(new_to_orig_value_int,
                                                               new_contingency_table,
                                                               new_values_num_seen)
-                best_splits_per_attrib.append((attrib_index,
-                                               [left_int_values, right_int_values],
-                                               curr_cut_value))
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[left_int_values, right_int_values],
+                          criterion_value=curr_cut_value))
             elif is_valid_numeric_attrib:
                 values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
                                                                   tree_node.dataset.samples,
@@ -801,15 +791,13 @@ class LSSquaredGini(Criterion):
                  first_right_value) = cls._best_cut_for_numeric(
                      values_and_classes,
                      tree_node.dataset.num_classes)
-                best_splits_per_attrib.append((attrib_index,
-                                               [{last_left_value}, {first_right_value}],
-                                               cut_val))
-
-        best_attribute_and_split = (None, [], float('-inf'))
-        for curr_attrib_split in best_splits_per_attrib:
-            if curr_attrib_split[2] > best_attribute_and_split[2]:
-                best_attribute_and_split = curr_attrib_split
-        return best_attribute_and_split
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[{last_left_value}, {first_right_value}],
+                          criterion_value=cut_val))
+        if best_splits_per_attrib:
+            return max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+        return Split()
 
     @staticmethod
     def _remove_empty_values(contingency_table, values_num_samples):
@@ -1098,12 +1086,7 @@ class LSChiSquare(Criterion):
         Args:
           tree_node (TreeNode): tree node where we want to find the best attribute/split.
 
-        Returns:
-            A tuple cointaining, in order:
-                - the index of the accepted attribute;
-                - a list of sets, each containing the values that should go to that split/subtree.
-                -  Split value according to the criterion. If no attribute has a valid split, this
-                value should be `float('-inf')`.
+        Returns the best split found.
         """
         best_splits_per_attrib = []
         for (attrib_index,
@@ -1114,16 +1097,17 @@ class LSChiSquare(Criterion):
                 (new_to_orig_value_int,
                  new_contingency_table,
                  new_values_num_seen) = cls._remove_empty_values(
-                     tree_node.contingency_tables[attrib_index][0],
-                     tree_node.contingency_tables[attrib_index][1])
+                     tree_node.contingency_tables[attrib_index].contingency_table,
+                     tree_node.contingency_tables[attrib_index].values_num_samples)
                 (curr_cut_value,
                  left_int_values,
                  right_int_values) = cls._generate_best_split(new_to_orig_value_int,
                                                               new_contingency_table,
                                                               new_values_num_seen)
-                best_splits_per_attrib.append((attrib_index,
-                                               [left_int_values, right_int_values],
-                                               curr_cut_value))
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[left_int_values, right_int_values],
+                          criterion_value=curr_cut_value))
             elif is_valid_numeric_attrib:
                 values_and_classes = cls._get_numeric_values_seen(tree_node.valid_samples_indices,
                                                                   tree_node.dataset.samples,
@@ -1136,15 +1120,13 @@ class LSChiSquare(Criterion):
                      values_and_classes,
                      tree_node.dataset.num_classes,
                      tree_node.class_index_num_samples)
-                best_splits_per_attrib.append((attrib_index,
-                                               [{last_left_value}, {first_right_value}],
-                                               cut_val))
-
-        best_attribute_and_split = (None, [], float('-inf'))
-        for curr_attrib_split in best_splits_per_attrib:
-            if curr_attrib_split[2] > best_attribute_and_split[2]:
-                best_attribute_and_split = curr_attrib_split
-        return best_attribute_and_split
+                best_splits_per_attrib.append(
+                    Split(attrib_index=attrib_index,
+                          splits_values=[{last_left_value}, {first_right_value}],
+                          criterion_value=cut_val))
+        if best_splits_per_attrib:
+            return max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+        return Split()
 
     @staticmethod
     def _remove_empty_values(contingency_table, values_num_samples):
@@ -1443,3 +1425,1142 @@ class LSChiSquare(Criterion):
             class_num_right[first_right_class] -= 1
 
         return (best_cut_value, best_last_left_new_value, best_first_right_new_value)
+
+
+
+#################################################################################################
+#################################################################################################
+###                                                                                           ###
+###                            CONDITIONAL INFERENCE TREE TWOING                              ###
+###                                                                                           ###
+#################################################################################################
+#################################################################################################
+
+
+class ConditionalInferenceTreeTwoing(Criterion):
+    """
+    Conditional Inference Tree using Twoing criterion to find best split. For references, see
+    "Unbiased Recursive Partitioning: A Conditional Inference Framework, T. Hothorn, K. Hornik & A.
+    Zeileis. Journal of Computational and Graphical Statistics Vol. 15 , Iss. 3,2006" and
+    "Breiman, L., Friedman, J. J., Olshen, R. A., and Stone, C. J. Classification and Regression
+    Trees. Wadsworth, 1984".
+    """
+    name = 'Conditional Inference Tree Twoing'
+
+    @classmethod
+    def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, using the Conditional Inference Tree
+        Framework to choose the best attribute and using the Twoing criterion to find the best split
+        for it.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns the best split found.
+        """
+        best_splits_per_attrib = []
+        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_attrib:
+                if cls._is_big_contingency_table(
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples):
+                    # In this case, the chi^2-test is a good approximation.
+                    curr_c_quad_cdf = cls._get_chi_square_test_p_value(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples)
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[], # will be calculated later
+                                                        criterion_value=curr_c_quad_cdf))
+                else:
+                    curr_c_quad_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[], # will be calculated later
+                                                        criterion_value=curr_c_quad_cdf))
+
+        if best_splits_per_attrib:
+            best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+            # Let's find the best split for this attribute using the Twoing criterion.
+            best_total_gini_gain = float('-inf')
+            best_left_values = set()
+            best_right_values = set()
+            values_seen = cls._get_values_seen(
+                tree_node.contingency_tables[best_split.attrib_index].values_num_samples)
+            for (set_left_classes,
+                 set_right_classes) in cls._generate_twoing(tree_node.class_index_num_samples):
+                (twoing_contingency_table,
+                 superclass_index_num_samples) = cls._get_twoing_contingency_table(
+                     tree_node.contingency_tables[best_split.attrib_index].contingency_table,
+                     tree_node.contingency_tables[best_split.attrib_index].values_num_samples,
+                     set_left_classes,
+                     set_right_classes)
+                original_gini = cls._calculate_gini_index(len(tree_node.valid_samples_indices),
+                                                          superclass_index_num_samples)
+                (curr_gini_gain,
+                 left_values,
+                 right_values) = cls._two_class_trick(
+                     original_gini,
+                     superclass_index_num_samples,
+                     values_seen,
+                     tree_node.contingency_tables[best_split.attrib_index].values_num_samples,
+                     twoing_contingency_table,
+                     len(tree_node.valid_samples_indices))
+                if curr_gini_gain > best_total_gini_gain:
+                    best_total_gini_gain = curr_gini_gain
+                    best_left_values = left_values
+                    best_right_values = right_values
+            return Split(attrib_index=best_split.attrib_index,
+                         splits_values=[best_left_values, best_right_values],
+                         criterion_value=best_split.criterion_value)
+        return Split()
+
+    @classmethod
+    def _is_big_contingency_table(cls, values_num_samples, class_index_num_samples):
+        num_values_seen = sum(value_num_samples > 0 for value_num_samples in values_num_samples)
+        num_classes_seen = sum(class_num_samples > 0
+                               for class_num_samples in class_index_num_samples)
+        return num_values_seen * num_classes_seen > BIG_CONTINGENCY_TABLE_THRESHOLD
+
+    @classmethod
+    def _get_chi_square_test_p_value(cls, contingency_table, values_num_samples,
+                                     class_index_num_samples):
+        classes_seen = set(class_index for class_index, class_num_samples
+                           in enumerate(class_index_num_samples) if class_num_samples > 0)
+        num_classes = len(classes_seen)
+        if num_classes == 1:
+            return 0.0
+
+        num_values = sum(num_samples > 0 for num_samples in values_num_samples)
+        num_samples = sum(num_samples for num_samples in values_num_samples)
+        curr_chi_square_value = 0.0
+        for value, value_num_sample in enumerate(values_num_samples):
+            if value_num_sample == 0:
+                continue
+            for class_index in classes_seen:
+                expected_value_class = (
+                    values_num_samples[value] * class_index_num_samples[class_index] / num_samples)
+                diff = contingency_table[value][class_index] - expected_value_class
+                curr_chi_square_value += diff * (diff / expected_value_class)
+        return 1. - scipy.stats.chi2.cdf(x=curr_chi_square_value,
+                                         df=((num_classes - 1) * (num_values - 1)))
+
+    @classmethod
+    def _calculate_c_quad_cdf(cls, contingency_table, values_num_samples, class_index_num_samples,
+                              num_valid_samples):
+        def _calculate_expected_value_h(class_index_num_samples, num_valid_samples):
+            return (1./num_valid_samples) * np.array(class_index_num_samples)
+
+        def _calculate_covariance_h(expected_value_h, class_index_num_samples, num_valid_samples):
+            num_classes = len(class_index_num_samples)
+            covariance_h = np.zeros((num_classes, num_classes))
+            for class_index, class_num_samples in enumerate(class_index_num_samples):
+                if class_num_samples:
+                    curr_class_one_hot_encoding = np.zeros((num_classes))
+                    curr_class_one_hot_encoding[class_index] = 1.
+                    diff = curr_class_one_hot_encoding - expected_value_h
+                    covariance_h += class_num_samples * np.outer(diff, diff)
+            return covariance_h / num_valid_samples
+
+        def _calculate_mu_j(values_num_samples, expected_value_h):
+            return np.outer(values_num_samples, expected_value_h).flatten(order='F')
+
+        def _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h):
+            values_num_samples_correct_dim = values_num_samples.reshape(
+                (values_num_samples.shape[0], 1))
+            return (((num_valid_samples / (num_valid_samples - 1))
+                     * np.kron(covariance_h, np.diag(values_num_samples)))
+                    - ((1 / (num_valid_samples - 1))
+                       * np.kron(covariance_h,
+                                 np.kron(values_num_samples_correct_dim,
+                                         values_num_samples_correct_dim.transpose()))))
+
+
+        expected_value_h = _calculate_expected_value_h(class_index_num_samples, num_valid_samples)
+        covariance_h = _calculate_covariance_h(expected_value_h,
+                                               class_index_num_samples,
+                                               num_valid_samples)
+        mu_j = _calculate_mu_j(values_num_samples, expected_value_h)
+        sigma_j = _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h)
+
+        temp_diff = contingency_table.flatten(order='F') - mu_j
+
+        curr_rcond = 1e-15
+        while True:
+            try:
+                sigma_j_pinv = np.linalg.pinv(sigma_j)
+                sigma_j_rank = np.linalg.matrix_rank(sigma_j)
+                break
+            except np.linalg.linalg.LinAlgError:
+                # Happens when sigma_j is (very) badly conditioned
+                pass
+            try:
+                (sigma_j_pinv, sigma_j_rank) = scipy.linalg.pinv(sigma_j, return_rank=True)
+                break
+            except:
+                # Happens when sigma_j is (very) badly conditioned
+                curr_rcond *= 10.
+                if curr_rcond > 1e-6:
+                    # We give up on this attribute
+                    print('Warning: attribute has sigma_j matrix that is not decomposable in SVD.')
+                    return float('-inf')
+
+        c_quad = np.dot(temp_diff, np.dot(sigma_j_pinv, temp_diff.transpose()))
+        return scipy.stats.chi2.cdf(x=c_quad, df=sigma_j_rank)
+
+    @staticmethod
+    def _get_values_seen(values_num_samples):
+        values_seen = set()
+        for value, num_samples in enumerate(values_num_samples):
+            if num_samples > 0:
+                values_seen.add(value)
+        return values_seen
+
+    @staticmethod
+    def _generate_twoing(class_index_num_samples):
+        # We only need to look at superclasses of up to (len(class_index_num_samples)/2 + 1)
+        # elements because of symmetry! The subsets we are not choosing are complements of the ones
+        # chosen.
+        non_empty_classes = set([])
+        for class_index, class_num_samples in enumerate(class_index_num_samples):
+            if class_num_samples > 0:
+                non_empty_classes.add(class_index)
+        number_non_empty_classes = len(non_empty_classes)
+
+        for left_classes in itertools.chain.from_iterable(
+                itertools.combinations(non_empty_classes, size_left_superclass)
+                for size_left_superclass in range(1, number_non_empty_classes // 2 + 1)):
+            set_left_classes = set(left_classes)
+            set_right_classes = non_empty_classes - set_left_classes
+            if not set_left_classes or not set_right_classes:
+                # A valid split must have at least one sample in each side
+                continue
+            yield set_left_classes, set_right_classes
+
+    @staticmethod
+    def _get_twoing_contingency_table(contingency_table, values_num_samples, set_left_classes,
+                                      set_right_classes):
+        twoing_contingency_table = np.zeros((contingency_table.shape[0], 2), dtype=float)
+        superclass_index_num_samples = [0, 0]
+        for value, value_num_samples in enumerate(values_num_samples):
+            if value_num_samples == 0:
+                continue
+            for class_index in set_left_classes:
+                superclass_index_num_samples[0] += contingency_table[value][class_index]
+                twoing_contingency_table[value][0] += contingency_table[value][class_index]
+            for class_index in set_right_classes:
+                superclass_index_num_samples[1] += contingency_table[value][class_index]
+                twoing_contingency_table[value][1] += contingency_table[value][class_index]
+        return twoing_contingency_table, superclass_index_num_samples
+
+    @staticmethod
+    def _two_class_trick(original_gini, class_index_num_samples, values_seen, values_num_samples,
+                         contingency_table, num_total_valid_samples):
+        # TESTED!
+        def _get_non_empty_class_indices(class_index_num_samples):
+            # TESTED!
+            first_non_empty_class = None
+            second_non_empty_class = None
+            for class_index, class_num_samples in enumerate(class_index_num_samples):
+                if class_num_samples > 0:
+                    if first_non_empty_class is None:
+                        first_non_empty_class = class_index
+                    else:
+                        second_non_empty_class = class_index
+                        break
+            return first_non_empty_class, second_non_empty_class
+
+        def _calculate_value_class_ratio(values_seen, values_num_samples, contingency_table,
+                                         non_empty_class_indices):
+            # TESTED!
+            value_number_ratio = [] # [(value, number_on_second_class, ratio_on_second_class)]
+            second_class_index = non_empty_class_indices[1]
+            for curr_value in values_seen:
+                number_second_non_empty = contingency_table[curr_value][second_class_index]
+                value_number_ratio.append((curr_value,
+                                           number_second_non_empty,
+                                           number_second_non_empty/values_num_samples[curr_value]))
+            value_number_ratio.sort(key=lambda tup: tup[2])
+            return value_number_ratio
+
+        def _calculate_children_gini_index(num_left_first, num_left_second, num_right_first,
+                                           num_right_second, num_left_samples, num_right_samples):
+            # TESTED!
+            if num_left_samples != 0:
+                left_first_class_freq_ratio = float(num_left_first)/float(num_left_samples)
+                left_second_class_freq_ratio = float(num_left_second)/float(num_left_samples)
+                left_split_gini_index = (1.0
+                                         - left_first_class_freq_ratio**2
+                                         - left_second_class_freq_ratio**2)
+            else:
+                # We can set left_split_gini_index to any value here, since it will be multiplied
+                # by zero in curr_children_gini_index
+                left_split_gini_index = 1.0
+
+            if num_right_samples != 0:
+                right_first_class_freq_ratio = float(num_right_first)/float(num_right_samples)
+                right_second_class_freq_ratio = float(num_right_second)/float(num_right_samples)
+                right_split_gini_index = (1.0
+                                          - right_first_class_freq_ratio**2
+                                          - right_second_class_freq_ratio**2)
+            else:
+                # We can set right_split_gini_index to any value here, since it will be multiplied
+                # by zero in curr_children_gini_index
+                right_split_gini_index = 1.0
+
+            curr_children_gini_index = ((num_left_samples * left_split_gini_index
+                                         + num_right_samples * right_split_gini_index)
+                                        / (num_left_samples + num_right_samples))
+            return curr_children_gini_index
+
+        # We only need to sort values by the percentage of samples in second non-empty class with
+        # this value. The best split will be given by choosing an index to split this list of
+        # values in two.
+        (first_non_empty_class,
+         second_non_empty_class) = _get_non_empty_class_indices(class_index_num_samples)
+        if first_non_empty_class is None or second_non_empty_class is None:
+            return (float('-inf'), {0}, set())
+
+        value_number_ratio = _calculate_value_class_ratio(values_seen,
+                                                          values_num_samples,
+                                                          contingency_table,
+                                                          (first_non_empty_class,
+                                                           second_non_empty_class))
+
+        best_split_total_gini_gain = float('-inf')
+        best_last_left_index = 0
+
+        num_left_first = 0
+        num_left_second = 0
+        num_left_samples = 0
+        num_right_first = class_index_num_samples[first_non_empty_class]
+        num_right_second = class_index_num_samples[second_non_empty_class]
+        num_right_samples = num_total_valid_samples
+
+        for last_left_index, (last_left_value, last_left_num_second, _) in enumerate(
+                value_number_ratio[:-1]):
+            num_samples_last_left_value = values_num_samples[last_left_value]
+            # num_samples_last_left_value > 0 always, since the values without samples were not
+            # added to the values_seen when created by cls._generate_value_to_index
+
+            last_left_num_first = num_samples_last_left_value - last_left_num_second
+
+            num_left_samples += num_samples_last_left_value
+            num_left_first += last_left_num_first
+            num_left_second += last_left_num_second
+            num_right_samples -= num_samples_last_left_value
+            num_right_first -= last_left_num_first
+            num_right_second -= last_left_num_second
+
+            curr_children_gini_index = _calculate_children_gini_index(num_left_first,
+                                                                      num_left_second,
+                                                                      num_right_first,
+                                                                      num_right_second,
+                                                                      num_left_samples,
+                                                                      num_right_samples)
+            curr_gini_gain = original_gini - curr_children_gini_index
+            if curr_gini_gain > best_split_total_gini_gain:
+                best_split_total_gini_gain = curr_gini_gain
+                best_last_left_index = last_left_index
+
+        # Let's get the values and split the indices corresponding to the best split found.
+        set_left_values = set([tup[0] for tup in value_number_ratio[:best_last_left_index + 1]])
+        set_right_values = set(values_seen) - set_left_values
+
+        return (best_split_total_gini_gain, set_left_values, set_right_values)
+
+    @staticmethod
+    def _calculate_gini_index(side_num, class_num_side):
+        gini_index = 1.0
+        for curr_class_num_side in class_num_side:
+            if curr_class_num_side > 0:
+                gini_index -= (curr_class_num_side/side_num)**2
+        return gini_index
+
+    @classmethod
+    def _calculate_children_gini_index(cls, left_num, class_num_left, right_num, class_num_right):
+        left_split_gini_index = cls._calculate_gini_index(left_num, class_num_left)
+        right_split_gini_index = cls._calculate_gini_index(right_num, class_num_right)
+        children_gini_index = ((left_num * left_split_gini_index
+                                + right_num * right_split_gini_index)
+                               / (left_num + right_num))
+        return children_gini_index
+
+
+
+#################################################################################################
+#################################################################################################
+###                                                                                           ###
+###                        CONDITIONAL INFERENCE TREE LS SQUARED GINI                         ###
+###                                                                                           ###
+#################################################################################################
+#################################################################################################
+
+
+class ConditionalInferenceTreeLSSquaredGini(Criterion):
+    """
+    Conditional Inference Tree using LS Squared Gini criterion to find best split. For reference,
+    see "Unbiased Recursive Partitioning: A Conditional Inference Framework, T. Hothorn, K. Hornik
+    & A. Zeileis. Journal of Computational and Graphical Statistics Vol. 15 , Iss. 3,2006".
+    """
+    name = 'Conditional Inference Tree LS Squared Gini'
+
+    @classmethod
+    def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, using the Conditional Inference Tree
+        Framework to choose the best attribute and using the LS Squared Gini criterion to find the
+        best split for it.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns the best split found.
+        """
+        best_splits_per_attrib = []
+        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_attrib:
+                if cls._is_big_contingency_table(
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples):
+                    # In this case, the chi^2-test is a good approximation.
+                    curr_c_quad_cdf = cls._get_chi_square_test_p_value(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples)
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[], # will be calculated later
+                                                        criterion_value=curr_c_quad_cdf))
+                else:
+                    curr_c_quad_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[], # will be calculated later
+                                                        criterion_value=curr_c_quad_cdf))
+
+        if best_splits_per_attrib:
+            best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+            # Let's find the best split for this attribute using the LS Squared Gini criterion.
+            (new_to_orig_value_int,
+             new_contingency_table,
+             new_values_num_seen) = cls._remove_empty_values(
+                 tree_node.contingency_tables[best_split.attrib_index].contingency_table,
+                 tree_node.contingency_tables[best_split.attrib_index].values_num_samples)
+            (_,
+             left_int_values,
+             right_int_values) = cls._generate_best_split(new_to_orig_value_int,
+                                                          new_contingency_table,
+                                                          new_values_num_seen)
+            return Split(attrib_index=best_split.attrib_index,
+                         splits_values=[left_int_values, right_int_values],
+                         criterion_value=best_split.criterion_value)
+        return Split()
+
+    @classmethod
+    def _is_big_contingency_table(cls, values_num_samples, class_index_num_samples):
+        num_values_seen = sum(value_num_samples > 0 for value_num_samples in values_num_samples)
+        num_classes_seen = sum(class_num_samples > 0
+                               for class_num_samples in class_index_num_samples)
+        return num_values_seen * num_classes_seen > BIG_CONTINGENCY_TABLE_THRESHOLD
+
+    @classmethod
+    def _get_chi_square_test_p_value(cls, contingency_table, values_num_samples,
+                                     class_index_num_samples):
+        classes_seen = set(class_index for class_index, class_num_samples
+                           in enumerate(class_index_num_samples) if class_num_samples > 0)
+        num_classes = len(classes_seen)
+        if num_classes == 1:
+            return 0.0
+
+        num_values = sum(num_samples > 0 for num_samples in values_num_samples)
+        num_samples = sum(num_samples for num_samples in values_num_samples)
+        curr_chi_square_value = 0.0
+        for value, value_num_sample in enumerate(values_num_samples):
+            if value_num_sample == 0:
+                continue
+            for class_index in classes_seen:
+                expected_value_class = (
+                    values_num_samples[value] * class_index_num_samples[class_index] / num_samples)
+                diff = contingency_table[value][class_index] - expected_value_class
+                curr_chi_square_value += diff * (diff / expected_value_class)
+        return 1. - scipy.stats.chi2.cdf(x=curr_chi_square_value,
+                                         df=((num_classes - 1) * (num_values - 1)))
+
+    @classmethod
+    def _calculate_c_quad_cdf(cls, contingency_table, values_num_samples, class_index_num_samples,
+                              num_valid_samples):
+        def _calculate_expected_value_h(class_index_num_samples, num_valid_samples):
+            return (1./num_valid_samples) * np.array(class_index_num_samples)
+
+        def _calculate_covariance_h(expected_value_h, class_index_num_samples, num_valid_samples):
+            num_classes = len(class_index_num_samples)
+            covariance_h = np.zeros((num_classes, num_classes))
+            for class_index, class_num_samples in enumerate(class_index_num_samples):
+                if class_num_samples:
+                    curr_class_one_hot_encoding = np.zeros((num_classes))
+                    curr_class_one_hot_encoding[class_index] = 1.
+                    diff = curr_class_one_hot_encoding - expected_value_h
+                    covariance_h += class_num_samples * np.outer(diff, diff)
+            return covariance_h / num_valid_samples
+
+        def _calculate_mu_j(values_num_samples, expected_value_h):
+            return np.outer(values_num_samples, expected_value_h).flatten(order='F')
+
+        def _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h):
+            values_num_samples_correct_dim = values_num_samples.reshape(
+                (values_num_samples.shape[0], 1))
+            return (((num_valid_samples / (num_valid_samples - 1))
+                     * np.kron(covariance_h, np.diag(values_num_samples)))
+                    - ((1 / (num_valid_samples - 1))
+                       * np.kron(covariance_h,
+                                 np.kron(values_num_samples_correct_dim,
+                                         values_num_samples_correct_dim.transpose()))))
+
+
+        expected_value_h = _calculate_expected_value_h(class_index_num_samples, num_valid_samples)
+        covariance_h = _calculate_covariance_h(expected_value_h,
+                                               class_index_num_samples,
+                                               num_valid_samples)
+        mu_j = _calculate_mu_j(values_num_samples, expected_value_h)
+        sigma_j = _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h)
+
+        temp_diff = contingency_table.flatten(order='F') - mu_j
+
+        curr_rcond = 1e-15
+        while True:
+            try:
+                sigma_j_pinv = np.linalg.pinv(sigma_j)
+                sigma_j_rank = np.linalg.matrix_rank(sigma_j)
+                break
+            except np.linalg.linalg.LinAlgError:
+                # Happens when sigma_j is (very) badly conditioned
+                pass
+            try:
+                (sigma_j_pinv, sigma_j_rank) = scipy.linalg.pinv(sigma_j, return_rank=True)
+                break
+            except:
+                # Happens when sigma_j is (very) badly conditioned
+                curr_rcond *= 10.
+                if curr_rcond > 1e-6:
+                    # We give up on this attribute
+                    print('Warning: attribute has sigma_j matrix that is not decomposable in SVD.')
+                    return float('-inf')
+
+        c_quad = np.dot(temp_diff, np.dot(sigma_j_pinv, temp_diff.transpose()))
+        return scipy.stats.chi2.cdf(x=c_quad, df=sigma_j_rank)
+
+    @staticmethod
+    def _remove_empty_values(contingency_table, values_num_samples):
+        # Define conversion from original values to new values
+        orig_to_new_value_int = {}
+        new_to_orig_value_int = []
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                orig_to_new_value_int[orig_value] = len(new_to_orig_value_int)
+                new_to_orig_value_int.append(orig_value)
+
+        # Generate the new contingency tables
+        new_contingency_table = np.zeros((len(new_to_orig_value_int), contingency_table.shape[1]),
+                                         dtype=int)
+        new_value_num_seen = np.zeros((len(new_to_orig_value_int)), dtype=int)
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                curr_new_value = orig_to_new_value_int[orig_value]
+                new_value_num_seen[curr_new_value] = curr_num_samples
+                np.copyto(dst=new_contingency_table[curr_new_value, :],
+                          src=contingency_table[orig_value, :])
+
+        return (new_to_orig_value_int,
+                new_contingency_table,
+                new_value_num_seen)
+
+    @classmethod
+    def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
+                             new_values_num_seen):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
+            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut).
+            weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
+                               dtype=np.float64)
+            for value_index_i in range(new_values_num_seen.shape[0]):
+                for value_index_j in range(new_values_num_seen.shape[0]):
+                    if value_index_i == value_index_j:
+                        continue
+                    for class_index in range(new_contingency_table.shape[1]):
+                        num_elems_value_j_diff_class = (
+                            new_values_num_seen[value_index_j]
+                            - new_contingency_table[value_index_j, class_index])
+                        weights[value_index_i, value_index_j] += (
+                            new_contingency_table[value_index_i, class_index]
+                            * num_elems_value_j_diff_class)
+            return weights
+
+
+        weights = _init_values_weights(new_contingency_table, new_values_num_seen)
+        # Initial partition generated through a greedy approach.
+        (cut_val,
+         left_new_values,
+         right_new_values) = cls._generate_initial_partition(len(new_values_num_seen), weights)
+        # Look for a better solution locally, changing the side of a single node or exchanging a
+        # pair of nodes from different sides, while it increases the cut value.
+        (cut_val_switched,
+         left_new_values_switched,
+         right_new_values_switched) = cls._switch_while_increase(cut_val,
+                                                                 left_new_values,
+                                                                 right_new_values,
+                                                                 weights)
+        if cut_val_switched > cut_val:
+            cut_val = cut_val_switched
+            (left_orig_values,
+             right_orig_values) = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                left_new_values_switched,
+                                                                right_new_values_switched)
+        else:
+            (left_orig_values,
+             right_orig_values) = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                left_new_values,
+                                                                right_new_values)
+        return cut_val, left_orig_values, right_orig_values
+
+    @classmethod
+    def _generate_initial_partition(cls, num_values, weights):
+        set_left_values = set()
+        set_right_values = set()
+        cut_val = 0.0
+
+        for value in range(num_values):
+            if not set_left_values: # first node goes to the left
+                set_left_values.add(value)
+                continue
+            gain_assigning_right = sum(weights[value][left_value]
+                                       for left_value in set_left_values)
+            gain_assigning_left = sum(weights[value][right_value]
+                                      for right_value in set_right_values)
+            if gain_assigning_right >= gain_assigning_left:
+                set_right_values.add(value)
+                cut_val += gain_assigning_right
+            else:
+                set_left_values.add(value)
+                cut_val += gain_assigning_left
+        return cut_val, set_left_values, set_right_values
+
+    @classmethod
+    def _switch_while_increase(cls, cut_val, set_left_values, set_right_values, weights):
+        curr_cut_val = cut_val
+        values_seen = set_left_values | set_right_values
+
+        found_improvement = True
+        while found_improvement:
+            found_improvement = False
+
+            # Try to switch the side of a single node (`value`) to improve the cut value.
+            for value in values_seen:
+                new_cut_val = cls._split_gain_for_single_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                value,
+                                                                weights)
+                if new_cut_val - curr_cut_val >= EPSILON:
+                    curr_cut_val = new_cut_val
+                    if value in set_left_values:
+                        set_left_values.remove(value)
+                        set_right_values.add(value)
+                    else:
+                        set_left_values.add(value)
+                        set_right_values.remove(value)
+                    found_improvement = True
+                    break
+            if found_improvement:
+                continue
+
+            # Try to switch a pair of nodes (`value1` and `value2`) from different sides to improve
+            # the cut value.
+            for value1, value2 in itertools.combinations(values_seen, 2):
+                if ((value1 in set_left_values and value2 in set_left_values) or
+                        (value1 in set_right_values and value2 in set_right_values)):
+                    continue
+                new_cut_val = cls._split_gain_for_double_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                (value1, value2),
+                                                                weights)
+                if new_cut_val - curr_cut_val >= EPSILON:
+                    curr_cut_val = new_cut_val
+                    if value1 in set_left_values:
+                        set_left_values.remove(value1)
+                        set_right_values.add(value1)
+                        set_right_values.remove(value2)
+                        set_left_values.add(value2)
+                    else:
+                        set_left_values.remove(value2)
+                        set_right_values.add(value2)
+                        set_right_values.remove(value1)
+                        set_left_values.add(value1)
+                    found_improvement = True
+                    break
+        return curr_cut_val, set_left_values, set_right_values
+
+    @staticmethod
+    def _split_gain_for_single_switch(curr_gain, left_new_values, right_new_values,
+                                      new_value_to_change_sides, weights):
+        new_gain = curr_gain
+        if new_value_to_change_sides in left_new_values:
+            for value in left_new_values:
+                if value == new_value_to_change_sides:
+                    continue
+                new_gain += weights[value][new_value_to_change_sides]
+            for value in right_new_values:
+                new_gain -= weights[value][new_value_to_change_sides]
+        else:
+            for value in left_new_values:
+                new_gain -= weights[value][new_value_to_change_sides]
+            for value in right_new_values:
+                if value == new_value_to_change_sides:
+                    continue
+                new_gain += weights[value][new_value_to_change_sides]
+        return new_gain
+
+    @staticmethod
+    def _split_gain_for_double_switch(curr_gain, left_new_values, right_new_values,
+                                      new_values_to_change_sides, weights):
+        assert len(new_values_to_change_sides) == 2
+        new_gain = curr_gain
+        first_value_to_change_sides = new_values_to_change_sides[0]
+        second_value_to_change_sides = new_values_to_change_sides[1]
+
+        if first_value_to_change_sides in left_new_values:
+            for value in left_new_values:
+                if value == first_value_to_change_sides:
+                    continue
+                new_gain += weights[value][first_value_to_change_sides]
+                new_gain -= weights[value][second_value_to_change_sides]
+            for value in right_new_values:
+                if value == second_value_to_change_sides:
+                    continue
+                new_gain -= weights[value][first_value_to_change_sides]
+                new_gain += weights[value][second_value_to_change_sides]
+        else:
+            for value in left_new_values:
+                if value == second_value_to_change_sides:
+                    continue
+                new_gain -= weights[value][first_value_to_change_sides]
+                new_gain += weights[value][second_value_to_change_sides]
+            for value in right_new_values:
+                if value == first_value_to_change_sides:
+                    continue
+                new_gain += weights[value][first_value_to_change_sides]
+                new_gain -= weights[value][second_value_to_change_sides]
+        return new_gain
+
+    @staticmethod
+    def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
+        # Let's get the original values on each side of this partition
+        left_orig_values = set(new_to_orig_value_int[left_new_value]
+                               for left_new_value in left_new_values)
+        right_orig_values = set(new_to_orig_value_int[right_new_value]
+                                for right_new_value in right_new_values)
+        return left_orig_values, right_orig_values
+
+
+
+#################################################################################################
+#################################################################################################
+###                                                                                           ###
+###                          CONDITIONAL INFERENCE TREE LS CHI SQUARE                         ###
+###                                                                                           ###
+#################################################################################################
+#################################################################################################
+
+
+class ConditionalInferenceTreeLSChiSquare(Criterion):
+    """
+    Conditional Inference Tree using LS Chi Square criterion to find best split. For reference,
+    see "Unbiased Recursive Partitioning: A Conditional Inference Framework, T. Hothorn, K. Hornik
+    & A. Zeileis. Journal of Computational and Graphical Statistics Vol. 15 , Iss. 3,2006".
+    """
+    name = 'Conditional Inference Tree LS Chi Square'
+
+    @classmethod
+    def select_best_attribute_and_split(cls, tree_node):
+        """Returns the best attribute and its best split, using the Conditional Inference Tree
+        Framework to choose the best attribute and using the LS CHi Square criterion to find the
+        best split for it.
+
+        Args:
+          tree_node (TreeNode): tree node where we want to find the best attribute/split.
+
+        Returns the best split found.
+        """
+        best_splits_per_attrib = []
+        for attrib_index, is_valid_attrib in enumerate(tree_node.valid_nominal_attribute):
+            if is_valid_attrib:
+                if cls._is_big_contingency_table(
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples):
+                    # In this case, the chi^2-test is a good approximation.
+                    curr_c_quad_cdf = cls._get_chi_square_test_p_value(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples)
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[], # will be calculated later
+                                                        criterion_value=curr_c_quad_cdf))
+                else:
+                    curr_c_quad_cdf = cls._calculate_c_quad_cdf(
+                        tree_node.contingency_tables[attrib_index].contingency_table,
+                        tree_node.contingency_tables[attrib_index].values_num_samples,
+                        tree_node.class_index_num_samples,
+                        len(tree_node.valid_samples_indices))
+                    best_splits_per_attrib.append(Split(attrib_index=attrib_index,
+                                                        splits_values=[], # will be calculated later
+                                                        criterion_value=curr_c_quad_cdf))
+
+        if best_splits_per_attrib:
+            best_split = max(best_splits_per_attrib, key=lambda split: split.criterion_value)
+            # Let's find the best split for this attribute using the LS Chi Square criterion.
+            (new_to_orig_value_int,
+             new_contingency_table,
+             new_values_num_seen) = cls._remove_empty_values(
+                 tree_node.contingency_tables[best_split.attrib_index].contingency_table,
+                 tree_node.contingency_tables[best_split.attrib_index].values_num_samples)
+            (_,
+             left_int_values,
+             right_int_values) = cls._generate_best_split(new_to_orig_value_int,
+                                                          new_contingency_table,
+                                                          new_values_num_seen)
+            return Split(attrib_index=best_split.attrib_index,
+                         splits_values=[left_int_values, right_int_values],
+                         criterion_value=best_split.criterion_value)
+        return Split()
+
+    @classmethod
+    def _is_big_contingency_table(cls, values_num_samples, class_index_num_samples):
+        num_values_seen = sum(value_num_samples > 0 for value_num_samples in values_num_samples)
+        num_classes_seen = sum(class_num_samples > 0
+                               for class_num_samples in class_index_num_samples)
+        return num_values_seen * num_classes_seen > BIG_CONTINGENCY_TABLE_THRESHOLD
+
+    @classmethod
+    def _get_chi_square_test_p_value(cls, contingency_table, values_num_samples,
+                                     class_index_num_samples):
+        classes_seen = set(class_index for class_index, class_num_samples
+                           in enumerate(class_index_num_samples) if class_num_samples > 0)
+        num_classes = len(classes_seen)
+        if num_classes == 1:
+            return 0.0
+
+        num_values = sum(num_samples > 0 for num_samples in values_num_samples)
+        num_samples = sum(num_samples for num_samples in values_num_samples)
+        curr_chi_square_value = 0.0
+        for value, value_num_sample in enumerate(values_num_samples):
+            if value_num_sample == 0:
+                continue
+            for class_index in classes_seen:
+                expected_value_class = (
+                    values_num_samples[value] * class_index_num_samples[class_index] / num_samples)
+                diff = contingency_table[value][class_index] - expected_value_class
+                curr_chi_square_value += diff * (diff / expected_value_class)
+        return 1. - scipy.stats.chi2.cdf(x=curr_chi_square_value,
+                                         df=((num_classes - 1) * (num_values - 1)))
+
+    @classmethod
+    def _calculate_c_quad_cdf(cls, contingency_table, values_num_samples, class_index_num_samples,
+                              num_valid_samples):
+        def _calculate_expected_value_h(class_index_num_samples, num_valid_samples):
+            return (1./num_valid_samples) * np.array(class_index_num_samples)
+
+        def _calculate_covariance_h(expected_value_h, class_index_num_samples, num_valid_samples):
+            num_classes = len(class_index_num_samples)
+            covariance_h = np.zeros((num_classes, num_classes))
+            for class_index, class_num_samples in enumerate(class_index_num_samples):
+                if class_num_samples:
+                    curr_class_one_hot_encoding = np.zeros((num_classes))
+                    curr_class_one_hot_encoding[class_index] = 1.
+                    diff = curr_class_one_hot_encoding - expected_value_h
+                    covariance_h += class_num_samples * np.outer(diff, diff)
+            return covariance_h / num_valid_samples
+
+        def _calculate_mu_j(values_num_samples, expected_value_h):
+            return np.outer(values_num_samples, expected_value_h).flatten(order='F')
+
+        def _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h):
+            values_num_samples_correct_dim = values_num_samples.reshape(
+                (values_num_samples.shape[0], 1))
+            return (((num_valid_samples / (num_valid_samples - 1))
+                     * np.kron(covariance_h, np.diag(values_num_samples)))
+                    - ((1 / (num_valid_samples - 1))
+                       * np.kron(covariance_h,
+                                 np.kron(values_num_samples_correct_dim,
+                                         values_num_samples_correct_dim.transpose()))))
+
+
+        expected_value_h = _calculate_expected_value_h(class_index_num_samples, num_valid_samples)
+        covariance_h = _calculate_covariance_h(expected_value_h,
+                                               class_index_num_samples,
+                                               num_valid_samples)
+        mu_j = _calculate_mu_j(values_num_samples, expected_value_h)
+        sigma_j = _calculate_sigma_j(values_num_samples, num_valid_samples, covariance_h)
+
+        temp_diff = contingency_table.flatten(order='F') - mu_j
+
+        curr_rcond = 1e-15
+        while True:
+            try:
+                sigma_j_pinv = np.linalg.pinv(sigma_j)
+                sigma_j_rank = np.linalg.matrix_rank(sigma_j)
+                break
+            except np.linalg.linalg.LinAlgError:
+                # Happens when sigma_j is (very) badly conditioned
+                pass
+            try:
+                (sigma_j_pinv, sigma_j_rank) = scipy.linalg.pinv(sigma_j, return_rank=True)
+                break
+            except:
+                # Happens when sigma_j is (very) badly conditioned
+                curr_rcond *= 10.
+                if curr_rcond > 1e-6:
+                    # We give up on this attribute
+                    print('Warning: attribute has sigma_j matrix that is not decomposable in SVD.')
+                    return float('-inf')
+
+        c_quad = np.dot(temp_diff, np.dot(sigma_j_pinv, temp_diff.transpose()))
+        return scipy.stats.chi2.cdf(x=c_quad, df=sigma_j_rank)
+
+    @staticmethod
+    def _remove_empty_values(contingency_table, values_num_samples):
+        # Define conversion from original values to new values
+        orig_to_new_value_int = {}
+        new_to_orig_value_int = []
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                orig_to_new_value_int[orig_value] = len(new_to_orig_value_int)
+                new_to_orig_value_int.append(orig_value)
+
+        # Generate the new contingency tables
+        new_contingency_table = np.zeros((len(new_to_orig_value_int), contingency_table.shape[1]),
+                                         dtype=int)
+        new_value_num_seen = np.zeros((len(new_to_orig_value_int)), dtype=int)
+        for orig_value, curr_num_samples in enumerate(values_num_samples):
+            if curr_num_samples > 0:
+                curr_new_value = orig_to_new_value_int[orig_value]
+                new_value_num_seen[curr_new_value] = curr_num_samples
+                np.copyto(dst=new_contingency_table[curr_new_value, :],
+                          src=contingency_table[orig_value, :])
+
+        return (new_to_orig_value_int,
+                new_contingency_table,
+                new_value_num_seen)
+
+    @classmethod
+    def _generate_best_split(cls, new_to_orig_value_int, new_contingency_table,
+                             new_values_num_seen):
+        def _init_values_weights(new_contingency_table, new_values_num_seen):
+            # Initializes the weight of each edge in the values graph (to be sent to the Max Cut)
+            weights = np.zeros((new_values_num_seen.shape[0], new_values_num_seen.shape[0]),
+                               dtype=np.float64)
+            for value_index_i, num_samples_value_index_i in enumerate(new_values_num_seen):
+                for value_index_j, num_samples_value_index_j in enumerate(new_values_num_seen):
+                    if value_index_i >= value_index_j:
+                        continue
+                    num_samples_both_values = (num_samples_value_index_i
+                                               + num_samples_value_index_j) # is always > 0.
+                    for curr_class_index in range(new_contingency_table.shape[1]):
+                        num_samples_both_values_curr_class = (
+                            new_contingency_table[value_index_i, curr_class_index]
+                            + new_contingency_table[value_index_j, curr_class_index])
+                        if num_samples_both_values_curr_class == 0:
+                            continue
+
+                        expected_value_index_i_class = (
+                            num_samples_value_index_i * num_samples_both_values_curr_class
+                            / num_samples_both_values)
+                        diff_index_i = (
+                            new_contingency_table[value_index_i, curr_class_index]
+                            - expected_value_index_i_class)
+
+                        expected_value_index_j_class = (
+                            num_samples_value_index_j * num_samples_both_values_curr_class
+                            / num_samples_both_values)
+                        diff_index_j = (
+                            new_contingency_table[value_index_j, curr_class_index]
+                            - expected_value_index_j_class)
+
+                        edge_weight_curr_class = (
+                            diff_index_i * (diff_index_i / expected_value_index_i_class)
+                            + diff_index_j * (diff_index_j / expected_value_index_j_class))
+                        weights[value_index_i, value_index_j] += edge_weight_curr_class
+
+                    if new_values_num_seen.shape[0] > 2:
+                        weights[value_index_i, value_index_j] /= (new_values_num_seen.shape[0] - 1.)
+                    weights[value_index_j, value_index_i] = weights[value_index_i, value_index_j]
+            return weights
+
+
+        weights = _init_values_weights(new_contingency_table, new_values_num_seen)
+        # Initial partition generated through a greedy approach.
+        (cut_val,
+         left_new_values,
+         right_new_values) = cls._generate_initial_partition(len(new_values_num_seen), weights)
+        # Look for a better solution locally, changing the side of a single node or exchanging a
+        # pair of nodes from different sides, while it increases the cut value.
+        (cut_val_switched,
+         left_new_values_switched,
+         right_new_values_switched) = cls._switch_while_increase(cut_val,
+                                                                 left_new_values,
+                                                                 right_new_values,
+                                                                 weights)
+        if cut_val_switched > cut_val:
+            cut_val = cut_val_switched
+            (left_orig_values,
+             right_orig_values) = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                left_new_values_switched,
+                                                                right_new_values_switched)
+        else:
+            (left_orig_values,
+             right_orig_values) = cls._get_split_in_orig_values(new_to_orig_value_int,
+                                                                left_new_values,
+                                                                right_new_values)
+        return cut_val, left_orig_values, right_orig_values
+
+    @classmethod
+    def _generate_initial_partition(cls, num_values, weights):
+        set_left_values = set()
+        set_right_values = set()
+        cut_val = 0.0
+
+        for value in range(num_values):
+            if not set_left_values: # first node goes to the left
+                set_left_values.add(value)
+                continue
+            gain_assigning_right = sum(weights[value][left_value]
+                                       for left_value in set_left_values)
+            gain_assigning_left = sum(weights[value][right_value]
+                                      for right_value in set_right_values)
+            if gain_assigning_right >= gain_assigning_left:
+                set_right_values.add(value)
+                cut_val += gain_assigning_right
+            else:
+                set_left_values.add(value)
+                cut_val += gain_assigning_left
+        return cut_val, set_left_values, set_right_values
+
+    @classmethod
+    def _switch_while_increase(cls, cut_val, set_left_values, set_right_values, weights):
+        curr_cut_val = cut_val
+        values_seen = set_left_values | set_right_values
+
+        found_improvement = True
+        while found_improvement:
+            found_improvement = False
+
+            # Try to switch the side of a single node (`value`) to improve the cut value.
+            for value in values_seen:
+                new_cut_val = cls._split_gain_for_single_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                value,
+                                                                weights)
+                if new_cut_val - curr_cut_val >= EPSILON:
+                    curr_cut_val = new_cut_val
+                    if value in set_left_values:
+                        set_left_values.remove(value)
+                        set_right_values.add(value)
+                    else:
+                        set_left_values.add(value)
+                        set_right_values.remove(value)
+                    found_improvement = True
+                    break
+            if found_improvement:
+                continue
+
+            # Try to switch a pair of nodes (`value1` and `value2`) from different sides to improve
+            # the cut value.
+            for value1, value2 in itertools.combinations(values_seen, 2):
+                if ((value1 in set_left_values and value2 in set_left_values) or
+                        (value1 in set_right_values and value2 in set_right_values)):
+                    continue
+                new_cut_val = cls._split_gain_for_double_switch(curr_cut_val,
+                                                                set_left_values,
+                                                                set_right_values,
+                                                                (value1, value2),
+                                                                weights)
+                if new_cut_val - curr_cut_val >= EPSILON:
+                    curr_cut_val = new_cut_val
+                    if value1 in set_left_values:
+                        set_left_values.remove(value1)
+                        set_right_values.add(value1)
+                        set_right_values.remove(value2)
+                        set_left_values.add(value2)
+                    else:
+                        set_left_values.remove(value2)
+                        set_right_values.add(value2)
+                        set_right_values.remove(value1)
+                        set_left_values.add(value1)
+                    found_improvement = True
+                    break
+        return curr_cut_val, set_left_values, set_right_values
+
+    @staticmethod
+    def _split_gain_for_single_switch(curr_gain, left_new_values, right_new_values,
+                                      new_value_to_change_sides, weights):
+        new_gain = curr_gain
+        if new_value_to_change_sides in left_new_values:
+            for value in left_new_values:
+                if value == new_value_to_change_sides:
+                    continue
+                new_gain += weights[value][new_value_to_change_sides]
+            for value in right_new_values:
+                new_gain -= weights[value][new_value_to_change_sides]
+        else:
+            for value in left_new_values:
+                new_gain -= weights[value][new_value_to_change_sides]
+            for value in right_new_values:
+                if value == new_value_to_change_sides:
+                    continue
+                new_gain += weights[value][new_value_to_change_sides]
+        return new_gain
+
+    @staticmethod
+    def _split_gain_for_double_switch(curr_gain, left_new_values, right_new_values,
+                                      new_values_to_change_sides, weights):
+        assert len(new_values_to_change_sides) == 2
+        new_gain = curr_gain
+        first_value_to_change_sides = new_values_to_change_sides[0]
+        second_value_to_change_sides = new_values_to_change_sides[1]
+
+        if first_value_to_change_sides in left_new_values:
+            for value in left_new_values:
+                if value == first_value_to_change_sides:
+                    continue
+                new_gain += weights[value][first_value_to_change_sides]
+                new_gain -= weights[value][second_value_to_change_sides]
+            for value in right_new_values:
+                if value == second_value_to_change_sides:
+                    continue
+                new_gain -= weights[value][first_value_to_change_sides]
+                new_gain += weights[value][second_value_to_change_sides]
+        else:
+            for value in left_new_values:
+                if value == second_value_to_change_sides:
+                    continue
+                new_gain -= weights[value][first_value_to_change_sides]
+                new_gain += weights[value][second_value_to_change_sides]
+            for value in right_new_values:
+                if value == first_value_to_change_sides:
+                    continue
+                new_gain += weights[value][first_value_to_change_sides]
+                new_gain -= weights[value][second_value_to_change_sides]
+        return new_gain
+
+    @staticmethod
+    def _get_split_in_orig_values(new_to_orig_value_int, left_new_values, right_new_values):
+        # Let's get the original values on each side of this partition
+        left_orig_values = set(new_to_orig_value_int[left_new_value]
+                               for left_new_value in left_new_values)
+        right_orig_values = set(new_to_orig_value_int[right_new_value]
+                                for right_new_value in right_new_values)
+        return left_orig_values, right_orig_values

@@ -4,6 +4,7 @@
 """Module containing the DecisionTree, TreeNode and NodeSplit classes.
 """
 
+import collections
 import math
 import random
 import sys
@@ -24,6 +25,13 @@ USE_MIN_SAMPLES_SECOND_LARGEST_CLASS = True
 #: Minimum number of samples needed in the two most frequent classes such that this node can be
 #: split.
 MIN_SAMPLES_SECOND_LARGEST_CLASS = 40
+
+#: Contains the information about an attribute's contingency table. When empty, defaults to
+#: `(None, None)`.
+ContingencyTable = collections.namedtuple('ContingencyTable',
+                                          ['contingency_table',
+                                           'values_num_samples'])
+ContingencyTable.__new__.__defaults__ = (None, None)
 
 
 class DecisionTree(object):
@@ -754,12 +762,11 @@ class TreeNode(object):
 
 
     def _calculate_contingency_tables(self):
-        self.contingency_tables = [] # vector of pairs (attrib_contingency_table,
-                                     #                  attrib_values_num_samples)
+        self.contingency_tables = [] # list of `ContingencyTable`'s
         for (attrib_index,
              is_valid_nominal_attribute) in enumerate(self.valid_nominal_attribute):
             if not is_valid_nominal_attribute:
-                self.contingency_tables.append(([], []))
+                self.contingency_tables.append(ContingencyTable())
                 continue
 
             attrib_num_values = len(self.dataset.attrib_int_to_value[attrib_index])
@@ -773,7 +780,9 @@ class TreeNode(object):
                 curr_contingency_table[curr_sample_value][curr_sample_class] += 1
                 curr_values_num_samples[curr_sample_value] += 1
 
-            self.contingency_tables.append((curr_contingency_table, curr_values_num_samples))
+            self.contingency_tables.append(ContingencyTable(
+                contingency_table=curr_contingency_table,
+                values_num_samples=curr_values_num_samples))
 
     def _is_attribute_valid(self, attrib_index, min_allowed_in_two_largest):
         """Returns a pair of booleans indicating:
