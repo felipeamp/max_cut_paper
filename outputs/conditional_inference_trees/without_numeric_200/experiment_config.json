@@ -1,0 +1,34 @@
+{
+    "datasets basepath": "./datasets",
+    "use all datasets": true,
+    "load one dataset at a time": false,
+
+    "criteria": [
+        "Conditional Inference Tree Twoing",
+        "Conditional Inference Tree LS Squared Gini",
+        "Conditional Inference Tree LS Chi Square"
+    ],
+
+    "use numeric attributes": false,
+
+    "output folder": "./outputs/conditional_inference_trees/without_numeric_200",
+
+    "num trials": 20,
+    "calculate t-test on accuracy": true,
+    "t-test single-sided p-value": 0.05,
+
+    "max depth": 5,
+    "rank attributes": false,
+    "use cross-validation": true,
+    "num folds": 3,
+    "is stratified": true,
+
+    "prunning parameters": {
+        "use chi-sq test": true,
+        "max chi-sq p-value": 0.1,
+        "second most freq value min samples": 15,
+
+        "min num samples allowed": [1],
+        "use second most freq class min samples": false
+    }
+}
