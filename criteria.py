@@ -20,7 +20,7 @@ import scipy
 EPSILON = 0.000001
 
 #: Maximum rank allowed for sigma_j matrices in Conditional Inferente Tree framework
-BIG_CONTINGENCY_TABLE_THRESHOLD = 300
+BIG_CONTINGENCY_TABLE_THRESHOLD = 200
 
 #: Contains the information about a given split. When empty, defaults to
 #: `(None, [], float('-inf'))`.
