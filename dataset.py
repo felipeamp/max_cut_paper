@@ -272,7 +272,8 @@ class Dataset(object):
         sample_costs = []
         for curr_sample_class in sample_class:
             sample_costs.append([1.0] * self.num_classes)
-            sample_costs[-1][curr_sample_class] = 0.0
+            if curr_sample_class < self.num_classes:
+                sample_costs[-1][curr_sample_class] = 0.0
         return sample_costs
 
     def _print_loaded_information(self):
