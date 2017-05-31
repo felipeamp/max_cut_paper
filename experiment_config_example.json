@@ -49,5 +49,5 @@
         "min num samples allowed": [1],
         "use second most freq class min samples": false, // when false, do not supply "second most freq class min samples"
         // "second most freq class min samples": 40, // only used when "use second most freq class min samples" is true
-    },
+    }
 }
