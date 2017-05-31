@@ -64,11 +64,11 @@ Nursery,None,GW Squared Gini,0,0,3,2,2,0
 Nursery,None,LS Chi Square,0,0,1,2,2,2
 Nursery,None,LS Squared Gini,3,3,0,0,0,4
 Nursery,None,Twoing,3,3,1,0,0,2
-Nursery with Aggreg,None,GW Chi Square,0,0,3,3,3,0
-Nursery with Aggreg,None,GW Squared Gini,2,2,3,2,2,0
-Nursery with Aggreg,None,LS Chi Square,0,0,1,3,3,3
-Nursery with Aggreg,None,LS Squared Gini,3,3,2,1,1,2
-Nursery with Aggreg,None,Twoing,4,4,0,0,0,4
+Nursery with Aggreg,None,GW Chi Square,2,2,4,1,1,0
+Nursery with Aggreg,None,GW Squared Gini,0,0,3,3,3,1
+Nursery with Aggreg,None,LS Chi Square,2,2,1,1,1,2
+Nursery with Aggreg,None,LS Squared Gini,0,0,0,3,3,4
+Nursery with Aggreg,None,Twoing,4,4,1,0,0,2
 Poker Hand,None,GW Chi Square,2,2,2,1,1,0
 Poker Hand,None,GW Squared Gini,1,1,0,3,3,2
 Poker Hand,None,LS Chi Square,3,3,0,0,0,2

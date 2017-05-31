@@ -1,22 +1,17 @@
 {
     "datasets basepath": "./datasets",
-    "use all datasets": false,
-    "datasets folders": [
-        "nursery with aggreg correct"
-    ],
+    "use all datasets": true,
     "load one dataset at a time": false,
 
     "criteria": [
         "Twoing",
         "LS Squared Gini",
-        "LS Chi Square",
-        "GW Squared Gini",
-        "GW Chi Square"
+        "LS Chi Square"
     ],
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/nursery_aggreg/cv_without_numeric",
+    "output folder": "./outputs/paper/cv_without_numeric_without_gw",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,

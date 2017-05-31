@@ -6,12 +6,14 @@
     "criteria": [
         "Twoing",
         "LS Squared Gini",
-        "LS Chi Square"
+        "LS Chi Square",
+        "GW Squared Gini",
+        "GW Chi Square"
     ],
 
-    "use numeric attributes": true,
+    "use numeric attributes": false,
 
-    "output folder": "./outputs/paper/with numeric",
+    "output folder": "./outputs/paper/cv_without_numeric_full",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,

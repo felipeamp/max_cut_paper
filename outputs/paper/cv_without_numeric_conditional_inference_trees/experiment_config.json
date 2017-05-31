@@ -11,7 +11,7 @@
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/conditional_inference_trees/without_numeric_200",
+    "output folder": "./outputs/paper/cv_without_numeric_conditional_inference_trees",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,

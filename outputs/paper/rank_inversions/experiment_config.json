@@ -13,7 +13,7 @@
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/paper/inversions/",
+    "output folder": "./outputs/paper/rank_inversions/",
 
     "num trials": 10,
     "calculate t-test on accuracy": true,
