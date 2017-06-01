@@ -1,0 +1,7 @@
+Dataset,Attribute,Criterion Difference Name,Paired t-statistics on Accuracy with Missing Values,Degrees of Freedom of Accuracy with Missing Values,P-value t-statistics on Accuracy with Missing Values,Paired t-statistics on Accuracy without Missing Values,Degrees of Freedom of Accuracy without Missing Values,P-value t-statistics on Accuracy without Missing Values,Paired t-statistics on Number of Nodes,Degrees of Freedom of Number of Nodes,P-value t-statistics on Number of Nodes
+Cars with Aggreg,None,LS Chi Square - LS Squared Gini,18.517676078865808,19,6.42819131258e-14,18.517676078865808,19,6.42819131258e-14,-10.191836272269411,19,0.999999998064
+Cars with Aggreg,None,LS Chi Square - Twoing,-13.620688002262566,19,0.999999999985,-13.620688002262566,19,0.999999999985,1.5657627225318307,19,0.0669538601278
+Cars with Aggreg,None,LS Squared Gini - Twoing,-26.994638584062557,19,1.0,-26.994638584062557,19,1.0,13.0495498286125,19,3.1041280657e-11
+Nursery with Aggreg,None,LS Chi Square - LS Squared Gini,-9.246725653366775,19,0.999999990851,-9.246725653366775,19,0.999999990851,5.1688656122241605,19,2.72991573954e-05
+Nursery with Aggreg,None,LS Chi Square - Twoing,-8.7188690263134,19,0.999999977186,-8.7188690263134,19,0.999999977186,9.42230266307082,19,6.8023480182e-09
+Nursery with Aggreg,None,LS Squared Gini - Twoing,0.04643911308163649,19,0.48172245228,0.04643911308163649,19,0.48172245228,7.086288467933887,19,4.83283756125e-07
