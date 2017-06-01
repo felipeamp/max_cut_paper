@@ -1,0 +1,39 @@
+{
+    "datasets basepath": "./datasets",
+    "use all datasets": false,
+    "datasets folders": [
+        "cars",
+        "nursery"
+    ],
+    "load one dataset at a time": false,
+
+    "criteria": [
+        "Twoing",
+        "LS Squared Gini",
+        "LS Chi Square"
+    ],
+
+    "use numeric attributes": false,
+
+    "output folder": "./outputs/test_ext",
+
+    "num trials": 20,
+    "starting seed index": 1,
+    "calculate t-test on accuracy": true,
+    "t-test single-sided p-value": 0.05,
+
+    "rank attributes": false,
+    "max depth": 16,
+    "use cross-validation": true,
+    "num folds": 3,
+    "is stratified": true,
+
+    "prunning parameters": {
+        "use chi-sq test": true,
+        "max chi-sq p-value": 0.1,
+        "second most freq value min samples": 15,
+
+        "min num samples allowed": [1],
+        "use second most freq class min samples": false
+    }
+}
