@@ -2,9 +2,9 @@ Dataset,Attribute,Criterion,Number of times is statistically better with missing
 Adult Census Income,None,Conditional Inference Tree LS Chi Square,1,1,0,1,1,1
 Adult Census Income,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
 Adult Census Income,None,Conditional Inference Tree Twoing,2,2,0,0,0,1
-Cars,None,Conditional Inference Tree LS Chi Square,1,1,0,0,0,1
-Cars,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
-Cars,None,Conditional Inference Tree Twoing,1,1,0,0,0,1
+Cars,None,Conditional Inference Tree LS Chi Square,0,0,0,0,0,1
+Cars,None,Conditional Inference Tree LS Squared Gini,0,0,2,0,0,0
+Cars,None,Conditional Inference Tree Twoing,0,0,0,0,0,1
 Cars with Aggreg,None,Conditional Inference Tree LS Chi Square,1,1,0,0,0,2
 Cars with Aggreg,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
 Cars with Aggreg,None,Conditional Inference Tree Twoing,1,1,1,0,0,1
@@ -20,9 +20,9 @@ Cover Type,None,Conditional Inference Tree Twoing,0,0,0,0,0,0
 Cover Type with Aggreg,None,Conditional Inference Tree LS Chi Square,0,0,0,0,0,0
 Cover Type with Aggreg,None,Conditional Inference Tree LS Squared Gini,0,0,0,0,0,0
 Cover Type with Aggreg,None,Conditional Inference Tree Twoing,0,0,0,0,0,0
-KDD98 Multiclass 2,None,Conditional Inference Tree LS Chi Square,1,1,1,1,1,1
-KDD98 Multiclass 2,None,Conditional Inference Tree LS Squared Gini,2,2,0,0,0,2
-KDD98 Multiclass 2,None,Conditional Inference Tree Twoing,0,0,2,2,2,0
+KDD98 Multiclass 2,None,Conditional Inference Tree LS Chi Square,1,1,1,1,0,1
+KDD98 Multiclass 2,None,Conditional Inference Tree LS Squared Gini,2,0,0,0,0,2
+KDD98 Multiclass 2,None,Conditional Inference Tree Twoing,0,0,2,2,1,0
 KDD98 Multiclass 3,None,Conditional Inference Tree LS Chi Square,0,0,1,1,1,1
 KDD98 Multiclass 3,None,Conditional Inference Tree LS Squared Gini,2,2,0,0,0,2
 KDD98 Multiclass 3,None,Conditional Inference Tree Twoing,0,0,2,1,1,0
