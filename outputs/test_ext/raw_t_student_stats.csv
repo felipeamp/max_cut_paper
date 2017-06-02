@@ -1,7 +1,0 @@
-Dataset,Attribute,Criterion Difference Name,Paired t-statistics on Accuracy with Missing Values,Degrees of Freedom of Accuracy with Missing Values,P-value t-statistics on Accuracy with Missing Values,Paired t-statistics on Accuracy without Missing Values,Degrees of Freedom of Accuracy without Missing Values,P-value t-statistics on Accuracy without Missing Values,Paired t-statistics on Number of Nodes,Degrees of Freedom of Number of Nodes,P-value t-statistics on Number of Nodes
-Nursery,None,Twoing - LS Squared Gini,18.66175447287527,19,5.58442181386e-14,18.66175447287527,19,5.58442181386e-14,-11.4632262960326,19,0.999999999721
-Nursery,None,Twoing - LS Chi Square,-8.503150316607377,19,0.999999966525,-8.503150316607377,19,0.999999966525,-1.1182177024790059,19,0.861293175822
-Nursery,None,LS Squared Gini - LS Chi Square,-19.11966034836753,19,1.0,-19.11966034836753,19,1.0,10.410159418354366,19,1.37187716742e-09
-Cars,None,Twoing - LS Squared Gini,12.628398390808934,19,5.44465583729e-11,12.628398390808934,19,5.44465583729e-11,-5.140471435938832,19,0.999970925872
-Cars,None,Twoing - LS Chi Square,-0.5122546590184819,19,0.692811979119,-0.5122546590184819,19,0.692811979119,-3.3869895354200885,19,0.998452913416
-Cars,None,LS Squared Gini - LS Chi Square,-17.59284318320566,19,1.0,-17.59284318320566,19,1.0,4.051764409840671,19,0.000340375602094

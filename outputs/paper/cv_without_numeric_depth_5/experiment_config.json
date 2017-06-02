@@ -4,14 +4,14 @@
     "load one dataset at a time": false,
 
     "criteria": [
-        "Conditional Inference Tree Twoing",
-        "Conditional Inference Tree LS Squared Gini",
-        "Conditional Inference Tree LS Chi Square"
+        "Twoing",
+        "LS Squared Gini",
+        "LS Chi Square"
     ],
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/paper/cv_without_numeric_conditional_inference_trees",
+    "output folder": "./outputs/paper/cv_without_numeric_depth_5",
 
     "num trials": 20,
     "calculate t-test on accuracy": true,

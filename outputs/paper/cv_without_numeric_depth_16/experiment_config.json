@@ -1,10 +1,6 @@
 {
     "datasets basepath": "./datasets",
-    "use all datasets": false,
-    "datasets folders": [
-        "cars",
-        "nursery"
-    ],
+    "use all datasets": true,
     "load one dataset at a time": false,
 
     "criteria": [
@@ -15,7 +11,7 @@
 
     "use numeric attributes": false,
 
-    "output folder": "./outputs/test_ext",
+    "output folder": "./outputs/paper/cv_without_numeric_depth_16",
 
     "num trials": 20,
     "starting seed index": 1,
