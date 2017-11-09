@@ -25,7 +25,7 @@ def load_word_to_phonemes(dict_filepath):
     word_to_phonemes = {}
     with open(dict_filepath) as fin:
         for line in fin:
-            line_list = line.rstrip().split()
+            line_list = line.split('#')[0].rstrip().split()
             word = line_list[0].rstrip('()0123456789')
             if word in word_to_phonemes:
                 # Word with more than one pronunciation. Only save the first one.
