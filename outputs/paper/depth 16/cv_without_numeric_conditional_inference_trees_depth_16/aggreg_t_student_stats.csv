@@ -1,0 +1,52 @@
+Dataset,Attribute,Criterion,Number of times is statistically better with missing values,Number of times is statistically better without missing values,Number of times has statistically larger number of nodes,Number of times is statistically worse with missing values,Number of times is statistically worse without missing values,Number of times has statistically smaller number of nodes
+Adult Census Income,None,Conditional Inference Tree LS Chi Square,1,1,0,0,0,2
+Adult Census Income,None,Conditional Inference Tree LS Squared Gini,0,0,1,2,2,0
+Adult Census Income,None,Conditional Inference Tree Twoing,1,1,1,0,0,0
+Cars,None,Conditional Inference Tree LS Chi Square,2,2,0,0,0,1
+Cars,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
+Cars,None,Conditional Inference Tree Twoing,1,1,0,1,1,1
+Cars with Aggreg,None,Conditional Inference Tree LS Chi Square,2,2,1,0,0,1
+Cars with Aggreg,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
+Cars with Aggreg,None,Conditional Inference Tree Twoing,1,1,0,1,1,2
+Contraceptive,None,Conditional Inference Tree LS Chi Square,0,0,0,0,0,1
+Contraceptive,None,Conditional Inference Tree LS Squared Gini,0,0,2,0,0,0
+Contraceptive,None,Conditional Inference Tree Twoing,0,0,0,0,0,1
+Contraceptive with Aggreg,None,Conditional Inference Tree LS Chi Square,1,1,0,0,0,2
+Contraceptive with Aggreg,None,Conditional Inference Tree LS Squared Gini,1,1,1,0,0,0
+Contraceptive with Aggreg,None,Conditional Inference Tree Twoing,0,0,1,2,2,0
+Cover Type,None,Conditional Inference Tree LS Chi Square,0,0,0,0,0,0
+Cover Type,None,Conditional Inference Tree LS Squared Gini,0,0,0,0,0,0
+Cover Type,None,Conditional Inference Tree Twoing,0,0,0,0,0,0
+Cover Type with Aggreg,None,Conditional Inference Tree LS Chi Square,0,0,1,0,0,0
+Cover Type with Aggreg,None,Conditional Inference Tree LS Squared Gini,0,0,0,0,0,2
+Cover Type with Aggreg,None,Conditional Inference Tree Twoing,0,0,1,0,0,0
+KDD98 Multiclass 2,None,Conditional Inference Tree LS Chi Square,1,1,1,1,1,1
+KDD98 Multiclass 2,None,Conditional Inference Tree LS Squared Gini,2,2,0,0,0,2
+KDD98 Multiclass 2,None,Conditional Inference Tree Twoing,0,0,2,2,2,0
+KDD98 Multiclass 3,None,Conditional Inference Tree LS Chi Square,0,0,1,1,1,1
+KDD98 Multiclass 3,None,Conditional Inference Tree LS Squared Gini,2,2,0,0,0,2
+KDD98 Multiclass 3,None,Conditional Inference Tree Twoing,0,0,2,1,1,0
+KDD98 Multiclass 5,None,Conditional Inference Tree LS Chi Square,1,1,1,0,1,1
+KDD98 Multiclass 5,None,Conditional Inference Tree LS Squared Gini,1,2,0,0,0,2
+KDD98 Multiclass 5,None,Conditional Inference Tree Twoing,0,0,2,2,2,0
+KDD98 Multiclass 9,None,Conditional Inference Tree LS Chi Square,1,1,1,1,1,1
+KDD98 Multiclass 9,None,Conditional Inference Tree LS Squared Gini,2,2,0,0,0,2
+KDD98 Multiclass 9,None,Conditional Inference Tree Twoing,0,0,2,2,2,0
+Mushroom,None,Conditional Inference Tree LS Chi Square,1,1,0,0,0,1
+Mushroom,None,Conditional Inference Tree LS Squared Gini,0,1,2,0,0,0
+Mushroom,None,Conditional Inference Tree Twoing,0,0,0,1,2,1
+Nursery,None,Conditional Inference Tree LS Chi Square,1,1,1,0,0,1
+Nursery,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
+Nursery,None,Conditional Inference Tree Twoing,1,1,0,0,0,2
+Nursery with Aggreg,None,Conditional Inference Tree LS Chi Square,1,1,1,0,0,1
+Nursery with Aggreg,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
+Nursery with Aggreg,None,Conditional Inference Tree Twoing,1,1,0,0,0,2
+Poker Hand,None,Conditional Inference Tree LS Chi Square,1,1,0,1,1,2
+Poker Hand,None,Conditional Inference Tree LS Squared Gini,0,0,2,2,2,0
+Poker Hand,None,Conditional Inference Tree Twoing,2,2,1,0,0,1
+Reuters Phonemes 10000 samples 15 classes,None,Conditional Inference Tree LS Chi Square,1,1,2,1,1,0
+Reuters Phonemes 10000 samples 15 classes,None,Conditional Inference Tree LS Squared Gini,0,0,0,2,2,2
+Reuters Phonemes 10000 samples 15 classes,None,Conditional Inference Tree Twoing,2,2,1,0,0,1
+San Francisco Crime 15 classes,None,Conditional Inference Tree LS Chi Square,1,1,1,0,0,1
+San Francisco Crime 15 classes,None,Conditional Inference Tree LS Squared Gini,0,0,2,1,1,0
+San Francisco Crime 15 classes,None,Conditional Inference Tree Twoing,0,0,0,0,0,2
